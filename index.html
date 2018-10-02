@@ -1,0 +1,115 @@
+<html>
+	<head>
+		<title>.</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<div id="div"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/96/three.min.js"></script>
+<script src="http://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<script src="http://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
+<script>
+init();
+animate();
+var camera,
+		scene,
+		renderer,
+		controls,
+		container = document.createElement('div');
+		document.body.appendChild(container);
+/*
+
+// TODO:
+add controls
+external js file
+
+*/
+function init() {
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(000000);
+
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+	camera.target = new THREE.Vector3(0, 0, 0);
+	camera.position.set(0, 0, 10);
+
+	scene.add(camera);
+
+	controls= new THREE.OrbitControls(camera);
+
+  renderer = new THREE.WebGLRenderer({antialias:true});
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(devicePixelRatio);
+  document.body.appendChild(renderer.domElement);
+
+	var loader = new THREE.TextureLoader();
+		loader.load('img/1.jpg', function(texture) {
+     var sphereGeometry = new THREE.SphereGeometry(-2, 20, 20)
+
+     var sphereMaterial = new THREE.MeshBasicMaterial({map: texture})
+
+     var mesh = new THREE.Mesh( sphereGeometry, sphereMaterial );
+     scene.add( mesh );
+
+})
+
+/*
+CROSS ORIGIN
+  //allow cross origin loading
+  loader.crossOrigin = '';
+
+  var arr = [
+   'img/1.jpg',
+   'img/2.jpg',
+   'img/3.jpg'
+  ];
+  var textureToShow = 0;
+
+  var material = new THREE.MeshBasicMaterial();
+
+  var geometry = new THREE.BoxGeometry( -1, 1, 1 );
+
+  var cube = new THREE.Mesh( geometry, material );
+  cube.position.y = 0.1;
+	cube.scale.x = -1;
+
+  //load texture
+  loader.load(arr[textureToShow], function(tex) {
+   //add texture when cube loaded
+   material.map = tex;
+   //texture++
+   textureToShow++;
+
+   scene.add( cube );
+  });
+
+  // Click interaction
+  var canvas = document.getElementsByTagName("canvas")[0];
+  canvas.addEventListener("click", function() {
+
+   loader.load(arr[textureToShow], function(tex) {
+    //add texture when cube loaded
+    material.map = tex;
+    textureToShow++;
+    //if end of texture return to fist img
+    if(textureToShow > arr.length-1) {
+     textureToShow = 0;
+    }
+   });
+  });
+*/
+
+}
+
+	function animate() {
+	 requestAnimationFrame(animate);
+	 controls.update();
+	 renderer.render(scene, camera);
+	};
+
+</script>
+	</body>
+</html>
