@@ -2,16 +2,7 @@
 <html lang="en">
 	<head>
 		<title>.</title>
-			<style>
-			body{
-			  margin: 0;
-				overflow: hidden;
-			}
-			canvas{
-			  width: 100%;
-			  height: 100%;
-			}
-			</style>
+
 	</head>
 	<body>
 		<canvas id="div"></canvas>
@@ -19,15 +10,16 @@
 		<script src="http://threejs.org/examples/js/controls/OrbitControls.js"></script>
 		<script src="http://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
 <script>
-init();
-animate();
-document.body.appendChild(container);
 
 var camera,
 		scene,
 		renderer,
 		controls,
 		container = document.createElement('div');
+
+		init();
+		animate();
+		document.body.appendChild(container);
 
 /*
 TODO:
