@@ -68,8 +68,8 @@
 
 			createButton();
 
-			window.addEventListener( 'resize', onWindowResize, false );
-			window.addEventListener( "mousemove", onDocumentMouseMove, false );
+			window.addEventListener('resize', onWindowResize, false);
+			window.addEventListener("click", onDocumentMouseDown, false);
 		}
 
 
@@ -78,21 +78,23 @@
 			renderer.setSize( window.innerWidth, window.innerHeight );
 		}
 		var selectedObject = null;
-		function onDocumentMouseMove( event ) {
+		function onDocumentMouseDown(event) {
+
 			event.preventDefault();
 			if ( selectedObject ) {
         console.log("off");
 				//selectedObject.material.color = new THREE.Color(0xffffff);
 				selectedObject = null;
 			}
-			var intersects = getIntersects( event.layerX, event.layerY );
+			var intersects = getIntersects(event.layerX, event.layerY);
 			if ( intersects.length > 0 ) {
-				var res = intersects.filter( function ( res ) {
+				var res = intersects.filter(function (res) {
 					return res && res.object;
-				} )[ 0 ];
+				})[0];
 				if ( res && res.object ) {
 					selectedObject = res.object;
           console.log("on");
+					window.open("https://github.com/");
           //selectedObject.material.color = new THREE.Color(0xffffff);
 				}
 			}
