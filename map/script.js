@@ -6,10 +6,15 @@ var renderer,
     raycaster = new THREE.Raycaster(),
     mouseVector = new THREE.Vector3(),
     diamondButton,
+    clock = new THREE.Clock(),
     diamondTexture;
 init();
 animate();
-
+/*
+TODO
+CHANGE LIGHT
+Block texture penetration
+*/
 function initializingSpace() {
   renderer = new THREE.WebGLRenderer({antialias:true});
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -25,17 +30,13 @@ function initializingSpace() {
   camera.position.set(0, 40, 0);
   scene.add(camera);
 
-  controls = new THREE.OrbitControls(camera);
+  controls = new THREE.FirstPersonControls(camera);
+  controls.movementSpeed = 100;
+  controls.lookSpeed = 0.125;
+  controls.lookVertical = true;
 
 
-
-  var light = new THREE.PointLight( 0xffffff, 1, 100 );
-  light.position.set( 0, 50, 15 );
-  light.castShadow = true;
-  light.shadow.mapSize.width = 100000;  // default
-  light.shadow.mapSize.height = 100000; // default
-  light.shadow.camera.near = 0.5;       // default
-  light.shadow.camera.far = 500;      // default
+  var light = new THREE.AmbientLight(0xffffff);
   scene.add(light);
 }
 
@@ -66,9 +67,12 @@ function init() {
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   renderer.setSize( window.innerWidth, window.innerHeight );
+  controls.handleResize();
 }
 
+
 function animate() {
+  controls.update( clock.getDelta() );
   renderer.render( scene, camera );
   requestAnimationFrame( animate );
 }
