@@ -4,6 +4,7 @@
 <script src="http://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
 <script src="https://cdn.rawgit.com/mrdoob/three.js/r69/examples/js/loaders/ColladaLoader.js"></script>
 <script src="https://cdn.rawgit.com/mrdoob/three.js/r85/examples/js/loaders/GLTF2Loader.js"></script>
+<script src="https://threejs.org/examples/js/controls/MapControls.js"></script>
 <meta type="no-cache"
 <html>
 	<head>
@@ -20,7 +21,6 @@
 	scene,
 	camera,
 	controls,
-	raycaster = new THREE.Raycaster(),
 	mouseVector = new THREE.Vector3(),
 	diamond1,
 	clock = new THREE.Clock(),
@@ -31,7 +31,6 @@ animate();
 /*
 TODO
 CHANGE LIGHT
-Block texture penetration
 Raycaster
 
 */
@@ -50,10 +49,15 @@ camera.target = new THREE.Vector3(0, 0, 0);
 camera.position.set(0, 40, 0);
 scene.add(camera);
 
-controls = new THREE.FirstPersonControls(camera);
-controls.movementSpeed = 100;
-controls.lookSpeed = 0.125;
-controls.lookVertical = true;
+//controls
+controls = new THREE.MapControls(camera, renderer.domElement);
+controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+controls.dampingFactor = 0.25;
+controls.screenSpacePanning = false;
+controls.minDistance = 70;
+controls.maxDistance = 100;
+controls.minPolarAngle = Math.PI / 6;
+controls.maxPolarAngle = Math.PI / 3;
 
 
 var light = new THREE.AmbientLight(0xffffff);
@@ -85,6 +89,8 @@ function init() {
 initializingSpace();
 loadMap();
 createButton();
+window.addEventListener('resize', onWindowResize, false);
+window.addEventListener("click", onClick);
 }
 function onWindowResize() {
 camera.aspect = window.innerWidth / window.innerHeight;
@@ -92,6 +98,19 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 controls.handleResize();
 }
 
+
+function onClick(e) {
+var mouse = new THREE.Vector2(
+	(e.clientX / window.innerWidth) * 2 - 1,
+	- (e.clientY / window.innerHeight) * 2 + 1
+);
+var raycaster = new THREE.Raycaster();
+raycaster.setFromCamera(mouse, camera);
+var intersects = raycaster.intersectObject(button);
+	if(intersects.lenght > 0) {
+		console.log("hello");
+	}
+}
 
 function animate() {
 controls.update(clock.getDelta());
