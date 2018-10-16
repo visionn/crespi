@@ -62,6 +62,11 @@ function init() {
 
 }
 
+var geometry = new THREE.SphereGeometry( 10, 2, 100 );
+var material = new THREE.MeshNormalMaterial( );
+diamondButton =  new THREE.Mesh( geometry, material );
+scene.add( doamondButton );
+
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
