@@ -1,12 +1,8 @@
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/96/three.min.js"></script>
-<script src=http://mrdoob.github.io/three.js/examples/js/controls/FirstPersonControls.js ></script>
-<script src="http://threejs.org/examples/js/renderers/CSS3DRenderer.js"></script>
-<script src="https://cdn.rawgit.com/mrdoob/three.js/r69/examples/js/loaders/ColladaLoader.js"></script>
 <script src="https://cdn.rawgit.com/mrdoob/three.js/r85/examples/js/loaders/GLTF2Loader.js"></script>
 <script src="https://threejs.org/examples/js/controls/MapControls.js"></script>
-<meta type="no-cache"
-<html>
+
+<!DOCTYPE html>
 	<head>
 		<title>.</title>
 		<style>
@@ -16,106 +12,139 @@
 	</head>
 	<body>
 	</body>
-	<script>
-	var renderer,
-	scene,
-	camera,
-	controls,
-	mouseVector = new THREE.Vector3(),
-	diamond1,
-	clock = new THREE.Clock(),
-	diamondTexture;
-	const button = new THREE.Group();
+<script>
+var renderer,
+    scene,
+    camera,
+    controls,
+    mouseVector = new THREE.Vector3(),
+    clock = new THREE.Clock(),
+    diamondTexture;
+const button = new THREE.Group();
 init();
 animate();
 /*
 TODO
 CHANGE LIGHT
 Raycaster
-
 */
 function initializingSpace() {
-renderer = new THREE.WebGLRenderer({antialias:true});
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(devicePixelRatio);
-document.body.appendChild(renderer.domElement);
-
-scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
-
-camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.target = new THREE.Vector3(0, 0, 0);
-//last one is fov
-camera.position.set(0, 40, 0);
-scene.add(camera);
-
-//controls
-controls = new THREE.MapControls(camera, renderer.domElement);
-controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-controls.dampingFactor = 0.25;
-controls.screenSpacePanning = false;
-controls.minDistance = 70;
-controls.maxDistance = 100;
-controls.minPolarAngle = Math.PI / 6;
-controls.maxPolarAngle = Math.PI / 3;
-
-
-var light = new THREE.AmbientLight(0xffffff);
-	button.add(light);
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.target = new THREE.Vector3(0, 0, 0);
+    //last one is fov
+    camera.position.set(0, 40, 0);
+    scene.add(camera);
+    //controls
+    controls = new THREE.MapControls(camera, renderer.domElement);
+    controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+    controls.dampingFactor = 0.25;
+    controls.screenSpacePanning = false;
+    controls.minDistance = 70;
+    controls.maxDistance = 100;
+    //controls.minPolarAngle = Math.PI / 6;
+    //controls.maxPolarAngle = Math.PI / 3;
+    var light = new THREE.AmbientLight(0xffffff);
+    button.add(light);
 }
-
-function loadMap(){
-const mapLoader = new THREE.GLTF2Loader();
-const mapDir = "3d/crespi3d.gltf";
-mapLoader.load(mapDir, function(data) {
-	gltf = data;
-	scene.add(gltf.scene);
-	gltf.animations;
-	gltf.scene;
-	gltf.cameras;
-	gltf.asset;
-});
-
+function loadMap() {
+    const mapLoader = new THREE.GLTF2Loader();
+    const mapDir = "crespi3d.gltf";
+    mapLoader.allowCrossOrigin = true;
+    mapLoader.load(mapDir, function(data) {
+        gltf = data;
+        scene.add(gltf.scene);
+        gltf.animations;
+        gltf.scene;
+        gltf.cameras;
+        gltf.asset;
+    });
 }
 function createButton() {
-	var geometry = new THREE.SphereGeometry(10, 2, 100);
-	var material = new THREE.MeshNormalMaterial();
-	diamond1 = new THREE.Mesh(geometry, material);
-	diamond1.position.set(0, 30, 0);
-	button.add(diamond1);
-	scene.add(button);
+
+		var sphereArray = [];
+console.log(new THREE.Vector3(30, 100, 0));
+console.log(new THREE.Vector3(50, 100, 0));
+		var spherePos = [{
+			x: -0.01501501501501501,
+			y: 0.3972602739726028,
+			z: 0
+		},
+		{
+			x: 40,
+			y: 30,
+			z: 0
+		},
+		{
+			x: 50,
+			y: 80,
+			z: 0
+		}
+		];
+		var sphere = {
+    	geometry: new THREE.SphereGeometry(10, 2, 100),
+    	material: new THREE.MeshNormalMaterial(),
+		}
+		var mesh = new THREE.Mesh(sphere.geometry, sphere.material);
+
+		for(var i = 0; i < spherePos.length; i++){
+			sphereArray[i] = mesh;
+			sphereArray[i].position.x = spherePos[i].x;
+			sphereArray[i].position.y = spherePos[i].y;
+			sphereArray[i].position.z = spherePos[i].z;
+			button.add(sphereArray);
+		}
+
+    scene.add(button);
 }
 function init() {
-initializingSpace();
-loadMap();
-createButton();
-window.addEventListener('resize', onWindowResize, false);
-window.addEventListener("click", onClick);
+    initializingSpace();
+    loadMap();
+    createButton();
+    window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener("click", onClick, false);
 }
 function onWindowResize() {
-camera.aspect = window.innerWidth / window.innerHeight;
-renderer.setSize( window.innerWidth, window.innerHeight );
-controls.handleResize();
+    camera.aspect = window.innerWidth / window.innerHeight;
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
-
 function onClick(e) {
-var mouse = new THREE.Vector2(
-	(e.clientX / window.innerWidth) * 2 - 1,
-	- (e.clientY / window.innerHeight) * 2 + 1
-);
-var raycaster = new THREE.Raycaster();
-raycaster.setFromCamera(mouse, camera);
-var intersects = raycaster.intersectObject(button);
-	if(intersects.lenght > 0) {
-		console.log("hello");
+    var mouse = new THREE.Vector2(
+        (e.clientX / window.innerWidth) * 2 - 1,
+        -(e.clientY / window.innerHeight) * 2 + 1
+    );
+		console.log(mouse);
+		var raycaster = new THREE.Raycaster();
+		raycaster.setFromCamera(mouse, camera);
+
+		var intersects = raycaster.intersectObjects(button.children);
+		console.log(intersects[0].object.parent);
+		//if raycaster detects sth
+		if(intersects.length > 0) {
+			console.log("hello");
+			if(intersects[0].object.parent === button.sphere0) {
+				console.log("sphere0");
+			}
+		}
+
 	}
-}
+
+
+
+
+
 
 function animate() {
-controls.update(clock.getDelta());
-renderer.render(scene, camera);
-requestAnimationFrame(animate);
+    controls.update(clock.getDelta());
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
 }
-	</script>
+</script>
 </html>
