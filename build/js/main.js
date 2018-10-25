@@ -19,21 +19,19 @@ CHANGE LIGHT
 Raycaster
 */
 function initializingSpace() {
-    renderer = new THREE.WebGLRenderer({
-        antialias: true
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(devicePixelRatio);
-    document.body.appendChild(renderer.domElement);
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xffffff);
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.target = new THREE.Vector3(0, 0, 0);
+
+    space.renderer.setSize(window.innerWidth, window.innerHeight);
+    space.renderer.setPixelRatio(devicePixelRatio);
+    document.body.appendChild(space.renderer.domElement);
+
+    space.scene.background = new THREE.Color(0xffffff);
+
+    space.camera.target = new THREE.Vector3(0, 0, 0);
     //last one is fov
-    camera.position.set(0, 40, 0);
-    scene.add(camera);
+    space.camera.position.set(0, 40, 0);
+    space.scene.add(space.camera);
     //controls
-    controls = new THREE.MapControls(camera, renderer.domElement);
+    controls = new THREE.MapControls(space.camera, space.renderer.domElement);
     controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     controls.dampingFactor = 0.25;
     controls.screenSpacePanning = false;
@@ -41,17 +39,17 @@ function initializingSpace() {
     controls.maxDistance = 100;
     controls.minPolarAngle = Math.PI / 8;
     controls.maxPolarAngle = Math.PI / 3;
-    var light = new THREE.AmbientLight(0xffffff);
-    button.add(light);
+
+    space.scene.add(space.light);
 }
 
 function loadMap() {
     const mapLoader = new THREE.GLTF2Loader();
-    const mapDir = "crespi3d.gltf";
+    const mapDir = "3d/crespi3d.gltf";
     mapLoader.allowCrossOrigin = true;
     mapLoader.load(mapDir, function(data) {
         gltf = data;
-        scene.add(gltf.scene);
+        space.scene.add(gltf.scene);
         gltf.animations;
         gltf.scene;
         gltf.cameras;
@@ -95,7 +93,7 @@ function createButton() {
         button.add(sphereArray[i]);
     }
 
-    scene.add(button);
+    space.scene.add(button);
 }
 
 function init() {
@@ -108,7 +106,7 @@ function init() {
 
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    space.renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function onClick(e) {
@@ -135,6 +133,6 @@ function onClick(e) {
 
 function animate() {
     controls.update(clock.getDelta());
-    renderer.render(scene, camera);
+    space.renderer.render(space.scene, space.camera);
     requestAnimationFrame(animate);
 }
