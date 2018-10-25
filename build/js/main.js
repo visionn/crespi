@@ -1,24 +1,12 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/96/three.min.js"></script>
-<script src="https://cdn.rawgit.com/mrdoob/three.js/r85/examples/js/loaders/GLTF2Loader.js"></script>
-<script src="https://threejs.org/examples/js/controls/MapControls.js"></script>
-
-<!DOCTYPE html>
-	<head>
-		<title>.</title>
-		<style>
-			body { margin: 0; }
-			canvas { width: 100%; height: 100% }
-		</style>
-	</head>
-	<body>
-	</body>
-<script>
-var renderer,
-    scene,
-    camera,
-    controls,
-		sphereData,
-		sphereArray = [],
+var space = {
+  scene: new THREE.Scene(),
+  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
+  renderer: new THREE.WebGLRenderer({antialias: true}),
+  light: new THREE.AmbientLight(0xffffff)
+}
+var controls,
+    sphereData,
+    sphereArray = [],
     mouseVector = new THREE.Vector3(),
     clock = new THREE.Clock(),
     diamondTexture;
@@ -51,11 +39,12 @@ function initializingSpace() {
     controls.screenSpacePanning = false;
     controls.minDistance = 70;
     controls.maxDistance = 100;
-    //controls.minPolarAngle = Math.PI / 6;
-    //controls.maxPolarAngle = Math.PI / 3;
+    controls.minPolarAngle = Math.PI / 8;
+    controls.maxPolarAngle = Math.PI / 3;
     var light = new THREE.AmbientLight(0xffffff);
     button.add(light);
 }
+
 function loadMap() {
     const mapLoader = new THREE.GLTF2Loader();
     const mapDir = "crespi3d.gltf";
@@ -69,44 +58,46 @@ function loadMap() {
         gltf.asset;
     });
 }
-function createButton() {
-	//add coordinates if you need to create a new sphere
-		sphereData = [{
-			x: 0.004379562043795637,
-			y: 0.48125937031484256,
-			z: 3,
-			id: "uno"
-		},
-		{
-			x: 40,
-			y: 30,
-			z: 0,
-			id: "due"
-		},
-		{
-			x: 100,
-			y: 20,
-			z: 0
-		}
-		];
-		var sphere = {
-    	geometry: new THREE.SphereGeometry(10, 2, 100),
-    	material: new THREE.MeshNormalMaterial(),
-		}
 
-		for(var i = 0; i < sphereData.length; i++){
-			sphereArray[i] = new THREE.Mesh(sphere.geometry, sphere.material);
-			sphereArray[i].position.x = sphereData[i].x;
-			sphereArray[i].position.y = sphereData[i].y;
-			sphereArray[i].position.z = sphereData[i].z;
-			sphereArray[i].name = sphereData[i].id;
-			sphereArray[i].scale = 0.5;
-			console.log(sphereArray[i]);
-			button.add(sphereArray[i]);
-		}
+function createButton() {
+    //add coordinates if you need to create a new sphere
+    sphereData = [{
+            x: 50,
+            y: 20,
+            z: 0,
+            id: "uno"
+        },
+        {
+            x: 40,
+            y: 20,
+            z: -150,
+            id: "due"
+        },
+        {
+            x: -50,
+            y: 20,
+            z: -50
+        }
+    ];
+    var sphere = {
+        geometry: new THREE.SphereGeometry(10, 2, 100),
+        material: new THREE.MeshNormalMaterial(),
+    }
+
+    for (var i = 0; i < sphereData.length; i++) {
+        sphereArray[i] = new THREE.Mesh(sphere.geometry, sphere.material);
+        sphereArray[i].position.x = sphereData[i].x;
+        sphereArray[i].position.y = sphereData[i].y;
+        sphereArray[i].position.z = sphereData[i].z;
+        sphereArray[i].name = sphereData[i].id;
+        sphereArray[i].scale = 0.5;
+        console.log(sphereArray[i]);
+        button.add(sphereArray[i]);
+    }
 
     scene.add(button);
 }
+
 function init() {
     initializingSpace();
     loadMap();
@@ -114,30 +105,32 @@ function init() {
     window.addEventListener('resize', onWindowResize, false);
     window.addEventListener("click", onClick, false);
 }
+
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
 function onClick(e) {
     var mouse = new THREE.Vector2(
         (e.clientX / window.innerWidth) * 2 - 1,
         -(e.clientY / window.innerHeight) * 2 + 1
     );
-		var raycaster = new THREE.Raycaster();
-		raycaster.setFromCamera(mouse, camera);
+    var raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
 
-		var intersects = raycaster.intersectObjects(button.children);
-		//if raycaster detects sth
-		if(intersects.length > 0) {
-						console.log(intersects);
-			//id = uno
-			if(intersects[0].object.name == sphereData[0].id) {
-				console.log("sphere0");
-			}
-		}
+    var intersects = raycaster.intersectObjects(button.children);
+    //if raycaster detects sth
+    if (intersects.length > 0) {
+        console.log(intersects);
+        //id = uno
+        if (intersects[0].object.name == sphereData[0].id) {
+            console.log("sphere0");
+        }
+    }
 
 
-	}
+}
 
 
 function animate() {
@@ -145,5 +138,3 @@ function animate() {
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
 }
-</script>
-</html>
