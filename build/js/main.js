@@ -18,7 +18,14 @@ animate();
 TODO
 CHANGE LIGHT
 Raycaster
+add sphere video construtor
 */
+class sphereVideo {
+  constructor() {
+    this.video = sphereData.video;
+  }
+}
+
 function initializingSpace() {
 
     space.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -30,6 +37,7 @@ function initializingSpace() {
     space.camera.target = new THREE.Vector3(0, 0, 0);
     //last one is fov
     space.camera.position.set(0, 40, 0);
+
     space.scene.add(space.camera);
     //controls
     controls = new THREE.MapControls(space.camera, space.renderer.domElement);
@@ -64,7 +72,8 @@ function createButton() {
             x: 50,
             y: 20,
             z: 0,
-            id: "uno"
+            id: "uno",
+            video: ""
         },
         {
             x: 40,
@@ -108,9 +117,7 @@ function onWindowResize() {
     space.camera.aspect = window.innerWidth / window.innerHeight;
     space.renderer.setSize(window.innerWidth, window.innerHeight);
 }
-function video() {
-  space.camera.position.set(1000, 20, 46);
-}
+
 
 function onClick(e) {
     var mouse = new THREE.Vector2(
@@ -127,8 +134,6 @@ function onClick(e) {
         //id = uno
         if (intersects[0].object.name == sphereData[0].id) {
             console.log("sphere 0 tapped");
-            saveCameraPosition = space.camera.position;
-            video();
         }
     }
 
@@ -140,4 +145,5 @@ function animate() {
     controls.update(clock.getDelta());
     space.renderer.render(space.scene, space.camera);
     requestAnimationFrame(animate);
+    //    console.log(space.camera.position);
 }
