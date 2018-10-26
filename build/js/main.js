@@ -67,13 +67,43 @@ function loadMap() {
 }
 
 function createButton() {
-    //add coordinates if you need to create a new sphere
-    sphereData = new THREE.JSONLoader("js/sphereData.json");
-    var sphere = {
-        geometry: new THREE.SphereGeometry(10, 2, 100),
-        material: new THREE.MeshNormalMaterial(),
+/*
+    sphereData = new Array();
+    function loadArray() {
+      $.getJSON("js/spheredata.json", function(data) {
+        sphereData = data.spheres;
+        console.log("json loaded");
+      }).error(function() {
+        console.log("spheredata.json not loaded");
+      });
     }
+*/
+  sphereData = [{
+          x: 50,
+          y: 20,
+          z: 0,
+          id: 0,
+          video: ""
+      },
+      {
+          x: 40,
+          y: 20,
+          z: -150,
+          id: 1
+      },
+      {
+          x: -50,
+          y: 20,
+          z: -50,
+          id: 2
+      }
+  ];
 
+  var sphere = {
+      geometry: new THREE.SphereGeometry(10, 2, 100),
+      material: new THREE.MeshNormalMaterial()
+  }
+    //spheredata.lenght determinates sphere quantity
     for (var i = 0; i < sphereData.length; i++) {
         sphereArray[i] = new THREE.Mesh(sphere.geometry, sphere.material);
         sphereArray[i].position.x = sphereData[i].x;
@@ -111,11 +141,11 @@ function onClick(e) {
 
     var intersects = raycaster.intersectObjects(button.children);
     //if raycaster detects sth
-    if (intersects.length > 0) {
+    if(intersects.length == 1) {
         console.log(intersects);
-        //id = uno
-        if (intersects[0].object.name == sphereData[0].id) {
-            console.log("sphere 0 tapped");
+          if (intersects.object.name == sphereData.id) {
+            console.log("sphere" + i + "tapped");
+            //constructor(sphereData);
         }
     }
 
