@@ -68,25 +68,7 @@ function loadMap() {
 
 function createButton() {
     //add coordinates if you need to create a new sphere
-    sphereData = [{
-            x: 50,
-            y: 20,
-            z: 0,
-            id: "uno",
-            video: ""
-        },
-        {
-            x: 40,
-            y: 20,
-            z: -150,
-            id: "due"
-        },
-        {
-            x: -50,
-            y: 20,
-            z: -50
-        }
-    ];
+    sphereData = new THREE.JSONLoader("js/sphereData.json");
     var sphere = {
         geometry: new THREE.SphereGeometry(10, 2, 100),
         material: new THREE.MeshNormalMaterial(),
