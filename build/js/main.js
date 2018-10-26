@@ -82,20 +82,19 @@ function createButton() {
           x: 50,
           y: 20,
           z: 0,
-          id: 0,
+          id: "uno",
           video: ""
       },
       {
           x: 40,
           y: 20,
           z: -150,
-          id: 1
+          id: "due"
       },
       {
           x: -50,
           y: 20,
-          z: -50,
-          id: 2
+          z: -50
       }
   ];
 
