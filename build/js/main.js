@@ -6,6 +6,7 @@ var space = {
 }
 var controls,
     sphereData,
+    saveCameraPosition,
     sphereArray = [],
     mouseVector = new THREE.Vector3(),
     clock = new THREE.Clock(),
@@ -89,7 +90,6 @@ function createButton() {
         sphereArray[i].position.z = sphereData[i].z;
         sphereArray[i].name = sphereData[i].id;
         sphereArray[i].scale = 0.5;
-        console.log(sphereArray[i]);
         button.add(sphereArray[i]);
     }
 
@@ -105,8 +105,11 @@ function init() {
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    space.camera.aspect = window.innerWidth / window.innerHeight;
     space.renderer.setSize(window.innerWidth, window.innerHeight);
+}
+function video() {
+  space.camera.position.set(1000, 20, 46);
 }
 
 function onClick(e) {
@@ -115,7 +118,7 @@ function onClick(e) {
         -(e.clientY / window.innerHeight) * 2 + 1
     );
     var raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, space.camera);
 
     var intersects = raycaster.intersectObjects(button.children);
     //if raycaster detects sth
@@ -123,7 +126,9 @@ function onClick(e) {
         console.log(intersects);
         //id = uno
         if (intersects[0].object.name == sphereData[0].id) {
-            console.log("sphere0");
+            console.log("sphere 0 tapped");
+            saveCameraPosition = space.camera.position;
+            video();
         }
     }
 
