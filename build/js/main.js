@@ -11,6 +11,10 @@ var controls,
     mouseVector = new THREE.Vector3(),
     clock = new THREE.Clock(),
     diamondTexture;
+var videoSphere = {
+  geometry: new THREE.SphereGeometry(10, 2, 100),
+  material: new THREE.MeshNormalMaterial()
+}
 const button = new THREE.Group();
 init();
 animate();
@@ -20,9 +24,14 @@ CHANGE LIGHT
 Raycaster
 add sphere video construtor
 */
-class sphereVideo {
-  constructor() {
-    this.video = sphereData.video;
+class SphereVideo {
+  constructor(video, scene) {
+    this.video = video;
+    this.sphere = scene;
+    }
+  createSphere() {
+    var videoMesh = new THREE.Mesh(videoSphere.geometry, videoSphere.material);
+    space.scene.add(videoMesh);
   }
 }
 
@@ -142,8 +151,9 @@ function onClick(e) {
     //if raycaster detects sth
     if(intersects.length == 1) {
         console.log(intersects);
-          if (intersects.object.name == sphereData.id) {
-            console.log("sphere" + i + "tapped");
+          if (intersects[0].object.name == sphereData[0].id) {
+            var tmp = new SphereVideo(sphereData[0].video);
+            tmp.createSphere(space.scene);
             //constructor(sphereData);
         }
     }
