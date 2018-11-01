@@ -10,8 +10,7 @@ var sphereData;
 var clock = new THREE.Clock();
 const button = new THREE.Group();
 
-init();
-animate();
+
 function setScene(scene) {
   scene.background = new THREE.Color(0xffffff);
 }
@@ -42,17 +41,27 @@ CHANGE LIGHT
 Raycaster
 add sphere video construtor
 */
-class SphereVideo {
-  constructor(video, scene) {
-    this.video = video;
-    space.scene = null;
+
+
+class Scene {
+  constructor(scene) {
+    this.scene = scene;
     }
-  createSphere() {
-    this.scene = space.scene;
+  createVideoScene(video) {
+    this.video = video;
     var videoMesh = new THREE.Mesh(videoSphere.geometry, videoSphere.material);
     this.scene.add(videoMesh);
   }
+  createMapScene() {
+    loadMap();
+    createButton();
+    addLight();
+  }
 }
+
+
+init();
+animate();
 
 function addLight() {
     const light = new THREE.AmbientLight(0xffffff);
@@ -115,9 +124,8 @@ function createButton() {
 
 
 function init() {
-    addLight();
-    loadMap();
-    createButton();
+    var mapScene = new Scene(scene);
+    mapScene.createMapScene();
     window.addEventListener('resize', onWindowResize, false);
     window.addEventListener("click", onClick, false);
 }
@@ -141,8 +149,8 @@ function onClick(e) {
     if(intersects.length == 1) {
         console.log(intersects);
           if (intersects[0].object.name == sphereData[0].id) {
-            var tmp = new SphereVideo(sphereData[0].video);
-            tmp.createSphere(scene);
+            var tmp = new SphereVideo();
+            tmp.createVideoSphere(sphereData[0].video);
             //constructor(sphereData);
         }
     }
