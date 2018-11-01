@@ -1,23 +1,41 @@
-var space = {
-  scene: new THREE.Scene(),
-  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
-  renderer: new THREE.WebGLRenderer({antialias: true}),
-  light: new THREE.AmbientLight(0xffffff)
-}
-var controls,
-    sphereData,
-    saveCameraPosition,
-    sphereArray = [],
-    mouseVector = new THREE.Vector3(),
-    clock = new THREE.Clock(),
-    diamondTexture;
-var videoSphere = {
-  geometry: new THREE.SphereGeometry(10, 2, 100),
-  material: new THREE.MeshNormalMaterial()
-}
+const scene = new THREE.Scene();
+setScene(scene);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+setCamera(camera, scene);
+const renderer = new THREE.WebGLRenderer({antialias: true});
+setRenderer(renderer);
+const controls = new THREE.MapControls(camera, renderer.domElement);
+setControls(controls);
+var sphereData;
+var clock = new THREE.Clock();
 const button = new THREE.Group();
+
 init();
 animate();
+function setScene(scene) {
+  scene.background = new THREE.Color(0xffffff);
+}
+function setCamera(camera, scene) {
+  camera.target = new THREE.Vector3(0, 0, 0);
+  //last one is fov
+  camera.position.set(0, 40, 0);
+  scene.add(camera);
+}
+function setRenderer(renderer) {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(devicePixelRatio);
+  document.body.appendChild(renderer.domElement);
+}
+function setControls(controls) {
+  //controls
+  controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+  controls.dampingFactor = 0.25;
+  controls.screenSpacePanning = false;
+  controls.minDistance = 70;
+  controls.maxDistance = 100;
+  controls.minPolarAngle = Math.PI / 8;
+  controls.maxPolarAngle = Math.PI / 3;
+}
 /*
 TODO
 CHANGE LIGHT
@@ -27,38 +45,18 @@ add sphere video construtor
 class SphereVideo {
   constructor(video, scene) {
     this.video = video;
-    this.sphere = scene;
+    space.scene = null;
     }
   createSphere() {
+    this.scene = space.scene;
     var videoMesh = new THREE.Mesh(videoSphere.geometry, videoSphere.material);
-    space.scene.add(videoMesh);
+    this.scene.add(videoMesh);
   }
 }
 
-function initializingSpace() {
-
-    space.renderer.setSize(window.innerWidth, window.innerHeight);
-    space.renderer.setPixelRatio(devicePixelRatio);
-    document.body.appendChild(space.renderer.domElement);
-
-    space.scene.background = new THREE.Color(0xffffff);
-
-    space.camera.target = new THREE.Vector3(0, 0, 0);
-    //last one is fov
-    space.camera.position.set(0, 40, 0);
-
-    space.scene.add(space.camera);
-    //controls
-    controls = new THREE.MapControls(space.camera, space.renderer.domElement);
-    controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-    controls.dampingFactor = 0.25;
-    controls.screenSpacePanning = false;
-    controls.minDistance = 70;
-    controls.maxDistance = 100;
-    controls.minPolarAngle = Math.PI / 8;
-    controls.maxPolarAngle = Math.PI / 3;
-
-    space.scene.add(space.light);
+function addLight() {
+    const light = new THREE.AmbientLight(0xffffff);
+    scene.add(light);
 }
 
 function loadMap() {
@@ -67,7 +65,7 @@ function loadMap() {
     mapLoader.allowCrossOrigin = true;
     mapLoader.load(mapDir, function(data) {
         gltf = data;
-        space.scene.add(gltf.scene);
+        scene.add(gltf.scene);
         gltf.animations;
         gltf.scene;
         gltf.cameras;
@@ -76,18 +74,8 @@ function loadMap() {
 }
 
 function createButton() {
-/*
-    sphereData = new Array();
-    function loadArray() {
-      $.getJSON("js/spheredata.json", function(data) {
-        sphereData = data.spheres;
-        console.log("json loaded");
-      }).error(function() {
-        console.log("spheredata.json not loaded");
-      });
-    }
-*/
-  sphereData = [{
+  let sTmp;
+    sphereData = [{
           x: 50,
           y: 20,
           z: 0,
@@ -107,26 +95,27 @@ function createButton() {
       }
   ];
 
-  var sphere = {
+  let sphere = {
       geometry: new THREE.SphereGeometry(10, 2, 100),
       material: new THREE.MeshNormalMaterial()
   }
-    //spheredata.lenght determinates sphere quantity
-    for (var i = 0; i < sphereData.length; i++) {
-        sphereArray[i] = new THREE.Mesh(sphere.geometry, sphere.material);
-        sphereArray[i].position.x = sphereData[i].x;
-        sphereArray[i].position.y = sphereData[i].y;
-        sphereArray[i].position.z = sphereData[i].z;
-        sphereArray[i].name = sphereData[i].id;
-        sphereArray[i].scale = 0.5;
-        button.add(sphereArray[i]);
-    }
+  //spheredata.lenght determinates sphere quantity
+  for (let i = 0; i < sphereData.length; i++) {
+      sTmp = new THREE.Mesh(sphere.geometry, sphere.material);
+      sTmp.position.x = sphereData[i].x;
+      sTmp.position.y = sphereData[i].y;
+      sTmp.position.z = sphereData[i].z;
+      sTmp.name = sphereData[i].id;
+      sTmp.scale = 0.5;
+      button.add(sTmp);
+  }
 
-    space.scene.add(button);
+  scene.add(button);
 }
 
+
 function init() {
-    initializingSpace();
+    addLight();
     loadMap();
     createButton();
     window.addEventListener('resize', onWindowResize, false);
@@ -145,7 +134,7 @@ function onClick(e) {
         -(e.clientY / window.innerHeight) * 2 + 1
     );
     var raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, space.camera);
+    raycaster.setFromCamera(mouse, camera);
 
     var intersects = raycaster.intersectObjects(button.children);
     //if raycaster detects sth
@@ -153,7 +142,7 @@ function onClick(e) {
         console.log(intersects);
           if (intersects[0].object.name == sphereData[0].id) {
             var tmp = new SphereVideo(sphereData[0].video);
-            tmp.createSphere(space.scene);
+            tmp.createSphere(scene);
             //constructor(sphereData);
         }
     }
@@ -164,7 +153,7 @@ function onClick(e) {
 
 function animate() {
     controls.update(clock.getDelta());
-    space.renderer.render(space.scene, space.camera);
+    renderer.render(scene, camera);
     requestAnimationFrame(animate);
     //    console.log(space.camera.position);
 }
