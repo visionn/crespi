@@ -2,7 +2,6 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({antialias: true});
 const controls = new THREE.MapControls(camera, renderer.domElement);
-//var gui = new dat.GUI();
 
 var sphereData;
 var clock = new THREE.Clock();
@@ -54,6 +53,8 @@ class Scene {
   createVideoScene(scene, video) {
     this.scene = scene;
     this.video = video;
+    controls.enabled = false;
+    camera.position.set(0, 0, 0);
     let sphere = {
         geometry: new THREE.SphereGeometry(10, 2, 100),
         material: new THREE.MeshNormalMaterial()
@@ -68,8 +69,8 @@ class Scene {
     createButton();
   }
   mapOff() {
-    buttons.visible = false;
     mapG.visible = false;
+    buttons.visible = false;
   }
 }
 
@@ -170,6 +171,7 @@ function onClick(e) {
         console.log(intersects);
           if (intersects[0].object.name == sphereData[0].id) {
             sceneC.mapOff();
+            sceneC.createVideoScene(scene);
             //sceneC = new Scene();
             //sceneC.createVideoScene(scene);
             //constructor(sphereData);
