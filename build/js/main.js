@@ -54,9 +54,9 @@ class Scene {
     this.scene = scene;
     this.video = video;
     controls.enabled = false;
-    camera.position.set(0, 0, 0);
+    camera.position.set(0, 0, 1);
     let sphere = {
-        geometry: new THREE.SphereGeometry(10, 2, 100),
+        geometry: new THREE.SphereGeometry(-20, 20, 20),
         material: new THREE.MeshNormalMaterial()
     }
     var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
@@ -153,6 +153,7 @@ function init() {
 
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
