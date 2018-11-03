@@ -1,14 +1,14 @@
 const scene = new THREE.Scene();
-setScene(scene);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-setCamera(camera, scene);
 const renderer = new THREE.WebGLRenderer({antialias: true});
-setRenderer(renderer);
 const controls = new THREE.MapControls(camera, renderer.domElement);
-setControls(controls);
+//var gui = new dat.GUI();
+
 var sphereData;
 var clock = new THREE.Clock();
-const button = new THREE.Group();
+
+const buttons = new THREE.Group();
+const mapG = new THREE.Group();
 
 
 function setScene(scene) {
@@ -44,18 +44,32 @@ add sphere video construtor
 
 
 class Scene {
-  constructor(scene) {
-    this.scene = scene;
+  constructor() {
+    this.scene = null;
+    setScene(scene);
+    setCamera(camera, scene);
+    setRenderer(renderer);
+    setControls(controls);
     }
-  createVideoScene(video) {
+  createVideoScene(scene, video) {
+    this.scene = scene;
     this.video = video;
-    var videoMesh = new THREE.Mesh(videoSphere.geometry, videoSphere.material);
+    let sphere = {
+        geometry: new THREE.SphereGeometry(10, 2, 100),
+        material: new THREE.MeshNormalMaterial()
+    }
+    var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
     this.scene.add(videoMesh);
   }
-  createMapScene() {
+  createMapScene(scene) {
+    this.scene = scene;
     loadMap();
-    createButton();
     addLight();
+    createButton();
+  }
+  mapOff() {
+    buttons.visible = false;
+    mapG.visible = false;
   }
 }
 
@@ -74,12 +88,17 @@ function loadMap() {
     mapLoader.allowCrossOrigin = true;
     mapLoader.load(mapDir, function(data) {
         gltf = data;
-        scene.add(gltf.scene);
+        mapG.add(gltf.scene);
         gltf.animations;
         gltf.scene;
         gltf.cameras;
         gltf.asset;
     });
+    console.log(mapG);
+    //true = map visible
+    mapG.layer = "mapScene";
+    scene.add(mapG);
+    //object.layers.set("map");
 }
 
 function createButton() {
@@ -116,23 +135,24 @@ function createButton() {
       sTmp.position.z = sphereData[i].z;
       sTmp.name = sphereData[i].id;
       sTmp.scale = 0.5;
-      button.add(sTmp);
+      buttons.add(sTmp);
   }
-
-  scene.add(button);
+  buttons.layer = "mapScene";
+  scene.add(buttons);
 }
 
+var sceneC = new Scene();
+sceneC.createMapScene(scene);
 
 function init() {
-    var mapScene = new Scene(scene);
-    mapScene.createMapScene();
+
     window.addEventListener('resize', onWindowResize, false);
     window.addEventListener("click", onClick, false);
 }
 
 function onWindowResize() {
-    space.camera.aspect = window.innerWidth / window.innerHeight;
-    space.renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 
@@ -144,13 +164,14 @@ function onClick(e) {
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, camera);
 
-    var intersects = raycaster.intersectObjects(button.children);
+    var intersects = raycaster.intersectObjects(buttons.children);
     //if raycaster detects sth
     if(intersects.length == 1) {
         console.log(intersects);
           if (intersects[0].object.name == sphereData[0].id) {
-            var tmp = new SphereVideo();
-            tmp.createVideoSphere(sphereData[0].video);
+            sceneC.mapOff();
+            //sceneC = new Scene();
+            //sceneC.createVideoScene(scene);
             //constructor(sphereData);
         }
     }
