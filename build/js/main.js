@@ -147,7 +147,7 @@ sceneC.createMapScene(scene);
 
 function init() {
 
-    window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener("resize", onWindowResize, false);
     window.addEventListener("click", onClick, false);
 }
 
