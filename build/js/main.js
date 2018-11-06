@@ -24,7 +24,7 @@ function setRenderer(renderer) {
   renderer.setPixelRatio(devicePixelRatio);
   document.body.appendChild(renderer.domElement);
 }
-function setControls(controls) {
+function setMapControls(controls) {
   //controls
   controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
   controls.dampingFactor = 0.25;
@@ -48,18 +48,20 @@ class Scene {
     setScene(scene);
     setCamera(camera, scene);
     setRenderer(renderer);
-    setControls(controls);
+    setMapControls(controls);
     }
   createVideoScene(scene, video) {
     this.scene = scene;
     this.video = video;
-    controls.enabled = false;
-    camera.position.set(0, 0, 1);
+    //controls.enabled = false;
     let sphere = {
         geometry: new THREE.SphereGeometry(-20, 20, 20),
         material: new THREE.MeshNormalMaterial()
     }
     var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
+    //controls.enabled = false;
+      controls.enableDamping = false;
+    videoMesh.position.set(camera.position.x, camera.position.y, camera.position.z);
     this.scene.add(videoMesh);
   }
   createMapScene(scene) {
