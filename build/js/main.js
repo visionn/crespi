@@ -1,7 +1,15 @@
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({antialias: true});
-const controls = new THREE.MapControls(camera, renderer.domElement);
+const map = {
+    camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
+    controls: null
+  }
+map.controls = new THREE.MapControls(map.camera, renderer.domElement)
+const video = {
+  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
+  controls: null
+}
+video.controls = new THREE.OrbitControls(video.camera)
 
 var sphereData;
 var clock = new THREE.Clock();
@@ -14,10 +22,10 @@ function setScene(scene) {
   scene.background = new THREE.Color(0xffffff);
 }
 function setCamera(camera, scene) {
-  camera.target = new THREE.Vector3(0, 0, 0);
+  map.camera.target = new THREE.Vector3(0, 0, 0);
   //last one is fov
-  camera.position.set(0, 40, 0);
-  scene.add(camera);
+  map.camera.position.set(0, 40, 0);
+  scene.add(map.camera);
 }
 function setRenderer(renderer) {
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -26,13 +34,13 @@ function setRenderer(renderer) {
 }
 function setMapControls(controls) {
   //controls
-  controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-  controls.dampingFactor = 0.25;
-  controls.screenSpacePanning = false;
-  controls.minDistance = 70;
-  controls.maxDistance = 100;
-  controls.minPolarAngle = Math.PI / 8;
-  controls.maxPolarAngle = Math.PI / 3;
+  map.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+  map.controls.dampingFactor = 0.25;
+  map.controls.screenSpacePanning = false;
+  map.controls.minDistance = 70;
+  map.controls.maxDistance = 100;
+  map.controls.minPolarAngle = Math.PI / 8;
+  map.controls.maxPolarAngle = Math.PI / 3;
 }
 /*
 TODO
@@ -46,9 +54,9 @@ class Scene {
   constructor() {
     this.scene = null;
     setScene(scene);
-    setCamera(camera, scene);
+    setCamera(map.camera, scene);
     setRenderer(renderer);
-    setMapControls(controls);
+    setMapControls(map.controls);
     }
   createVideoScene(scene, video) {
     this.scene = scene;
@@ -59,9 +67,10 @@ class Scene {
         material: new THREE.MeshNormalMaterial()
     }
     var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
-    //controls.enabled = false;
-      controls.enableDamping = false;
+
+
     videoMesh.position.set(camera.position.x, camera.position.y, camera.position.z);
+    //setOrbitControls();
     this.scene.add(videoMesh);
   }
   createMapScene(scene) {
@@ -79,7 +88,13 @@ class Scene {
 
 init();
 animate();
-
+/*
+function setOrbitControls() {
+  controls = null;
+  controls = new THREE.OrbitControls(camera);
+  controls.enableZoom = false;
+}
+*/
 function addLight() {
     const light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
@@ -97,7 +112,6 @@ function loadMap() {
         gltf.cameras;
         gltf.asset;
     });
-    console.log(mapG);
     //true = map visible
     mapG.layer = "mapScene";
     scene.add(mapG);
@@ -154,8 +168,10 @@ function init() {
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+    map.camera.aspect = window.innerWidth / window.innerHeight;
+    video.camera.aspect = window.innerWidth / window.innerHeight;
+    map.camera.updateProjectionMatrix();
+    video.camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
@@ -166,7 +182,7 @@ function onClick(e) {
         -(e.clientY / window.innerHeight) * 2 + 1
     );
     var raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, map.camera);
 
     var intersects = raycaster.intersectObjects(buttons.children);
     //if raycaster detects sth
@@ -186,8 +202,9 @@ function onClick(e) {
 
 
 function animate() {
-    controls.update(clock.getDelta());
-    renderer.render(scene, camera);
+    map.controls.update(clock.getDelta());
+    renderer.render(scene, map.camera);
+    //renderer.render(scene, video.camera);
     requestAnimationFrame(animate);
     //    console.log(space.camera.position);
 }
