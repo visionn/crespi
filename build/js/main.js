@@ -90,6 +90,8 @@ function videoControls() {
 
   orbitControls.enabled = true;
   orbitControls.target.set(camera.position.x + 5, camera.position.y, camera.position.z);
+  orbitControls.enablePan = false;
+  orbitControls.enableZoom = false;
   /*
   controls.enableRotate = false;
   controls.enablePan = false;
