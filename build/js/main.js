@@ -1,15 +1,10 @@
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({antialias: true});
-const map = {
-    camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
-    controls: null
-  }
-map.controls = new THREE.MapControls(map.camera, renderer.domElement)
-const video = {
-  camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
-  controls: null
-}
-video.controls = new THREE.OrbitControls(video.camera)
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const mapControls = new THREE.MapControls(camera, renderer.domElement)
+const orbitControls = new THREE.OrbitControls(camera);
+
+orbitControls.enabled = false;
 
 var sphereData;
 var clock = new THREE.Clock();
@@ -22,25 +17,25 @@ function setScene(scene) {
   scene.background = new THREE.Color(0xffffff);
 }
 function setCamera(camera, scene) {
-  map.camera.target = new THREE.Vector3(0, 0, 0);
+  camera.target = new THREE.Vector3(0, 0, 0);
   //last one is fov
-  map.camera.position.set(0, 40, 0);
-  scene.add(map.camera);
+  camera.position.set(0, 40, 0);
+  scene.add(camera);
 }
 function setRenderer(renderer) {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(devicePixelRatio);
   document.body.appendChild(renderer.domElement);
 }
-function setMapControls(controls) {
+function setMapControls(mapControls) {
   //controls
-  map.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-  map.controls.dampingFactor = 0.25;
-  map.controls.screenSpacePanning = false;
-  map.controls.minDistance = 70;
-  map.controls.maxDistance = 100;
-  map.controls.minPolarAngle = Math.PI / 8;
-  map.controls.maxPolarAngle = Math.PI / 3;
+  mapControls.dampingFactor = 0.25;
+  mapControls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+  mapControls.screenSpacePanning = false;
+  mapControls.minDistance = 70;
+  mapControls.maxDistance = 100;
+  mapControls.minPolarAngle = Math.PI / 8;
+  mapControls.maxPolarAngle = Math.PI / 3;
 }
 /*
 TODO
@@ -54,13 +49,14 @@ class Scene {
   constructor() {
     this.scene = null;
     setScene(scene);
-    setCamera(map.camera, scene);
+    setCamera(camera, scene);
     setRenderer(renderer);
-    setMapControls(map.controls);
+    setMapControls(mapControls);
     }
   createVideoScene(scene, video) {
     this.scene = scene;
     this.video = video;
+          mapControls.enabled = false;
     //controls.enabled = false;
     let sphere = {
         geometry: new THREE.SphereGeometry(-20, 20, 20),
@@ -69,11 +65,12 @@ class Scene {
     var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
 
 
-    videoMesh.position.set(camera.position.x, camera.position.y, camera.position.z);
-    //setOrbitControls();
+    videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
+    videoControls();
     this.scene.add(videoMesh);
   }
   createMapScene(scene) {
+
     this.scene = scene;
     loadMap();
     addLight();
@@ -88,13 +85,18 @@ class Scene {
 
 init();
 animate();
-/*
-function setOrbitControls() {
-  controls = null;
-  controls = new THREE.OrbitControls(camera);
+
+function videoControls() {
+
+  orbitControls.enabled = true;
+  orbitControls.target.set(camera.position.x + 5, camera.position.y, camera.position.z);
+  /*
+  controls.enableRotate = false;
+  controls.enablePan = false;
   controls.enableZoom = false;
+  */
 }
-*/
+
 function addLight() {
     const light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
@@ -168,10 +170,8 @@ function init() {
 }
 
 function onWindowResize() {
-    map.camera.aspect = window.innerWidth / window.innerHeight;
-    video.camera.aspect = window.innerWidth / window.innerHeight;
-    map.camera.updateProjectionMatrix();
-    video.camera.updateProjectionMatrix();
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
@@ -182,7 +182,7 @@ function onClick(e) {
         -(e.clientY / window.innerHeight) * 2 + 1
     );
     var raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, map.camera);
+    raycaster.setFromCamera(mouse, camera);
 
     var intersects = raycaster.intersectObjects(buttons.children);
     //if raycaster detects sth
@@ -202,8 +202,8 @@ function onClick(e) {
 
 
 function animate() {
-    map.controls.update(clock.getDelta());
-    renderer.render(scene, map.camera);
+    mapControls.update(clock.getDelta());
+    renderer.render(scene, camera);
     //renderer.render(scene, video.camera);
     requestAnimationFrame(animate);
     //    console.log(space.camera.position);
