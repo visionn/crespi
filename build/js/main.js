@@ -1,3 +1,8 @@
+/*
+TODO
+CHANGE LIGHT
+VIDEO EXIT BUTTON
+*/
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({antialias: true});
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -37,12 +42,7 @@ function setMapControls(mapControls) {
   mapControls.minPolarAngle = Math.PI / 8;
   mapControls.maxPolarAngle = Math.PI / 3;
 }
-/*
-TODO
-CHANGE LIGHT
-Raycaster
-add sphere video construtor
-*/
+
 
 
 class Scene {
@@ -56,16 +56,17 @@ class Scene {
   createVideoScene(scene, video) {
     this.scene = scene;
     this.video = video;
-          mapControls.enabled = false;
+    mapControls.enabled = false;
+    let exitButton;
     //controls.enabled = false;
     let sphere = {
         geometry: new THREE.SphereGeometry(-20, 20, 20),
         material: new THREE.MeshNormalMaterial()
     }
     var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
-
-
+//videosphere and exit spawns in your position
     videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
+    exitButton.position.set(camera.position.x + 5, camera.position.y, camera.position.z)
     videoControls();
     this.scene.add(videoMesh);
   }
