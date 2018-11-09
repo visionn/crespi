@@ -1,3 +1,8 @@
+require('three');
+require('three-gltfloader');
+require('three-mapcontrols');
+require('three-orbitcontrols');
+
 /*
 TODO
 CHANGE LIGHT
@@ -106,7 +111,7 @@ function addLight() {
 }
 
 function loadMap() {
-    const mapLoader = new THREE.GLTF2Loader();
+    const mapLoader = new THREE.GLTFLoader();
     const mapDir = "3d/crespi3d.gltf";
     mapLoader.allowCrossOrigin = true;
     mapLoader.load(mapDir, function(data) {
