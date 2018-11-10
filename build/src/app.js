@@ -13,8 +13,11 @@ const renderer = new THREE.WebGLRenderer({antialias: true});
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const mapControls = new THREE.MapControls(camera, renderer.domElement)
 const orbitControls = new THREE.OrbitControls(camera);
-
 orbitControls.enabled = false;
+const kSCREEN_SIZE = {
+  width: document.innerWidth,
+  height: document.innerHeight
+}
 
 var sphereData;
 var clock = new THREE.Clock();
@@ -33,9 +36,9 @@ function setCamera(camera, scene) {
   scene.add(camera);
 }
 function setRenderer(renderer) {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(devicePixelRatio);
-  document.body.appendChild(renderer.domElement);
+  renderer.setSize(kSCREEN_SIZE.with, kSCREEN_SIZE.height);
+//  renderer.setPixelRatio(devicePixelRatio);
+  document.getElementById('crespi-app').appendChild(renderer.domElement);
 }
 function setMapControls(mapControls) {
   //controls
@@ -62,8 +65,6 @@ class Scene {
     this.scene = scene;
     this.video = video;
     mapControls.enabled = false;
-    let exitButton;
-    //controls.enabled = false;
     let sphere = {
         geometry: new THREE.SphereGeometry(-20, 20, 20),
         material: new THREE.MeshNormalMaterial()
@@ -71,7 +72,6 @@ class Scene {
     var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
 //videosphere and exit spawns in your position
     videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
-    exitButton.position.set(camera.position.x + 5, camera.position.y, camera.position.z)
     videoControls();
     this.scene.add(videoMesh);
   }
