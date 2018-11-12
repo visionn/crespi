@@ -9,14 +9,16 @@ CHANGE LIGHT
 VIDEO EXIT BUTTON
 */
 const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer({antialias: true});
+const renderer = new THREE.WebGLRenderer({
+    antialias: true
+});
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const mapControls = new THREE.MapControls(camera, renderer.domElement)
 const orbitControls = new THREE.OrbitControls(camera);
 orbitControls.enabled = false;
 const kSCREEN_SIZE = {
-  width: document.innerWidth,
-  height: document.innerHeight
+    width: document.innerWidth,
+    height: document.innerHeight
 }
 
 var sphereData;
@@ -24,68 +26,74 @@ var clock = new THREE.Clock();
 
 const buttons = new THREE.Group();
 const mapG = new THREE.Group();
+var video = new THREE.Group();
 
 
 function setScene(scene) {
-  scene.background = new THREE.Color(0xffffff);
+    scene.background = new THREE.Color(0xffffff);
 }
+
 function setCamera(camera, scene) {
-  camera.target = new THREE.Vector3(0, 0, 0);
-  //last one is fov
-  camera.position.set(0, 40, 0);
-  scene.add(camera);
+    camera.target = new THREE.Vector3(0, 0, 0);
+    //last one is fov
+    camera.position.set(0, 40, 0);
+    scene.add(camera);
 }
+
 function setRenderer(renderer) {
-  renderer.setSize(kSCREEN_SIZE.with, kSCREEN_SIZE.height);
-//  renderer.setPixelRatio(devicePixelRatio);
-  document.getElementById('crespi-app').appendChild(renderer.domElement);
+    renderer.setSize(kSCREEN_SIZE.with, kSCREEN_SIZE.height);
+    //  renderer.setPixelRatio(devicePixelRatio);
+    document.getElementById('crespi-app').appendChild(renderer.domElement);
 }
+
 function setMapControls(mapControls) {
-  //controls
-  mapControls.dampingFactor = 0.25;
-  mapControls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-  mapControls.screenSpacePanning = false;
-  mapControls.minDistance = 70;
-  mapControls.maxDistance = 100;
-  mapControls.minPolarAngle = Math.PI / 8;
-  mapControls.maxPolarAngle = Math.PI / 3;
+    // controls
+    mapControls.dampingFactor = 0.25;
+    mapControls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+    mapControls.screenSpacePanning = false;
+    mapControls.minDistance = 70;
+    mapControls.maxDistance = 100;
+    mapControls.minPolarAngle = Math.PI / 8;
+    mapControls.maxPolarAngle = Math.PI / 3;
 }
 
 
 
 class Scene {
-  constructor() {
-    this.scene = null;
-    setScene(scene);
-    setCamera(camera, scene);
-    setRenderer(renderer);
-    setMapControls(mapControls);
+    constructor() {
+        this.scene = null;
+        setScene(scene);
+        setCamera(camera, scene);
+        setRenderer(renderer);
+        setMapControls(mapControls);
     }
-  createVideoScene(scene, video) {
-    this.scene = scene;
-    this.video = video;
-    mapControls.enabled = false;
-    let sphere = {
-        geometry: new THREE.SphereGeometry(-20, 20, 20),
-        material: new THREE.MeshNormalMaterial()
+    createVideoScene(scene, video) {
+        this.scene = scene;
+        this.video = video;
+        mapControls.enabled = false;
+        let sphere = {
+            geometry: new THREE.SphereGeometry(-20, 20, 20),
+            material: new THREE.MeshNormalMaterial()
+        }
+        let videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
+        videoMesh.name = 'video';
+        // videosphere and exit spawns in your position
+        videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
+        videoControls();
+        video.add(videoMesh);
+        this.scene.add(video);
     }
-    var videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
-//videosphere and exit spawns in your position
-    videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
-    videoControls();
-    this.scene.add(videoMesh);
-  }
-  createMapScene(scene) {
+    createMapScene(scene) {
 
-    this.scene = scene;
-    loadMap();
-    addLight();
-    createButton();
-  }
-  mapOff() {
-    mapG.visible = false;
-    buttons.visible = false;
-  }
+        this.scene = scene;
+        loadMap();
+        addLight();
+        createButton();
+    }
+    mapOff() {
+        mapG.visible = false;
+        buttons.visible = false;
+    }
 }
 
 
@@ -94,15 +102,15 @@ animate();
 
 function videoControls() {
 
-  orbitControls.enabled = true;
-  orbitControls.target.set(camera.position.x + 5, camera.position.y, camera.position.z);
-  orbitControls.enablePan = false;
-  orbitControls.enableZoom = false;
-  /*
-  controls.enableRotate = false;
-  controls.enablePan = false;
-  controls.enableZoom = false;
-  */
+    orbitControls.enabled = true;
+    orbitControls.target.set(camera.position.x + 5, camera.position.y, camera.position.z);
+    orbitControls.enablePan = false;
+    orbitControls.enableZoom = false;
+    /*
+    controls.enableRotate = false;
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    */
 }
 
 function addLight() {
@@ -129,43 +137,43 @@ function loadMap() {
 }
 
 function createButton() {
-  let sTmp;
+    let sTmp;
     sphereData = [{
-          x: 50,
-          y: 20,
-          z: 0,
-          id: "uno",
-          video: ""
-      },
-      {
-          x: 40,
-          y: 20,
-          z: -150,
-          id: "due"
-      },
-      {
-          x: -50,
-          y: 20,
-          z: -50
-      }
-  ];
+            x: 50,
+            y: 20,
+            z: 0,
+            id: "uno",
+            video: ""
+        },
+        {
+            x: 40,
+            y: 20,
+            z: -150,
+            id: "due"
+        },
+        {
+            x: -50,
+            y: 20,
+            z: -50
+        }
+    ];
 
-  let sphere = {
-      geometry: new THREE.SphereGeometry(10, 2, 100),
-      material: new THREE.MeshNormalMaterial()
-  }
-  //spheredata.lenght determinates sphere quantity
-  for (let i = 0; i < sphereData.length; i++) {
-      sTmp = new THREE.Mesh(sphere.geometry, sphere.material);
-      sTmp.position.x = sphereData[i].x;
-      sTmp.position.y = sphereData[i].y;
-      sTmp.position.z = sphereData[i].z;
-      sTmp.name = sphereData[i].id;
-      sTmp.scale = 0.5;
-      buttons.add(sTmp);
-  }
-  buttons.layer = "mapScene";
-  scene.add(buttons);
+    let sphere = {
+        geometry: new THREE.SphereGeometry(10, 2, 100),
+        material: new THREE.MeshNormalMaterial()
+    }
+    //spheredata.lenght determinates sphere quantity
+    for (let i = 0; i < sphereData.length; i++) {
+        sTmp = new THREE.Mesh(sphere.geometry, sphere.material);
+        sTmp.position.x = sphereData[i].x;
+        sTmp.position.y = sphereData[i].y;
+        sTmp.position.z = sphereData[i].z;
+        sTmp.name = sphereData[i].id;
+        sTmp.scale = 0.5;
+        buttons.add(sTmp);
+    }
+    buttons.layer = "mapScene";
+    scene.add(buttons);
 }
 
 var sceneC = new Scene();
@@ -192,17 +200,23 @@ function onClick(e) {
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, camera);
 
-    var intersects = raycaster.intersectObjects(buttons.children);
+    var intersects = raycaster.intersectObjects(camera.children);
+    //let videoIntersects = raycaster.intersectObjects(video.children);
     //if raycaster detects sth
-    if(intersects.length == 1) {
-        console.log(intersects);
-          if (intersects[0].object.name == sphereData[0].id) {
+          console.log(intersects);
+    if (intersects.length == 1) {
+
+        if (intersects[0].object.name == sphereData[0].id) {
             sceneC.mapOff();
             sceneC.createVideoScene(scene);
             //sceneC = new Scene();
             //sceneC.createVideoScene(scene);
             //constructor(sphereData);
         }
+        /*if (videoIntersects[0].object.name == 'video') {
+            console.log('video tapped');
+        }
+        */
     }
 
 
