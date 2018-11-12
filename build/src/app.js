@@ -7,6 +7,7 @@ require('three-orbitcontrols');
 TODO
 CHANGE LIGHT
 VIDEO EXIT BUTTON
+CHANGE BUTTONS TO A GROUP OF ALL OBJECTS IN SCENE
 */
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer({
@@ -80,8 +81,9 @@ class Scene {
         // videosphere and exit spawns in your position
         videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
         videoControls();
-        video.add(videoMesh);
-        this.scene.add(video);
+        buttons.add(videoMesh);
+        // todo set visible specific group obj
+        this.scene.add(buttons);
     }
     createMapScene(scene) {
 
@@ -200,7 +202,7 @@ function onClick(e) {
     var raycaster = new THREE.Raycaster();
     raycaster.setFromCamera(mouse, camera);
 
-    var intersects = raycaster.intersectObjects(camera.children);
+    var intersects = raycaster.intersectObjects(buttons.children);
     //let videoIntersects = raycaster.intersectObjects(video.children);
     //if raycaster detects sth
           console.log(intersects);
