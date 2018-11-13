@@ -18,7 +18,7 @@ const renderer = new THREE.WebGLRenderer({
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const mapControls = new THREE.MapControls(camera, renderer.domElement)
 const orbitControls = new THREE.OrbitControls(camera);
-orbitControls.enabled = false;
+
 const kSCREEN_SIZE = {
     width: document.innerWidth,
     height: document.innerHeight
@@ -31,9 +31,6 @@ const buttons = new THREE.Group();
 const mapG = new THREE.Group();
 const kVIDEO_GROUP = new THREE.Group();
 
-function setScene(scene) {
-    scene.background = new THREE.Color(0xffffff);
-}
 
 function setCamera(camera, scene) {
     camera.target = new THREE.Vector3(0, 0, 0);
@@ -64,7 +61,6 @@ function setMapControls(mapControls) {
 class Scene {
     constructor() {
         this.scene = null;
-        setScene(scene);
         setCamera(camera, scene);
         setRenderer(renderer);
         setMapControls(mapControls);
@@ -72,7 +68,7 @@ class Scene {
     createVideoScene(scene, video) {
         this.scene = scene;
         this.video = video;
-        mapControls.enabled = false;
+
         let sphere = {
             geometry: new THREE.SphereGeometry(-20, 20, 20),
             material: new THREE.MeshNormalMaterial()
@@ -101,17 +97,27 @@ class Scene {
         addLight();
         createButton();
     }
-    setMap(status) {
-        // kVIDEO_GROUP.visible = !status;
-        mapG.visible = status;
-        buttons.visible = status;
-    }
+
 }
 
 
 init();
 animate();
 
+function setScene(type) {
+  let status;
+  scene.background = new THREE.Color(0xffffff);
+  if (type == 'map')
+    status = true;
+  else if(type == 'video')
+    status = false;
+
+  orbitControls.enabled = !status;
+  mapControls.enabled = status;
+  kVIDEO_GROUP.visible = !status;
+  mapG.visible = status;
+  buttons.visible = status;
+ }
 
 function videoControls() {
 
@@ -191,6 +197,7 @@ function createButton() {
 
 var sceneC = new Scene();
 sceneC.createMapScene(scene);
+setScene('map');
 
 function init() {
 
@@ -220,8 +227,9 @@ function onClick(e) {
     if (intersects.length == 1) {
 
         if (intersects[0].object.name == sphereData[0].id) {
-            sceneC.setMap(false);
+
             sceneC.createVideoScene(scene);
+                        setScene('video');
             //sceneC = new Scene();
             //sceneC.createVideoScene(scene);
             //constructor(sphereData);
