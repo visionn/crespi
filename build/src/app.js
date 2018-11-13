@@ -11,120 +11,149 @@ CHANGE LIGHT
 VIDEO EXIT BUTTON
 CHANGE BUTTONS TO A GROUP OF ALL OBJECTS IN SCENE
 */
-const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer({
+const SCENE = new THREE.Scene();
+const RENDERER = new THREE.WebGLRenderer({
     antialias: true
 });
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const mapControls = new THREE.MapControls(camera, renderer.domElement)
-const orbitControls = new THREE.OrbitControls(camera);
+const CAMERA = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+const MAP_CONTROLS = new THREE.MapControls(CAMERA, RENDERER.domElement);
+const ORBIT_CONTROLS = new THREE.OrbitControls(CAMERA);
 
-const kSCREEN_SIZE = {
+const SCREEN_SIZE = {
     width: document.innerWidth,
     height: document.innerHeight
 }
 
-var sphereData;
-var clock = new THREE.Clock();
+let sphereData;
+let clock = new THREE.Clock();
 
-const buttons = new THREE.Group();
-const mapG = new THREE.Group();
+const BUTTONS_GROUP = new THREE.Group();
+const MAP_GROUP = new THREE.Group();
+// todo: remove obj instead of toggling group visibility
 const kVIDEO_GROUP = new THREE.Group();
 
-
-function setCamera(camera, scene) {
-    camera.target = new THREE.Vector3(0, 0, 0);
-    //last one is fov
-    camera.position.set(0, 40, 0);
-    scene.add(camera);
+function setCamera(CAMERA, SCENE) {
+  // setting CAMERA init position
+  CAMERA.target = new THREE.Vector3(0, 0, 0);
+  // telling CAMERA what to lock at
+  // last one is fov
+  CAMERA.position.set(0, 40, 0);
+  SCENE.add(CAMERA);
 }
 
-function setRenderer(renderer) {
-    renderer.setSize(kSCREEN_SIZE.with, kSCREEN_SIZE.height);
-    //  renderer.setPixelRatio(devicePixelRatio);
-    document.getElementById('crespi-app').appendChild(renderer.domElement);
+function setRenderer(RENDERER) {
+  // setting RENDERER canvas size
+  RENDERER.setSize(SCREEN_SIZE.with, SCREEN_SIZE.height);
+
+  //  renderer.setPixelRatio(devicePixelRatio); // further use
+  // appends html div
+  document.getElementById('crespi-app').appendChild(RENDERER.domElement);
 }
 
-function setMapControls(mapControls) {
-    // controls
-    mapControls.dampingFactor = 0.25;
-    mapControls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-    mapControls.screenSpacePanning = false;
-    mapControls.minDistance = 70;
-    mapControls.maxDistance = 100;
-    mapControls.minPolarAngle = Math.PI / 8;
-    mapControls.maxPolarAngle = Math.PI / 3;
+function setMapControls(MAP_CONTROLS) {
+  // USE A CLASS INSTEAD ex MAP_CONTROLS = {dampingFactor: 0.25, enable...}
+  // an animation loop is required when either damping or auto-rotation are enabled
+  // damping factor is responsable to map scrolling along x and z axys
+  MAP_CONTROLS.dampingFactor = 0.25;
+  MAP_CONTROLS.enableDamping = true;
+  // space panning lets you fly through the map
+  MAP_CONTROLS.screenSpacePanning = false;
+  // setting min max zoom distance
+  MAP_CONTROLS.minDistance = 70;
+  MAP_CONTROLS.maxDistance = 100;
+  // setting min max polar angle
+  MAP_CONTROLS.minPolarAngle = Math.PI / 8;
+  MAP_CONTROLS.maxPolarAngle = Math.PI / 3;
 }
 
 
 
 class Scene {
-    constructor() {
-        this.scene = null;
-        setCamera(camera, scene);
-        setRenderer(renderer);
-        setMapControls(mapControls);
-    }
-    createVideoScene(scene, video) {
-        this.scene = scene;
-        this.video = video;
+  // when constructor is called, whole scene gets built
+  constructor() {
+    this.scene = null;
+    setCamera(CAMERA, SCENE);
+    setRenderer(RENDERER);
+    setMapControls(MAP_CONTROLS);
+  }
+  createVideoScene(SCENE, video) {
+    this.scene = SCENE;
+    // video name passed from onClick function
+    this.video = video;
 
-        let sphere = {
-            geometry: new THREE.SphereGeometry(-20, 20, 20),
-            material: new THREE.MeshNormalMaterial()
-        }
-        let videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
-        // videosphere and exit spawns in your position
-        videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
-        videoControls();
-        // todo set visible specific group obj
-        kVIDEO_GROUP.add(videoMesh);
-        this.scene.add(kVIDEO_GROUP);
-        window.onkeydown = function(e) {
-          let keyCode = e.keyCode ? e.keyCode : e.which;
-            // 77 = m key
-            if (keyCode == 77) {
-             kVIDEO_GROUP.visible = false;
-             mapG.visible = true;
-             buttons.visible = true;
-            }
-        }
+    // videosphere size
+    let sphere = {
+      geometry: new THREE.SphereGeometry(-20, 20, 20),
+      material: new THREE.MeshNormalMaterial()
     }
-    createMapScene(scene) {
-
-        this.scene = scene;
-        loadMap();
-        addLight();
-        createButton();
+    let videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
+    // videosphere and exit spawns in your position
+    videoMesh.position.set(
+      CAMERA.position.x + 5,
+      CAMERA.position.y,
+      CAMERA.position.z
+    );
+    // setting type of controls on
+    videoControls();
+    kVIDEO_GROUP.add(videoMesh);
+    this.scene.add(kVIDEO_GROUP);
+    // for testing purpuose; if key 'm' is pressed, kVIDEO_GROUP toggles of
+    window.onkeydown = function(e) {
+      // if true, returns e.keyCode val in keyCode
+      // if not returns e.which
+      let keyCode = e.keyCode ? e.keyCode : e.which;
+      // 77 = m key
+      if (keyCode == 77) {
+        // toggles video off and map off
+        // todo move this to setscene
+        ORBIT_CONTROLS.enabled = false;
+        MAP_CONTROLS.enabled = true;
+        kVIDEO_GROUP.visible = false;
+        MAP_GROUP.visible = true;
+        BUTTONS_GROUP.visible = true;
+      }
     }
-
+  }
+  createMapScene(SCENE) {
+    this.scene = SCENE;
+    loadMap();
+    addLight();
+    createButton();
+  }
 }
-
 
 init();
 animate();
 
 function setScene(type) {
   let status;
-  scene.background = new THREE.Color(0xffffff);
+  // todo move background setting to setEnviroment() (currently addLight)
+  SCENE.background = new THREE.Color(0xffffff);
   if (type == 'map')
     status = true;
   else if(type == 'video')
     status = false;
 
-  orbitControls.enabled = !status;
-  mapControls.enabled = status;
+  ORBIT_CONTROLS.enabled = !status;
+  MAP_CONTROLS.enabled = status;
   kVIDEO_GROUP.visible = !status;
-  mapG.visible = status;
-  buttons.visible = status;
- }
+  MAP_GROUP.visible = status;
+  BUTTONS_GROUP.visible = status;
+}
 
 function videoControls() {
-
-    orbitControls.enabled = true;
-    orbitControls.target.set(camera.position.x + 5, camera.position.y, camera.position.z);
-    orbitControls.enablePan = false;
-    orbitControls.enableZoom = false;
+  ORBIT_CONTROLS.target.set(
+   CAMERA.position.x + 5,
+   CAMERA.position.y,
+   CAMERA.position.z
+  );
+  ORBIT_CONTROLS.enablePan = false;
+  ORBIT_CONTROLS.enableZoom = false;
     /*
     controls.enableRotate = false;
     controls.enablePan = false;
@@ -132,122 +161,117 @@ function videoControls() {
     */
 }
 
+// todo change name into setEnviroment
 function addLight() {
-    const light = new THREE.AmbientLight(0xffffff);
-    scene.add(light);
+  const light = new THREE.AmbientLight(0xffffff);
+  SCENE.add(light);
 }
 
 function loadMap() {
-    const mapLoader = new THREE.GLTFLoader();
-    const mapDir = "3d/crespi3d.gltf";
-    mapLoader.allowCrossOrigin = true;
-    mapLoader.load(mapDir, function(data) {
-        gltf = data;
-        mapG.add(gltf.scene);
-        gltf.animations;
-        gltf.scene;
-        gltf.cameras;
-        gltf.asset;
-    });
-    //true = map visible
-    mapG.layer = "mapScene";
-    scene.add(mapG);
-    //object.layers.set("map");
+  const MAP_LOADER = new THREE.GLTFLoader();
+  // model's directory
+  const MAP_DIR = "3d/crespi3d.gltf";
+  MAP_LOADER.allowCrossOrigin = true;
+  MAP_LOADER.load(MAP_DIR, (data) => {
+    gltf = data;
+    MAP_GROUP.add(gltf.scene);
+    gltf.animations;
+    gltf.scene;
+    gltf.cameras;
+    gltf.asset;
+  });
+  SCENE.add(MAP_GROUP);
 }
 
 function createButton() {
-    let sTmp;
-    sphereData = [{
-            x: 50,
-            y: 20,
-            z: 0,
-            id: "uno",
-            video: ""
-        },
-        {
-            x: 40,
-            y: 20,
-            z: -150,
-            id: "due"
-        },
-        {
-            x: -50,
-            y: 20,
-            z: -50
-        }
-    ];
-
-    let sphere = {
-        geometry: new THREE.SphereGeometry(10, 2, 100),
-        material: new THREE.MeshNormalMaterial()
-    }
-    //spheredata.lenght determinates sphere quantity
-    for (let i = 0; i < sphereData.length; i++) {
-        sTmp = new THREE.Mesh(sphere.geometry, sphere.material);
-        sTmp.position.x = sphereData[i].x;
-        sTmp.position.y = sphereData[i].y;
-        sTmp.position.z = sphereData[i].z;
-        sTmp.name = sphereData[i].id;
-        sTmp.scale = 0.5;
-        buttons.add(sTmp);
-    }
-    buttons.layer = "mapScene";
-    scene.add(buttons);
+  let tmp;
+  sphereData = [{
+    x: 50,
+    y: 20,
+    z: 0,
+    // represents button identification name
+    id: "uno",
+    // video directory
+    video: ""
+  },
+  {
+    x: 40,
+    y: 20,
+    z: -150,
+    id: "due"
+  },
+  {
+    x: -50,
+    y: 20,
+    z: -50
+  }];
+  // button dimentions
+  let sphere = {
+    geometry: new THREE.SphereGeometry(10, 2, 100),
+    material: new THREE.MeshNormalMaterial()
+  }
+  //spheredata.lenght determinates sphere quantity
+  for (let i = 0; i < sphereData.length; i++) {
+    tmp = new THREE.Mesh(sphere.geometry, sphere.material);
+    tmp.position.x = sphereData[i].x;
+    tmp.position.y = sphereData[i].y;
+    tmp.position.z = sphereData[i].z;
+    tmp.name = sphereData[i].id;
+    tmp.scale = 0.5;
+    BUTTONS_GROUP.add(tmp);
+  }
+  SCENE.add(BUTTONS_GROUP);
 }
 
-var sceneC = new Scene();
-sceneC.createMapScene(scene);
+let sceneC = new Scene();
+sceneC.createMapScene(SCENE);
 setScene('map');
 
 function init() {
-
-    window.addEventListener("resize", onWindowResize, false);
-    window.addEventListener("click", onClick, false);
+  window.addEventListener('resize', onWindowResize, false);
+  window.addEventListener('click', onClick, false);
 }
 
 function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+  // asign new window sizes to camera
+  CAMERA.aspect = window.innerWidth / window.innerHeight;
+  // updates camera projections
+  CAMERA.updateProjectionMatrix();
+  // updates RENDERER size on reductction for responsive canvas
+  RENDERER.setSize(window.innerWidth, window.innerHeight);
 }
 
 
 function onClick(e) {
-    var mouse = new THREE.Vector2(
-        (e.clientX / window.innerWidth) * 2 - 1,
-        -(e.clientY / window.innerHeight) * 2 + 1
-    );
-    var raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, camera);
-
-    var intersects = raycaster.intersectObjects(buttons.children);
+  // calculates mouse position
+  let mouse = new THREE.Vector2(
+    (e.clientX / window.innerWidth) * 2 - 1,
+    -(e.clientY / window.innerHeight) * 2 + 1
+  );
+  let raycaster = new THREE.Raycaster();
+  // updates the ray with mouse and camera position
+  raycaster.setFromCamera(mouse, CAMERA);
+  //array of objects intersected by raycaster
+  var intersects = raycaster.intersectObjects(BUTTONS_GROUP.children);
     //let videoIntersects = raycaster.intersectObjects(video.children);
     //if raycaster detects sth
-          console.log(intersects);
-    if (intersects.length == 1) {
-
-        if (intersects[0].object.name == sphereData[0].id) {
-
-            sceneC.createVideoScene(scene);
-                        setScene('video');
-            //sceneC = new Scene();
-            //sceneC.createVideoScene(scene);
-            //constructor(sphereData);
-        }
-        /*if (videoIntersects[0].object.name == 'video') {
-            console.log('video tapped');
-        }
-        */
+   console.log(intersects);
+  if (intersects.length == 1) {
+    // if name in intersects == name in sphereData.id
+    if (intersects[0].object.name == sphereData[0].id) {
+      // calling videoScene
+      sceneC.createVideoScene(SCENE);
+      // set scene type
+      setScene('video');
     }
-
-
+  }
 }
 
 
 function animate() {
-    mapControls.update(clock.getDelta());
-    renderer.render(scene, camera);
-    //renderer.render(scene, video.camera);
-    requestAnimationFrame(animate);
-    //    console.log(space.camera.position);
+  // clock is required for MAP_CONTROLS work
+  MAP_CONTROLS.update(clock.getDelta());
+  // rendering SCENE and CAMERE
+  RENDERER.render(SCENE, CAMERA);
+  requestAnimationFrame(animate);
 }
