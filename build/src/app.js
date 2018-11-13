@@ -1,3 +1,5 @@
+// use require.ensure for deployment
+
 require('three');
 require('three-gltfloader');
 require('three-mapcontrols');
@@ -27,8 +29,7 @@ var clock = new THREE.Clock();
 
 const buttons = new THREE.Group();
 const mapG = new THREE.Group();
-var video = new THREE.Group();
-
+const kVIDEO_GROUP = new THREE.Group();
 
 function setScene(scene) {
     scene.background = new THREE.Color(0xffffff);
@@ -77,13 +78,21 @@ class Scene {
             material: new THREE.MeshNormalMaterial()
         }
         let videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
-        videoMesh.name = 'video';
         // videosphere and exit spawns in your position
         videoMesh.position.set(camera.position.x + 5, camera.position.y, camera.position.z);
         videoControls();
-        buttons.add(videoMesh);
         // todo set visible specific group obj
-        this.scene.add(buttons);
+        kVIDEO_GROUP.add(videoMesh);
+        this.scene.add(kVIDEO_GROUP);
+        window.onkeydown = function(e) {
+          let keyCode = e.keyCode ? e.keyCode : e.which;
+            // 77 = m key
+            if (keyCode == 77) {
+             kVIDEO_GROUP.visible = false;
+             mapG.visible = true;
+             buttons.visible = true;
+            }
+        }
     }
     createMapScene(scene) {
 
@@ -92,15 +101,17 @@ class Scene {
         addLight();
         createButton();
     }
-    mapOff() {
-        mapG.visible = false;
-        buttons.visible = false;
+    setMap(status) {
+        // kVIDEO_GROUP.visible = !status;
+        mapG.visible = status;
+        buttons.visible = status;
     }
 }
 
 
 init();
 animate();
+
 
 function videoControls() {
 
@@ -209,7 +220,7 @@ function onClick(e) {
     if (intersects.length == 1) {
 
         if (intersects[0].object.name == sphereData[0].id) {
-            sceneC.mapOff();
+            sceneC.setMap(false);
             sceneC.createVideoScene(scene);
             //sceneC = new Scene();
             //sceneC.createVideoScene(scene);
