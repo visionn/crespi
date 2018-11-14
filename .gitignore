@@ -1,5 +1,0 @@
-#ignore all node modules
-build/node_modules/
-build/package-lock.json
-build/package.json
-build/webpack.config.js
