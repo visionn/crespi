@@ -98,24 +98,21 @@ class Scene {
       CAMERA.position.y,
       CAMERA.position.z
     );
+    // asignign name to videoMesh.name
+    videoMesh.name = "video";
     // setting type of controls on
     videoControls();
     kVIDEO_GROUP.add(videoMesh);
     this.scene.add(kVIDEO_GROUP);
     // for testing purpuose; if key 'm' is pressed, kVIDEO_GROUP toggles of
-    window.onkeydown = function(e) {
+    window.onkeydown (e) => {
       // if true, returns e.keyCode val in keyCode
       // if not returns e.which
       let keyCode = e.keyCode ? e.keyCode : e.which;
       // 77 = m key
       if (keyCode == 77) {
         // toggles video off and map off
-        // todo move this to setscene
-        ORBIT_CONTROLS.enabled = false;
-        MAP_CONTROLS.enabled = true;
-        kVIDEO_GROUP.visible = false;
-        MAP_GROUP.visible = true;
-        BUTTONS_GROUP.visible = true;
+        setScene('map');
       }
     }
   }
@@ -131,6 +128,7 @@ init();
 animate();
 
 function setScene(type) {
+ 
   let status;
   // todo move background setting to setEnviroment() (currently addLight)
   SCENE.background = new THREE.Color(0xffffff);
