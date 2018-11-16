@@ -1,0 +1,23 @@
+{
+  "name": "react-pract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/js/first.js",
+  "scripts": {
+    "start": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "defending1 <work.albertodefendi@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  }
+}
