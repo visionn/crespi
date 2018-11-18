@@ -71,7 +71,18 @@ function setMapControls(MAP_CONTROLS) {
   MAP_CONTROLS.maxPolarAngle = Math.PI / 3;
 }
 
+function changeScene() {
+ // Trigger animation
+   var div = document.getElementById("curtain");
+   div.offsetWidth;
 
+   // Trigger scene change
+   setTimeout(function() {
+       // Your real code should go here. I've added something
+       // just to demonstrate the change
+       document.getElementById("crespi-app").style.background = 0xffffff;
+   }, 1000);
+}
 
 class Scene {
   // when constructor is called, whole scene gets built
@@ -100,6 +111,9 @@ class Scene {
     );
     // asignign name to videoMesh.name
     videoMesh.name = 'video';
+
+   changeScene();
+
     // setting type of controls on
     videoControls();
     this.scene.add(videoMesh);
