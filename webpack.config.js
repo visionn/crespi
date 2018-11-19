@@ -5,7 +5,7 @@ module.exports = {
   //setting entry app.js
   //note: every entry must be in directory src to work with webpack
   entry: {
-    app: './src/build/js/Dom.js',
+    app: './src/build/js/app.js',
     vendor: ['react', 'react-dom']
   },
   output: {
