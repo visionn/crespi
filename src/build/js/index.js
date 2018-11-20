@@ -4,6 +4,6 @@ import ReactDOM from 'react-dom';
 import Dom from './Dom';
 
 ReactDOM.render (
-  <App />,
+  <Dom />,
   document.getElementById('crespi-app')
 );
