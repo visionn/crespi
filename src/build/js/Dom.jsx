@@ -1,10 +1,11 @@
 import React from 'react';
 import Scene from './Scene';
 
-const App = () => (
-  <div className="crespi-app">
+const Dom = () => (
+  <div className="dom">
     <Scene />
   </div>
 );
 
-export default App;
+
+export default Dom;
