@@ -1,11 +1,11 @@
 import React from 'react';
 import Scene from './Scene';
 
-const Dom = () => (
+const Dom = () => {
+  return(
   <div className="dom">
-    <Scene />
+    {<Scene />}
   </div>
-);
-
-
+ );
+};
 export default Dom;
