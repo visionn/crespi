@@ -1,6 +1,7 @@
 import React from 'react';
 import Scene from './Scene';
 
+
 const Dom = () => {
   return(
   <div className="dom">
