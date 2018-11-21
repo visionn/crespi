@@ -9,16 +9,17 @@ class Scene extends Component {
   render() {
     return (
       <div
-        ref={element => (this.container = element)}
+        ref={el => (this.container = el)}
       />
     );
   }
   componentDidMount() {
    const SCREEN_SIZE = {
-     width: document.innerWidth,
-     height: document.innerHeight
+     width: window.innerWidth,
+     height: window.innerHeight
    };
    const SCENE = new THREE.Scene();
+   SCENE.background = new THREE.Color(0x222222);
    const RENDERER = new THREE.WebGLRenderer({ antialias: true });
    RENDERER.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
 
@@ -36,17 +37,14 @@ class Scene extends Component {
    const BUTTONS_GROUP = new THREE.Group();
    const MAP_GROUP = new THREE.Group();
 
+   const geometry = new THREE.SphereGeometry();
+ const material = new THREE.MeshNormalMaterial({});
+
+  App(SCENE, CAMERA, RENDERER, MAP_CONTROLS, ORBIT_CONTROLS, BUTTONS_GROUP, MAP_GROUP, SCREEN_SIZE, sphereData);
    const animate = () => {
      requestAnimationFrame(animate);
      RENDERER.render(SCENE, CAMERA);
    }
-
-   // wait react container element
-   this.container.appendChild(RENDERER.domElement);
-
-   // adding addEventListeners for functions onClick and onWindowResize
-   window.addEventListener('resize', onWindowResize, false);
-   window.addEventListener('click', onClick, false);
 
    const onClick = (e) => {
      // calculates mouse position
@@ -75,7 +73,14 @@ class Scene extends Component {
     // updates RENDERER size on reductction for responsive canvas
     RENDERER.setSize(window.innerWidth, window.innerHeight);
    }
-   App(SCENE, CAMERA, RENDERER, MAP_CONTROLS, ORBIT_CONTROLS, BUTTONS_GROUP, MAP_GROUP, SCREEN_SIZE, sphereData);
+
+
+   // adding addEventListeners for functions onClick and onWindowResize
+   window.addEventListener('resize', onWindowResize, false);
+   window.addEventListener('click', onClick, false);
+
+   // wait react container element (This must be called at the end of everything)
+   this.container.appendChild(RENDERER.domElement);
    animate();
   }
 }
