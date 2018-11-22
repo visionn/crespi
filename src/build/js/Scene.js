@@ -3,7 +3,7 @@ require('three');
 require('three-gltfloader');
 require('three-mapcontrols');
 require('three-orbitcontrols');
-import App from './App';
+import App from 'App';
 
 class Scene extends Component {
   render() {
@@ -29,72 +29,49 @@ class Scene extends Component {
      0.1,
      1000
    );
-   const MAP_CONTROLS = new THREE.MapControls(CAMERA, RENDERER.domElement);
    const ORBIT_CONTROLS = new THREE.OrbitControls(CAMERA);
    let sphereData;
-   let clock = new THREE.Clock();
 
    const BUTTONS_GROUP = new THREE.Group();
    const MAP_GROUP = new THREE.Group();
 
-   const geometry = new THREE.SphereGeometry();
- const material = new THREE.MeshNormalMaterial({});
+  const createVideoScene = (video) => {
 
-  class Scene {
-    // when constructor is called, whole scene gets built
-    constructor() {
-      setCamera(CAMERA, SCENE);
-      setMapControls(MAP_CONTROLS);
+    // videosphere size
+    let sphere = {
+      geometry: new THREE.SphereGeometry(-20, 20, 20),
+      material: new THREE.MeshNormalMaterial()
     }
-    createVideoScene(SCENE, video) {
-      // video name passed from onClick function
-      this.video = video;
+    let videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
+    // videosphere and exit spawns in your position
+    videoMesh.position.set(
+      CAMERA.position.x + 5,
+      CAMERA.position.y,
+      CAMERA.position.z
+    );
+    // asignign name to videoMesh.name
+    videoMesh.name = 'video';
 
-      // videosphere size
-      let sphere = {
-        geometry: new THREE.SphereGeometry(-20, 20, 20),
-        material: new THREE.MeshNormalMaterial()
+
+    // setting type of controls on
+    SCENE.add(videoMesh);
+    // for testing purpuose; if key 'm' is pressed, kVIDEO_GROUP toggles of
+    window.onkeydown = (e) => {
+      // if true, returns e.keyCode val in keyCode
+      // if not returns e.which
+      let keyCode = e.keyCode ? e.keyCode : e.which;
+      // 77 = m key
+      if (keyCode == 77) {
+        // toggles video off and map off
+        setScene('map');
+        removeVideo(videoMesh);
       }
-      let videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
-      // videosphere and exit spawns in your position
-      videoMesh.position.set(
-        CAMERA.position.x + 5,
-        CAMERA.position.y,
-        CAMERA.position.z
-      );
-      // asignign name to videoMesh.name
-      videoMesh.name = 'video';
-
-
-      // setting type of controls on
-      videoControls();
-      SCENE.add(videoMesh);
-      // for testing purpuose; if key 'm' is pressed, kVIDEO_GROUP toggles of
-      window.onkeydown = (e) => {
-        // if true, returns e.keyCode val in keyCode
-        // if not returns e.which
-        let keyCode = e.keyCode ? e.keyCode : e.which;
-        // 77 = m key
-        if (keyCode == 77) {
-          // toggles video off and map off
-          setScene('map');
-          removeVideo(videoMesh);
-        }
-      }
-    }
-    createMapScene() {
-      loadMap();
-      addLight();
-      createButton();
     }
   }
 
-  let sceneC = new Scene();
-  sceneC.createMapScene(SCENE);
-  setScene('map');
 
 
-function setCamera(CAMERA, SCENE) {
+  const setCamera = () => {
   // setting CAMERA init position
   CAMERA.target = new THREE.Vector3(0, 0, 0);
   // telling CAMERA what to lock at
@@ -103,31 +80,8 @@ function setCamera(CAMERA, SCENE) {
   SCENE.add(CAMERA);
 }
 
-function setRenderer(RENDERER) {
-  // setting RENDERER canvas size
-  RENDERER.setSize(SCREEN_SIZE.with, SCREEN_SIZE.height);
 
-  //  renderer.setPixelRatio(devicePixelRatio); // further use
-  // appends html div
-}
-
-function setMapControls(MAP_CONTROLS) {
-  // USE A CLASS INSTEAD ex MAP_CONTROLS = {dampingFactor: 0.25, enable...}
-  // an animation loop is required when either damping or auto-rotation are enabled
-  // damping factor is responsable to map scrolling along x and z axys
-  MAP_CONTROLS.dampingFactor = 0.25;
-  MAP_CONTROLS.enableDamping = true;
-  // space panning lets you fly through the map
-  MAP_CONTROLS.screenSpacePanning = false;
-  // setting min max zoom distance
-  MAP_CONTROLS.minDistance = 70;
-  MAP_CONTROLS.maxDistance = 100;
-  // setting min max polar angle
-  MAP_CONTROLS.minPolarAngle = Math.PI / 8;
-  MAP_CONTROLS.maxPolarAngle = Math.PI / 3;
-}
-
-function setScene(type) {
+const setScene = (type) => {
 
   let status;
   // todo move background setting to setEnviroment() (currently addLight)
@@ -139,19 +93,17 @@ function setScene(type) {
     status = false;
   }
 
-  ORBIT_CONTROLS.enabled = !status;
-  MAP_CONTROLS.enabled = status;
   // kVIDEO_GROUP.visible = !status;
-  MAP_GROUP.visible = status;
   BUTTONS_GROUP.visible = status;
 }
-function removeVideo(videoMesh) {
+
+  const removeVideo = (videoMesh) => {
   let picker = SCENE.getObjectByName(videoMesh.name);
   SCENE.remove(picker);
   animate();
 }
 
-function videoControls() {
+ const setOrbitControls = () =>  {
   ORBIT_CONTROLS.target.set(
    CAMERA.position.x + 5,
    CAMERA.position.y,
@@ -167,27 +119,10 @@ function videoControls() {
 }
 
 // todo change name into setEnviroment
-function addLight() {
-  const light = new THREE.AmbientLight(0xffffff);
-  SCENE.add(light);
-}
 
-function loadMap() {
-  const MAP_LOADER = new THREE.GLTFLoader();
-  // model's directory
-  const MAP_DIR = "3d/crespi3d.gltf";
-  MAP_LOADER.allowCrossOrigin = true;
-  MAP_LOADER.load(MAP_DIR, (data) => {
-    MAP_GROUP.add(data.scene);
-    data.animations;
-    data.scene;
-    data.cameras;
-    data.asset;
-  });
-  SCENE.add(MAP_GROUP);
-}
 
-function createButton() {
+
+  const createButton = () => {
   let tmp;
   sphereData = [{
     x: 50,
@@ -256,7 +191,7 @@ function createButton() {
    //if raycaster detects sth
    console.log(intersects);
    if (intersects.length == 1) {
-    sceneC.createVideoScene(SCENE);
+    createVideoScene();
     setScene('video');
 
     }
@@ -268,6 +203,9 @@ function createButton() {
 
    // wait react container element (This must be called at the end of everything)
    this.container.appendChild(RENDERER.domElement);
+   setCamera();
+   setOrbitControls();
+   createButton();
    animate();
   }
 }
