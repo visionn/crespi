@@ -3,7 +3,7 @@ require('three');
 require('three-gltfloader');
 require('three-mapcontrols');
 require('three-orbitcontrols');
-import App from 'App';
+// import App from 'App';
 
 class Scene extends Component {
   render() {
@@ -12,6 +12,9 @@ class Scene extends Component {
         ref={el => (this.container = el)}
       />
     );
+  }
+  onButtonClick() {
+    console.log('tapped');
   }
   componentDidMount() {
    const SCREEN_SIZE = {
@@ -34,6 +37,8 @@ class Scene extends Component {
 
    const BUTTONS_GROUP = new THREE.Group();
    const MAP_GROUP = new THREE.Group();
+   let cameraRay = new THREE.Raycaster();
+   let center = new THREE.Vector2(0, 0);
 
   const createVideoScene = (video) => {
 
@@ -76,7 +81,7 @@ class Scene extends Component {
   CAMERA.target = new THREE.Vector3(0, 0, 0);
   // telling CAMERA what to lock at
   // last one is fov
-  CAMERA.position.set(0, 40, 0);
+  CAMERA.position.set(0, 0, 0);
   SCENE.add(CAMERA);
 }
 
@@ -125,8 +130,8 @@ const setScene = (type) => {
   const createButton = () => {
   let tmp;
   sphereData = [{
-    x: 50,
-    y: 20,
+    x: 40,
+    y: 0,
     z: 0,
     // represents button identification name
     id: "uno",
@@ -134,16 +139,22 @@ const setScene = (type) => {
     video: ""
   },
   {
-    x: 40,
-    y: 20,
-    z: -150,
+    x: -40,
+    y: 0,
+    z: 0,
     id: "due"
   },
   {
-    x: -50,
-    y: 20,
-    z: -50
-  }];
+    x: 0,
+    y: 0,
+    z: 40
+  },
+  {
+    x: 0,
+    y: 0,
+    z: -40
+  }
+ ];
   // button dimentions
   let sphere = {
     geometry: new THREE.SphereGeometry(10, 2, 100),
@@ -161,12 +172,6 @@ const setScene = (type) => {
   SCENE.add(BUTTONS_GROUP);
 }
 
-
-   const animate = () => {
-     requestAnimationFrame(animate);
-     RENDERER.render(SCENE, CAMERA);
-   }
-
    const onWindowResize = () => {
     // asign new window sizes to camera
     CAMERA.aspect = window.innerWidth / window.innerHeight;
@@ -175,6 +180,15 @@ const setScene = (type) => {
     // updates RENDERER size on reductction for responsive canvas
     RENDERER.setSize(window.innerWidth, window.innerHeight);
    }
+
+    const changePosition = (i) => {
+      if (sphereData[i].x > 0) {
+      CAMERA.position.x = sphereData[i].x - 10;
+      }
+      else if (sphereData[i].z > 0) {
+      CAMERA.position.z = sphereData[i].z - 10;
+      }
+    }
 
  const onClick = (e) => {
    // calculates mouse position
@@ -189,19 +203,38 @@ const setScene = (type) => {
    var intersects = raycaster.intersectObjects(BUTTONS_GROUP.children);
    //let videoIntersects = raycaster.intersectObjects(video.children);
    //if raycaster detects sth
+   let i;
    console.log(intersects);
    if (intersects.length == 1) {
-    createVideoScene();
-    setScene('video');
-
-    }
+     if (intersects[0].object.name == sphereData[0].id) {
+       i = 0;
+       changePosition(i);
+       // createVideoScene();
+       // setScene('video');
+     }
+   }
   }
    window.addEventListener('click', onClick, false);
    // adding addEventListeners for functions onClick and onWindowResize
    window.addEventListener('resize', onWindowResize, false);
 
 
+    const render = () => {
+      RENDERER.render(SCENE, CAMERA);
+    }
+    const animate = () => {
+      requestAnimationFrame(animate);
+      CAMERA.updateMatrixWorld();
+      cameraRay.setFromCamera(center, CAMERA);
+      let intersections = cameraRay.intersectObjects(BUTTONS_GROUP.children);
+      if (intersections.lenght > 0) {
+        console.log(intersections[0].object.name);
+      }
+      render();
+      }
+
    // wait react container element (This must be called at the end of everything)
+
    this.container.appendChild(RENDERER.domElement);
    setCamera();
    setOrbitControls();
@@ -209,5 +242,6 @@ const setScene = (type) => {
    animate();
   }
 }
+
 
 export default Scene;
