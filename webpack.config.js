@@ -10,6 +10,7 @@ module.exports = {
   },
   output: {
     //defining output file
+    pathinfo: false,
     path: PATH.resolve(__dirname, './src/build/min/'),
     filename: 'crespi.min.js',
     chunkFilename: '[id].[hash:8].js'
@@ -34,6 +35,11 @@ module.exports = {
       exclude: '/node_modules/',
       use: 'babel-loader'
     }]
+  },
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false
   },
    //if true autoupdates changes after first build
    watch: true
