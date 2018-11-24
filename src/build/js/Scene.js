@@ -6,6 +6,10 @@ require('three-orbitcontrols');
 // import App from 'App';
 
 class Scene extends Component {
+  constructor(props) {
+    super(props);
+    let sceneName = 'map'
+  }
   render() {
     return (
       <div
@@ -38,6 +42,7 @@ class Scene extends Component {
    const BUTTONS_GROUP = new THREE.Group();
    const MAP_GROUP = new THREE.Group();
    let cameraRay = new THREE.Raycaster();
+   let cameraWatching;
    let center = new THREE.Vector2(0, 0);
 
   const createVideoScene = (video) => {
@@ -218,7 +223,6 @@ const setScene = (type) => {
    // adding addEventListeners for functions onClick and onWindowResize
    window.addEventListener('resize', onWindowResize, false);
 
-
     const render = () => {
       RENDERER.render(SCENE, CAMERA);
     }
@@ -227,9 +231,9 @@ const setScene = (type) => {
       CAMERA.updateMatrixWorld();
       cameraRay.setFromCamera(center, CAMERA);
       let intersections = cameraRay.intersectObjects(BUTTONS_GROUP.children);
-      if (intersections.lenght > 0) {
-        console.log(intersections[0].object.name);
-      }
+      // console.log(intersections[0].object);
+      // cameraWatching = intersections[0].object.name
+      // console.log(cameraWatching);
       render();
       }
 
@@ -242,6 +246,7 @@ const setScene = (type) => {
    animate();
   }
 }
+
 
 
 export default Scene;
