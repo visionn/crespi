@@ -8,13 +8,21 @@ require('three-orbitcontrols');
 class Scene extends Component {
   constructor(props) {
     super(props);
-    let sceneName = 'map'
+    this.state = {
+      lookingAt: props.initialState
+    }
+  }
+  changeSceneState() {
+    // updates react element
+    this.setState({
+      lookingAt: 'nothing'
+    });
   }
   render() {
     return (
-      <div
-        ref={el => (this.container = el)}
-      />
+      <div ref={el => (this.container = el)}>
+        <button>{this.state.lookingAt}</button>
+      </div>
     );
   }
   onButtonClick() {

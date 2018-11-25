@@ -6,16 +6,12 @@ import Scene from './Scene';
 class App extends Component {
   constructor() {
     super();
-
-    this.sceneButton = {
-      name: 'null'
-    }
   }
+
   render() {
     return (
       <div>
-        <button >{this.sceneButton.name}</button>
-        <Scene sceneButton />
+        <Scene initialState={'welcome'} />
       </div>
     );
   }
