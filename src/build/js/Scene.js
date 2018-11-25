@@ -29,6 +29,7 @@ class Scene extends Component {
     });
   }
   moveRight() {
+    // rotates by 90 degrees on y axys
     this.camera.rotateY(Math.PI / 2);
   }
   render() {
@@ -245,6 +246,7 @@ const setScene = (type) => {
     const animate = () => {
       requestAnimationFrame(animate);
       this.camera.updateMatrixWorld();
+      // todo add frustum https://stackoverflow.com/questions/24877880/three-js-check-if-object-is-in-frustum
       cameraRay.setFromCamera(center, this.camera);
       let intersections = cameraRay.intersectObjects(BUTTONS_GROUP.children);
       // console.log(intersections[0].object);
