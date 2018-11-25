@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Scene initialState={'welcome'} />
+        <Scene initialStatus={false} initialState={'welcome'} />
       </div>
     );
   }
