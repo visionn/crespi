@@ -8,8 +8,18 @@ require('three-orbitcontrols');
 class Scene extends Component {
   constructor(props) {
     super(props);
+    this.scene = new THREE.Scene();
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    );
+    this.arr = 25;
     this.state = {
-      lookingAt: props.initialState
+      lookingAt: props.initialState,
+      right: props.initialStatus
     }
   }
   changeSceneState() {
@@ -18,10 +28,15 @@ class Scene extends Component {
       lookingAt: 'nothing'
     });
   }
+  moveRight() {
+    this.camera.rotateY(Math.PI / 2);
+  }
   render() {
     return (
       <div ref={el => (this.container = el)}>
         <button>{this.state.lookingAt}</button>
+        <button onClick={() => this.moveRight()}>➡</button>
+        <p>{console.log(this.state.right)}</p>
       </div>
     );
   }
@@ -33,18 +48,10 @@ class Scene extends Component {
      width: window.innerWidth,
      height: window.innerHeight
    };
-   const SCENE = new THREE.Scene();
-   SCENE.background = new THREE.Color(0x222222);
-   const RENDERER = new THREE.WebGLRenderer({ antialias: true });
-   RENDERER.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
+   this.scene.background = new THREE.Color(0x222222);
+   this.renderer.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
 
-   const CAMERA = new THREE.PerspectiveCamera(
-     75,
-     SCREEN_SIZE.width / SCREEN_SIZE.height,
-     0.1,
-     1000
-   );
-   const ORBIT_CONTROLS = new THREE.OrbitControls(CAMERA);
+   const ORBIT_CONTROLS = new THREE.OrbitControls(this.camera);
    let sphereData;
 
    const BUTTONS_GROUP = new THREE.Group();
@@ -63,16 +70,16 @@ class Scene extends Component {
     let videoMesh = new THREE.Mesh(sphere.geometry, sphere.material);
     // videosphere and exit spawns in your position
     videoMesh.position.set(
-      CAMERA.position.x + 5,
-      CAMERA.position.y,
-      CAMERA.position.z
+      this.camera.position.x + 5,
+      this.camera.position.y,
+      this.camera.position.z
     );
     // asignign name to videoMesh.name
     videoMesh.name = 'video';
 
 
     // setting type of controls on
-    SCENE.add(videoMesh);
+    this.scene.add(videoMesh);
     // for testing purpuose; if key 'm' is pressed, kVIDEO_GROUP toggles of
     window.onkeydown = (e) => {
       // if true, returns e.keyCode val in keyCode
@@ -89,13 +96,14 @@ class Scene extends Component {
 
 
 
+
   const setCamera = () => {
-  // setting CAMERA init position
-  CAMERA.target = new THREE.Vector3(0, 0, 0);
-  // telling CAMERA what to lock at
+  // setting this.camera init position
+  this.camera.target = new THREE.Vector3(0, 0, 0);
+  // telling this.camera what to lock at
   // last one is fov
-  CAMERA.position.set(0, 0, 0);
-  SCENE.add(CAMERA);
+  this.camera.position.set(0, 0, 0);
+  this.scene.add(this.camera);
 }
 
 
@@ -103,7 +111,7 @@ const setScene = (type) => {
 
   let status;
   // todo move background setting to setEnviroment() (currently addLight)
-  SCENE.background = new THREE.Color(0xffffff);
+  this.scene.background = new THREE.Color(0xffffff);
   if (type == 'map') {
     status = true;
   }
@@ -116,16 +124,16 @@ const setScene = (type) => {
 }
 
   const removeVideo = (videoMesh) => {
-  let picker = SCENE.getObjectByName(videoMesh.name);
-  SCENE.remove(picker);
+  let picker = this.scene.getObjectByName(videoMesh.name);
+  this.scene.remove(picker);
   animate();
 }
 
  const setOrbitControls = () =>  {
   ORBIT_CONTROLS.target.set(
-   CAMERA.position.x + 5,
-   CAMERA.position.y,
-   CAMERA.position.z
+   this.camera.position.x + 5,
+   this.camera.position.y,
+   this.camera.position.z
   );
   ORBIT_CONTROLS.enablePan = false;
   ORBIT_CONTROLS.enableZoom = false;
@@ -182,24 +190,24 @@ const setScene = (type) => {
     tmp.name = sphereData[i].id;
     BUTTONS_GROUP.add(tmp);
   }
-  SCENE.add(BUTTONS_GROUP);
+  this.scene.add(BUTTONS_GROUP);
 }
 
    const onWindowResize = () => {
     // asign new window sizes to camera
-    CAMERA.aspect = window.innerWidth / window.innerHeight;
+    this.camera.aspect = window.innerWidth / window.innerHeight;
     // updates camera projections
-    CAMERA.updateProjectionMatrix();
-    // updates RENDERER size on reductction for responsive canvas
-    RENDERER.setSize(window.innerWidth, window.innerHeight);
+    this.camera.updateProjectionMatrix();
+    // updates this.renderer size on reductction for responsive canvas
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
    }
 
     const changePosition = (i) => {
       if (sphereData[i].x > 0) {
-      CAMERA.position.x = sphereData[i].x - 10;
+      this.camera.position.x = sphereData[i].x - 10;
       }
       else if (sphereData[i].z > 0) {
-      CAMERA.position.z = sphereData[i].z - 10;
+      this.camera.position.z = sphereData[i].z - 10;
       }
     }
 
@@ -211,7 +219,7 @@ const setScene = (type) => {
    );
    let raycaster = new THREE.Raycaster();
    // updates the ray with mouse and camera position
-   raycaster.setFromCamera(mouse, CAMERA);
+   raycaster.setFromCamera(mouse, this.camera);
    //array of objects intersected by raycaster
    var intersects = raycaster.intersectObjects(BUTTONS_GROUP.children);
    //let videoIntersects = raycaster.intersectObjects(video.children);
@@ -232,12 +240,12 @@ const setScene = (type) => {
    window.addEventListener('resize', onWindowResize, false);
 
     const render = () => {
-      RENDERER.render(SCENE, CAMERA);
+      this.renderer.render(this.scene, this.camera);
     }
     const animate = () => {
       requestAnimationFrame(animate);
-      CAMERA.updateMatrixWorld();
-      cameraRay.setFromCamera(center, CAMERA);
+      this.camera.updateMatrixWorld();
+      cameraRay.setFromCamera(center, this.camera);
       let intersections = cameraRay.intersectObjects(BUTTONS_GROUP.children);
       // console.log(intersections[0].object);
       // cameraWatching = intersections[0].object.name
@@ -247,7 +255,7 @@ const setScene = (type) => {
 
    // wait react container element (This must be called at the end of everything)
 
-   this.container.appendChild(RENDERER.domElement);
+   this.container.appendChild(this.renderer.domElement);
    setCamera();
    setOrbitControls();
    createButton();
