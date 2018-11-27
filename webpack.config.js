@@ -18,7 +18,7 @@ module.exports = {
   resolve: {
    //loading THREE dependencies
     alias: {
-      'three-mapcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/MapControls.js'),
+      'three-objectcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/ObjectControls.js'),
       'three-orbitcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/OrbitControls.js'),
       'three-gltfloader': PATH.join(__dirname, 'node_modules/three/examples/js/loaders/GLTFLoader.js')
     },
