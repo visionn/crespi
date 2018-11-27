@@ -230,6 +230,11 @@ class Scene extends Component {
 
     // wait react container element (This must be called at the end of everything)
     this.container.appendChild(this.renderer.domElement);
+    let controls = new THREE.ObjectControls(
+      this.camera,
+      this.renderer.domElement,
+      this.buttonsGroup.children
+    );
     setCamera();
     createButton();
     animate();
