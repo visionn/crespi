@@ -41,6 +41,14 @@ module.exports = {
     removeEmptyChunks: false,
     splitChunks: false
   },
+  devServer: {
+    contentBase: PATH.join(__dirname, 'src/build'),
+    compress: true,
+    port: 8080,
+    host: 'localhost',
+    open: true,
+    hot: true
+  },
    //if true autoupdates changes after first build
    watch: true
 };
