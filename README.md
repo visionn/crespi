@@ -1,4 +1,2 @@
 # crespi-tour
-## YOUR BEST UNESCO VR EXPERIENCE DELIVERED
-
-### demo https://cubisti.github.io/crespi-tour
+## Check out the experience on https://cubisti.github.io/crespi-tour
