@@ -204,7 +204,7 @@ class Scene extends Component {
     }
 
     const changePosition = (i) => {
-      this.camera.position.x += 20;
+      this.camera.position.x = 20;
     }
 
     const onClick = (e) => {
@@ -241,7 +241,7 @@ class Scene extends Component {
       requestAnimationFrame(animate);
       // cameraWatching = intersections[0].object.name
       // console.log(cameraWatching);
-      this.buttonsGroup.children[0].position.y += 1;
+      // this.buttonsGroup.children[0].position.y += 1;
       render();
     }
 
