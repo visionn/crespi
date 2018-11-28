@@ -23,6 +23,43 @@ class Scene extends Component {
       right: props.initialStatus
     }
   }
+  createSphereData = () => {
+    this.sphereData = [{
+      x: 40,
+      y: 0,
+      z: 0,
+      // represents button identification name
+      id: "uno",
+      // video directory
+      video: ""
+    },
+    {
+      x: -40,
+      y: 0,
+      z: 0,
+      id: "due"
+    },
+    {
+      x: 0,
+      y: 0,
+      z: 40,
+      id: "tre"
+    },
+    {
+      x: 0,
+      y: 0,
+      z: -40,
+      id: "cinque"
+    }];
+  }
+
+  changePosition = () => {
+    // getting position of object faced by camera
+    i = this.sphereData.indexOf(this.state.lookingAt);
+    console.log(this.sphereData);
+    this.camera.position.x = this.sphereData[i].x;
+    this.camera.position.z = this.sphereData[i].z;
+  }
 
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -57,12 +94,13 @@ class Scene extends Component {
     return (
       <div ref={el => (this.container = el)}>
         <button onClick={() => this.moveLeft()}>⬅</button>
-        <button>{this.state.lookingAt}</button>
+        <button onClick={() => this.changePosition()}>{this.state.lookingAt}</button>
         <button onClick={() => this.moveRight()}>➡</button>
       </div>
     );
   }
   componentDidMount = () => {
+    this.createSphereData();
     const SCREEN_SIZE = {
       width: window.innerWidth,
       height: window.innerHeight
@@ -134,33 +172,6 @@ class Scene extends Component {
 
     const createButton = () => {
       let tmp;
-      this.sphereData = [{
-        x: 40,
-        y: 0,
-        z: 0,
-        // represents button identification name
-        id: "uno",
-        // video directory
-        video: ""
-      },
-      {
-        x: -40,
-        y: 0,
-        z: 0,
-        id: "due"
-      },
-      {
-        x: 0,
-        y: 0,
-        z: 40,
-        id: "tre"
-      },
-      {
-        x: 0,
-        y: 0,
-        z: -40,
-        id: "cinque"
-      }];
       // button dimentions
       let sphere = {
         geometry: new THREE.SphereGeometry(10, 2, 100),
@@ -204,7 +215,8 @@ class Scene extends Component {
     }
 
     const changePosition = (i) => {
-      this.camera.position.x = 20;
+      this.camera.position.x = this.sphereData[i].x;
+      this.camera.position.z = this.sphereData[i].z;
     }
 
     const onClick = (e) => {
@@ -223,10 +235,7 @@ class Scene extends Component {
       let i;
       console.log(intersects);
       if (intersects.length == 1) {
-        if (intersects[0].object.name == this.sphereData[0].id) {
-          i = 0;
-          changePosition(i);
-        }
+        this.changePosition();
       }
     }
 
@@ -250,6 +259,7 @@ class Scene extends Component {
 
     setCamera();
     createButton();
+    this.cameraRay();
     animate();
   }
 }
