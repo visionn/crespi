@@ -44,11 +44,15 @@ module.exports = {
   devServer: {
     contentBase: PATH.join(__dirname, 'src/build'),
     compress: true,
+    // listening on port 8080
     port: 8080,
-    host: 'localhost',
-    open: true,
+    // host = pc ip address. to access server type pc ip address
+    host: '0.0.0.0',
     hot: true
   },
+   watchOptions: {
+     poll: true
+   },
    //if true autoupdates changes after first build
    watch: true
 };
