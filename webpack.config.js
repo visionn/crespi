@@ -1,5 +1,6 @@
 const PATH = require('path');
 const WEBPACK = require('webpack');
+const HTML_WEBPACK_PLUGIN = require('html-webpack-plugin');
 
 module.exports = {
   //setting entry app.js
@@ -16,7 +17,7 @@ module.exports = {
     chunkFilename: '[id].[hash:8].js'
   },
   resolve: {
-   //loading THREE dependencies
+    //loading THREE dependencies
     alias: {
       'three-objectcontrols': PATH.join(__dirname, 'libs/ObjectControls.js'),
       'three-orbitcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/OrbitControls.js'),
@@ -24,17 +25,30 @@ module.exports = {
     },
     extensions: ['*', '.js', '.jsx']
   },
-  plugins:[
+  plugins: [
     //fetching THREE lib
     new WEBPACK.ProvidePlugin({
       'THREE': 'three'
+    }),
+    new HTML_WEBPACK_PLUGIN({
+      template: PATH.join(__dirname, './src/build/index.html'),
+      filename: 'index.html'
     })
   ],
   module: {
-    rules: [{
-      exclude: '/node_modules/',
-      use: 'babel-loader'
-    }]
+    rules: [
+      {
+        exclude: '/node_modules/',
+        use: 'babel-loader'
+      },
+      {
+        test: /\.html$/,
+        use: [{
+          loader: 'html-loader',
+          options: {minimize: true}
+        }]
+      }
+    ]
   },
   optimization: {
     removeAvailableModules: false,
@@ -42,17 +56,17 @@ module.exports = {
     splitChunks: false
   },
   devServer: {
+    hot: true,
+    inline: true,
     contentBase: PATH.join(__dirname, 'src/build'),
-    compress: true,
     // listening on port 8080
     port: 8080,
     // host = pc ip address. to access server type pc ip address
     host: '0.0.0.0',
-    hot: true
   },
-   watchOptions: {
-     poll: true
-   },
-   //if true autoupdates changes after first build
-   watch: true
+  watchOptions: {
+    poll: true
+  },
+  //if true autoupdates changes after first build
+  watch: true
 };
