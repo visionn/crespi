@@ -17,13 +17,6 @@ class Scene extends Component {
       1000
     );
     this.buttonsGroup = new THREE.Group();
-    this.sphereData;
-    this.state = {
-      lookingAt: props.initialState,
-      right: props.initialStatus
-    }
-  }
-  createSphereData = () => {
     this.sphereData = [{
       x: 40,
       y: 0,
@@ -51,16 +44,25 @@ class Scene extends Component {
       z: -40,
       id: "cinque"
     }];
+    this.state = {
+      lookingAt: props.initialState,
+      right: props.initialStatus
+    }
   }
-
   changePosition = () => {
     // getting position of object faced by camera
-    i = this.sphereData.indexOf(this.state.lookingAt);
-    console.log(this.sphereData);
-    this.camera.position.x = this.sphereData[i].x;
-    this.camera.position.z = this.sphereData[i].z;
+    let i = 0;
+    // if item is found saves position inside i
+    while (this.sphereData[i].id != this.state.lookingAt || i < this.sphereData.lenght) {
+      i++;
+    }
+    if (this.sphereData[i].z == 0) {
+      this.camera.position.x = this.sphereData[i].x - 20;
+    }
+    if (this.sphereData[i].x == 0) {
+      this.camera.position.z = this.sphereData[i].z - 20;
+    }
   }
-
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let cameraWatching;
@@ -69,14 +71,12 @@ class Scene extends Component {
     // todo add frustum https://stackoverflow.com/questions/24877880/three-js-check-if-object-is-in-frustum
     cameraRay.setFromCamera(rayVector, this.camera)
     cameraWatching = cameraRay.intersectObjects(this.buttonsGroup.children, false);
-    // console.log(intersections[0].object.name);
     this.setState({
       lookingAt: cameraWatching[0].object.name
     });
   }
   moveLeft = () => {
     this.camera.rotateY(-Math.PI / 2);
-    console.log(this.sphereData.lenght)
     this.cameraRay();
     this.setPositionZero();
   }
@@ -100,7 +100,6 @@ class Scene extends Component {
     );
   }
   componentDidMount = () => {
-    this.createSphereData();
     const SCREEN_SIZE = {
       width: window.innerWidth,
       height: window.innerHeight
@@ -259,7 +258,6 @@ class Scene extends Component {
 
     setCamera();
     createButton();
-    this.cameraRay();
     animate();
   }
 }
