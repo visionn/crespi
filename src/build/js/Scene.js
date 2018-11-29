@@ -17,6 +17,7 @@ class Scene extends Component {
       1000
     );
     this.buttonsGroup = new THREE.Group();
+    this.selected;
     this.sphereData = [{
       x: 40,
       y: 0,
@@ -65,14 +66,13 @@ class Scene extends Component {
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
-    let cameraWatching;
     let rayVector = new THREE.Vector2(0, 0);
 
     // todo add frustum https://stackoverflow.com/questions/24877880/three-js-check-if-object-is-in-frustum
     cameraRay.setFromCamera(rayVector, this.camera)
-    cameraWatching = cameraRay.intersectObjects(this.buttonsGroup.children, false);
+    this.selected = cameraRay.intersectObjects(this.buttonsGroup.children, false);
     this.setState({
-      lookingAt: cameraWatching[0].object.name
+      lookingAt: this.selected[0].object.name
     });
   }
   moveLeft = () => {
@@ -228,29 +228,21 @@ class Scene extends Component {
       // updates the ray with mouse and camera position
       raycaster.setFromCamera(mouse, this.camera);
       //array of objects intersected by raycaster
-      let intersects = raycaster.intersectObjects(this.buttonsGroup.children);
+      this.selected = raycaster.intersectObjects(this.buttonsGroup.children);
       //let videoIntersects = raycaster.intersectObjects(video.children);
       //if raycaster detects sth
       let i;
-      console.log(intersects);
-      if (intersects.length == 1) {
+      console.log(this.selected);
+      if (this.selected.length == 1) {
         this.changePosition();
       }
     }
-
     window.addEventListener('click', onClick, false);
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);
-
-    const render = () => {
-      this.renderer.render(this.scene, this.camera);
-    }
     const animate = () => {
       requestAnimationFrame(animate);
-      // cameraWatching = intersections[0].object.name
-      // console.log(cameraWatching);
-      // this.buttonsGroup.children[0].position.y += 1;
-      render();
+      this.renderer.render(this.scene, this.camera);
     }
 
     // wait react container element (This must be called at the end of everything)
