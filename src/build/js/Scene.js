@@ -18,6 +18,8 @@ class Scene extends Component {
     );
     this.buttonsGroup = new THREE.Group();
     this.selected;
+    this.minZoom = 1;
+    this.maxZoom = 2;
     this.sphereData = [{
       x: 40,
       y: 0,
@@ -50,29 +52,10 @@ class Scene extends Component {
       right: props.initialStatus
     }
   }
-  changePosition = () => {
+  setZoom = (zoom) => {
     // getting position of object faced by camera
-    let i = 0;
-    // if item is found saves position inside i
-    while (this.sphereData[i].id != this.selected[0].object.name || i < this.sphereData.lenght) {
-      i++;
-    }
-    if (this.sphereData[i].z == 0) {
-      if (this.sphereData.x > 0) {
-        this.camera.position.x = this.sphereData[i].x - 20;
-      }
-      else {
-        this.camera.position.x = this.sphereData[i].x + 20;
-      }
-    }
-    if (this.sphereData[i].x == 0) {
-      if (this.sphereData.z > 0) {
-        this.camera.position.z = this.sphereData[i].z - 20;
-      }
-      else {
-        this.camera.position.z = this.sphereData[i].z + 20
-      }
-    }
+    this.camera.zoom = zoom;
+    this.camera.updateProjectionMatrix();
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -88,17 +71,13 @@ class Scene extends Component {
   moveLeft = () => {
     this.camera.rotateY(-Math.PI / 2);
     this.cameraRay();
-    this.setPositionZero();
+    this.setZoom(this.minZoom);
   }
   moveRight = () => {
     // rotates by 90 degrees on y axys
     this.camera.rotateY(Math.PI / 2);
     this.cameraRay();
-    this.setPositionZero();
-  }
-  setPositionZero = () => {
-    this.camera.position.x = 0;
-    this.camera.position.z = 0;
+    this.setZoom(this.minZoom);
   }
   onClickEvent = (e) => {
     // calculates mouse position
@@ -115,14 +94,14 @@ class Scene extends Component {
     //if raycaster detects sth
     console.log(this.selected);
     if (this.selected.length == 1) {
-       this.changePosition();
+       this.setZoom(this.maxZoom);
     }
   }
   render() {
    return (
     <div ref={el => (this.container = el)} onClick={this.onClickEvent}>
     <button onClick={() => this.moveLeft()}>⬅</button>
-    <button onClick={() => this.changePosition()}>{this.state.lookingAt}</button>
+    <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.lookingAt}</button>
     <button onClick={() => this.moveRight()}>➡</button>
     </div>
    );
@@ -184,10 +163,6 @@ class Scene extends Component {
       // updates this.renderer size on reductction for responsive canvas
       this.renderer.setSize(window.innerWidth, window.innerHeight);
     }
-    const changePosition = (i) => {
-      this.camera.position.x = this.sphereData[i].x;
-      this.camera.position.z = this.sphereData[i].z;
-    }
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);
     const animate = () => {
@@ -199,6 +174,7 @@ class Scene extends Component {
     setCamera();
     createButton();
     animate();
+    this.cameraRay();
   }
 }
 
