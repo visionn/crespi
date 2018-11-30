@@ -58,10 +58,20 @@ class Scene extends Component {
       i++;
     }
     if (this.sphereData[i].z == 0) {
-      this.camera.position.x = this.sphereData[i].x - 20;
+      if (this.sphereData.x > 0) {
+        this.camera.position.x = this.sphereData[i].x - 20;
+      }
+      else {
+        this.camera.position.x = this.sphereData[i].x + 20;
+      }
     }
     if (this.sphereData[i].x == 0) {
-      this.camera.position.z = this.sphereData[i].z - 20;
+      if (this.sphereData.z > 0) {
+        this.camera.position.z = this.sphereData[i].z - 20;
+      }
+      else {
+        this.camera.position.z = this.sphereData[i].z + 20
+      }
     }
   }
   cameraRay = () => {
