@@ -56,6 +56,11 @@ class Scene extends Component {
     // getting position of object faced by camera
     this.camera.zoom = zoom;
     this.camera.updateProjectionMatrix();
+    if (zoom == this.maxZoom) {
+      this.setState({
+        lookingAt: 'Guarda il video'
+      })
+    }
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
