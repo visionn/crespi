@@ -6,7 +6,6 @@ class Video extends Component {
     this.video
   }
   componentDidMount = () => {
-    console.log('mounted');
     let sphere = {
       geometry: new THREE.SphereGeometry(-20, 20, 20),
       material: new THREE.MeshNormalMaterial()
@@ -22,6 +21,12 @@ class Video extends Component {
     this.video.name = 'video';
     // setting type of controls on
     this.app.scene.add(this.video);
+  }
+  componentWillUnmount = () => {
+    console.log('unmounted');
+    let picker = this.app.scene.getObjectByName(this.video.name);
+    this.app.remove(picker);
+    this.app.animate();
   }
   render() {
     return(
