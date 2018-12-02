@@ -3,7 +3,7 @@ require('three');
 require('three-gltfloader');
 require('three-objectcontrols');
 require('three-orbitcontrols');
-// import App from 'App';
+import Video from './Video';
 
 class Scene extends Component {
   constructor(props) {
@@ -48,9 +48,22 @@ class Scene extends Component {
       id: "cinque"
     }];
     this.state = {
-      lookingAt: props.initialState,
-      right: props.initialStatus
+      lookingAt: '',
+      right: false,
+      videoStatus: false
     }
+  }
+  render() {
+   return (
+    <div ref={el => (this.container = el)} onClick={this.onClickEvent}>
+      <button onClick={() => this.moveLeft()}>⬅</button>
+      <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.lookingAt}</button>
+      <button onClick={() => this.moveRight()}>➡</button>
+      <div>
+        {this.state.videoStatus ? <Video this={this}/> : null}
+      </div>
+   </div>
+   );
   }
   setZoom = (zoom) => {
     // getting position of object faced by camera
@@ -59,7 +72,10 @@ class Scene extends Component {
     if (zoom == this.maxZoom) {
       this.setState({
         lookingAt: 'Guarda il video'
-      })
+      });
+      this.setState({
+        videoStatus: true
+      });
     }
   }
   cameraRay = () => {
@@ -101,15 +117,6 @@ class Scene extends Component {
     if (this.selected.length == 1) {
        this.setZoom(this.maxZoom);
     }
-  }
-  render() {
-   return (
-    <div ref={el => (this.container = el)} onClick={this.onClickEvent}>
-    <button onClick={() => this.moveLeft()}>⬅</button>
-    <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.lookingAt}</button>
-    <button onClick={() => this.moveRight()}>➡</button>
-    </div>
-   );
   }
   componentDidMount = () => {
     const SCREEN_SIZE = {

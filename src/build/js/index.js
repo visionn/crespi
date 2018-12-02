@@ -4,14 +4,10 @@ import ReactDOM from 'react-dom';
 import Scene from './Scene';
 
 class App extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <div>
-        <Scene initialStatus={false} initialState={'welcome'} />
+        <Scene />
       </div>
     );
   }
