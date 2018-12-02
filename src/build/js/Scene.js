@@ -49,16 +49,16 @@ class Scene extends Component {
     }];
     this.state = {
       lookingAt: '',
-      right: false,
+      buttonState: false,
       videoStatus: false
     }
   }
   render() {
    return (
     <div ref={el => (this.container = el)} onClick={this.onClickEvent}>
-      <button onClick={() => this.moveLeft()}>⬅</button>
-      <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.lookingAt}</button>
-      <button onClick={() => this.moveRight()}>➡</button>
+      <button onClick={() => this.rotateCamera(false)}>⬅</button>
+      <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}</button>
+      <button onClick={() => this.rotateCamera(true)}>➡</button>
       <div>
         {this.state.videoStatus ? <Video this={this}/> : null}
       </div>
@@ -70,12 +70,16 @@ class Scene extends Component {
     this.camera.zoom = zoom;
     this.camera.updateProjectionMatrix();
     if (zoom == this.maxZoom) {
-      this.setState({
-        lookingAt: 'Guarda il video'
-      });
-      this.setState({
-        videoStatus: true
-      });
+      if (this.buttonState) {
+        this.setState({
+          videoStatus: true,
+        });
+      }
+      else {
+        this.setState({
+          buttonState: true
+        });
+      }
     }
   }
   cameraRay = () => {
@@ -89,14 +93,14 @@ class Scene extends Component {
       lookingAt: this.selected[0].object.name
     });
   }
-  moveLeft = () => {
-    this.camera.rotateY(-Math.PI / 2);
-    this.cameraRay();
-    this.setZoom(this.minZoom);
-  }
-  moveRight = () => {
-    // rotates by 90 degrees on y axys
-    this.camera.rotateY(Math.PI / 2);
+  rotateCamera = (direction) => {
+    // true = right, false = left
+    if (direction) {
+      this.camera.rotateY(-Math.PI / 2);
+    }
+    else {
+      this.camera.rotateY(Math.PI / 2);
+    }
     this.cameraRay();
     this.setZoom(this.minZoom);
   }
