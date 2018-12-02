@@ -59,9 +59,9 @@ class Scene extends Component {
       <button onClick={() => this.rotateCamera(false)}>⬅</button>
       <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}</button>
       <button onClick={() => this.rotateCamera(true)}>➡</button>
-      <div>
+      <video>
         {this.state.videoStatus ? <Video this={this}/> : null}
-      </div>
+      </video>
    </div>
    );
   }
@@ -127,6 +127,10 @@ class Scene extends Component {
        this.setZoom(this.maxZoom);
     }
   }
+  animate = () => {
+    requestAnimationFrame(this.animate);
+    this.renderer.render(this.scene, this.camera);
+  }
   componentDidMount = () => {
     const SCREEN_SIZE = {
       width: window.innerWidth,
@@ -186,15 +190,11 @@ class Scene extends Component {
     }
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);
-    const animate = () => {
-      requestAnimationFrame(animate);
-      this.renderer.render(this.scene, this.camera);
-    }
     // wait react container element (This must be called at the end of everything)
     this.container.appendChild(this.renderer.domElement);
     setCamera();
     createButton();
-    animate();
+    this.animate();
     this.cameraRay();
   }
 }
