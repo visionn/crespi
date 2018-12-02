@@ -70,9 +70,9 @@ class Scene extends Component {
     this.camera.zoom = zoom;
     this.camera.updateProjectionMatrix();
     if (zoom == this.maxZoom) {
-      if (this.buttonState) {
+      if (this.state.buttonState) {
         this.setState({
-          videoStatus: true,
+          videoStatus: true
         });
       }
       else {
@@ -80,6 +80,11 @@ class Scene extends Component {
           buttonState: true
         });
       }
+    }
+    else {
+      this.setState({
+        buttonState: false
+      })
     }
   }
   cameraRay = () => {
