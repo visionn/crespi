@@ -5,6 +5,11 @@ require('three-objectcontrols');
 require('three-orbitcontrols');
 import Video from './Video';
 
+/* TODO:
+  add redux to index for universal state
+  add sass loader
+  fix controls
+*/
 class Scene extends Component {
   constructor(props) {
     super(props);
@@ -57,7 +62,9 @@ class Scene extends Component {
    return (
     <div ref={el => (this.container = el)} onClick={this.onClickEvent}>
       <button onClick={() => this.rotateCamera(false)}>⬅</button>
-      <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}</button>
+      <button onClick={() => this.setZoom(this.maxZoom)}>
+        {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
+      </button>
       <button onClick={() => this.rotateCamera(true)}>➡</button>
       <video>
         {this.state.videoStatus ? <Video video={this.state.videoStatus} this={this}/> : null}
