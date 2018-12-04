@@ -60,7 +60,7 @@ class Scene extends Component {
       <button onClick={() => this.setZoom(this.maxZoom)}>{this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}</button>
       <button onClick={() => this.rotateCamera(true)}>➡</button>
       <video>
-        {this.state.videoStatus ? <Video this={this}/> : null}
+        {this.state.videoStatus ? <Video video={this.state.videoStatus} this={this}/> : null}
       </video>
    </div>
    );
@@ -83,7 +83,8 @@ class Scene extends Component {
     }
     else {
       this.setState({
-        buttonState: false
+        buttonState: false,
+        videoStatus: false
       })
     }
   }

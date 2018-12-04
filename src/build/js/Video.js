@@ -25,7 +25,7 @@ class Video extends Component {
   componentWillUnmount = () => {
     console.log('unmounted');
     let picker = this.app.scene.getObjectByName(this.video.name);
-    this.app.remove(picker);
+    this.app.scene.remove(picker);
     this.app.animate();
   }
   render() {
