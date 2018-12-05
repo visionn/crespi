@@ -6,13 +6,13 @@ module.exports = {
   //setting entry app.js
   //note: every entry must be in directory src to work with webpack
   entry: {
-    app: './src/build/js/index.js',
+    app: './src/js/index.js',
     vendor: ['react', 'react-dom']
   },
   output: {
     //defining output file
     pathinfo: false,
-    path: PATH.resolve(__dirname, './src/build/min/'),
+    path: PATH.resolve(__dirname, './src/min/'),
     filename: 'crespi.min.js',
     chunkFilename: '[id].[hash:8].js'
   },
@@ -31,7 +31,7 @@ module.exports = {
       'THREE': 'three'
     }),
     new HTML_WEBPACK_PLUGIN({
-      template: PATH.join(__dirname, './src/build/index.html'),
+      template: PATH.join(__dirname, './src/index.html'),
       filename: 'index.html'
     })
   ],
@@ -58,7 +58,7 @@ module.exports = {
   devServer: {
     hot: true,
     inline: true,
-    contentBase: PATH.join(__dirname, 'src/build'),
+    contentBase: PATH.join(__dirname, 'src'),
     // listening on port 8080
     port: 8080,
     // host = pc ip address. to access server type pc ip address
