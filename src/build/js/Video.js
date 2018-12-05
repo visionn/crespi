@@ -30,9 +30,10 @@ class Video extends Component {
   render() {
     return(
      <div>
+       {this.props.video ? <div ref={el => (this.videoContainer = el)} /> : null}
        <h1>MOUNTED</h1>
        <button onClick={this.componentWillUnmount}>X</button>
-       <div ref={el => (this.videoContainer = el)} />
+
      </div>
   );
   }
