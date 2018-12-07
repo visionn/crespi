@@ -23,7 +23,6 @@ class Dom extends Component {
       1000
     );
     this.buttonsGroup = new THREE.Group();
-    this.buttons;
     this.selected;
     this.minZoom = 1;
     this.maxZoom = 2;
@@ -68,7 +67,6 @@ class Dom extends Component {
         {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
       </button>
       <button onClick={() => this.rotateCamera(true)}>➡</button>
-      <div>{this.buttons}</div>
       <video>
         {this.state.videoStatus ? <Video video={this.state.videoStatus} this={this}/> : null}
       </video>
@@ -158,7 +156,7 @@ class Dom extends Component {
       this.scene.add(this.camera);
     }
   const createButton = () => {
-      let tmp = [];
+      let tmp;
       // button dimentions
       let sphere = {
         geometry: new THREE.SphereGeometry(10, 2, 100),
@@ -169,26 +167,24 @@ class Dom extends Component {
       let controlsTmp;
       //spheredata.lenght determinates sphere quantity
       for (let i = 0; i < this.sphereData.length; i++) {
-        tmp[i] = new THREE.Mesh(sphere.geometry, sphere.material);
+        tmp = new THREE.Mesh(sphere.geometry, sphere.material);
         // setting positions
-        tmp[i].position.x = this.sphereData[i].x;
-        tmp[i].position.y = this.sphereData[i].y;
-        tmp[i].position.z = this.sphereData[i].z;
-        tmp[i].name = this.sphereData[i].id;
+        tmp.position.x = this.sphereData[i].x;
+        tmp.position.y = this.sphereData[i].y;
+        tmp.position.z = this.sphereData[i].z;
+        tmp.name = this.sphereData[i].id;
         // setting controls for each object
         controls.Tmp = new THREE.ObjectControls(
           this.camera,
           this.renderer.domElement,
-          tmp[i]
+          tmp
         );
-        // pushing tmp[i] to end of controls[]
-        controls.push(tmp[i]);
+        // pushing tmp to end of controls[]
+        controls.push(tmp);
         // adding tm to this.buttonsGroup
-        this.buttonsGroup.add(tmp[i]);
+        this.buttonsGroup.add(tmp);
       }
       this.scene.add(this.buttonsGroup);
-      this.buttons = tmp.map((scene) => <div>{scene}</div>);
-
         // controls.setRotationSpeed(2);
     }
     const onWindowResize = () => {
