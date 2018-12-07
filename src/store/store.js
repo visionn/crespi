@@ -6,4 +6,4 @@ const INITIAL_STATE = {
   zoom: false,
   cameraWatching: ''
 };
-export const STORE = createStore(reducer, INITIAL_STATE);
+export default STORE = createStore(reducer, INITIAL_STATE);
