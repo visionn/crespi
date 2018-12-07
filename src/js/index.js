@@ -1,13 +1,13 @@
 // use require.ensure for deployment
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Scene from './Scene';
+import Dom from './dom';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Scene />
+        <Dom />
       </div>
     );
   }
