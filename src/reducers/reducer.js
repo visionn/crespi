@@ -1,10 +1,7 @@
-export default (state, action) => {
+export const REDUCER = (state = [], action) => {
   switch (action.type) {
-    case: 'ADD_ZOOM':
-      return {...state, zoom}
-      break;
-    case: 'REMOVE_ZOOM':
-      break;
+    case: 'SET_ZOOM':
+      return action.zoom;
     default:
       return state;
   }
