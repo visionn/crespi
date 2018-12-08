@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 require('three');
 require('three-gltfloader');
 require('three-objectcontrols');
-require('three-orbitcontrols');
-import {createStore} from 'redux';
-import {ADD_ZOOM, REMOVE_ZOOM} from '../actions/actions';
+// import {createStore} from 'redux';
+// import {ADD_ZOOM, REMOVE_ZOOM} from '../actions/actions';
 // import Scene from './Scene';
 import Video from './Video';
 
@@ -16,7 +15,7 @@ import Video from './Video';
 class Dom extends Component {
   constructor(props) {
     super(props);
-    this.store = createStore();
+    // this.store = createStore();
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.camera = new THREE.PerspectiveCamera(

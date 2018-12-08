@@ -21,6 +21,7 @@ module.exports = {
     alias: {
       'three-objectcontrols': PATH.join(__dirname, 'libs/ObjectControls.js'),
       'three-orbitcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/OrbitControls.js'),
+      'three-orientation-controls': PATH.join(__dirname, 'node_modules/three/examples/js/controls/DeviceOrientationControls.js'),
       'three-gltfloader': PATH.join(__dirname, 'node_modules/three/examples/js/loaders/GLTFLoader.js')
     },
     extensions: ['*', '.js', '.jsx']
