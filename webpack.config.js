@@ -41,12 +41,20 @@ module.exports = {
       {
         exclude: '/node_modules/',
         use: 'babel-loader'
-      },
-      {
+      }, {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
           options: {minimize: true}
+        }]
+      }, {
+        test: /\.scss$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader'
+        }, {
+          loader: 'sass-loader'
         }]
       }
     ]
@@ -64,10 +72,5 @@ module.exports = {
     port: 8080,
     // host = pc ip address. to access server type pc ip address
     host: '0.0.0.0',
-  },
-  watchOptions: {
-    poll: true
-  },
-  //if true autoupdates changes after first build
-  watch: true
+  }
 };
