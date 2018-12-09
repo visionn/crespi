@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 require('three');
 require('three-gltfloader');
 require('three-objectcontrols');
-// import {createStore} from 'redux';
+import {createStore} from 'redux';
+import reducer from '../reducers/reducer';
 // import {ADD_ZOOM, REMOVE_ZOOM} from '../actions/actions';
 // import Scene from './Scene';
 import Video from './Video';
+// import '../css/main.css';
 
 /* TODO:
   add redux to index for universal state
@@ -15,7 +17,7 @@ import Video from './Video';
 class Dom extends Component {
   constructor(props) {
     super(props);
-    // this.store = createStore();
+    this.store = createStore(reducer);
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.camera = new THREE.PerspectiveCamera(
@@ -35,7 +37,6 @@ class Dom extends Component {
       // represents button identification name
       id: "uno",
       // video directory
-      video: ""
     },
     {
       x: -40,
@@ -63,14 +64,14 @@ class Dom extends Component {
   }
   render() {
    return (
-    <div ref={el => (this.container = el)} onClick={this.onClickEvent}>
+    <div className="Dom" ref={el => (this.container = el)} onClick={this.onClickEvent}>
       <button onClick={() => this.rotateCamera(false)}>⬅</button>
       <button onClick={() => this.setZoom(this.maxZoom)}>
         {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
       </button>
       <button onClick={() => this.rotateCamera(true)}>➡</button>
-      <video>
-        {this.state.videoStatus ? <Video video={this.state.videoStatus} this={this}/> : null}
+      <video className="Video">
+        {this.state.videoStatus ? <Video video={this.state.lookingAt + '.mp4'} this={this}/> : null}
       </video>
    </div>
    );
@@ -101,8 +102,6 @@ class Dom extends Component {
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
-
-    // todo add frustum https://stackoverflow.com/questions/24877880/three-js-check-if-object-is-in-frustum
     cameraRay.setFromCamera(rayVector, this.camera);
     this.selected = cameraRay.intersectObjects(this.buttonsGroup.children, false);
     this.setState({
