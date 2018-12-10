@@ -5,24 +5,33 @@ class Video extends Component {
   constructor(props) {
     super(props);
     this.app = this.props.this;
-    this.video;
+    this.geometry = new THREE.SphereBufferGeometry(-20, 20, 20);
+    this.texture;
+    this.material;
     this.orbitcontrols = new THREE.OrbitControls(this.app.scene, this.app.renderer.domElement);
     this.deviceOrientationControls = new THREE.DeviceOrientationControls(this.app.scene);
+    this.video;
   }
   componentDidMount = () => {
-    this.video = THREE.VideoTexture(this.videoContainer);
+    this.video = new THREE.Mesh(this.geometry, this.material);
+    this.video.name = 'video';
+    this.videoContainer.src = 'ada.mp4';
+    this.texture = new THREE.VideoTexture(this.videoContainer);
+    this.material = new THREE.MeshBasicMaterial({map: this.texture});
+    this.app.scene.add(this.video);
   }
   componentWillUnmount = () => {
     this.orbitcontrols.enabled = false;
     this.deviceOrientationControls.enabled = false;
-    // this.app.controls.enabled = true;
+    let picker = this.app.scene.getObjectByName(this.video.name);
+    this.app.scene.remove(picker);
+    this.app.animate();
   }
   render() {
     return(
-     <video ref={el => (this.videoContainer = el)}>
-       <h1>MOUNTED</h1>
-       <button onClick={this.componentWillUnmount}>X</button>
-     </video>
+     <div>
+       <video ref={el => (this.videoContainer = el)} />
+     </div>
   );
   }
 }
