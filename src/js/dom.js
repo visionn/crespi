@@ -64,15 +64,27 @@ class Dom extends Component {
   }
   render() {
    return (
-    <div className={style.Dom} ref={el => (this.container = el)} onClick={this.onClickEvent}>
-      <button className={style.leftButton} onClick={() => this.rotateCamera(false)}>⬅</button>
-      <button onClick={() => this.setZoom(this.maxZoom)}>
-        {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
-      </button>
-      <button className={style.rightButton} onClick={() => this.rotateCamera(true)}>➡</button>
-      <video className={style.Video}>
-        {this.state.videoStatus ? <Video video={this.state.lookingAt + '.mp4'} animate={this.animate} scene={this.scene} domElement={this.renderer.domElement} camera={this.camera}/> : null}
-      </video>
+    <div>
+      <div className={style.Dom} ref={el => (this.container = el)} onClick={this.onClickEvent}>
+        <div className={style.moveButton}>
+          <button className={style.leftButton} onClick={() => this.rotateCamera(false)}>⬅</button>
+          <button onClick={() => this.setZoom(this.maxZoom)}>
+            {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
+          </button>
+          <button className={style.rightButton} onClick={() => this.rotateCamera(true)}>➡</button>
+        </div>
+     </div>
+     <div className={style.Video}>
+     {this.state.videoStatus ?
+       <Video
+       video={this.state.lookingAt + '.mp4'}
+       animate={this.animate}
+       scene={this.scene}
+       domElement={this.renderer.domElement}
+       camera={this.camera}/>
+        :
+       null}
+     </div>
    </div>
    );
   }
@@ -81,7 +93,7 @@ class Dom extends Component {
     this.camera.updateProjectionMatrix();
     if (zoom === this.maxZoom) {
       for (let i = 0; i < this.zoom; i++) {
-        this.camera.zoom = i;
+        this.camera.zoom += i;
       }
       if (this.state.buttonState) {
         this.setState({
