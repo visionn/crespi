@@ -5,3 +5,12 @@
 .Video {
   z-index: 100;
 }
+.centralButton {
+  z-index: 1;
+}
+.leftButton {
+  z-index: 1;
+}
+.rightButton {
+  z-index: 1;
+}
