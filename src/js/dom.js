@@ -71,16 +71,18 @@ class Dom extends Component {
       </button>
       <button onClick={() => this.rotateCamera(true)}>➡</button>
       <video className="Video">
-        {this.state.videoStatus ? <Video video={this.state.lookingAt + '.mp4'} this={this}/> : null}
+        {this.state.videoStatus ? <Video video={this.state.lookingAt + '.mp4'} animate={this.animate} scene={this.scene} domElement={this.renderer.domElement} camera={this.camera}/> : null}
       </video>
    </div>
    );
   }
   setZoom = (zoom) => {
     // getting position of object faced by camera
-    this.camera.zoom = zoom;
     this.camera.updateProjectionMatrix();
-    if (zoom == this.maxZoom) {
+    if (zoom === this.maxZoom) {
+      for (let i = 0; i < this.zoom; i++) {
+        this.camera.zoom = i;
+      }
       if (this.state.buttonState) {
         this.setState({
           videoStatus: true
@@ -93,6 +95,7 @@ class Dom extends Component {
       }
     }
     else {
+      this.cameraZoom = zoom;
       this.setState({
         buttonState: false,
         videoStatus: false
