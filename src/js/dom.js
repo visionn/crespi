@@ -7,7 +7,7 @@ import reducer from '../reducers/reducer';
 // import {ADD_ZOOM, REMOVE_ZOOM} from '../actions/actions';
 // import Scene from './Scene';
 import Video from './Video';
-// import '../css/main.css';
+import style from '../css/main.css';
 
 /* TODO:
   add redux to index for universal state
@@ -64,13 +64,13 @@ class Dom extends Component {
   }
   render() {
    return (
-    <div className="Dom" ref={el => (this.container = el)} onClick={this.onClickEvent}>
-      <button onClick={() => this.rotateCamera(false)}>⬅</button>
+    <div className={style.Dom} ref={el => (this.container = el)} onClick={this.onClickEvent}>
+      <button className={style.leftButton} onClick={() => this.rotateCamera(false)}>⬅</button>
       <button onClick={() => this.setZoom(this.maxZoom)}>
         {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
       </button>
-      <button onClick={() => this.rotateCamera(true)}>➡</button>
-      <video className="Video">
+      <button className={style.rightButton} onClick={() => this.rotateCamera(true)}>➡</button>
+      <video className={style.Video}>
         {this.state.videoStatus ? <Video video={this.state.lookingAt + '.mp4'} animate={this.animate} scene={this.scene} domElement={this.renderer.domElement} camera={this.camera}/> : null}
       </video>
    </div>
