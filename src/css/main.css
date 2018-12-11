@@ -1,16 +1,11 @@
 .Dom {
   overflow: hidden;
   margin: 0% 0% 0% 0%;
+  position: relative;
 }
 .Video {
-  z-index: 100;
+  z-index: 3;
 }
-.centralButton {
-  z-index: 1;
-}
-.leftButton {
-  z-index: 1;
-}
-.rightButton {
-  z-index: 1;
+.moveButton {
+  position: absolute;
 }
