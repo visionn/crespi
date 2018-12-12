@@ -4,25 +4,29 @@ require('three-orientation-controls');
 class Video extends Component {
   constructor(props) {
     super(props);
-    this.geometry = new THREE.SphereBufferGeometry(-20, 20, 20);
+    this.videoMesh;
     this.texture;
     this.material;
-    this.orbitcontrols = new THREE.OrbitControls(this.props.scene, this.props.domElement);
-    this.deviceOrientationControls = new THREE.DeviceOrientationControls(this.props.scene);
-    this.video;
+    this.controls;
   }
   componentDidMount = () => {
-    this.video = new THREE.Mesh(this.geometry, this.material);
-    this.video.name = 'video';
-    this.videoContainer.src = 'ada.mp4';
-    this.texture = new THREE.VideoTexture(this.videoContainer);
-    this.material = new THREE.MeshBasicMaterial({map: this.texture});
-    this.props.scene.add(this.video);
+    this.controls = new THREE.OrbitControls(this.props.camera);
+    let geometry = new THREE.SphereBufferGeometry(-20, 20, 20);
+    let video = this.videoContainer;
+    video.crossOrigin = 'anonymous';
+    video.loop = true;
+    video.src = '../videos/test.mp4';
+    video.play();
+    let texture = new THREE.VideoTexture(video);
+    // texture.flipY = true;
+    let material = new THREE.MeshBasicMaterial({map: texture});
+    this.videoMesh = new THREE.Mesh(geometry, material);
+    this.videoMesh.name = 'video';
+    this.props.scene.add(this.videoMesh);
   }
   componentWillUnmount = () => {
-    this.orbitcontrols.enabled = false;
-    this.deviceOrientationControls.enabled = false;
-    let picker = this.props.scene.getObjectByName(this.video.name);
+    this.controls.enabled = false;
+    let picker = this.props.scene.getObjectByName(this.videoMesh.name);
     this.props.scene.remove(picker);
     this.props.animate();
   }
