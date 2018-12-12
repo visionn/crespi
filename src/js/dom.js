@@ -89,12 +89,9 @@ class Dom extends Component {
    );
   }
   setZoom = (zoom) => {
-    // getting position of object faced by camera
+    this.camera.zoom = zoom;
     this.camera.updateProjectionMatrix();
-    if (zoom === this.maxZoom) {
-      for (let i = 0; i < this.zoom; i++) {
-        this.camera.zoom += i;
-      }
+    if (zoom == this.maxZoom) {
       if (this.state.buttonState) {
         this.setState({
           videoStatus: true
@@ -107,7 +104,6 @@ class Dom extends Component {
       }
     }
     else {
-      this.cameraZoom = zoom;
       this.setState({
         buttonState: false,
         videoStatus: false
