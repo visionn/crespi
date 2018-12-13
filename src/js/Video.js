@@ -11,15 +11,17 @@ class Video extends Component {
   }
   componentDidMount = () => {
     this.controls = new THREE.OrbitControls(this.props.camera);
+    this.props.camera.position.set(0, 0, 1)
     let geometry = new THREE.SphereBufferGeometry(-20, 20, 20);
     let video = this.videoContainer;
     video.crossOrigin = 'anonymous';
     video.loop = true;
     video.src = '../videos/test.mp4';
+    video.setAttribute('webkit-playsinline', 'webkit-playsinline');
     video.play();
     let texture = new THREE.VideoTexture(video);
-    // texture.flipY = true;
     let material = new THREE.MeshBasicMaterial({map: texture});
+    texture.flipY = false;
     this.videoMesh = new THREE.Mesh(geometry, material);
     this.videoMesh.name = 'video';
     this.props.scene.add(this.videoMesh);
@@ -33,6 +35,7 @@ class Video extends Component {
   render() {
     return(
      <div>
+       <button onClick={this.componentWillUnmount}>X</button>
        <video ref={el => (this.videoContainer = el)} />
      </div>
   );
