@@ -74,6 +74,6 @@ module.exports = {
     // listening on port 8080
     port: 8080,
     // host = pc ip address. to access server type pc ip address
-    host: '0.0.0.0',
+    host: 'localhost',
   }
 };
