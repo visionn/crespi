@@ -6,13 +6,13 @@ module.exports = {
   //setting entry app.js
   //note: every entry must be in directory src to work with webpack
   entry: {
-    app: './src/build/js/index.js',
+    app: './src/js/index.js',
     vendor: ['react', 'react-dom']
   },
   output: {
     //defining output file
     pathinfo: false,
-    path: PATH.resolve(__dirname, './src/build/min/'),
+    path: PATH.resolve(__dirname, './src/min/'),
     filename: 'crespi.min.js',
     chunkFilename: '[id].[hash:8].js'
   },
@@ -21,6 +21,7 @@ module.exports = {
     alias: {
       'three-objectcontrols': PATH.join(__dirname, 'libs/ObjectControls.js'),
       'three-orbitcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/OrbitControls.js'),
+      'three-orientation-controls': PATH.join(__dirname, 'node_modules/three/examples/js/controls/DeviceOrientationControls.js'),
       'three-gltfloader': PATH.join(__dirname, 'node_modules/three/examples/js/loaders/GLTFLoader.js')
     },
     extensions: ['*', '.js', '.jsx']
@@ -31,7 +32,7 @@ module.exports = {
       'THREE': 'three'
     }),
     new HTML_WEBPACK_PLUGIN({
-      template: PATH.join(__dirname, './src/build/index.html'),
+      template: PATH.join(__dirname, './src/index.html'),
       filename: 'index.html'
     })
   ],
@@ -40,12 +41,23 @@ module.exports = {
       {
         exclude: '/node_modules/',
         use: 'babel-loader'
-      },
-      {
+      }, {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
           options: {minimize: true}
+        }]
+      }, {
+        test: /\.css$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            modules: true,
+            localIdentName: '[local]___[hash:base64:5]'
+          }
         }]
       }
     ]
@@ -58,15 +70,10 @@ module.exports = {
   devServer: {
     hot: true,
     inline: true,
-    contentBase: PATH.join(__dirname, 'src/build'),
+    contentBase: PATH.join(__dirname, 'src'),
     // listening on port 8080
     port: 8080,
     // host = pc ip address. to access server type pc ip address
-    host: '0.0.0.0',
-  },
-  watchOptions: {
-    poll: true
-  },
-  //if true autoupdates changes after first build
-  watch: true
+    host: 'localhost',
+  }
 };
