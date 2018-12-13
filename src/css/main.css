@@ -1,11 +1,24 @@
 .Dom {
+  width:100%;
+  height:100%;
+  padding:0;
+  margin:0;
   overflow: hidden;
-  margin: 0% 0% 0% 0%;
   position: relative;
 }
 .Video {
+  width:100%;
+  height:100%;
+  padding:0;
+  margin:0;
+  overflow: hidden;
+  position: relative;
   z-index: 3;
 }
 .moveButton {
   position: absolute;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  background-color: red;
 }
