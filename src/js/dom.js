@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 require('three');
 require('three-gltfloader');
 require('three-objectcontrols');
-import {createStore} from 'redux';
-import reducer from '../reducers/reducer';
+// import {createStore} from 'redux';
+// import REDUCER from '../reducers/reducer';
+// import {STORE} from '../store/store';
 // import {ADD_ZOOM, REMOVE_ZOOM} from '../actions/actions';
 // import Scene from './Scene';
 import Video from './Video';
@@ -14,10 +15,10 @@ import style from '../css/main.css';
   add sass loader
   fix controls
 */
+
 class Dom extends Component {
   constructor(props) {
     super(props);
-    this.store = createStore(reducer);
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.camera = new THREE.PerspectiveCamera(
@@ -66,6 +67,7 @@ class Dom extends Component {
    return (
     <div>
       <div className={style.Dom} ref={el => (this.container = el)} onClick={this.onClickEvent}>
+        {this.state.videoStatus ? null :
         <div className={style.moveButton}>
           <button className={style.leftButton} onClick={() => this.rotateCamera(false)}>⬅</button>
           <button onClick={() => this.setZoom(this.maxZoom)}>
@@ -73,6 +75,7 @@ class Dom extends Component {
           </button>
           <button className={style.rightButton} onClick={() => this.rotateCamera(true)}>➡</button>
         </div>
+        }
      </div>
      <div className={style.Video}>
      {this.state.videoStatus ?
@@ -92,6 +95,8 @@ class Dom extends Component {
     this.camera.zoom = zoom;
     this.camera.updateProjectionMatrix();
     if (zoom == this.maxZoom) {
+      this.camera.lookAt(0, 0, 0);
+      this.buttonsGroup.rotateY(this.camera.position.y);
       if (this.state.buttonState) {
         this.setState({
           videoStatus: true
@@ -119,13 +124,16 @@ class Dom extends Component {
       lookingAt: this.selected[0].object.name
     });
   }
+  controls = () => {
+    let controls = new THREE.OrbitControls(this.camera);
+  }
   rotateCamera = (direction) => {
     // true = right, false = left
     if (direction) {
-      this.camera.rotateY(-Math.PI / 2);
+      this.buttonsGroup.rotateY(-Math.PI / 2);
     }
     else {
-      this.camera.rotateY(Math.PI / 2);
+      this.buttonsGroup.rotateY(Math.PI / 2);
     }
     this.cameraRay();
     this.setZoom(this.minZoom);
@@ -149,6 +157,10 @@ class Dom extends Component {
     }
   }
   animate = () => {
+    if (this.buttonState) {
+      let object = this.scene.getObjectByName(this.state.lookingAt);
+      this.object.rotation.y += 0.5;
+    }
     requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
   }
@@ -157,17 +169,17 @@ class Dom extends Component {
       width: window.innerWidth,
       height: window.innerHeight
     };
-    this.scene.background = new THREE.Color(0x222222);
+    this.scene.background = new THREE.Color(0xffffff);
     this.renderer.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
     const setCamera = () => {
-      // setting this.camera init position
-      this.camera.target = new THREE.Vector3(0, 0, 0);
       // telling this.camera what to lock at
+      // setting this.camera init position
+      // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, 0);
+      this.camera.position.set(0, 0, 80);
       this.scene.add(this.camera);
     }
-  const createButton = () => {
+    const createButton = () => {
       let tmp;
       // button dimentions
       let sphere = {
@@ -213,6 +225,7 @@ class Dom extends Component {
     this.container.appendChild(this.renderer.domElement);
     setCamera();
     createButton();
+    this.controls();
     this.animate();
     this.cameraRay();
   }
