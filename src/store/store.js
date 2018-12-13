@@ -1,9 +1,9 @@
 import {createStore} from 'redux';
-import reducer form '../reducers';
+import REDUCER from '../reducers/reducer';
 // store works as a vault of redux states
 const INITIAL_STATE = {
   video: false,
-  zoom: false,
+  zoom: 1,
   cameraWatching: ''
 };
-export const STORE = createStore(reducer, INITIAL_STATE);
+export const STORE = createStore(REDUCER, INITIAL_STATE);
