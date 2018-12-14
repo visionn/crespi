@@ -36,7 +36,7 @@ class Video extends Component {
     return(
      <div>
        <button onClick={this.componentWillUnmount}>X</button>
-       <video ref={el => (this.videoContainer = el)} />
+       <video ref={el => (this.videoContainer = el)}></video>
      </div>
   );
   }
