@@ -7,6 +7,7 @@ require('three-objectcontrols');
 // import {STORE} from '../store/store';
 // import {ADD_ZOOM, REMOVE_ZOOM} from '../actions/actions';
 // import Scene from './Scene';
+import Info from './info';
 import Video from './Video';
 import style from '../css/main.css';
 
@@ -66,27 +67,21 @@ class Dom extends Component {
   render() {
    return (
     <div>
-      <div className={style.Dom} ref={el => (this.container = el)} onClick={this.onClickEvent}>
-        {this.state.videoStatus ? null :
-        <div className={style.moveButton}>
-          <button className={style.leftButton} onClick={() => this.rotateCamera(false)}>⬅</button>
-          <button onClick={() => this.setZoom(this.maxZoom)}>
-            {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
-          </button>
-          <button className={style.rightButton} onClick={() => this.rotateCamera(true)}>➡</button>
+      {this.state.buttonState ? null :
+        <div className={style.Dom} ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
+          {this.state.videoStatus ? null :
+
+            <button className={style.moveButton} onClick={() => this.setZoom(this.maxZoom)}>
+              {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
+            </button>
+          }
         </div>
-        }
+      }
+     <div>
+       {this.state.buttonState ? <Info /> : null}
      </div>
      <div className={style.Video}>
-     {this.state.videoStatus ?
-       <Video
-       video={this.state.lookingAt + '.mp4'}
-       animate={this.animate}
-       scene={this.scene}
-       domElement={this.renderer.domElement}
-       camera={this.camera}/>
-        :
-       null}
+       {this.state.videoStatus ? <Video /> : null}
      </div>
    </div>
    );
@@ -120,9 +115,19 @@ class Dom extends Component {
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
     this.selected = cameraRay.intersectObjects(this.buttonsGroup.children, false);
-    this.setState({
-      lookingAt: this.selected[0].object.name
-    });
+    console.log(this.selected);
+    try{
+      if (typeof(this.selected) !== 'undefined') {
+        this.setState({
+          lookingAt: this.selected[0].object.name
+        });
+      }
+    }
+    catch (e) {
+      this.setState({
+        lookingAt: ''
+      });
+    }
   }
   controls = () => {
     let controls = new THREE.OrbitControls(this.camera);
@@ -157,10 +162,6 @@ class Dom extends Component {
     }
   }
   animate = () => {
-    if (this.buttonState) {
-      let object = this.scene.getObjectByName(this.state.lookingAt);
-      this.object.rotation.y += 0.5;
-    }
     requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
   }
