@@ -33,30 +33,30 @@ class Dom extends Component {
     this.minZoom = 1;
     this.maxZoom = 2;
     this.sphereData = [{
-      x: 40,
-      y: 0,
+      x: 15,
+      y: 15,
       z: 0,
       // represents button identification name
-      id: "uno",
+      id: 'fabbrica',
       // video directory
     },
     {
-      x: -40,
+      x: -5,
       y: 0,
       z: 0,
-      id: "due"
+      id: 'mystery'
     },
     {
       x: 0,
       y: 0,
-      z: 40,
-      id: "tre"
+      z: 20,
+      id: 'mystery'
     },
     {
       x: 0,
       y: 0,
-      z: -40,
-      id: "cinque"
+      z: -20,
+      id: 'mystery'
     }];
     this.state = {
       lookingAt: '',
@@ -67,7 +67,7 @@ class Dom extends Component {
   render() {
    return (
     <div>
-      {this.state.buttonState ? null :
+      {this.state.buttonState || this.state.videoState ? null :
         <div className={style.Dom} ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
           {this.state.videoStatus ? null :
 
@@ -114,7 +114,7 @@ class Dom extends Component {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
-    this.selected = cameraRay.intersectObjects(this.buttonsGroup.children, false);
+    this.selected = cameraRay.intersectObjects(this.scene.children, false);
     console.log(this.selected);
     try{
       if (typeof(this.selected) !== 'undefined') {
@@ -172,6 +172,8 @@ class Dom extends Component {
     };
     this.scene.background = new THREE.Color(0xffffff);
     this.renderer.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
+    const light = new THREE.AmbientLight(0xffffff);
+    this.scene.add(light);
     const setCamera = () => {
       // telling this.camera what to lock at
       // setting this.camera init position
@@ -181,6 +183,7 @@ class Dom extends Component {
       this.scene.add(this.camera);
     }
     const createButton = () => {
+      const MAP_LOADER = new THREE.GLTFLoader();
       let tmp;
       // button dimentions
       let sphere = {
@@ -192,24 +195,16 @@ class Dom extends Component {
       let controlsTmp;
       //spheredata.lenght determinates sphere quantity
       for (let i = 0; i < this.sphereData.length; i++) {
-        tmp = new THREE.Mesh(sphere.geometry, sphere.material);
-        // setting positions
-        tmp.position.x = this.sphereData[i].x;
-        tmp.position.y = this.sphereData[i].y;
-        tmp.position.z = this.sphereData[i].z;
-        tmp.name = this.sphereData[i].id;
-        // setting controls for each object
-        controls.Tmp = new THREE.ObjectControls(
-          this.camera,
-          this.renderer.domElement,
-          tmp
-        );
-        // pushing tmp to end of controls[]
-        controls.push(tmp);
+        // alt + 0096 for backthick (``)
+        MAP_LOADER.load(`../assets/3d/${this.sphereData[i].id}.gltf`, (gltf) => {
+          gltf.scene.position.x = this.sphereData[i].x;
+          gltf.scene.position.y = this.sphereData[i].y;
+          gltf.scene.position.z = this.sphereData[i].z;
+          gltf.scene.name = this.sphereData[i].id;
+          this.scene.add(gltf.scene);
+        });
         // adding tm to this.buttonsGroup
-        this.buttonsGroup.add(tmp);
       }
-      this.scene.add(this.buttonsGroup);
         // controls.setRotationSpeed(2);
     }
     const onWindowResize = () => {
