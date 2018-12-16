@@ -47,18 +47,6 @@ module.exports = {
           loader: 'html-loader',
           options: {minimize: true}
         }]
-      }, {
-        test: /\.css$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true,
-            modules: true,
-            localIdentName: '[local]___[hash:base64:5]'
-          }
-        }]
       }
     ]
   },
@@ -75,5 +63,6 @@ module.exports = {
     port: 8080,
     // host = pc ip address. to access server type pc ip address
     host: 'localhost',
-  }
+  },
+  cache: false
 };
