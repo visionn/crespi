@@ -9,7 +9,7 @@ require('three-objectcontrols');
 // import Scene from './Scene';
 import Info from './info';
 import Video from './Video';
-import style from '../css/main.css';
+import {Scene, Toast} from '../style/dom.js';
 
 /* TODO:
   add redux to index for universal state
@@ -33,30 +33,12 @@ class Dom extends Component {
     this.minZoom = 1;
     this.maxZoom = 2;
     this.sphereData = [{
-      x: 15,
+      x: 2,
       y: 15,
       z: 0,
       // represents button identification name
       id: 'fabbrica',
       // video directory
-    },
-    {
-      x: -5,
-      y: 0,
-      z: 0,
-      id: 'mystery'
-    },
-    {
-      x: 0,
-      y: 0,
-      z: 20,
-      id: 'mystery'
-    },
-    {
-      x: 0,
-      y: 0,
-      z: -20,
-      id: 'mystery'
     }];
     this.state = {
       lookingAt: '',
@@ -68,19 +50,18 @@ class Dom extends Component {
    return (
     <div>
       {this.state.buttonState || this.state.videoState ? null :
-        <div className={style.Dom} ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
+        <Scene ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
           {this.state.videoStatus ? null :
-
-            <button className={style.moveButton} onClick={() => this.setZoom(this.maxZoom)}>
+            <Toast onClick={() => this.setZoom(this.maxZoom)}>
               {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
-            </button>
+            </Toast>
           }
-        </div>
+        </Scene>
       }
      <div>
        {this.state.buttonState ? <Info /> : null}
      </div>
-     <div className={style.Video}>
+     <div>
        {this.state.videoStatus ? <Video /> : null}
      </div>
    </div>
@@ -114,7 +95,7 @@ class Dom extends Component {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
-    this.selected = cameraRay.intersectObjects(this.scene.children, false);
+    this.selected = cameraRay.intersectObjects(this.buttonsGroup.children, true);
     console.log(this.selected);
     try{
       if (typeof(this.selected) !== 'undefined') {
@@ -153,7 +134,7 @@ class Dom extends Component {
     // updates the ray with mouse and camera position
     raycaster.setFromCamera(mouse, this.camera);
     //array of objects intersected by raycaster
-    this.selected = raycaster.intersectObjects(this.buttonsGroup.children);
+    this.selected = raycaster.intersectObjects(this.buttonsGroup.children[0].children, true);
     //let videoIntersects = raycaster.intersectObjects(video.children);
     //if raycaster detects sth
     console.log(this.selected);
@@ -200,11 +181,13 @@ class Dom extends Component {
           gltf.scene.position.x = this.sphereData[i].x;
           gltf.scene.position.y = this.sphereData[i].y;
           gltf.scene.position.z = this.sphereData[i].z;
-          gltf.scene.name = this.sphereData[i].id;
-          this.scene.add(gltf.scene);
+          gltf.scene.children[0].name = this.sphereData[i].id;
+          console.log(gltf.scene);
+          this.buttonsGroup.add(gltf.scene);
         });
         // adding tm to this.buttonsGroup
       }
+      this.scene.add(this.buttonsGroup);
         // controls.setRotationSpeed(2);
     }
     const onWindowResize = () => {
