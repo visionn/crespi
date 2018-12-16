@@ -1,12 +1,12 @@
-export const ADD_ZOOM = zoom => {
+export const SHOW_INFO = zoom => {
   return {
-    type: 'ADD_ZOOM',
-      zoom: 2
+    type: 'SHOW_INFO',
+    status: true
   }
 };
 export const REMOVE_ZOOM = zoom => {
   return {
-    type: 'REMOVE_ZOOM',
-    zoom: 1
+    type: 'HIDE_INFO',
+    status: false
   }
 };
