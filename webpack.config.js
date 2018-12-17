@@ -31,6 +31,9 @@ module.exports = {
     new WEBPACK.ProvidePlugin({
       'THREE': 'three'
     }),
+    new WEBPACK.ProvidePlugin({
+      React: 'react'
+    }),
     new HTML_WEBPACK_PLUGIN({
       template: PATH.join(__dirname, './src/index.html'),
       filename: 'index.html'
