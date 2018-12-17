@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 require('three');
 require('three-gltfloader');
 require('three-objectcontrols');
-import {createStore} from 'redux';
-import {STORE} from '../redux/store/store';
+import {connect} from 'react-redux';
 import {SHOW_INFO, HIDE_INFO} from '../redux/actions/actions';
 import Info from './info';
 import Video from './Video';
@@ -31,13 +30,22 @@ class Dom extends Component {
     this.minZoom = 1;
     this.maxZoom = 2;
     this.sphereData = [{
-      x: 2,
+      x: 15,
       y: 15,
       z: 0,
       // represents button identification name
       id: 'fabbrica',
       // video directory
-    }];
+    },
+    {
+      x: -15,
+      y: 15,
+      z: 0,
+      // represents button identification name
+      id: 'mystery',
+      // video directory
+    }
+   ];
     this.state = {
       lookingAt: '',
       videoStatus: false
@@ -46,7 +54,7 @@ class Dom extends Component {
   render() {
    return (
     <div>
-      {STORE.getState().info || this.state.videoState ? null :
+      {this.props.store.info || this.state.videoState ? null :
         <Scene ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
           {this.state.videoStatus ? null :
             <Toast onClick={this.showInfo}>
@@ -174,5 +182,5 @@ class Dom extends Component {
     this.cameraRay();
   }
 }
-
-export default Dom;
+const DOM = connect({SHOW_INFO, HIDE_INFO})(Dom);
+export default DOM;
