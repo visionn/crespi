@@ -1,4 +1,4 @@
-export const INFO_REDUCER = (state = '', action) => {
+export const INFO_REDUCER = (state = false, action) => {
   switch (action.type) {
     case 'SHOW_INFO':
       return action.status;
