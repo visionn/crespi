@@ -2,15 +2,12 @@ import React, {Component} from 'react';
 require('three');
 require('three-gltfloader');
 require('three-objectcontrols');
-// import {createStore} from 'redux';
-// import REDUCER from '../reducers/reducer';
-// import {STORE} from '../store/store';
-// import {ADD_ZOOM, REMOVE_ZOOM} from '../actions/actions';
-// import Scene from './Scene';
+import {createStore} from 'redux';
+import {STORE} from '../redux/store/store';
+import {SHOW_INFO, HIDE_INFO} from '../redux/actions/actions';
 import Info from './info';
 import Video from './Video';
 import {Scene, Toast} from '../style/dom.js';
-
 /* TODO:
   add redux to index for universal state
   add sass loader
@@ -20,6 +17,7 @@ import {Scene, Toast} from '../style/dom.js';
 class Dom extends Component {
   constructor(props) {
     super(props);
+    STORE.subscribe(() => console.log(STORE.getState()));
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.camera = new THREE.PerspectiveCamera(
@@ -42,54 +40,32 @@ class Dom extends Component {
     }];
     this.state = {
       lookingAt: '',
-      buttonState: false,
       videoStatus: false
     }
   }
   render() {
    return (
     <div>
-      {this.state.buttonState || this.state.videoState ? null :
+      {STORE.getState().info || this.state.videoState ? null :
         <Scene ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
           {this.state.videoStatus ? null :
-            <Toast onClick={() => this.setZoom(this.maxZoom)}>
-              {this.state.buttonState ? 'Guarda il video' : this.state.lookingAt}
+            <Toast onClick={this.showInfo}>
+              {STORE.getState().info ? 'Guarda il video' : this.state.lookingAt}
             </Toast>
           }
         </Scene>
       }
      <div>
-       {this.state.buttonState ? <Info /> : null}
+       {STORE.getState().info ? <Info /> : null}
      </div>
      <div>
-       {this.state.videoStatus ? <Video /> : null}
+       {STORE.getState().info ? <Video /> : null}
      </div>
    </div>
    );
   }
-  setZoom = (zoom) => {
-    this.camera.zoom = zoom;
-    this.camera.updateProjectionMatrix();
-    if (zoom == this.maxZoom) {
-      this.camera.lookAt(0, 0, 0);
-      this.buttonsGroup.rotateY(this.camera.position.y);
-      if (this.state.buttonState) {
-        this.setState({
-          videoStatus: true
-        });
-      }
-      else {
-        this.setState({
-          buttonState: true
-        });
-      }
-    }
-    else {
-      this.setState({
-        buttonState: false,
-        videoStatus: false
-      })
-    }
+  showInfo = () => {
+    STORE.dispatch(SHOW_INFO());
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -113,17 +89,6 @@ class Dom extends Component {
   controls = () => {
     let controls = new THREE.OrbitControls(this.camera);
   }
-  rotateCamera = (direction) => {
-    // true = right, false = left
-    if (direction) {
-      this.buttonsGroup.rotateY(-Math.PI / 2);
-    }
-    else {
-      this.buttonsGroup.rotateY(Math.PI / 2);
-    }
-    this.cameraRay();
-    this.setZoom(this.minZoom);
-  }
   onClickEvent = (e) => {
     // calculates mouse position
     let mouse = new THREE.Vector2(
@@ -139,7 +104,7 @@ class Dom extends Component {
     //if raycaster detects sth
     console.log(this.selected);
     if (this.selected.length == 1) {
-       this.setZoom(this.maxZoom);
+       this.showInfo();
     }
   }
   animate = () => {
