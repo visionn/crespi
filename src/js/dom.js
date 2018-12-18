@@ -30,13 +30,8 @@ class Dom extends Component {
     this.minZoom = 1;
     this.maxZoom = 2;
     this.sphereData = [{
-<<<<<<< HEAD
-      x: 15,
-      y: 15,
-=======
       x: 120,
       y: 0,
->>>>>>> master
       z: 0,
       // represents button identification name
       id: 'mystery',
