@@ -22,19 +22,3 @@
   color: white;
   background-color: red;
 }
-.title{
-  text-align: center;
-  font-family: helvetica;
-  font-weight: 900;
-}
-.box{
-  margin-top: -10%;
-  margin-left: 5px;
-  margin-right: 5px;
-  height: 50%;
-  background-color: blue;
-}
-.text{
-  margin-top: -40;
-  font-family: helvetica;
-}

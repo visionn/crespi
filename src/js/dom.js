@@ -30,11 +30,16 @@ class Dom extends Component {
     this.minZoom = 1;
     this.maxZoom = 2;
     this.sphereData = [{
+<<<<<<< HEAD
       x: 15,
       y: 15,
+=======
+      x: 120,
+      y: 0,
+>>>>>>> master
       z: 0,
       // represents button identification name
-      id: 'fabbrica',
+      id: 'mystery',
       // video directory
     },
     {
@@ -67,7 +72,7 @@ class Dom extends Component {
        {STORE.getState().info ? <Info /> : null}
      </div>
      <div>
-       {STORE.getState().info ? <Video /> : null}
+       {this.state.videoState ? <Video /> : null}
      </div>
    </div>
    );
@@ -79,12 +84,13 @@ class Dom extends Component {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
-    this.selected = cameraRay.intersectObjects(this.buttonsGroup.children, true);
+    this.selected = cameraRay.intersectObjects(this.scene.children, true);
     console.log(this.selected);
     try{
       if (typeof(this.selected) !== 'undefined') {
+        // reading gltf.scene.children[0].name
         this.setState({
-          lookingAt: this.selected[0].object.name
+          lookingAt: this.selected[0].object.parent.parent.name
         });
       }
     }
@@ -98,6 +104,7 @@ class Dom extends Component {
     let controls = new THREE.OrbitControls(this.camera);
   }
   onClickEvent = (e) => {
+    console.log(this.buttonsGroup);
     // calculates mouse position
     let mouse = new THREE.Vector2(
       (e.clientX / window.innerWidth) * 2 - 1,
@@ -107,7 +114,7 @@ class Dom extends Component {
     // updates the ray with mouse and camera position
     raycaster.setFromCamera(mouse, this.camera);
     //array of objects intersected by raycaster
-    this.selected = raycaster.intersectObjects(this.buttonsGroup.children[0].children, true);
+    this.selected = raycaster.intersectObjects(this.scene.children, true);
     //let videoIntersects = raycaster.intersectObjects(video.children);
     //if raycaster detects sth
     console.log(this.selected);
@@ -133,7 +140,7 @@ class Dom extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, 80);
+      this.camera.position.set(0, 0, 1);
       this.scene.add(this.camera);
     }
     const createButton = () => {
@@ -151,17 +158,14 @@ class Dom extends Component {
       for (let i = 0; i < this.sphereData.length; i++) {
         // alt + 0096 for backthick (``)
         MAP_LOADER.load(`../assets/3d/${this.sphereData[i].id}.gltf`, (gltf) => {
+          this.scene.add(gltf.scene);
           gltf.scene.position.x = this.sphereData[i].x;
           gltf.scene.position.y = this.sphereData[i].y;
           gltf.scene.position.z = this.sphereData[i].z;
           gltf.scene.children[0].name = this.sphereData[i].id;
-          console.log(gltf.scene);
-          this.buttonsGroup.add(gltf.scene);
+          this.scene.add(gltf.scene);
         });
-        // adding tm to this.buttonsGroup
       }
-      this.scene.add(this.buttonsGroup);
-        // controls.setRotationSpeed(2);
     }
     const onWindowResize = () => {
       // asign new window sizes to camera

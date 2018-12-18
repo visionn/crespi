@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Title, Box, Description} from '../style/info';
 class Info extends Component {
   constructor(props) {
     super(props);
@@ -7,9 +8,9 @@ class Info extends Component {
   render() {
     return(
       <div>
-        <h1>Lorem ipsum</h1>
-        <div ref={(el) => this.elementContainer = el} />
-        <div>{this.description}</div>
+        <Title>Lorem ipsum</Title>
+        <Box ref={(el) => this.elementContainer = el} />
+        <Description>{this.description}</Description>
       </div>
     );
   }
