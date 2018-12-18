@@ -59,7 +59,7 @@ class Dom extends Component {
        {STORE.getState().info ? <Info /> : null}
      </div>
      <div>
-       {STORE.getState().info ? <Video /> : null}
+       {this.state.videoState ? <Video /> : null}
      </div>
    </div>
    );
