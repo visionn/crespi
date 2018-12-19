@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 {
-  "extends": [
-     "eslint: recommended",
-     "google"
-  ],
+  "extends": "google",
   "rules": {
-
-   }
+   
+  }
 }
-=======
-"extends": "eslint:recommended"
->>>>>>> master
