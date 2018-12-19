@@ -1,7 +1,7 @@
 // use require.ensure for deployment
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Dom from './dom';
+import DOM from './dom';
 import {Provider} from 'react-redux';
 import {STORE} from '../redux/store/store';
 
@@ -9,7 +9,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Dom />
+        <DOM />
       </div>
     );
   }

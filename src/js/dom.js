@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 require('three');
 require('three-gltfloader');
 require('three-objectcontrols');
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SHOW_INFO, HIDE_INFO} from '../redux/actions/actions';
 import Info from './info';
@@ -12,11 +13,24 @@ import {Scene, Toast} from '../style/dom.js';
   add sass loader
   fix controls
 */
+// sends state to props
+const mapStateToProps = state => ({
+  info: state.info
+});
+// sends props actions, taken as props to reducer
+const mapDispatchToProps = dispatch => ({
+  // binding actions. This method takes: (action, dispatcher)
+  ...bindActionCreators({
+    SHOW_INFO,
+    HIDE_INFO
+    },
+    dispatch
+  )
+});
 
 class Dom extends Component {
   constructor(props) {
     super(props);
-    STORE.subscribe(() => console.log(STORE.getState()));
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.camera = new THREE.PerspectiveCamera(
@@ -36,14 +50,6 @@ class Dom extends Component {
       // represents button identification name
       id: 'mystery',
       // video directory
-    },
-    {
-      x: -15,
-      y: 15,
-      z: 0,
-      // represents button identification name
-      id: 'mystery',
-      // video directory
     }
    ];
     this.state = {
@@ -54,17 +60,17 @@ class Dom extends Component {
   render() {
    return (
     <div>
-      {this.props.store.info || this.state.videoState ? null :
+      {this.props.info || this.state.videoState ? null :
         <Scene ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
-          {this.state.videoStatus ? null :
+          {this.props.info ? null :
             <Toast onClick={this.showInfo}>
-              {STORE.getState().info ? 'Guarda il video' : this.state.lookingAt}
+              {this.state.videoState ? 'Guarda il video' : this.state.lookingAt}
             </Toast>
           }
         </Scene>
       }
      <div>
-       {STORE.getState().info ? <Info /> : null}
+       {this.props.info ? <Info /> : null}
      </div>
      <div>
        {this.state.videoState ? <Video /> : null}
@@ -73,7 +79,8 @@ class Dom extends Component {
    );
   }
   showInfo = () => {
-    STORE.dispatch(SHOW_INFO());
+    this.props.SHOW_INFO();
+    console.log(this.props)
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -181,5 +188,5 @@ class Dom extends Component {
     this.cameraRay();
   }
 }
-const DOM = connect({SHOW_INFO, HIDE_INFO})(Dom);
+const DOM = connect(mapStateToProps, mapDispatchToProps)(Dom);
 export default DOM;
