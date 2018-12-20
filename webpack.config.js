@@ -29,10 +29,7 @@ module.exports = {
   plugins: [
     //fetching THREE lib
     new WEBPACK.ProvidePlugin({
-      'THREE': 'three'
-    }),
-    new WEBPACK.ProvidePlugin({
-      React: 'react'
+      THREE: 'three'
     }),
     new HTML_WEBPACK_PLUGIN({
       template: PATH.join(__dirname, './src/index.html'),
