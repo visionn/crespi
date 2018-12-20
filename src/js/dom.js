@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-require('three');
 require('three-gltfloader');
-require('three-objectcontrols');
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {SHOW_INFO, HIDE_INFO} from '../redux/actions/actions';
-import Info from './info';
 import Video from './Video';
 import {Scene, Toast} from '../style/dom.js';
 /* TODO:
@@ -58,29 +55,25 @@ class Dom extends Component {
     }
   }
   render() {
-   return (
-    <div>
-      {this.props.info || this.state.videoState ? null :
-        <Scene ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
+    return(
+      <div>
           {this.props.info ? null :
-            <Toast onClick={this.showInfo}>
-              {this.state.videoState ? 'Guarda il video' : this.state.lookingAt}
-            </Toast>
-          }
-        </Scene>
-      }
-     <div>
-       {this.props.info ? <Info /> : null}
-     </div>
-     <div>
-       {this.state.videoState ? <Video /> : null}
-     </div>
-   </div>
-   );
+            <Scene ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
+              {this.props.info ? null :
+                <Toast onClick={this.showInfo}>
+                  {this.state.videoState ? 'Guarda il video' : this.state.lookingAt}
+                </Toast>
+              }
+            </Scene>
+           }
+         <div>
+           {this.state.videoState ? <Video /> : null}
+         </div>
+       </div>
+    );
   }
   showInfo = () => {
-    this.props.SHOW_INFO();
-    console.log(this.props)
+    this.props.SHOW_INFO('mystery');
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -129,12 +122,8 @@ class Dom extends Component {
     this.renderer.render(this.scene, this.camera);
   }
   componentDidMount = () => {
-    const SCREEN_SIZE = {
-      width: window.innerWidth,
-      height: window.innerHeight
-    };
     this.scene.background = new THREE.Color(0xffffff);
-    this.renderer.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
     const light = new THREE.AmbientLight(0xffffff);
     this.scene.add(light);
     const setCamera = () => {
@@ -188,5 +177,4 @@ class Dom extends Component {
     this.cameraRay();
   }
 }
-const DOM = connect(mapStateToProps, mapDispatchToProps)(Dom);
-export default DOM;
+export default connect(mapStateToProps, mapDispatchToProps)(Dom);
