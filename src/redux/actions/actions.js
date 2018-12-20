@@ -1,7 +1,7 @@
-export const SHOW_INFO = () => {
+export const SHOW_INFO = (looking) => {
   return {
     type: 'SHOW_INFO',
-    status: true
+    status: looking
   }
 };
 export const HIDE_INFO = () => {
