@@ -132,18 +132,9 @@ class Dom extends Component {
     }
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
-      let tmp;
-      // button dimentions
-      let sphere = {
-        geometry: new THREE.SphereGeometry(10, 2, 100),
-        material: new THREE.MeshNormalMaterial()
-      }
-
-      let controls = [null];
-      let controlsTmp;
       //spheredata.lenght determinates sphere quantity
       for (let i = 0; i < this.sphereData.length; i++) {
-        // alt + 0096 for backthick (``)
+        // alt + 0096 for backthick (``) 😜
         MAP_LOADER.load(`../assets/3d/${this.sphereData[i].id}.gltf`, (gltf) => {
           this.scene.add(gltf.scene);
           gltf.scene.position.x = this.sphereData[i].x;
