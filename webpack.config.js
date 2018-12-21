@@ -6,7 +6,7 @@ module.exports = {
   //setting entry app.js
   //note: every entry must be in directory src to work with webpack
   entry: {
-    app: './src/js/index.js',
+    app: './src/index.js',
     vendor: ['react', 'react-dom']
   },
   output: {
@@ -19,7 +19,6 @@ module.exports = {
   resolve: {
     //loading THREE dependencies
     alias: {
-      'three-objectcontrols': PATH.join(__dirname, 'libs/ObjectControls.js'),
       'three-orbitcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/OrbitControls.js'),
       'three-orientation-controls': PATH.join(__dirname, 'node_modules/three/examples/js/controls/DeviceOrientationControls.js'),
       'three-gltfloader': PATH.join(__dirname, 'node_modules/three/examples/js/loaders/GLTFLoader.js')
