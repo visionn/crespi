@@ -14,5 +14,10 @@ export const Description = styled.div`
   font-family: helvetica;
 `;
 export const Exit = styled.button`
-
+  align: right;
+  position: absolute;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  background-color: red;
 `;
