@@ -34,9 +34,7 @@ class Info extends Component {
           <div>
             <Exit onClick={this.props.HIDE_INFO}>X</Exit>
             <Title>Lorem ipsum</Title>
-            <Box>
-              <div ref={element => (this.elementRef = element)}/>
-            </Box>
+            <Box ref={element => (this.elementRef = element)} />
             <Description>{this.description}</Description>
           </div>
       </div>
@@ -53,16 +51,16 @@ class Info extends Component {
     let controls = new THREE.OrbitControls(this.camera);
     const light = new THREE.AmbientLight(0xffffff);
     this.scene.add(light);
-    let geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    let cube = new THREE.Mesh( geometry, material );
-    this.scene.add(cube);
+    const MAP_LOADER = new THREE.GLTFLoader();
+    MAP_LOADER.load(`../assets/3d/${this.props.info}.gltf`, (gltf) => {
+      this.scene.add(gltf.scene);
+    });
     const setCamera = () => {
       // telling this.camera what to lock at
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, -5);
+      this.camera.position.set(-20, 0, 0);
       this.scene.add(this.camera);
     }
     const onWindowResize = () => {
