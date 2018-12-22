@@ -23,9 +23,9 @@ class Info extends Component {
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.camera = new THREE.PerspectiveCamera(
       75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
+      1,
+      1,
+      10
     );
   }
   render() {
@@ -33,8 +33,8 @@ class Info extends Component {
       <div>
           <div>
             <Exit onClick={this.props.HIDE_INFO}>X</Exit>
-            <Title>Lorem ipsum</Title>
-            <Box ref={element => (this.elementRef = element)} />
+            <Title>{this.props.info}</Title>
+            <Box ref={element => (this.elementRef = element)} onWindowResize={this.onResize} />
             <Description>{this.description}</Description>
           </div>
       </div>
@@ -45,9 +45,7 @@ class Info extends Component {
    this.renderer.render(this.scene, this.camera);
   }
   componentDidMount = () => {
-    let size = {width: window.innerWidth * (95 / 100), height: window.innerHeight * (40 / 100)}
-    this.scene.background = new THREE.Color(0xffffff);
-    this.renderer.setSize(size.width, size.height);
+    this.scene.background = new THREE.Color(0x000000);
     let controls = new THREE.OrbitControls(this.camera);
     const light = new THREE.AmbientLight(0xffffff);
     this.scene.add(light);
@@ -60,21 +58,20 @@ class Info extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(-20, 0, 0);
+      this.camera.position.set(-150, 0, 0);
       this.scene.add(this.camera);
     }
-    const onWindowResize = () => {
-      // asign new window sizes to camera
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      // updates camera projections
-      this.camera.updateProjectionMatrix();
-      // updates this.renderer size on reductction for responsive canvas
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-    window.addEventListener('resize', onWindowResize, false);
     this.elementRef.appendChild(this.renderer.domElement);
     setCamera();
     this.animate();
+  }
+  onResize = () => {
+    // asign new window sizes to camera
+    this.camera.aspect = window.clientWidth / window.clientHeight;
+    // updates camera projections
+    this.camera.updateProjectionMatrix();
+    // updates this.renderer size on reductction for responsive canvas
+    this.renderer.setSize(window.clientWidth, window.clientHeight);
   }
 }
 
