@@ -25,8 +25,9 @@ class Info extends Component {
       75,
       1,
       1,
-      10
+      1000
     );
+    this.element;
   }
   render() {
     return(
@@ -42,23 +43,30 @@ class Info extends Component {
   }
   animate = () => {
    requestAnimationFrame(this.animate);
+   if(this.element) {
+     this.element.rotation.y += 0.1;
+   }
    this.renderer.render(this.scene, this.camera);
   }
   componentDidMount = () => {
-    this.scene.background = new THREE.Color(0x000000);
+    this.scene.background = new THREE.Color(0xffffff);
     let controls = new THREE.OrbitControls(this.camera);
     const light = new THREE.AmbientLight(0xffffff);
     this.scene.add(light);
     const MAP_LOADER = new THREE.GLTFLoader();
     MAP_LOADER.load(`../assets/3d/${this.props.info}.gltf`, (gltf) => {
-      this.scene.add(gltf.scene);
+      this.element = gltf.scene;
+      this.element.position.x = 0;
+      this.element.position.y = 0;
+      this.element.position.z = 0;
+      this.scene.add(this.element);
     });
     const setCamera = () => {
       // telling this.camera what to lock at
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(-150, 0, 0);
+      this.camera.position.set(1, 0, 0);
       this.scene.add(this.camera);
     }
     this.elementRef.appendChild(this.renderer.domElement);
