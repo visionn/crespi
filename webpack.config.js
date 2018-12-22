@@ -59,7 +59,7 @@ module.exports = {
     inline: true,
     contentBase: PATH.join(__dirname, 'src'),
     // listening on port 8080
-    port: 8080,
+    port: 3000,
     // host = pc ip address. to access server type pc ip address
     host: 'localhost',
   },
