@@ -5,8 +5,10 @@ export const Title = styled.h1`
   font-weight: 900;
 `;
 export const Box = styled.div`
-  margin-left: 5%;
-  margin-right: 5%;
+  width: 94%;
+  height: 40%;
+  margin-left: 3%;
+  margin-right: 3%;
 `;
 export const Description = styled.div`
   margin-left: 20%;
