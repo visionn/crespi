@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Exit, Title, Box, Description} from '../style/info';
+import {Exit, Title, Box, Description, Top, Container} from '../style/info';
 import {connect} from 'react-redux';
 import {HIDE_INFO} from '../redux/actions/actions';
 import {bindActionCreators} from 'redux';
@@ -26,14 +26,14 @@ class Info extends Component {
   }
   render() {
     return(
-      <div>
-          <div>
-            <Exit onClick={this.props.HIDE_INFO}>X</Exit>
-            <Title>{this.props.info}</Title>
-            <Box ref={element => (this.elementRef = element)} />
-            <Description>{this.description}</Description>
-          </div>
-      </div>
+      <Container>
+        <Top>
+          <Exit onClick={this.props.HIDE_INFO}>X</Exit>
+          <Title>{this.props.info}</Title>
+        </Top>
+        <Box ref={element => (this.elementRef = element)} />
+        <Description>{this.description}</Description>
+      </Container>
     );
   }
   animate = () => {
@@ -68,7 +68,7 @@ class Info extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(-100, 0, 0);
+      this.camera.position.set(-1, 0, 0);
       this.scene.add(this.camera);
     }
     window.addEventListener('resize', this.onResize, false);
