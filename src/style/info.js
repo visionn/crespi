@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 export const Top = styled.div`
-  top: 0;
+  top: 5%;
   left: 0;
   right: 0;
   position: fixed;
-  background-color: red;
   z-index: 3;
 `;
-export const Title = styled.h1`
+export const Title = styled.div`
   position: relative;
   text-align: center;
   font-family: helvetica;
+  font-size: 3rem;
   font-weight: 900;
 `;
 export const Box = styled.div`
@@ -25,19 +25,19 @@ export const Description = styled.div`
   left: 20%;
   right: 20%;
   top: 60%;
-  font-size: 1.5 rem;
+  font-size: 1.2rem;
   font-family: helvetica;
 `;
 export const Container = styled.div`
   overflow: visible;
 `;
 export const Exit = styled.button`
-  position: relative;
-  top: 5%;
-  left: 95%;
+  position: absolute;
+  top: 1.6rem;
+  right: 5%;
   border: none;
   border-radius: 20px;
-  color: white;
-  background-color: red;
-  font-size: 5 rem;
+  filter: blur(50%);
+  -webkit-filter: blur(50%);
+  font-size: 2rem;
 `;
