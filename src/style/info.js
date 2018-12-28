@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 export const Top = styled.div`
-  top: 5%;
+  top: 3%;
   left: 0;
   right: 0;
   position: fixed;
@@ -15,7 +15,7 @@ export const Title = styled.div`
 `;
 export const Box = styled.div`
   position: absolute;
-  top: 10%;
+  top: 0;
   bottom: 30%;
   left: 3%;
   right: 3%;
@@ -34,10 +34,9 @@ export const Container = styled.div`
 export const Exit = styled.button`
   position: absolute;
   top: 1.6rem;
-  right: 5%;
+  left: 95%;
   border: none;
   border-radius: 20px;
-  filter: blur(50%);
-  -webkit-filter: blur(50%);
+  background-color: white;
   font-size: 2rem;
 `;
