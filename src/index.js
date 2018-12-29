@@ -1,19 +1,9 @@
 // use require.ensure for deployment
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import DOM from './dom';
 import {Provider} from 'react-redux';
-import {STORE} from '../redux/store/store';
-
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <DOM />
-      </div>
-    );
-  }
-}
+import {STORE} from './redux/store/store';
+import App from './components/app.js';
 
 ReactDOM.render(
   <Provider store={STORE}>
