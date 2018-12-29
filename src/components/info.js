@@ -20,62 +20,60 @@ class Info extends Component {
     super(props);
     this.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque dictum viverra leo, at elementum metus blandit at. Morbi augue augue, aliquam non magna ac, posuere malesuada turpis. Curabitur lacinia sem non suscipit gravida. In imperdiet eros quam, at elementum ipsum volutpat vitae. Fusce mollis consequat ligula et convallis. Praesent tempor enim non enim tempor, ut aliquet tellus tempor. Aenean laoreet cursus dui id consequat. Donec pellentesque mollis diam, sed  gravida mi convallis a. Quisque et viverra ipsum, vitae gravida velit.';
     this.scene = new THREE.Scene();
-    this.renderer = new THREE.WebGLRenderer({antialias: true});
-    this.camera;
+    this.renderer = new THREE.WebGLRenderer({ antialias: true });
     this.element;
+    this.camera;
   }
   render() {
     return(
       <Container>
-        <Top>
-          <Exit onClick={this.props.HIDE_INFO}>X</Exit>
-          <Title>{this.props.info}</Title>
-        </Top>
         <Box ref={element => (this.elementRef = element)} />
+        <Exit onClick={this.props.HIDE_INFO}>X</Exit>
+        <Title>{this.props.info}</Title>
         <Description>{this.description}</Description>
       </Container>
     );
   }
   animate = () => {
-   requestAnimationFrame(this.animate);
-   if(this.element) {
-     this.element.rotation.y += 0.01;
-   }
-   this.renderer.render(this.scene, this.camera);
+    requestAnimationFrame(this.animate);
+    if (this.element) {
+      this.element.rotation.y += 0.01;
+    }
+    this.renderer.render(this.scene, this.camera);
   }
   componentDidMount = () => {
+    this.renderer.setSize(this.elementRef.clientWidth, this.elementRef.clientHeight);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.elementRef.appendChild(this.renderer.domElement);
+    this.scene.background = new THREE.Color(0xffffff);
     this.camera = new THREE.PerspectiveCamera(
       75,
       this.elementRef.clientWidth / this.elementRef.clientHeight,
       0.1,
       1000
     );
-    this.scene.background = new THREE.Color(0xffffff);
-    this.renderer.setSize(this.elementRef.clientWidth, this.elementRef.clientHeight);
     let controls = new THREE.OrbitControls(this.camera, this.elementRef);
     const LIGHT = new THREE.AmbientLight(0xffffff);
     this.scene.add(LIGHT);
     const MAP_LOADER = new THREE.GLTFLoader();
     MAP_LOADER.load(`../assets/3d/${this.props.info}.gltf`, (gltf) => {
       this.element = gltf.scene;
-      this.element.scale.set(0.1, 0.1, 0.1);
       this.element.position.x = 0;
       this.element.position.y = 0;
       this.element.position.z = 0;
       this.scene.add(this.element);
-      this.camera.lookAt(this.element);
     });
     const setCamera = () => {
       // telling this.camera what to lock at
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(-12, 0, 0);
+      this.camera.position.set(
+        -1, 0, 0
+      );
       this.scene.add(this.camera);
     }
     window.addEventListener('resize', this.onResize, false);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.elementRef.appendChild(this.renderer.domElement);
     setCamera();
     this.animate();
   }
