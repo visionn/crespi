@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 require('three-gltfloader');
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {SHOW_INFO, HIDE_INFO} from '../redux/actions/actions';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { SHOW_INFO, HIDE_INFO } from '../redux/actions/actions';
 import Video from './Video';
-import {Scene, Toast} from '../style/dom.js';
+import { Scene, Toast } from '../style/dom.js';
 /* TODO:
   add redux to index for universal state
   add sass loader
@@ -12,17 +12,18 @@ import {Scene, Toast} from '../style/dom.js';
 */
 // sends state to props
 const mapStateToProps = state => ({
-  info: state.info
+  info: state.info,
 });
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
   // binding actions. This method takes: (action, dispatcher)
-  ...bindActionCreators({
-    SHOW_INFO,
-    HIDE_INFO
+  ...bindActionCreators(
+    {
+      SHOW_INFO,
+      HIDE_INFO,
     },
-    dispatch
-  )
+    dispatch,
+  ),
 });
 
 class Dom extends Component {
@@ -34,43 +35,46 @@ class Dom extends Component {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      1000,
     );
     this.buttonsGroup = new THREE.Group();
     this.selected;
     this.minZoom = 1;
     this.maxZoom = 2;
-    this.sphereData = [{
-      x: 120,
-      y: 0,
-      z: 0,
-      // represents button identification name
-      id: 'mystery',
-      // video directory
-    }
-   ];
+    this.sphereData = [
+      {
+        x: 120,
+        y: 0,
+        z: 0,
+        // represents button identification name
+        id: 'mystery',
+        // video directory
+      },
+    ];
     this.state = {
       lookingAt: '',
-      videoStatus: false
-    }
+      videoStatus: false,
+    };
   }
   render() {
-    return(
+    return (
       <div>
-        <Scene ref={el => (this.container = el)} onMouseDown={this.cameraRay} onClick={this.onClickEvent}>
+        <Scene
+          ref={el => (this.container = el)}
+          onMouseDown={this.cameraRay}
+          onClick={this.onClickEvent}
+        >
           <Toast onClick={this.showInfo}>
             {this.state.videoState ? 'Guarda il video' : this.state.lookingAt}
           </Toast>
         </Scene>
-        <div>
-          {this.state.videoState ? <Video /> : null}
-        </div>
+        <div>{this.state.videoState ? <Video /> : null}</div>
       </div>
     );
   }
   showInfo = () => {
     this.props.SHOW_INFO('mystery');
-  }
+  };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
@@ -78,28 +82,27 @@ class Dom extends Component {
     this.selected = cameraRay.intersectObjects(this.scene.children, true);
     console.log(this.selected);
     try {
-      if (typeof(this.selected) !== 'undefined') {
+      if (typeof this.selected !== 'undefined') {
         // reading gltf.scene.children[0].name
         this.setState({
-          lookingAt: this.selected[0].object.parent.parent.name
+          lookingAt: this.selected[0].object.parent.parent.name,
         });
       }
-    }
-    catch (e) {
+    } catch (e) {
       this.setState({
-        lookingAt: ''
+        lookingAt: '',
       });
     }
-  }
+  };
   controls = () => {
     let controls = new THREE.OrbitControls(this.camera);
-  }
-  onClickEvent = (e) => {
+  };
+  onClickEvent = e => {
     console.log(this.buttonsGroup);
     // calculates mouse position
     let mouse = new THREE.Vector2(
       (e.clientX / window.innerWidth) * 2 - 1,
-      -(e.clientY / window.innerHeight) * 2 + 1
+      -(e.clientY / window.innerHeight) * 2 + 1,
     );
     let raycaster = new THREE.Raycaster();
     // updates the ray with mouse and camera position
@@ -110,13 +113,13 @@ class Dom extends Component {
     //if raycaster detects sth
     console.log(this.selected);
     if (this.selected.length == 1) {
-       this.showInfo();
+      this.showInfo();
     }
-  }
+  };
   animate = () => {
     requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
-  }
+  };
   componentDidMount = () => {
     this.scene.background = new THREE.Color(0xffffff);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -129,13 +132,13 @@ class Dom extends Component {
       // last one is fov
       this.camera.position.set(0, 0, 1);
       this.scene.add(this.camera);
-    }
+    };
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
       //spheredata.lenght determinates sphere quantity
       for (let i = 0; i < this.sphereData.length; i++) {
         // alt + 0096 for backthick (``) 😜
-        MAP_LOADER.load(`../assets/3d/${this.sphereData[i].id}.gltf`, (gltf) => {
+        MAP_LOADER.load(`../assets/3d/${this.sphereData[i].id}.gltf`, gltf => {
           this.scene.add(gltf.scene);
           gltf.scene.position.x = this.sphereData[i].x;
           gltf.scene.position.y = this.sphereData[i].y;
@@ -144,7 +147,7 @@ class Dom extends Component {
           this.scene.add(gltf.scene);
         });
       }
-    }
+    };
     const onWindowResize = () => {
       // asign new window sizes to camera
       this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -152,7 +155,7 @@ class Dom extends Component {
       this.camera.updateProjectionMatrix();
       // updates this.renderer size on reductction for responsive canvas
       this.renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+    };
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);
     // wait react container element (This must be called at the end of everything)
@@ -162,6 +165,9 @@ class Dom extends Component {
     this.controls();
     this.animate();
     this.cameraRay();
-  }
+  };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Dom);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Dom);
