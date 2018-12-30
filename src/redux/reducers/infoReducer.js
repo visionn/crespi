@@ -7,4 +7,4 @@ export const INFO_REDUCER = (state = false, action) => {
     default:
       return state;
   }
-}
+};

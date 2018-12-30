@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 require('three');
 require('three-orbitcontrols');
 require('three-orientation-controls');
@@ -11,7 +11,7 @@ class Video extends Component {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      1000,
     );
     this.videoMesh;
     this.texture;
@@ -21,13 +21,13 @@ class Video extends Component {
   componentDidMount = () => {
     const SCREEN_SIZE = {
       width: window.innerWidth,
-      height: window.innerHeight
+      height: window.innerHeight,
     };
     this.scene.add(this.camera);
 
     this.renderer.setSize(SCREEN_SIZE.width, SCREEN_SIZE.height);
     let controls = new THREE.OrbitControls(this.camera);
-    this.camera.position.set(0, 0, 1)
+    this.camera.position.set(0, 0, 1);
     let geometry = new THREE.SphereBufferGeometry(-20, 20, 20);
     let video = this.videoContainer;
     video.crossOrigin = 'anonymous';
@@ -36,31 +36,31 @@ class Video extends Component {
     video.setAttribute('webkit-playsinline', 'webkit-playsinline');
     video.play();
     let texture = new THREE.VideoTexture(video);
-    let material = new THREE.MeshBasicMaterial({map: texture});
+    let material = new THREE.MeshBasicMaterial({ map: texture });
     texture.flipY = false;
     this.videoMesh = new THREE.Mesh(geometry, material);
     this.videoMesh.name = 'video';
     this.scene.add(this.videoMesh);
     this.animate();
-  }
+  };
   animate = () => {
     requestAnimationFrame(this.animate);
     this.renderer.render(this.scene, this.camera);
-  }
+  };
   componentWillUnmount = () => {
     this.controls.enabled = false;
     let picker = this.scene.getObjectByName(this.videoMesh.name);
     this.scene.remove(picker);
     this.sceneContainer.appendChild(this.renderer.domElement);
     this.animate();
-  }
+  };
   render() {
-    return(
-     <div ref={el => (this.sceneContainer = el)}>
-       <button onClick={this.componentWillUnmount}>X</button>
-       <video ref={el => (this.videoContainer = el)}></video>
-     </div>
-  );
+    return (
+      <div ref={el => (this.sceneContainer = el)}>
+        <button onClick={this.componentWillUnmount}>X</button>
+        <video ref={el => (this.videoContainer = el)} />
+      </div>
+    );
   }
 }
 export default Video;
