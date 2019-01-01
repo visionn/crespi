@@ -6,8 +6,12 @@
   "scripts": {
     "start": "webpack-dev-server --hot",
     "build": "webpack --mode production",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint --ignore-path .gitignore .",
+    "prettier": "*.js"
   },
+  "pre-commit": [
+    "prettier"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
