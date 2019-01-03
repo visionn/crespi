@@ -50,7 +50,7 @@ class Info extends Component {
     );
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.elementRef.appendChild(this.renderer.domElement);
-    this.scene.background = new THREE.Color(0xffffff);
+    this.scene.background = new THREE.Color();
     this.camera = new THREE.PerspectiveCamera(
       75,
       this.elementRef.clientWidth / this.elementRef.clientHeight,
@@ -58,7 +58,7 @@ class Info extends Component {
       1000,
     );
     let controls = new THREE.OrbitControls(this.camera, this.elementRef);
-    const LIGHT = new THREE.AmbientLight(0xffffff);
+    const LIGHT = new THREE.AmbientLight();
     this.scene.add(LIGHT);
     const MAP_LOADER = new THREE.GLTFLoader();
     MAP_LOADER.load(`../assets/3d/${this.props.info}.gltf`, gltf => {

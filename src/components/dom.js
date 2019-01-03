@@ -88,7 +88,8 @@ class Dom extends Component {
           lookingAt: this.selected[0].object.parent.parent.name,
         });
       }
-    } catch (e) {
+    }
+    catch (e) {
       this.setState({
         lookingAt: '',
       });
@@ -121,9 +122,10 @@ class Dom extends Component {
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
-    this.scene.background = new THREE.Color(0xffffff);
+    // default: white
+    this.scene.background = new THREE.Color();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    const light = new THREE.AmbientLight(0xffffff);
+    const light = new THREE.AmbientLight();
     this.scene.add(light);
     const setCamera = () => {
       // telling this.camera what to lock at
