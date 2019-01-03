@@ -9,8 +9,15 @@ export const Scene = styled.div`
 `;
 export const Toast = styled.button`
   position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%, -50%);
   border: none;
-  border-radius: 20px;
+  border-radius: 10%;
   color: white;
-  background-color: red;
+  background-color: #000004;
+  font-size: 2rem;
+  :empty {
+    display: none;
+  }
 `;
