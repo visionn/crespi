@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --hot",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
-    "prettier": "*.js"
+    "prettier": "prettier --write **/*.js"
   },
   "pre-commit": [
     "prettier"
