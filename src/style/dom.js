@@ -10,10 +10,10 @@ export const Scene = styled.div`
 export const Toast = styled.button`
   position: absolute;
   left: 50%;
-  top: 5%;
   transform: translate(-50%, -50%);
+  top: 90%;
   border: none;
-  border-radius: 10%;
+  border-radius: 5%;
   color: white;
   background-color: #000004;
   font-size: 2rem;
