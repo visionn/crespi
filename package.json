@@ -19,7 +19,7 @@
     "@babel/preset-env": "7.1.6",
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.1.5",
-    "babel-loader": "8.0.4",
+    "babel-loader": "8.0.5",
     "eslint": "5.9.0",
     "eslint-config-google": "0.11.0",
     "html-loader": "0.5.5",
