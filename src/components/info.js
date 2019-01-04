@@ -30,8 +30,10 @@ class Info extends Component {
     return (
       <Container>
         <Box ref={element => (this.elementRef = element)} />
-        <Exit onClick={this.props.HIDE_INFO}>X</Exit>
-        <Title>{this.props.info}</Title>
+        <Top>
+          <Exit onClick={this.props.HIDE_INFO}>X</Exit>
+          <Title>{this.props.info}</Title>
+        </Top>
         <Description>{this.description}</Description>
       </Container>
     );
