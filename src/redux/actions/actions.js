@@ -10,3 +10,9 @@ export const HIDE_INFO = () => {
     status: false,
   };
 };
+export const LOOKING_AT = looking => {
+  return {
+    type: 'LOOKING_AT',
+    status: looking
+  }
+}
