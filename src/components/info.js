@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Exit, Title, Box, Description, Top, Container } from '../style/info';
 import { connect } from 'react-redux';
-import { HIDE_INFO } from '../redux/actions/actions';
+import { HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import { bindActionCreators } from 'redux';
 require('three-gltfloader');
 
 const mapStateToProps = state => ({
   info: state.info,
+  lookingAt: state.looking,
 });
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
@@ -32,7 +33,7 @@ class Info extends Component {
         <Box ref={element => (this.elementRef = element)} />
         <Top>
           <Exit onClick={this.props.HIDE_INFO}>X</Exit>
-          <Title>{this.props.info}</Title>
+          <Title>{this.props.lookingAt}</Title>
         </Top>
         <Description>{this.description}</Description>
       </Container>
