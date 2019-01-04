@@ -33,8 +33,9 @@ export const Container = styled.div`
 `;
 export const Exit = styled.button`
   position: absolute;
-  top: 1.6rem;
-  left: 95%;
+  z-index: 5;
+  top: 2rem;
+  right: 2rem;
   border: none;
   border-radius: 20px;
   background-color: white;
