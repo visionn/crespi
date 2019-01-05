@@ -7,32 +7,28 @@
     "start": "webpack-dev-server --hot",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
-    "prettier": "prettier --write **/*.js"
+    "format": "prettier --write **/*.js"
   },
-  "pre-commit": [
-    "prettier"
-  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.1.0",
-    "@babel/preset-env": "^7.1.6",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/runtime": "^7.1.5",
-    "babel-loader": "^8.0.4",
-    "eslint": "^5.9.0",
-    "eslint-config-google": "^0.11.0",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "pre-commit": "^1.2.2",
+    "@babel/core": "7.2.2",
+    "@babel/plugin-proposal-class-properties": "7.2.3",
+    "@babel/plugin-proposal-object-rest-spread": "7.2.0",
+    "@babel/plugin-transform-runtime": "7.2.0",
+    "@babel/preset-env": "7.2.3",
+    "@babel/preset-react": "7.0.0",
+    "@babel/runtime": "7.2.0",
+    "babel-loader": "8.0.5",
+    "eslint": "5.11.1",
+    "eslint-config-google": "0.11.0",
+    "html-loader": "0.5.5",
+    "html-webpack-plugin": "3.2.0",
     "prettier": "1.15.3",
-    "redux-devtools": "^3.4.2",
-    "webpack": "^4.25.1",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "webpack": "4.28.3",
+    "redux-devtools": "3.5.0",
+    "webpack-cli": "3.2.0",
+    "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
     "npm": "^6.5.0",
@@ -41,6 +37,6 @@
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
     "styled-components": "^4.1.2",
-    "three": "^0.98.0"
+    "three": "^0.100.0"
   }
 }
