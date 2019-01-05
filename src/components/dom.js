@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 require('three-gltfloader');
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { SHOW_INFO, HIDE_INFO } from '../redux/actions/actions';
+import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import Video from './Video';
 import { Scene, Toast } from '../style/dom.js';
 /* TODO:
@@ -13,6 +13,7 @@ import { Scene, Toast } from '../style/dom.js';
 // sends state to props
 const mapStateToProps = state => ({
   info: state.info,
+  lookingAt: state.looking
 });
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
@@ -21,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
     {
       SHOW_INFO,
       HIDE_INFO,
+      LOOKING_AT,
     },
     dispatch,
   ),
@@ -51,30 +53,18 @@ class Dom extends Component {
         // video directory
       },
     ];
-    this.state = {
-      lookingAt: '',
-      videoStatus: false,
-    };
   }
   render() {
     return (
-      <div>
-        <Scene
-          ref={el => (this.container = el)}
-          onMouseDown={this.cameraRay}
-          onClick={this.onClickEvent}
-        >
-          <Toast onClick={this.showInfo}>
-            {this.state.videoState ? 'Guarda il video' : this.state.lookingAt}
-          </Toast>
-        </Scene>
-        <div>{this.state.videoState ? <Video /> : null}</div>
-      </div>
+      <Scene
+        ref={el => (this.container = el)}
+        onMouseDown={this.cameraRay}
+        onClick={this.onClickEvent}
+      >
+        <Toast onClick={this.props.SHOW_INFO}>{this.props.lookingAt}</Toast>
+      </Scene>
     );
   }
-  showInfo = () => {
-    this.props.SHOW_INFO('mystery');
-  };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
@@ -83,15 +73,12 @@ class Dom extends Component {
     console.log(this.selected);
     try {
       if (typeof this.selected !== 'undefined') {
-        // reading gltf.scene.children[0].name
-        this.setState({
-          lookingAt: this.selected[0].object.parent.parent.name,
-        });
+        // reading gltf.scene.children[0].nam
+        this.props.LOOKING_AT(this.selected[0].object.parent.parent.name);
       }
-    } catch (e) {
-      this.setState({
-        lookingAt: '',
-      });
+    }
+    catch (e) {
+      this.props.LOOKING_AT('')
     }
   };
   controls = () => {
@@ -113,7 +100,7 @@ class Dom extends Component {
     //if raycaster detects sth
     console.log(this.selected);
     if (this.selected.length == 1) {
-      this.showInfo();
+      this.props.SHOW_INFO(this.selected[0].object.parent.parent.name);
     }
   };
   animate = () => {
@@ -121,9 +108,10 @@ class Dom extends Component {
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
-    this.scene.background = new THREE.Color(0xffffff);
+    // default: white
+    this.scene.background = new THREE.Color();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    const light = new THREE.AmbientLight(0xffffff);
+    const light = new THREE.AmbientLight();
     this.scene.add(light);
     const setCamera = () => {
       // telling this.camera what to lock at
