@@ -53,6 +53,7 @@ class Dom extends Component {
         // video directory
       },
     ];
+    this.elements = [];
   }
   render() {
     return (
@@ -105,6 +106,12 @@ class Dom extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
+    if (this.elements) {
+      // rotates every gltf.scene object pushed to this.elements
+      this.elements.forEach(element => {
+        element.rotation.y += 0.01;
+      })
+    }
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
@@ -133,6 +140,7 @@ class Dom extends Component {
           gltf.scene.position.z = this.sphereData[i].z;
           gltf.scene.children[0].name = this.sphereData[i].id;
           this.scene.add(gltf.scene);
+          this.elements.push(gltf.scene);
         });
       }
     };
