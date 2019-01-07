@@ -63,7 +63,7 @@ class Dom extends Component {
         onMouseDown={this.cameraRay}
         onClick={this.onClickEvent}
       >
-        <Toast onClick={this.props.SHOW_INFO}>{this.props.lookingAt}</Toast>
+        <Toast>{this.props.lookingAt}</Toast>
       </Scene>
     );
   }
@@ -72,7 +72,6 @@ class Dom extends Component {
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
     this.selected = cameraRay.intersectObjects(this.scene.children, true);
-    console.log(this.selected);
     try {
       if (typeof this.selected !== 'undefined') {
         // reading gltf.scene.children[0].nam
