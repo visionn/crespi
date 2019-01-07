@@ -43,6 +43,7 @@ class Dom extends Component {
     this.selected;
     this.minZoom = 1;
     this.maxZoom = 2;
+    this.controls;
     this.sphereData = [
       {
         x: 120,
@@ -83,10 +84,9 @@ class Dom extends Component {
     }
   };
   controls = () => {
-    let controls = new THREE.OrbitControls(this.camera);
+    this.controls = new THREE.OrbitControls(this.camera);
   };
   onClickEvent = e => {
-    console.log(this.buttonsGroup);
     // calculates mouse position
     let mouse = new THREE.Vector2(
       (e.clientX / window.innerWidth) * 2 - 1,
@@ -98,10 +98,16 @@ class Dom extends Component {
     //array of objects intersected by raycaster
     this.selected = raycaster.intersectObjects(this.scene.children, true);
     //let videoIntersects = raycaster.intersectObjects(video.children);
-    //if raycaster detects sth
-    console.log(this.selected);
-    if (this.selected.length == 1) {
-      this.props.SHOW_INFO(this.selected[0].object.parent.parent.name);
+    //if raycaster detects something
+    if (this.selected.length) {
+      this.sphereData.forEach(element => {
+        if (this.selected[0].object.parent.parent.name === element.id) {
+          this.camera.lookAt(element.x, element.y, element.z);
+          this.controls.enabled = false;
+          this.camera.zoom = 2;
+        }
+        else {}
+      });
     }
   };
   animate = () => {
