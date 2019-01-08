@@ -6,13 +6,6 @@ export const Top = styled.div`
   position: fixed;
   z-index: 3;
 `;
-export const Title = styled.div`
-  position: relative;
-  text-align: center;
-  font-family: helvetica;
-  font-size: 3rem;
-  font-weight: 900;
-`;
 export const Box = styled.div`
   position: absolute;
   top: 0;
@@ -22,9 +15,9 @@ export const Box = styled.div`
 `;
 export const Description = styled.div`
   position: absolute;
-  left: 20%;
-  right: 20%;
-  top: 60%;
+  left: 2rem;
+  right: 2rem;
+  top: 80%;
   font-size: 1.2rem;
   font-family: helvetica;
 `;
