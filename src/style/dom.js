@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 export const Scene = styled.div`
-  width: 100%;
-  height: 100%;
   padding: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin: 0;
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  z-index: 1;
 `;
 export const Toast = styled.button`
   position: absolute;

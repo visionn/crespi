@@ -1,5 +1,5 @@
 export const sphereData = [{
-  x: 120,
+  x: 130,
   y: 0,
   z: 0,
   id: 'mystery'

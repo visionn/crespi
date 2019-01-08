@@ -34,12 +34,6 @@ class Dom extends Component {
     super(props);
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000,
-    );
     this.buttonsGroup = new THREE.Group();
     this.selected;
     this.minZoom = 1;
@@ -59,7 +53,6 @@ class Dom extends Component {
     );
   }
   cameraRay = () => {
-    console.log(sphereData);
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
@@ -74,13 +67,13 @@ class Dom extends Component {
     }
   };
   controls = () => {
-    this.controls = new THREE.OrbitControls(this.camera);
+    this.controls = new THREE.OrbitControls(this.camera, this.container);
   };
   onClickEvent = e => {
     // calculates mouse position
     let mouse = new THREE.Vector2(
-      (e.clientX / window.innerWidth) * 2 - 1,
-      -(e.clientY / window.innerHeight) * 2 + 1,
+      (e.clientX / this.container.clientWidth) * 2 - 1,
+      -(e.clientY / this.container.clientHeight) * 2 + 1,
     );
     let raycaster = new THREE.Raycaster();
     // updates the ray with mouse and camera position
@@ -114,10 +107,20 @@ class Dom extends Component {
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
+    this.renderer.setSize(
+      this.container.clientWidth,
+      this.container.clientHeight,
+    );
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.container.appendChild(this.renderer.domElement);
+    this.camera = new THREE.PerspectiveCamera(
+      75,
+      this.container.clientWidth / this.container.clientHeight,
+      0.1,
+      1000,
+    );
     // default: white
-    console.log(sphereData);
     this.scene.background = new THREE.Color();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
     const light = new THREE.AmbientLight();
     this.scene.add(light);
     const setCamera = () => {
@@ -146,16 +149,15 @@ class Dom extends Component {
     };
     const onWindowResize = () => {
       // asign new window sizes to camera
-      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
       // updates camera projections
       this.camera.updateProjectionMatrix();
       // updates this.renderer size on reductction for responsive canvas
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
     };
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);
     // wait react container element (This must be called at the end of everything)
-    this.container.appendChild(this.renderer.domElement);
     setCamera();
     createButton();
     this.controls();
