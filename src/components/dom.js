@@ -95,6 +95,9 @@ class Dom extends Component {
           this.camera.lookAt(element.x, element.y, element.z);
           this.controls.enabled = false;
           this.camera.zoom = 2;
+          this.props.SHOW_INFO(
+            this.selected[0].object.parent.parent.name
+          );
         } else {
         }
       });
