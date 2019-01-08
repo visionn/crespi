@@ -24,3 +24,11 @@ export const Toast = styled.button`
     display: none;
   }
 `;
+export const Title = styled.div`
+  position: relative;
+  text-align: center;
+  font-family: helvetica;
+  font-size: 3rem;
+  font-weight: 900;
+  z-index: 2;
+`;
