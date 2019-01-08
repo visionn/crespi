@@ -8,7 +8,12 @@ const mapStateToProps = state => ({
 });
 class App extends Component {
   render() {
-    return <div>{this.props.info ? <Info /> : <Dom />}</div>;
+    return (
+      <div>
+       <Dom />
+       {this.props.info ? <Info /> : null}
+      </div>
+    );
   }
 }
 export default connect(mapStateToProps)(App);
