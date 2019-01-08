@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import Video from './Video';
 import { Scene, Toast } from '../style/dom.js';
+import { sphereData } from '../configuration/config.js';
 /* TODO:
   add redux to index for universal state
   add sass loader
   fix controls
-*/
-// sends state to props
+  config
+*/// sends state to props
 const mapStateToProps = state => ({
   info: state.info,
-  lookingAt: state.looking
+  lookingAt: state.looking,
 });
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
@@ -44,16 +45,6 @@ class Dom extends Component {
     this.minZoom = 1;
     this.maxZoom = 2;
     this.controls;
-    this.sphereData = [
-      {
-        x: 120,
-        y: 0,
-        z: 0,
-        // represents button identification name
-        id: 'mystery',
-        // video directory
-      },
-    ];
     this.elements = [];
   }
   render() {
@@ -68,6 +59,7 @@ class Dom extends Component {
     );
   }
   cameraRay = () => {
+    console.log(sphereData);
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
@@ -77,9 +69,8 @@ class Dom extends Component {
         // reading gltf.scene.children[0].nam
         this.props.LOOKING_AT(this.selected[0].object.parent.parent.name);
       }
-    }
-    catch (e) {
-      this.props.LOOKING_AT('')
+    } catch (e) {
+      this.props.LOOKING_AT('');
     }
   };
   controls = () => {
@@ -99,13 +90,13 @@ class Dom extends Component {
     //let videoIntersects = raycaster.intersectObjects(video.children);
     //if raycaster detects something
     if (this.selected.length) {
-      this.sphereData.forEach(element => {
+      sphereData.forEach(element => {
         if (this.selected[0].object.parent.parent.name === element.id) {
           this.camera.lookAt(element.x, element.y, element.z);
           this.controls.enabled = false;
           this.camera.zoom = 2;
+        } else {
         }
-        else {}
       });
     }
   };
@@ -115,12 +106,13 @@ class Dom extends Component {
       // rotates every gltf.scene object pushed to this.elements
       this.elements.forEach(element => {
         element.rotation.y += 0.01;
-      })
+      });
     }
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
     // default: white
+    console.log(sphereData);
     this.scene.background = new THREE.Color();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     const light = new THREE.AmbientLight();
@@ -136,14 +128,14 @@ class Dom extends Component {
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
       //spheredata.lenght determinates sphere quantity
-      for (let i = 0; i < this.sphereData.length; i++) {
+      for (let i = 0; i < sphereData.length; i++) {
         // alt + 0096 for backthick (``) 😜
-        MAP_LOADER.load(`../assets/3d/${this.sphereData[i].id}.gltf`, gltf => {
+        MAP_LOADER.load(`../assets/3d/${sphereData[i].id}.gltf`, gltf => {
           this.scene.add(gltf.scene);
-          gltf.scene.position.x = this.sphereData[i].x;
-          gltf.scene.position.y = this.sphereData[i].y;
-          gltf.scene.position.z = this.sphereData[i].z;
-          gltf.scene.children[0].name = this.sphereData[i].id;
+          gltf.scene.position.x = sphereData[i].x;
+          gltf.scene.position.y = sphereData[i].y;
+          gltf.scene.position.z = sphereData[i].z;
+          gltf.scene.children[0].name = sphereData[i].id;
           this.scene.add(gltf.scene);
           this.elements.push(gltf.scene);
         });
