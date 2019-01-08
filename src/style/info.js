@@ -19,6 +19,7 @@ export const Description = styled.div`
   right: 2rem;
   top: 80%;
   font-size: 1.2rem;
+  z-index: 2;
   font-family: helvetica;
 `;
 export const Container = styled.div`
