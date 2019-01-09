@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { slideUp, fadeIn, fadeOut } from './animations.js';
 export const Top = styled.div`
   top: 3%;
   left: 0;
@@ -14,31 +15,39 @@ export const Box = styled.div`
   right: 3%;
 `;
 export const Description = styled.div`
+  display: inline-block;
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1%;
   padding: 1rem 1.5rem;
   font-size: 1.2rem;
   z-index: 2;
   font-family: helvetica;
-  background-color: red;
   border-radius: 1rem;
   height: 6rem;
+  filter: drop-shadow(0 0 0.5rem black);
+  background-color: white;
+  visibility: ${props => props.lookingAt ? 'visible' : 'hidden'};
+  animation: ${props => props.lookingAt ? fadeIn : fadeOut} 0.5s linear;
+  transition: visibility 0.5s linear;
   div {
     opacity: 0;
     bottom: 1rem;
   }
   :hover {
-    overflow-y: scroll;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
+    overflow-y: scroll;
     ::-webkit-scrollbar {
       width: 0px;
        background: transparent;
     }
-    top: 2rem;
+    top: auto;
     height: auto;
+    max-height: 80%;
+    padding: 1rem 1.5rem;
+    transition: slideUp 2s cubic-bezier(.83, -0.43, .21, 1.42);
     div {
       opacity: 1;
       display: visible;
