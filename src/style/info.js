@@ -31,6 +31,12 @@ export const Description = styled.div`
   }
   :hover {
     overflow-y: scroll;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    ::-webkit-scrollbar {
+      width: 0px;
+       background: transparent;
+    }
     top: 2rem;
     height: auto;
     div {
