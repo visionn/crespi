@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div>
-       {this.props.lookingAt ? <Info /> : null}
+       <Info />
        <Dom />
       </div>
     );
