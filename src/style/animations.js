@@ -16,3 +16,11 @@ export const fadeOut = keyframes`
     opacity: 0;
   }
 `;
+export const slideUp = keyframes`
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(10rem);
+  }
+`;
