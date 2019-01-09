@@ -29,6 +29,13 @@ export const Toast = styled.div`
     display: none;
   }
 `;
+export const Box = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 30%;
+  left: 3%;
+  right: 3%;
+`;
 export const Title = styled.div`
   position: relative;
   text-align: center;

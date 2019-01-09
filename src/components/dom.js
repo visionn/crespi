@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import Video from './Video';
-import { Scene, Toast, Title } from '../style/dom.js';
-import { Box } from '../style/info.js'
+import { Scene, Toast, Title, Box } from '../style/dom.js';
 import { sphereData } from '../configuration/config.js';
 /* TODO:
   add redux to index for universal state
@@ -52,7 +51,7 @@ class Dom extends Component {
         <Box>
           <Title>{this.props.lookingAt}</Title>
         </Box>
-        <Toast lookingAt={this.props.lookingAt}>{this.props.info ? null : 'Clicca per scoprire di più'}</Toast>
+        <Toast lookingAt={this.props.lookingAt}>{this.props.info ? null : 'Scopri di più'}</Toast>
       </Scene>
     );
   }
