@@ -16,8 +16,8 @@ export const Toast = styled.div`
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  visibility: ${props => !props.lookingAt || props.info ? 'hidden' : 'visible'}
-  animation: ${props => !props.lookingAt || props.info ? fadeOut : fadeIn} 0.25s linear;
+  visibility: ${props => !props.lookingAt ? 'hidden' : 'visible'}
+  animation: ${props => !props.lookingAt ? fadeOut : fadeIn} 0.25s linear;
   transition: visibility 0.25s linear;
   top: 90%;
   border: none;
@@ -25,6 +25,9 @@ export const Toast = styled.div`
   color: white;
   background-color: #000004;
   font-size: 1rem;
+  :empty {
+    display: none;
+  }
 `;
 export const Title = styled.div`
   position: relative;
