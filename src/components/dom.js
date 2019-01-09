@@ -47,12 +47,7 @@ class Dom extends Component {
         ref={el => (this.container = el)}
         onMouseDown={this.cameraRay}
         onClick={this.onClickEvent}
-      >
-        <Box>
-          <Title>{this.props.lookingAt}</Title>
-        </Box>
-        <Toast lookingAt={this.props.lookingAt}>{this.props.info ? null : 'Scopri di più'}</Toast>
-      </Scene>
+      />
     );
   }
   cameraRay = () => {
