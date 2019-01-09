@@ -15,15 +15,32 @@ export const Box = styled.div`
 `;
 export const Description = styled.div`
   position: absolute;
-  left: 2rem;
-  right: 2rem;
-  top: 80%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem 1.5rem;
   font-size: 1.2rem;
   z-index: 2;
   font-family: helvetica;
+  background-color: red;
+  border-radius: 1rem;
+  height: 6rem;
+  div {
+    opacity: 0;
+    bottom: 1rem;
+  }
+  :hover {
+    overflow-y: scroll;
+    top: 2rem;
+    height: auto;
+    div {
+      opacity: 1;
+      display: visible;
+    }
+  }
 `;
 export const Container = styled.div`
-  overflow: visible;
+  overflow: hidden;
 `;
 export const Exit = styled.button`
   position: absolute;
