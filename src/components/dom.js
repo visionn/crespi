@@ -52,7 +52,7 @@ class Dom extends Component {
         <Box>
           <Title>{this.props.lookingAt}</Title>
         </Box>
-        <Toast info={this.props.info} lookingAt={this.props.lookingAt}>Clicca per scoprire di più</Toast>
+        <Toast lookingAt={this.props.lookingAt}>{this.props.info ? null : 'Clicca per scoprire di più'}</Toast>
       </Scene>
     );
   }
