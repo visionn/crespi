@@ -27,7 +27,7 @@ class Info extends Component {
         <Top>
           <Exit onClick={this.props.HIDE_INFO}>X</Exit>
         </Top>
-        <Description>
+        <Description lookingAt={this.props.lookingAt}>
           <h2>{this.props.lookingAt}</h2>
           <h7>Lorem ipsum</h7>
           <div>{sphereData[0].text[0].description}</div>
