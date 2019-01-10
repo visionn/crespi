@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { slideUp, fadeIn, fadeOut } from './animations.js';
+import { swapUp, swapDown } from './animations.js';
 export const Top = styled.div`
   top: 3%;
   left: 0;
@@ -29,7 +29,7 @@ export const Description = styled.div`
   filter: drop-shadow(0 0 0.5rem black);
   background-color: white;
   visibility: ${props => props.lookingAt ? 'visible' : 'hidden'};
-  animation: ${props => props.lookingAt ? fadeIn : fadeOut} 0.5s linear;
+  animation: ${props => props.lookingAt ? swapUp : swapDown} 0.25s cubic-bezier(.42, 0, 1, 1);
   transition: visibility 0.5s linear;
   div {
     opacity: 0;

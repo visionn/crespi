@@ -16,11 +16,19 @@ export const fadeOut = keyframes`
     opacity: 0;
   }
 `;
-export const slideUp = keyframes`
+export const swapUp = keyframes`
   from {
-    transform: translateY(0);
+    transform: translateY(5rem);
   }
   to {
-    transform: translateY(10rem);
+    transform: translateY(2%);
+  }
+`;
+export const swapDown = keyframes`
+  from {
+    transform: translateY(2%);
+  }
+  to {
+    transform: translateY(5rem);
   }
 `;
