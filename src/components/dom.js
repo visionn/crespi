@@ -97,6 +97,8 @@ class Dom extends Component {
       // rotates every gltf.scene object pushed to this.elements
       this.elements.forEach(element => {
         element.rotation.y += 0.01;
+        if (Math.round(Math.sin(element.rotation.y)))
+        console.log('h');
       });
     }
     this.renderer.render(this.scene, this.camera);
@@ -132,7 +134,6 @@ class Dom extends Component {
       for (let i = 0; i < sphereData.length; i++) {
         // alt + 0096 for backthick (``) 😜
         MAP_LOADER.load(`../assets/3d/${sphereData[i].id}.gltf`, gltf => {
-          this.scene.add(gltf.scene);
           gltf.scene.position.x = sphereData[i].x;
           gltf.scene.position.y = sphereData[i].y;
           gltf.scene.position.z = sphereData[i].z;
