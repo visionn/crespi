@@ -5,8 +5,9 @@ export const sphereData = [
     z: 0,
     id: 'mystery',
     text: [
-        {
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper lacinia posuere. \
+      {
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper lacinia posuere. \
           Suspendisse potenti. Integer ut laoreet magna, nec iaculis quam. Cras rhoncus vulputate risus, \
            ut bibendum quam pulvinar at. Quisque porttitor convallis augue quis scelerisque. Mauris \
            sodales quis sapien eu porta. Maecenas nec turpis maximus, porta justo in, \
@@ -22,9 +23,9 @@ export const sphereData = [
                 amet metus faucibus condimentum. Donec consequat nunc id \
                 purus posuere commodo. Suspendisse dignissim eu felis eu scelerisque. \
                 Pellentesque posuere, diam sit amet aliquet rhoncus, enim urna tempus purus, \
-                 quis auctor mauris lectus vel nunc. Nulla at diam eleifend, ornare elit ac, eleifend enim.'
-      }
-    ]
+                 quis auctor mauris lectus vel nunc. Nulla at diam eleifend, ornare elit ac, eleifend enim.',
+      },
+    ],
   },
   {
     x: -130,
@@ -32,8 +33,9 @@ export const sphereData = [
     z: 0,
     id: 'mystery',
     text: [
-        {
-          description: 'Lorem ipsum dolor sit amet, due adipiscing elit. Proin ullamcorper lacinia posuere. \
+      {
+        description:
+          'Lorem ipsum dolor sit amet, due adipiscing elit. Proin ullamcorper lacinia posuere. \
           Suspendisse potenti. Integer ut laoreet magna, nec iaculis quam. Cras rhoncus vulputate risus, \
            ut bibendum quam pulvinar at. Quisque porttitor convallis augue quis scelerisque. Mauris \
            sodales quis sapien eu porta. Maecenas nec turpis maximus, porta justo in, \
@@ -49,8 +51,8 @@ export const sphereData = [
                 amet metus faucibus condimentum. Donec consequat nunc id \
                 purus posuere commodo. Suspendisse dignissim eu felis eu scelerisque. \
                 Pellentesque posuere, diam sit amet aliquet rhoncus, enim urna tempus purus, \
-                 quis auctor mauris lectus vel nunc. Nulla at diam eleifend, ornare elit ac, eleifend enim.'
-      }
-    ]
-  }
+                 quis auctor mauris lectus vel nunc. Nulla at diam eleifend, ornare elit ac, eleifend enim.',
+      },
+    ],
+  },
 ];

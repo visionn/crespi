@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fadeIn, fadeOut } from './animations.js'
+import { fadeIn, fadeOut } from './animations.js';
 export const Scene = styled.div`
   padding: 0;
   top: 0;
@@ -16,8 +16,8 @@ export const Toast = styled.div`
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  visibility: ${props => !props.lookingAt ? 'hidden' : 'visible'}
-  animation: ${props => !props.lookingAt ? fadeOut : fadeIn} 0.25s linear;
+  visibility: ${props => (!props.lookingAt ? 'hidden' : 'visible')}
+  animation: ${props => (!props.lookingAt ? fadeOut : fadeIn)} 0.25s linear;
   transition: visibility 0.25s linear;
   top: 90%;
   border: none;
