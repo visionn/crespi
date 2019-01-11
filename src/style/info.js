@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { swapUp, swapDown } from './animations.js';
+import { swapUp, swapDown, fadeOut } from './animations.js';
 export const Top = styled.div`
   top: 3%;
   left: 0;
@@ -13,6 +13,12 @@ export const Box = styled.div`
   bottom: 30%;
   left: 3%;
   right: 3%;
+`;
+export const Title = styled.h2`
+  font-weight: bold;
+`;
+export const Subtitle = styled.h6`
+  font-weight: bold;
 `;
 export const Description = styled.div`
   display: inline-block;
@@ -28,9 +34,9 @@ export const Description = styled.div`
   height: 6rem;
   filter: drop-shadow(0 0 0.5rem black);
   background-color: white;
-  visibility: ${props => props.lookingAt ? 'visible' : 'hidden'};
-  animation: ${props => props.lookingAt ? swapUp : swapDown} 0.25s cubic-bezier(.42, 0, 1, 1);
-  transition: visibility 0.5s linear;
+  visibility: ${props => (props.lookingAt ? 'visible' : 'hidden')};
+  animation: ${props => (props.lookingAt ? swapUp : fadeOut)} 0.25s linear;
+  transition: visibility 0.25s linear;
   div {
     opacity: 0;
     bottom: 1rem;
@@ -47,11 +53,14 @@ export const Description = styled.div`
     height: auto;
     max-height: 80%;
     padding: 1rem 1.5rem;
-    transition: slideUp 2s cubic-bezier(.83, -0.43, .21, 1.42);
     div {
       opacity: 1;
       display: visible;
     }
+  }
+  }
+  :empty {
+   display: none;
   }
 `;
 export const Container = styled.div`

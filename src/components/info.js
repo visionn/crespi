@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Exit, Description, Top, Container, Box } from '../style/info';
+import { Exit, Description, Top, Container, Box, Title, Subtitle } from '../style/info';
 import { connect } from 'react-redux';
 import { HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import { bindActionCreators } from 'redux';
@@ -28,8 +28,8 @@ class Info extends Component {
           <Exit onClick={this.props.HIDE_INFO}>X</Exit>
         </Top>
         <Description lookingAt={this.props.lookingAt}>
-          <h2>{this.props.lookingAt}</h2>
-          <h7>Lorem ipsum</h7>
+          <Title>{this.props.lookingAt}</Title>
+          <Subtitle>{this.props.lookingAt}</Subtitle>
           <div>{sphereData[0].text[0].description}</div>
         </Description>
       </Container>
