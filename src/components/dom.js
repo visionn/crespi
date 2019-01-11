@@ -5,14 +5,13 @@ import { connect } from 'react-redux';
 import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import Video from './Video';
 import { Scene, Toast, Title, Box } from '../style/dom.js';
-import { sphereData } from '../configuration/config.js';
+import { sphereData } from '../configuration/config.js'; // sends state to props
 /* TODO:
   add redux to index for universal state
   add sass loader
   fix controls
   config
-*/// sends state to props
-const mapStateToProps = state => ({
+*/ const mapStateToProps = state => ({
   info: state.info,
   lookingAt: state.looking,
 });
@@ -86,9 +85,7 @@ class Dom extends Component {
           this.camera.lookAt(element.x, element.y, element.z);
           this.controls.enabled = false;
           this.camera.zoom = 2;
-          this.props.SHOW_INFO(
-            this.selected[0].object.parent.parent.name
-          );
+          this.props.SHOW_INFO(this.selected[0].object.parent.parent.name);
         } else {
         }
       });
@@ -147,11 +144,15 @@ class Dom extends Component {
     };
     const onWindowResize = () => {
       // asign new window sizes to camera
-      this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+      this.camera.aspect =
+        this.container.clientWidth / this.container.clientHeight;
       // updates camera projections
       this.camera.updateProjectionMatrix();
       // updates this.renderer size on reductction for responsive canvas
-      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+      this.renderer.setSize(
+        this.container.clientWidth,
+        this.container.clientHeight,
+      );
     };
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);
