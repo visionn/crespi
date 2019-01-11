@@ -5,10 +5,16 @@ import Info from './info';
 
 const mapStateToProps = state => ({
   info: state.info,
+  lookingAt: state.looking,
 });
 class App extends Component {
   render() {
-    return <div>{this.props.info ? <Info /> : <Dom />}</div>;
+    return (
+      <div>
+        <Info />
+        <Dom />
+      </div>
+    );
   }
 }
 export default connect(mapStateToProps)(App);
