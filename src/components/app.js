@@ -5,14 +5,14 @@ import Info from './info';
 
 const mapStateToProps = state => ({
   info: state.info,
-  lookingAt: state.looking
+  lookingAt: state.looking,
 });
 class App extends Component {
   render() {
     return (
       <div>
-       <Info />
-       <Dom />
+        <Info />
+        <Dom />
       </div>
     );
   }
