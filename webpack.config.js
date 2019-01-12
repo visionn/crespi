@@ -38,14 +38,21 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
         exclude: '/node_modules/',
-        use: 'babel-loader'
+        use: 'babel-loader',
       }, {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
-          options: {minimize: true}
+          options: {minimize: true},
         }]
+      }, {
+        test: /\.md$/,
+        loader: [
+          'babel-loader',
+          '@hugmanrique/react-markdown-loader',
+        ]
       }
     ]
   },
