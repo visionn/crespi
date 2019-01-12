@@ -45,7 +45,6 @@ class Dom extends Component {
       <Scene
         ref={el => (this.container = el)}
         onMouseDown={this.cameraRay}
-        onClick={this.onClickEvent}
       />
     );
   }
@@ -65,31 +64,6 @@ class Dom extends Component {
   };
   controls = () => {
     this.controls = new THREE.OrbitControls(this.camera, this.container);
-  };
-  onClickEvent = e => {
-    // calculates mouse position
-    let mouse = new THREE.Vector2(
-      (e.clientX / this.container.clientWidth) * 2 - 1,
-      -(e.clientY / this.container.clientHeight) * 2 + 1,
-    );
-    let raycaster = new THREE.Raycaster();
-    // updates the ray with mouse and camera position
-    raycaster.setFromCamera(mouse, this.camera);
-    //array of objects intersected by raycaster
-    this.selected = raycaster.intersectObjects(this.scene.children, true);
-    //let videoIntersects = raycaster.intersectObjects(video.children);
-    //if raycaster detects something
-    if (this.selected.length) {
-      sphereData.forEach(element => {
-        if (this.selected[0].object.parent.parent.name === element.id) {
-          this.camera.lookAt(element.x, element.y, element.z);
-          this.controls.enabled = false;
-          this.camera.zoom = 2;
-          this.props.SHOW_INFO(this.selected[0].object.parent.parent.name);
-        } else {
-        }
-      });
-    }
   };
   animate = () => {
     requestAnimationFrame(this.animate);
