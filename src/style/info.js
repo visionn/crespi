@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { swapUp, swapDown, fadeOut } from './animations.js';
 export const Top = styled.div`
+  visibility: inherit;
   top: 3%;
   left: 0;
   right: 0;
-  position: fixed;
+  position: sticky;
   z-index: 3;
 `;
 export const Box = styled.div`
@@ -51,7 +52,7 @@ export const Description = styled.div`
     }
     top: auto;
     height: auto;
-    max-height: 80%;
+    max-height: 90%;
     padding: 1rem 1.5rem;
     div {
       opacity: 1;
