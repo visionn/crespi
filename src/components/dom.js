@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import Video from './Video';
 import { Scene, Toast, Title, Box } from '../style/dom.js';
-import { sphereData } from '../configuration/config.js'; // sends state to props
+import { config } from '../configuration/config.js'; // sends state to props
 /* TODO:
   add redux to index for universal state
   add sass loader
@@ -105,13 +105,13 @@ class Dom extends Component {
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
       //spheredata.lenght determinates sphere quantity
-      for (let i = 0; i < sphereData.length; i++) {
+      for (let i = 0; i < config.length; i++) {
         // alt + 0096 for backthick (``) 😜
-        MAP_LOADER.load(`../assets/3d/${sphereData[i].id}.gltf`, gltf => {
-          gltf.scene.position.x = sphereData[i].x;
-          gltf.scene.position.y = sphereData[i].y;
-          gltf.scene.position.z = sphereData[i].z;
-          gltf.scene.children[0].name = sphereData[i].id;
+        MAP_LOADER.load(`../assets/3d/${config[i].id}.gltf`, gltf => {
+          gltf.scene.position.x = config[i].x;
+          gltf.scene.position.y = config[i].y;
+          gltf.scene.position.z = config[i].z;
+          gltf.scene.children[0].name = config[i].id;
           this.scene.add(gltf.scene);
           this.elements.push(gltf.scene);
         });
