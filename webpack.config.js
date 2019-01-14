@@ -12,7 +12,7 @@ module.exports = {
   output: {
     //defining output file
     pathinfo: false,
-    path: PATH.resolve(__dirname, './src/min/'),
+    path: PATH.resolve(__dirname, './build/'),
     filename: 'crespi.min.js',
     chunkFilename: '[id].[hash:8].js'
   },
