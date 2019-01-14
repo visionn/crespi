@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import Video from './Video';
 import { Scene, Toast, Title, Box } from '../style/dom.js';
-import { sphereData } from '../configuration/config.js'; // sends state to props
+import { config } from '../configuration/config.js'; // sends state to props
 /* TODO:
   add redux to index for universal state
   add sass loader
@@ -45,7 +45,6 @@ class Dom extends Component {
       <Scene
         ref={el => (this.container = el)}
         onMouseDown={this.cameraRay}
-        onClick={this.onClickEvent}
       />
     );
   }
@@ -66,37 +65,14 @@ class Dom extends Component {
   controls = () => {
     this.controls = new THREE.OrbitControls(this.camera, this.container);
   };
-  onClickEvent = e => {
-    // calculates mouse position
-    let mouse = new THREE.Vector2(
-      (e.clientX / this.container.clientWidth) * 2 - 1,
-      -(e.clientY / this.container.clientHeight) * 2 + 1,
-    );
-    let raycaster = new THREE.Raycaster();
-    // updates the ray with mouse and camera position
-    raycaster.setFromCamera(mouse, this.camera);
-    //array of objects intersected by raycaster
-    this.selected = raycaster.intersectObjects(this.scene.children, true);
-    //let videoIntersects = raycaster.intersectObjects(video.children);
-    //if raycaster detects something
-    if (this.selected.length) {
-      sphereData.forEach(element => {
-        if (this.selected[0].object.parent.parent.name === element.id) {
-          this.camera.lookAt(element.x, element.y, element.z);
-          this.controls.enabled = false;
-          this.camera.zoom = 2;
-          this.props.SHOW_INFO(this.selected[0].object.parent.parent.name);
-        } else {
-        }
-      });
-    }
-  };
   animate = () => {
     requestAnimationFrame(this.animate);
     if (this.elements) {
       // rotates every gltf.scene object pushed to this.elements
       this.elements.forEach(element => {
         element.rotation.y += 0.01;
+        if (Math.round(Math.sin(element.rotation.y)))
+        console.log('h');
       });
     }
     this.renderer.render(this.scene, this.camera);
@@ -129,14 +105,13 @@ class Dom extends Component {
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
       //spheredata.lenght determinates sphere quantity
-      for (let i = 0; i < sphereData.length; i++) {
+      for (let i = 0; i < config.length; i++) {
         // alt + 0096 for backthick (``) 😜
-        MAP_LOADER.load(`../assets/3d/${sphereData[i].id}.gltf`, gltf => {
-          this.scene.add(gltf.scene);
-          gltf.scene.position.x = sphereData[i].x;
-          gltf.scene.position.y = sphereData[i].y;
-          gltf.scene.position.z = sphereData[i].z;
-          gltf.scene.children[0].name = sphereData[i].id;
+        MAP_LOADER.load(`../assets/3d/${config[i].id}.gltf`, gltf => {
+          gltf.scene.position.x = config[i].x;
+          gltf.scene.position.y = config[i].y;
+          gltf.scene.position.z = config[i].z;
+          gltf.scene.children[0].name = config[i].id;
           this.scene.add(gltf.scene);
           this.elements.push(gltf.scene);
         });
