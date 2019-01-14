@@ -3,7 +3,7 @@ import { Exit, Description, Top, Container, Box, Title, Subtitle } from '../styl
 import { connect } from 'react-redux';
 import { HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import { bindActionCreators } from 'redux';
-import { sphereData } from '../configuration/config.js';
+import ReactMarkdown from 'react-markdown';
 
 const mapStateToProps = state => ({
   info: state.info,
@@ -24,13 +24,13 @@ class Info extends Component {
   render() {
     return (
       <Container>
-        <Top>
-          <Exit onClick={this.props.HIDE_INFO}>X</Exit>
-        </Top>
         <Description lookingAt={this.props.lookingAt}>
-          <Title>{this.props.lookingAt}</Title>
-          <Subtitle>{this.props.lookingAt}</Subtitle>
-          <div>{sphereData[0].text[0].description}</div>
+          <Top>
+           <Exit onClick={this.props.HIDE_INFO}>X</Exit>
+          </Top>
+          <Title>{this.props.lookingAt.title}</Title>
+          <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
+          <ReactMarkdown source={this.props.lookingAt.description} />
         </Description>
       </Container>
     );

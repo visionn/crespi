@@ -12,7 +12,7 @@ module.exports = {
   output: {
     //defining output file
     pathinfo: false,
-    path: PATH.resolve(__dirname, './src/min/'),
+    path: PATH.resolve(__dirname, './build/'),
     filename: 'crespi.min.js',
     chunkFilename: '[id].[hash:8].js'
   },
@@ -38,14 +38,18 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js$/,
         exclude: '/node_modules/',
-        use: 'babel-loader'
+        use: 'babel-loader',
       }, {
         test: /\.html$/,
         use: [{
           loader: 'html-loader',
-          options: {minimize: true}
+          options: {minimize: true},
         }]
+      }, {
+        test: /\.md$/,
+        use: 'raw-loader',
       }
     ]
   },
