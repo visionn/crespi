@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://cubisti.github.io/crespi-tour/",
   "scripts": {
     "start": "webpack-dev-server --hot",
     "build": "webpack --mode production",
