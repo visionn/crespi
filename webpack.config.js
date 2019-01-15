@@ -48,9 +48,9 @@ module.exports = {
           options: {minimize: true},
         }]
       }, {
-        test: /\.md$/,
+        test: /\.(md|gltf)$/,
         use: 'raw-loader',
-      }
+      },
     ]
   },
   optimization: {
