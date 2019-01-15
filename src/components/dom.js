@@ -13,7 +13,7 @@ import { Scene, Toast } from '../style/dom.js';
 // sends state to props
 const mapStateToProps = state => ({
   info: state.info,
-  lookingAt: state.looking
+  lookingAt: state.looking,
 });
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
@@ -77,9 +77,8 @@ class Dom extends Component {
         // reading gltf.scene.children[0].nam
         this.props.LOOKING_AT(this.selected[0].object.parent.parent.name);
       }
-    }
-    catch (e) {
-      this.props.LOOKING_AT('')
+    } catch (e) {
+      this.props.LOOKING_AT('');
     }
   };
   controls = () => {
@@ -110,7 +109,7 @@ class Dom extends Component {
       // rotates every gltf.scene object pushed to this.elements
       this.elements.forEach(element => {
         element.rotation.y += 0.01;
-      })
+      });
     }
     this.renderer.render(this.scene, this.camera);
   };
