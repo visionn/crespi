@@ -7,4 +7,4 @@ export const LOOKING_AT = (state = '', action) => {
     default:
       return '';
   }
-}
+};
