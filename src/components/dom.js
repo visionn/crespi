@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
 import Video from './Video';
 import { Scene, Toast, Title, Box } from '../style/dom.js';
-import config from '../configuration/config.js';
+import { config } from '../configuration/config.js';
 /* TODO:
   add redux to index for universal state
   add sass loader
@@ -95,15 +95,17 @@ class Dom extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, 2);
+      this.camera.position.set(0, 0, 1);
       this.scene.add(this.camera);
     };
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
       //spheredata.lenght determinates sphere quantity
-      for (let i in config) {
+      for (let i of config) {
         let mystery = require(`../assets/3d/${i.id}.gltf`);
         MAP_LOADER.parse(mystery, './', gltf => {
+          this.scene.add(gltf.scene);
+          console.log(gltf)
           gltf.scene.position.x = i.x;
           gltf.scene.position.y = i.y;
           gltf.scene.position.z = i.z;
