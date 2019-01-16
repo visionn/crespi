@@ -193,12 +193,6 @@
             "target" : 34962
         }
     ],
-    "buffers" : [
-        {
-            "byteLength" : 87312,
-            "uri" : "mystery.bin"
-        }
-    ],
     "materials" : [
         {
             "name" : "Chris_Shoe_Sole",
