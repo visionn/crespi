@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Dom from './dom';
-import Info from './info';
+import Scene from './';
+import Toast from './toast';
 
 const mapStateToProps = state => ({
   info: state.info,
@@ -11,8 +11,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Info />
-        <Dom />
+        <Toast />
+        <Scene />
       </div>
     );
   }
