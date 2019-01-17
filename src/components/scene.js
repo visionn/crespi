@@ -100,17 +100,24 @@ class Scene extends Component {
     };
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
-      //spheredata.lenght determinates sphere quantity
-      for (let i of config) {
-        let mystery = require(`../assets/3d/${i.id}.gltf`);
+      // takes the keys of config and loads them into an array
+      let keys = Object.getOwnPropertyNames(config);
+      for (let i of keys) {
+        // requiring 3d objects files using jsonloader
+        let mystery = require(`../assets/3d/${i}.gltf`);
+        // parsing previously loaded json file
         MAP_LOADER.parse(mystery, './', gltf => {
+          // setting object position
+          gltf.scene.position.set(
+            config[i].x,
+            config[i].y,
+            config[i].z,
+          );
+          // setting scene name
+          gltf.scene.children[0].name = i;
+          // adding model to scene
           this.scene.add(gltf.scene);
-          console.log(gltf)
-          gltf.scene.position.x = i.x;
-          gltf.scene.position.y = i.y;
-          gltf.scene.position.z = i.z;
-          gltf.scene.children[0].name = i.id;
-          this.scene.add(gltf.scene);
+          // pushing model to dedicate array
           this.elements.push(gltf.scene);
         });
       }
