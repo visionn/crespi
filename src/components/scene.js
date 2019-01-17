@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import 'three-gltfloader';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { SHOW_INFO, HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
+import { SHOW_INFO, HIDE_INFO, LOOKING_AT, DONT_LOOK } from '../redux/actions/actions';
 import Video from './Video';
 import { Container, Toast, Title, Box } from '../style/scene.js';
 import { config } from '../configuration/config.js';
@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => ({
       SHOW_INFO,
       HIDE_INFO,
       LOOKING_AT,
+      DONT_LOOK,
     },
     dispatch,
   ),
@@ -52,11 +53,11 @@ class Scene extends Component {
     this.selected = cameraRay.intersectObjects(this.scene.children, true);
     try {
       if (typeof this.selected !== 'undefined') {
-        // reading gltf.scene.children[0].nam
-        this.props.LOOKING_AT(this.selected[0].object.parent.parent.name);
+        // reading gltf.scene.name
+        this.props.LOOKING_AT(this.selected[0].object.parent.parent.name, 'ita');
       }
     } catch (e) {
-      this.props.LOOKING_AT('');
+      this.props.DONT_LOOK();
     }
   };
   controls = () => {
@@ -67,8 +68,7 @@ class Scene extends Component {
     if (this.elements) {
       // rotates every gltf.scene object pushed to this.elements
       this.elements.forEach(element => {
-        element.rotation.y += 0.01;
-        if (Math.round(Math.sin(element.rotation.y))) console.log('h');
+        element.rotation.y += 0.005;
       });
     }
     this.renderer.render(this.scene, this.camera);
@@ -109,12 +109,12 @@ class Scene extends Component {
         MAP_LOADER.parse(mystery, './', gltf => {
           // setting object position
           gltf.scene.position.set(
-            config[i].x,
-            config[i].y,
-            config[i].z,
+            config[i].position.x,
+            config[i].position.y,
+            config[i].position.z,
           );
           // setting scene name
-          gltf.scene.children[0].name = i;
+          gltf.scene.name = i;
           // adding model to scene
           this.scene.add(gltf.scene);
           // pushing model to dedicate array
