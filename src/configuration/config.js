@@ -1,12 +1,9 @@
-/*const requireHelper = (name, lang) => {
-  return  require(`../assets/text/${lang}/${name}/mystery.md`);
-};
-*/
-export const config = [
-  {
-    x: 1,
+export const config = {
+  chiesa: {
+    x: 100,
     y: 0,
     z: 0,
-    id: 'mystery',
+    ita: require('../assets/text/ita/chiesa/desc.md'),
+    eng: require('../assets/text/eng/chiesa/desc.md'),
   },
-];
+}
