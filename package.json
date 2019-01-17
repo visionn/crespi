@@ -5,7 +5,7 @@
   "main": "index.js",
   "homepage": "https://cubisti.github.io/crespi-tour/",
   "scripts": {
-    "start": "webpack-dev-server --hot",
+    "start": "node --max-old-space-size=8192 node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
     "format": "prettier --write **/*.js"
@@ -30,11 +30,13 @@
     "raw-loader": "^1.0.0",
     "react-markdown": "^4.0.6",
     "redux-devtools": "3.5.0",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "4.28.3",
     "webpack-cli": "3.2.0",
     "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
+    "coveralls": "^3.0.2",
     "npm": "^6.5.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
