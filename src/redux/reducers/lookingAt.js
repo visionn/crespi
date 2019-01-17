@@ -1,15 +1,11 @@
-import mysteryIta from '../../assets/text/ita/mystery/mystery.md';
+import { config } from '../../configuration/config'
 export const LOOKING_AT = (state = '', action) => {
-  switch (action.status) {
-    case 'mystery':
-      return {
-        title: 'Mistero',
-        subtitle: 'Ciao mistero',
-        description: mysteryIta,
-      };
-    case 'fabbrica':
-      return 'Fabbrica';
-    default:
+  switch (action.type) {
+    case 'LOOKING_AT':
+      return config[action.payload.status].text[action.payload.language];
+    case 'DONT_LOOK':
       return '';
+    default:
+      return state;
   }
 };
