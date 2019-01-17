@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Scene from './';
+import Scene from './scene';
 import Toast from './toast';
 
 const mapStateToProps = state => ({
