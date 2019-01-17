@@ -10,15 +10,17 @@ export const HIDE_INFO = () => {
     status: false,
   };
 };
-export const LOOKING_AT = (looking, language) => {
+export const LOOKING_AT = (status, language) => {
   return {
     type: 'LOOKING_AT',
-    status: looking,
-    language: language,
+    payload: {
+      status,
+      language,
+    },
   };
 };
 export const DONT_LOOK = () => {
   return {
-    type: 'NOT_LOOK',
+    type: 'DONT_LOOK',
   }
 }
