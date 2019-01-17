@@ -16,9 +16,3 @@ export const LOOKING_AT = looking => {
     status: looking,
   };
 };
-export const LANGUAGE = lang => {
-  return {
-    type: 'LANGUAGE',
-    language: lang,
-  };
-}
