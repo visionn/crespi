@@ -1,6 +1,7 @@
 const PATH = require('path');
 const WEBPACK = require('webpack');
 const HTML_WEBPACK_PLUGIN = require('html-webpack-plugin');
+const UGLIFY_JS_PLUGIN = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   //setting entry app.js
@@ -40,7 +41,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: '/node_modules/',
-        use: 'babel-loader',
+        use: 'babel-loader?cacheDirectory',
       }, {
         test: /\.html$/,
         use: [{
@@ -56,7 +57,8 @@ module.exports = {
   optimization: {
     removeAvailableModules: false,
     removeEmptyChunks: false,
-    splitChunks: false
+    splitChunks: false,
+    minimizer: [new UGLIFY_JS_PLUGIN()],
   },
   devServer: {
     hot: true,
