@@ -30,6 +30,7 @@
     "raw-loader": "^1.0.0",
     "react-markdown": "^4.0.6",
     "redux-devtools": "3.5.0",
+    "redux-devtools-extension": "^2.13.7",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "4.28.3",
     "webpack-cli": "3.2.0",
