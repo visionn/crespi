@@ -6,12 +6,12 @@ export const config = {
       z: 0,
     },
     text: {
-      ita: {
+      '🍕': {
         title: 'Lorem ipsum',
         subtitle: 'Subtitle',
         description: require('../assets/text/ita/chiesa/desc.md'),
       },
-      eng: {
+      '🇬🇧': {
        title: 'Lorem ipsum',
        subtitle: 'Subtitle',
        description: require('../assets/text/eng/chiesa/desc.md'),
