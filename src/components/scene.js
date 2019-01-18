@@ -54,7 +54,7 @@ class Scene extends Component {
     try {
       if (typeof this.selected !== 'undefined') {
         // reading gltf.scene.name
-        this.props.LOOKING_AT(this.selected[0].object.parent.parent.name, 'ita');
+        this.props.LOOKING_AT(this.selected[0].object.parent.parent.name, '🍕');
       }
     } catch (e) {
       this.props.DONT_LOOK();
