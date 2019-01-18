@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { SHOW_INFO, HIDE_INFO } from '../redux/actions/actions.js';
+import { Container } from '../style/info';
 
-mapStateToProps = state => {
-  info: state.info,
-}
-mapDispatchToProps = dispatch => {
+const mapStateToProps = state => ({
+  lookingAt: state.looking,
+});
+const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
       SHOW_INFO,
@@ -14,14 +15,15 @@ mapDispatchToProps = dispatch => {
     },
     dispatch,
   ),
-}
+});
 class Info extends Component {
-  constructor = (props) => {
+  constructor (props) {
     super();
   }
   render () {
     return (
       <Container>
+        <div>{this.props.lookingAt.language}</div>
         <div>defending1</div>
       </Container>
     );
