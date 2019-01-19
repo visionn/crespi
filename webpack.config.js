@@ -1,7 +1,7 @@
 const PATH = require('path');
 const WEBPACK = require('webpack');
 const HTML_WEBPACK_PLUGIN = require('html-webpack-plugin');
-const UGLIFY_JS_PLUGIN = require('uglifyjs-webpack-plugin');
+const PROGRESS_BAR = require('simple-progress-webpack-plugin');
 
 module.exports = {
   //setting entry app.js
@@ -15,7 +15,6 @@ module.exports = {
     pathinfo: false,
     path: PATH.resolve(__dirname, './build/'),
     filename: 'crespi.min.js',
-    chunkFilename: '[id].[hash:8].js'
   },
   resolve: {
     //loading THREE dependencies
@@ -34,7 +33,10 @@ module.exports = {
     new HTML_WEBPACK_PLUGIN({
       template: PATH.join(__dirname, './src/index.html'),
       filename: 'index.html'
-    })
+    }),
+    new PROGRESS_BAR({
+      format: 'minimal',
+    }),
   ],
   module: {
     rules: [
@@ -58,7 +60,6 @@ module.exports = {
     removeAvailableModules: false,
     removeEmptyChunks: false,
     splitChunks: false,
-    minimizer: [new UGLIFY_JS_PLUGIN()],
   },
   devServer: {
     hot: true,
