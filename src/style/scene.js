@@ -44,3 +44,8 @@ export const Title = styled.div`
   font-weight: 900;
   z-index: 2;
 `;
+export const Info = styled.button`
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+`;

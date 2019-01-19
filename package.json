@@ -5,7 +5,7 @@
   "main": "index.js",
   "homepage": "https://cubisti.github.io/crespi-tour/",
   "scripts": {
-    "start": "node --max-old-space-size=8192 node_modules/webpack-dev-server/bin/webpack-dev-server.js --hot",
+    "start": "webpack-dev-server --hot",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
     "format": "prettier --write **/*.js"
