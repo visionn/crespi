@@ -45,7 +45,7 @@ class Scene extends Component {
   render() {
     return (
       <Container ref={el => (this.container = el)} onMouseDown={this.cameraRay}>
-        <Info onClick={this.props.SHOW_INFO}>
+        <Info onClick={this.props.SHOW_INFO} />
       </Container>
     );
   }
