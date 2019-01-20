@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { SHOW_INFO, HIDE_INFO, CHANGE_LANGUAGE } from '../redux/actions/actions.js';
+import {
+  SHOW_INFO,
+  HIDE_INFO,
+  CHANGE_LANGUAGE,
+} from '../redux/actions/actions.js';
+import { Exit } from '../style/toast';
 import { Container } from '../style/info';
+import ReactMarkdown from 'react-markdown';
 
 const mapStateToProps = state => ({
   lookingAt: state.looking,
   language: state.language,
+  info: state.info,
 });
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
@@ -19,20 +26,22 @@ const mapDispatchToProps = dispatch => ({
   ),
 });
 class Info extends Component {
-  constructor (props) {
+  constructor(props) {
     super();
   }
-  render () {
+  render() {
     return (
-      <Container>
-        <button>Ita</button>
-        <button>Eng</button>
+      <Container info={this.props.info}>
+        <Exit onClick={this.props.HIDE_INFO}>X</Exit>
+        <button onClick={() => this.props.CHANGE_LANGUAGE('ita')}>Ita</button>
+        <button onClick={() => this.props.CHANGE_LANGUAGE('eng')}>Eng</button>
         <div>{this.props.language}</div>
-        <div>defending1</div>
+        <ReactMarkdown source={this.props.info} />
       </Container>
     );
   }
 }
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)(Info);
+  mapDispatchToProps,
+)(Info);
