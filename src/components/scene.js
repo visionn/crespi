@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import 'three-gltfloader';
+import 'three-orbitcontrols';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { SHOW_INFO, HIDE_INFO, LOOKING_AT, DONT_LOOK } from '../redux/actions/actions';
-import Video from './Video';
-import { Container, Toast, Title, Box, Info } from '../style/scene.js';
+import {
+  SHOW_INFO,
+  HIDE_INFO,
+  LOOKING_AT,
+  DONT_LOOK,
+} from '../redux/actions/actions';
+import { Container, Toast, Title, Box } from '../style/scene.js';
+import { InfoButton } from '../style/info';
 import { config } from '../configuration/config.js';
 /* TODO:
   add redux to index for universal state
@@ -45,7 +51,7 @@ class Scene extends Component {
   render() {
     return (
       <Container ref={el => (this.container = el)} onMouseDown={this.cameraRay}>
-        <Info onClick={this.props.SHOW_INFO} />
+        <InfoButton onClick={this.props.SHOW_INFO}>info</InfoButton>
       </Container>
     );
   }
@@ -57,7 +63,10 @@ class Scene extends Component {
     try {
       if (typeof this.selected !== 'undefined') {
         // reading gltf.scene.name
-        this.props.LOOKING_AT(this.selected[0].object.parent.parent.name, this.props.language);
+        this.props.LOOKING_AT(
+          this.selected[0].object.parent.parent.name,
+          this.props.language,
+        );
       }
     } catch (e) {
       this.props.DONT_LOOK();
