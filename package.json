@@ -1,17 +1,17 @@
 {
-  "name": "build",
+  "name": "crespi-tour",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Visit the world through virtual reality",
+  "main": "src/index.js",
   "homepage": "https://cubisti.github.io/crespi-tour/",
   "scripts": {
-    "start": "webpack-dev-server --hot",
+    "start": "webpack-dev-server --hot --inline",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
-    "format": "prettier --write **/*.js"
+    "format": "prettier --write **/*/*.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "defending1",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "devDependencies": {
     "@babel/core": "7.2.2",
     "@babel/plugin-proposal-class-properties": "7.2.3",
@@ -30,11 +30,15 @@
     "raw-loader": "^1.0.0",
     "react-markdown": "^4.0.6",
     "redux-devtools": "3.5.0",
+    "redux-devtools-extension": "^2.13.7",
+    "simple-progress-webpack-plugin": "^1.1.2",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack": "4.28.3",
     "webpack-cli": "3.2.0",
     "webpack-dev-server": "3.1.14"
   },
   "dependencies": {
+    "coveralls": "^3.0.2",
     "npm": "^6.5.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",

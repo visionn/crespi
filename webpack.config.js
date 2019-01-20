@@ -1,6 +1,7 @@
 const PATH = require('path');
 const WEBPACK = require('webpack');
 const HTML_WEBPACK_PLUGIN = require('html-webpack-plugin');
+const PROGRESS_BAR = require('simple-progress-webpack-plugin');
 
 module.exports = {
   //setting entry app.js
@@ -14,7 +15,7 @@ module.exports = {
     pathinfo: false,
     path: PATH.resolve(__dirname, './build/'),
     filename: 'crespi.min.js',
-    chunkFilename: '[id].[hash:8].js'
+    chunkFilename: '[id].[hash].js',
   },
   resolve: {
     //loading THREE dependencies
@@ -33,14 +34,17 @@ module.exports = {
     new HTML_WEBPACK_PLUGIN({
       template: PATH.join(__dirname, './src/index.html'),
       filename: 'index.html'
-    })
+    }),
+    new PROGRESS_BAR({
+      format: 'minimal',
+    }),
   ],
   module: {
     rules: [
       {
         test: /\.js$/,
         exclude: '/node_modules/',
-        use: 'babel-loader',
+        use: 'babel-loader?cacheDirectory',
       }, {
         test: /\.html$/,
         use: [{
@@ -48,15 +52,15 @@ module.exports = {
           options: {minimize: true},
         }]
       }, {
-        test: /\.md$/,
+        test: /\.(md|gltf)$/,
         use: 'raw-loader',
-      }
+      },
     ]
   },
   optimization: {
     removeAvailableModules: false,
     removeEmptyChunks: false,
-    splitChunks: false
+    splitChunks: false,
   },
   devServer: {
     hot: true,
