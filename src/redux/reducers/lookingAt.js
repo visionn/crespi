@@ -1,4 +1,4 @@
-import { config } from '../../configuration/config'
+import { config } from '../../configuration/config';
 export const LOOKING_AT = (state = '', action) => {
   switch (action.type) {
     case 'LOOKING_AT':

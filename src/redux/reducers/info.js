@@ -1,9 +1,9 @@
-export const INFO_REDUCER = (state = false, action) => {
+export const INFO_REDUCER = (state = '', action) => {
   switch (action.type) {
     case 'SHOW_INFO':
-      return action.status;
+      return '# hello markdown';
     case 'HIDE_INFO':
-      return action.status;
+      return null;
     default:
       return state;
   }
