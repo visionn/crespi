@@ -15,6 +15,7 @@ module.exports = {
     pathinfo: false,
     path: PATH.resolve(__dirname, './build/'),
     filename: 'crespi.min.js',
+    chunkFilename: '[id].[hash].js',
   },
   resolve: {
     //loading THREE dependencies
