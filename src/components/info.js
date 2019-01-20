@@ -25,8 +25,8 @@ class Info extends Component {
   render () {
     return (
       <Container>
-        <button onClick={() => this.props.CHANGE_LANGUAGE('ita')}>Ita</button>
-        <button onClick={() => this.props.CHANGE_LANGUAGE('eng')}>Eng</button>
+        <button>Ita</button>
+        <button>Eng</button>
         <div>{this.props.language}</div>
         <div>defending1</div>
       </Container>

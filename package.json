@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --hot --inline",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
-    "format": "prettier --write **/*.js"
+    "format": "prettier --write **/*/*.js"
   },
   "author": "defending1",
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
