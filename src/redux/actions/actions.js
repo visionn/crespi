@@ -1,13 +1,12 @@
-export const SHOW_INFO = looking => {
+export const SHOW_INFO = language => {
   return {
     type: 'SHOW_INFO',
-    status: looking,
+    status,
   };
 };
 export const HIDE_INFO = () => {
   return {
     type: 'HIDE_INFO',
-    status: false,
   };
 };
 export const LOOKING_AT = (status, language) => {
@@ -22,5 +21,11 @@ export const LOOKING_AT = (status, language) => {
 export const DONT_LOOK = () => {
   return {
     type: 'DONT_LOOK',
-  }
-}
+  };
+};
+export const CHANGE_LANGUAGE = language => {
+  return {
+    type: 'CHANGE_LANGUAGE',
+    language,
+  };
+};

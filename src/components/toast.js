@@ -9,7 +9,7 @@ import {
   Subtitle,
 } from '../style/toast';
 import { connect } from 'react-redux';
-import { HIDE_INFO, LOOKING_AT } from '../redux/actions/actions';
+import { HIDE_INFO, DONT_LOOK } from '../redux/actions/actions';
 import { bindActionCreators } from 'redux';
 import ReactMarkdown from 'react-markdown';
 
@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
-      HIDE_INFO,
+      DONT_LOOK,
     },
     dispatch,
   ),
@@ -34,7 +34,7 @@ class Toast extends Component {
       <Container>
         <Description lookingAt={this.props.lookingAt}>
           <Top>
-            <Exit onClick={this.props.HIDE_INFO}>X</Exit>
+            <Exit onClick={this.props.DONT_LOOK}>X</Exit>
           </Top>
           <Title>{this.props.lookingAt.title}</Title>
           <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
