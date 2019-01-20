@@ -62,7 +62,7 @@ class Scene extends Component {
     this.selected = cameraRay.intersectObjects(this.scene.children, true);
     try {
       if (typeof this.selected !== 'undefined') {
-        // reading gltf.scene.name
+        // reading gltf.scene.children[0].name
         this.props.LOOKING_AT(
           this.selected[0].object.parent.parent.name,
           this.props.language,
@@ -126,7 +126,7 @@ class Scene extends Component {
             config[i].position.z,
           );
           // setting scene name
-          gltf.scene.name = i;
+          gltf.scene.children[0].name = i;
           // adding model to scene
           this.scene.add(gltf.scene);
           // pushing model to dedicate array
@@ -135,16 +135,19 @@ class Scene extends Component {
       }
     };
     const onWindowResize = () => {
-      // asign new window sizes to camera
-      this.camera.aspect =
-        this.container.clientWidth / this.container.clientHeight;
-      // updates camera projections
-      this.camera.updateProjectionMatrix();
-      // updates this.renderer size on reductction for responsive canvas
-      this.renderer.setSize(
-        this.container.clientWidth,
-        this.container.clientHeight,
-      );
+      try {
+        // asign new window sizes to camera
+        this.camera.aspect =
+          this.container.clientWidth / this.container.clientHeight;
+        // updates camera projections
+        this.camera.updateProjectionMatrix();
+        // updates this.renderer size on reductction for responsive canvas
+        this.renderer.setSize(
+          this.container.clientWidth,
+          this.container.clientHeight,
+        );
+      }
+      catch (e) { }
     };
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);
