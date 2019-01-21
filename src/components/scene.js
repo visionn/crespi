@@ -115,23 +115,25 @@ class Scene extends Component {
       // takes the keys of config and loads them into an array
       let keys = Object.getOwnPropertyNames(config);
       for (let i of keys) {
-        // requiring 3d objects files using jsonloader
-        let mystery = require(`../assets/3d/${i}.gltf`);
-        // parsing previously loaded json file
-        MAP_LOADER.parse(mystery, './', gltf => {
-          // setting object position
-          gltf.scene.position.set(
-            config[i].position.x,
-            config[i].position.y,
-            config[i].position.z,
-          );
-          // setting scene name
-          gltf.scene.children[0].name = i;
-          // adding model to scene
-          this.scene.add(gltf.scene);
-          // pushing model to dedicate array
-          this.elements.push(gltf.scene);
-        });
+        if (i != 'info') {
+          // requiring 3d objects files using jsonloader
+          let mystery = require(`../assets/3d/${i}.gltf`);
+          // parsing previously loaded json file
+          MAP_LOADER.parse(mystery, './', gltf => {
+            // setting object position
+            gltf.scene.position.set(
+              config[i].position.x,
+              config[i].position.y,
+              config[i].position.z,
+            );
+            // setting scene name
+            gltf.scene.children[0].name = i;
+            // adding model to scene
+            this.scene.add(gltf.scene);
+            // pushing model to dedicate array
+            this.elements.push(gltf.scene);
+          });
+        }
       }
     };
     const onWindowResize = () => {
