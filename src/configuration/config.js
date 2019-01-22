@@ -5,6 +5,11 @@ export const config = {
       subtitle: 'Sottotitolo',
       description: require('../assets/text/ita/info/desc.md'),
     },
+    eng: {
+      title: 'Lorem ipsum',
+      subtitle: 'Subtitle',
+      description: require('../assets/text/eng/info/desc.md'),
+    },
   },
   chiesa: {
     position: {
