@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Scene from './scene';
 import Toast from './toast';
-import Info from './info'
+import Info from './info';
 
 const mapStateToProps = state => ({
   info: state.info,
