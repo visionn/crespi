@@ -49,8 +49,17 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)} onTouchStart={this.cameraRay} onPointerDown={this.cameraRay}>
-        <Button onTouchStart{this.props.SHOW_INFO} onPointerDown={this.props.SHOW_INFO}>INFO</Button>
+      <Container
+        ref={el => (this.container = el)}
+        onTouchStart={this.cameraRay}
+        onPointerDown={this.cameraRay}
+      >
+        <Button
+          onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
+          onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
+        >
+          INFO
+        </Button>
       </Container>
     );
   }
@@ -147,8 +156,7 @@ class Scene extends Component {
           this.container.clientWidth,
           this.container.clientHeight,
         );
-      }
-      catch (e) { }
+      } catch (e) {}
     };
     // adding addEventListeners for functions onClick and onWindowResize
     window.addEventListener('resize', onWindowResize, false);

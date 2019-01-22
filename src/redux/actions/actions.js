@@ -1,7 +1,7 @@
 export const SHOW_INFO = language => {
   return {
     type: 'SHOW_INFO',
-    status,
+    language,
   };
 };
 export const HIDE_INFO = () => {
