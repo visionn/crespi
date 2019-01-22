@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import {
-  Exit,
   Description,
-  Top,
   Container,
   Box,
   Title,
   Subtitle,
 } from '../style/toast';
+import { Exit, Top } from '../style/common'
 import { connect } from 'react-redux';
 import { HIDE_INFO, DONT_LOOK } from '../redux/actions/actions';
 import { bindActionCreators } from 'redux';
@@ -34,7 +33,7 @@ class Toast extends Component {
       <Container>
         <Description lookingAt={this.props.lookingAt}>
           <Top>
-            <Exit onClick={this.props.DONT_LOOK}>X</Exit>
+            <Exit onPointerDown={this.props.DONT_LOOK}>X</Exit>
           </Top>
           <Title>{this.props.lookingAt.title}</Title>
           <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>

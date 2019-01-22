@@ -9,9 +9,8 @@ import {
   LOOKING_AT,
   DONT_LOOK,
 } from '../redux/actions/actions';
-import { Container, Toast, Title, Box } from '../style/scene.js';
-import { InfoButton } from '../style/info';
-import { config } from '../configuration/config.js';
+import { Container, Button } from '../style/scene';
+import { config } from '../configuration/config';
 /* TODO:
   add redux to index for universal state
   add sass loader
@@ -50,8 +49,8 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)} onMouseDown={this.cameraRay}>
-        <InfoButton onClick={this.props.SHOW_INFO}>info</InfoButton>
+      <Container ref={el => (this.container = el)} onPointerDown={this.cameraRay}>
+        <Button onPointerDown={this.props.SHOW_INFO}>INFO</Button>
       </Container>
     );
   }
@@ -115,23 +114,25 @@ class Scene extends Component {
       // takes the keys of config and loads them into an array
       let keys = Object.getOwnPropertyNames(config);
       for (let i of keys) {
-        // requiring 3d objects files using jsonloader
-        let mystery = require(`../assets/3d/${i}.gltf`);
-        // parsing previously loaded json file
-        MAP_LOADER.parse(mystery, './', gltf => {
-          // setting object position
-          gltf.scene.position.set(
-            config[i].position.x,
-            config[i].position.y,
-            config[i].position.z,
-          );
-          // setting scene name
-          gltf.scene.children[0].name = i;
-          // adding model to scene
-          this.scene.add(gltf.scene);
-          // pushing model to dedicate array
-          this.elements.push(gltf.scene);
-        });
+        if (i != 'info') {
+          // requiring 3d objects files using jsonloader
+          let mystery = require(`../assets/3d/${i}.gltf`);
+          // parsing previously loaded json file
+          MAP_LOADER.parse(mystery, './', gltf => {
+            // setting object position
+            gltf.scene.position.set(
+              config[i].position.x,
+              config[i].position.y,
+              config[i].position.z,
+            );
+            // setting scene name
+            gltf.scene.children[0].name = i;
+            // adding model to scene
+            this.scene.add(gltf.scene);
+            // pushing model to dedicate array
+            this.elements.push(gltf.scene);
+          });
+        }
       }
     };
     const onWindowResize = () => {

@@ -1,15 +1,29 @@
 import styled from 'styled-components';
 export const Container = styled.div`
   position: absolute;
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+  overflow-y: scroll;
   visibility: ${props => (props.info ? 'visible' : 'hidden')};
   background-color: white;
-  top: 1rem;
-  left: 1rem;
-  bottom: 1rem;
-  right: 1rem;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 1rem 1.5rem;
   z-index: 2;
 `;
+export const Language = styled.button`
+  text-align: center;
+  top: 1rem;
+  background-color: red;
+  text-color: white;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 0.2rem;
+`;
 export const InfoButton = styled.button`
+  border: 0.2rem black solid;
   z-index: 2;
   position: absolute;
   top: 2rem;
@@ -17,5 +31,5 @@ export const InfoButton = styled.button`
   border: none;
   border-radius: 0.2rem;
   background-color: white;
-  font-size: 2rem;
+  font-size: 2.5rem;
 `;
