@@ -8,7 +8,7 @@ export const config = {
   },
   chiesa: {
     position: {
-      x: 100,
+      x: -120,
       y: 0,
       z: 0,
     },
