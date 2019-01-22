@@ -35,11 +35,21 @@ class Info extends Component {
     return (
       <Container info={this.props.info}>
         <Top>
-          <Exit onTouchStart{this.props.actions.HIDE_INFO} onPointerDown={this.props.actions.HIDE_INFO}>X</Exit>
+          <Exit
+            onTouchStart={this.props.actions.HIDE_INFO}
+            onPointerDown={this.props.actions.HIDE_INFO}
+          >
+            X
+          </Exit>
         </Top>
         <Title>{this.props.info.title}</Title>
         <Subtitle>{this.props.info.subtitle}</Subtitle>
-        <Language onTouchStart={this.props.lang} onPointerDown={this.props.lang}>{this.props.language}</Language>
+        <Language
+          onTouchStart={this.props.lang}
+          onPointerDown={this.props.lang}
+        >
+          {this.props.language}
+        </Language>
         <Body>
           <ReactMarkdown source={this.props.info.description} />
         </Body>
