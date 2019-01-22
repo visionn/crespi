@@ -11,36 +11,13 @@ export const Container = styled.div`
   position: absolute;
   z-index: 1;
 `;
-export const Toast = styled.div`
-  display: inline-block;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  visibility: ${props => (!props.lookingAt ? 'hidden' : 'visible')}
-  animation: ${props => (!props.lookingAt ? fadeOut : fadeIn)} 0.25s linear;
-  transition: visibility 0.25s linear;
-  top: 90%;
-  border: none;
-  border-radius: 5%;
-  color: white;
-  background-color: #000004;
-  font-size: 1rem;
-  :empty {
-    display: none;
-  }
-`;
-export const Box = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 30%;
-  left: 3%;
-  right: 3%;
-`;
-export const Title = styled.div`
-  position: relative;
-  text-align: center;
-  font-family: helvetica;
-  font-size: 3rem;
-  font-weight: 900;
+export const Button = styled.button`
   z-index: 2;
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  border: none;
+  border-radius: 0.2rem;
+  background-color: white;
+  font-size: 2rem;
 `;
