@@ -6,8 +6,9 @@ import {
   HIDE_INFO,
   CHANGE_LANGUAGE,
 } from '../redux/actions/actions.js';
-import { Exit } from '../style/toast';
-import { Container } from '../style/info';
+import { LANGUAGE } from '../redux/thunks/changeLanguage';
+import { Container, Language } from '../style/info';
+import { Title, Subtitle, Body, Exit, Top } from '../style/common';
 import ReactMarkdown from 'react-markdown';
 
 const mapStateToProps = state => ({
@@ -16,7 +17,7 @@ const mapStateToProps = state => ({
   info: state.info,
 });
 const mapDispatchToProps = dispatch => ({
-  ...bindActionCreators(
+  actions: bindActionCreators(
     {
       SHOW_INFO,
       HIDE_INFO,
@@ -24,6 +25,7 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   ),
+  lang: () => dispatch(LANGUAGE()),
 });
 class Info extends Component {
   constructor(props) {
@@ -32,11 +34,15 @@ class Info extends Component {
   render() {
     return (
       <Container info={this.props.info}>
-        <Exit onClick={this.props.HIDE_INFO}>X</Exit>
-        <button onClick={() => this.props.CHANGE_LANGUAGE('ita')}>Ita</button>
-        <button onClick={() => this.props.CHANGE_LANGUAGE('eng')}>Eng</button>
-        <div>{this.props.language}</div>
-        <ReactMarkdown source={this.props.info} />
+        <Top>
+          <Exit onPointerDown={this.props.actions.HIDE_INFO}>X</Exit>
+        </Top>
+        <Title>{this.props.info.title}</Title>
+        <Subtitle>{this.props.info.subtitle}</Subtitle>
+        <Language onPointerDown={this.props.lang}>{this.props.language}</Language>
+        <Body>
+          <ReactMarkdown source={this.props.info.description} />
+        </Body>
       </Container>
     );
   }

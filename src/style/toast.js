@@ -1,20 +1,5 @@
 import styled from 'styled-components';
 import { swapUp, swapDown, fadeOut } from './animations.js';
-export const Top = styled.div`
-  visibility: inherit;
-  top: 3%;
-  left: 0;
-  right: 0;
-  position: sticky;
-  z-index: 3;
-`;
-export const Box = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 30%;
-  left: 3%;
-  right: 3%;
-`;
 export const Title = styled.h2`
   font-weight: bold;
 `;
@@ -66,14 +51,4 @@ export const Description = styled.div`
 `;
 export const Container = styled.div`
   overflow: hidden;
-`;
-export const Exit = styled.button`
-  position: absolute;
-  z-index: 5;
-  top: 2rem;
-  right: 2rem;
-  border: none;
-  border-radius: 20px;
-  background-color: white;
-  font-size: 2rem;
 `;

@@ -1,7 +1,14 @@
 export const config = {
+  info: {
+    ita: {
+      title: 'Lorem ipsum',
+      subtitle: 'Sottotitolo',
+      description: require('../assets/text/ita/info/desc.md'),
+    }
+  },
   chiesa: {
     position: {
-      x: 100,
+      x: -120,
       y: 0,
       z: 0,
     },
