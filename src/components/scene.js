@@ -49,8 +49,8 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)} onPointerDown={this.cameraRay}>
-        <Button onPointerDown={this.props.SHOW_INFO}>INFO</Button>
+      <Container ref={el => (this.container = el)} onTouchStart={this.cameraRay} onPointerDown={this.cameraRay}>
+        <Button onTouchStart{this.props.SHOW_INFO} onPointerDown={this.props.SHOW_INFO}>INFO</Button>
       </Container>
     );
   }

@@ -8,8 +8,8 @@ export const Subtitle = styled.h4`
   font-family: helvetica;
 `;
 export const Body = styled.div`
-font-size: 1.2rem;
-font-family: helvetica;
+  font-size: 1.2rem;
+  font-family: helvetica;
 `;
 export const Top = styled.div`
   visibility: inherit;
