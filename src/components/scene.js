@@ -9,9 +9,8 @@ import {
   LOOKING_AT,
   DONT_LOOK,
 } from '../redux/actions/actions';
-import { Container, Toast, Title, Box } from '../style/scene.js';
-import { InfoButton } from '../style/info';
-import { config } from '../configuration/config.js';
+import { Container, Button } from '../style/scene';
+import { config } from '../configuration/config';
 /* TODO:
   add redux to index for universal state
   add sass loader
@@ -50,8 +49,8 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)} onMouseDown={this.cameraRay}>
-        <InfoButton onClick={this.props.SHOW_INFO}>info</InfoButton>
+      <Container ref={el => (this.container = el)} onPointerDown={this.cameraRay}>
+        <Button onPointerDown={this.props.SHOW_INFO}>INFO</Button>
       </Container>
     );
   }
