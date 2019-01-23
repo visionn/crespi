@@ -4,9 +4,13 @@ export const INFO_REDUCER = (state = '', action) => {
     case 'SHOW_INFO':
       return {
         ...config.info[action.language],
+        status: true,
       };
     case 'HIDE_INFO':
-      return '';
+      return {
+        ...state,
+        status: false,
+      };
     default:
       return state;
   }
