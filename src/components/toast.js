@@ -25,7 +25,7 @@ class Toast extends Component {
   render() {
     return (
       <Container>
-        <Description lookingAt={this.props.lookingAt}>
+        <Description lookingAt={this.props.lookingAt.status}>
           <Top>
             <Exit
               onTouchStart={this.props.DONT_LOOK}
