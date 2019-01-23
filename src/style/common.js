@@ -29,3 +29,11 @@ export const Exit = styled.button`
   background-color: white;
   font-size: 2rem;
 `;
+export const Root = styled.div`
+  @media (min-width: 320px) and (max-width: 1000px) {
+    font-size: 150%;
+  }
+  @media (min-width: 1001px)  {
+    font-size: 100%;
+  }
+`;
