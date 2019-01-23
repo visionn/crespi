@@ -33,7 +33,7 @@ class Info extends Component {
   }
   render() {
     return (
-      <Container info={this.props.info}>
+      <Container info={this.props.info.status}>
         <Top>
           <Exit
             onTouchStart={this.props.actions.HIDE_INFO}

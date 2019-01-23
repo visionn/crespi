@@ -7,7 +7,7 @@ export const Container = styled.div`
   overflow-y: scroll;
   visibility: ${props => (props.info ? 'visible' : 'hidden')};
   animation: ${props => (props.info ? fadeIn : fadeOut)} 0.25s linear;
-  transition: visibility 0.25 linear;
+  transition: visibility 0.25s linear;
   background-color: white;
   top: 0;
   left: 0;
