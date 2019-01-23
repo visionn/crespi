@@ -11,7 +11,7 @@ export const Description = styled.div`
   position: absolute;
   left: 1.5rem;
   right: 1.5rem;
-  bottom: 1%;
+  bottom: 0.5rem;
   padding: 1rem 1.5rem;
   font-size: 1.2rem;
   z-index: 2;
