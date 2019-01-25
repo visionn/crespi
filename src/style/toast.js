@@ -7,7 +7,10 @@ export const Subtitle = styled.h6`
   font-weight: bold;
 `;
 export const Body = styled.div`
-  visibility: ${props => props.show || props.lookingAt ? 'visible' : 'hidden'};
+  display: inline-block;
+  visibility: ${props => (props.show ? 'visible' : 'hidden')};
+  animation: ${props => (props.show ? swapUp : fadeOut)} 0.25s linear;
+  transition: visibility 0.25s linear;
   height: auto;
   position: relative;
   z-index: 3;
@@ -18,9 +21,8 @@ export const Body = styled.div`
     width: 0px;
      background: transparent;
   }
-  transition: all 1s;
 `;
-export const Description = styled.div`
+export const Container = styled.div`
   display: inline-block;
   position: absolute;
   padding: 1rem 1.5rem;
@@ -41,7 +43,4 @@ export const Description = styled.div`
   :empty {
    display: none;
   }
-`;
-export const Container = styled.div`
-  overflow: hidden;
 `;
