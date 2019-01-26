@@ -39,7 +39,7 @@ class Scene extends Component {
   constructor(props) {
     super(props);
     this.scene = new THREE.Scene();
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, });
     this.buttonsGroup = new THREE.Group();
     this.selected;
     this.minZoom = 1;
@@ -99,6 +99,7 @@ class Scene extends Component {
       this.container.clientHeight,
     );
     this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setClearColor(0x000000, 0);
     this.container.appendChild(this.renderer.domElement);
     this.camera = new THREE.PerspectiveCamera(
       75,
@@ -106,8 +107,6 @@ class Scene extends Component {
       0.1,
       1000,
     );
-    // default: white
-    this.scene.background = new THREE.Color();
     const light = new THREE.AmbientLight();
     this.scene.add(light);
     const setCamera = () => {
