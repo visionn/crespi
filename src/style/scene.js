@@ -8,6 +8,7 @@ export const Container = styled.div`
   right: 0;
   margin: 0;
   overflow: hidden;
+  background: linear-gradient(white, yellow);
   position: absolute;
   z-index: 1;
 `;
