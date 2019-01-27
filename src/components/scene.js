@@ -11,12 +11,7 @@ import {
 } from '../redux/actions/actions';
 import { Container, Button } from '../style/scene';
 import { config } from '../configuration/config';
-/* TODO:
-  add redux to index for universal state
-  add sass loader
-  fix controls
-  config
-*/ const mapStateToProps = state => ({
+const mapStateToProps = state => ({
   info: state.info,
   lookingAt: state.looking,
   language: state.language,
@@ -50,6 +45,7 @@ class Scene extends Component {
   render() {
     return (
       <Container
+        color={this.props.lookingAt.color}
         ref={el => (this.container = el)}
         onTouchStart={this.cameraRay}
         onPointerDown={this.cameraRay}
@@ -99,7 +95,7 @@ class Scene extends Component {
       this.container.clientHeight,
     );
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setClearColor(0x000000, 0);
+    this.renderer.setClearColor(new THREE.Color( 'black' ), 0);
     this.container.appendChild(this.renderer.domElement);
     this.camera = new THREE.PerspectiveCamera(
       75,
