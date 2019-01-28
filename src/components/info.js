@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   ),
-  lang: () => dispatch(LANGUAGE()),
+  language: () => dispatch(LANGUAGE()),
 });
 class Info extends Component {
   constructor(props) {
@@ -45,8 +45,8 @@ class Info extends Component {
         <Title>{this.props.info.title}</Title>
         <Subtitle>{this.props.info.subtitle}</Subtitle>
         <Language
-          onTouchStart={this.props.lang}
-          onPointerDown={this.props.lang}
+          onTouchStart={this.props.language}
+          onPointerDown={this.props.language}
         >
           {this.props.language}
         </Language>
