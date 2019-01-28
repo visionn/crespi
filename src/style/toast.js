@@ -19,10 +19,10 @@ export const Body = styled.div`
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 0px;
-     background: transparent;
+    background: transparent;
   }
 `;
-export const Container = styled.div`
+export const Toasty = styled.div`
   display: inline-block;
   position: absolute;
   padding: 1rem 1.5rem;
@@ -41,6 +41,6 @@ export const Container = styled.div`
   right: 1.5rem;
   bottom: 0.5rem;
   :empty {
-   display: none;
+    display: none;
   }
 `;

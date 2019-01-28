@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Scene from './scene';
 import Toast from './toast';
 import Info from './info';
-import { Root } from '../style/common'
+import { Root } from '../style/common';
 
 const mapStateToProps = state => ({
   info: state.info,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Box, Body, Title, Subtitle } from '../style/toast';
+import { Toasty, Box, Body, Title, Subtitle } from '../style/toast';
 import { Exit, Top } from '../style/common';
 import { connect } from 'react-redux';
 import { HIDE_INFO, DONT_LOOK } from '../redux/actions/actions';
@@ -24,11 +24,11 @@ class Toast extends Component {
     this.state = {
       showBody: false,
       height: '6rem',
-    }
+    };
   }
   render() {
     return (
-      <Container
+      <Toasty
         show={this.state.showBody}
         top={this.state.top}
         height={this.state.height}
@@ -38,40 +38,33 @@ class Toast extends Component {
       >
         <Title>{this.props.lookingAt.title}</Title>
         <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
-        {
-          this.props.lookingAt.status ?
-        <Body
-        show={this.state.showBody}
-        lookingAt={this.props.lookingAt.status}
-        >
-          <Top>
-          <Exit
-          onTouchStart={this.props.DONT_LOOK}
-          onPointerDown={this.props.DONT_LOOK}
-          >
-          X
-          </Exit>
+        <Body show={this.state.showBody}>
+          <Top show={this.state.showBody}>
+            <Exit
+              onTouchStart={this.changeState}
+              onPointerDown={this.changeState}
+            >
+              X
+            </Exit>
           </Top>
           <ReactMarkdown source={this.props.lookingAt.description} />
         </Body>
-        : null
-       }
-      </Container>
+      </Toasty>
     );
   }
   changeState = e => {
-    if(this.props.lookingAt) {
-      this.setState ({
-        showBody: true,
-        height: 'auto',
+    if (this.props.lookingAt.status) {
+      let prev = this.state.showBody;
+      this.setState({
+        showBody: !prev,
+        height: `${!prev ? 'auto' : '6rem'}`,
       });
-    }
-    else {
-      this.setState ({
+    } else {
+      this.setState({
         showBody: false,
       });
     }
-  }
+  };
 }
 
 export default connect(
