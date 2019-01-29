@@ -21,6 +21,7 @@ export const Top = styled.div`
 `;
 export const Exit = styled.button`
   position: absolute;
+  display: inherit;
   z-index: 5;
   top: 2rem;
   right: 2rem;
@@ -28,4 +29,12 @@ export const Exit = styled.button`
   border-radius: 20px;
   background-color: white;
   font-size: 2rem;
+`;
+export const Root = styled.div`
+  @media (min-width: 320px) and (max-width: 1000px) {
+    font-size: 150%;
+  }
+  @media (min-width: 1001px) {
+    font-size: 100%;
+  }
 `;

@@ -10,12 +10,8 @@ import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container, Language } from '../style/info';
 import { Title, Subtitle, Body, Exit, Top } from '../style/common';
 import ReactMarkdown from 'react-markdown';
+import { mapStateToProps } from '../redux/mapStateToProps';
 
-const mapStateToProps = state => ({
-  lookingAt: state.looking,
-  language: state.language,
-  info: state.info,
-});
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     {
@@ -25,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   ),
-  lang: () => dispatch(LANGUAGE()),
+  language: () => dispatch(LANGUAGE()),
 });
 class Info extends Component {
   constructor(props) {
@@ -33,7 +29,7 @@ class Info extends Component {
   }
   render() {
     return (
-      <Container info={this.props.info}>
+      <Container info={this.props.info.status}>
         <Top>
           <Exit
             onTouchStart={this.props.actions.HIDE_INFO}
@@ -45,8 +41,8 @@ class Info extends Component {
         <Title>{this.props.info.title}</Title>
         <Subtitle>{this.props.info.subtitle}</Subtitle>
         <Language
-          onTouchStart={this.props.lang}
-          onPointerDown={this.props.lang}
+          onTouchStart={this.props.language}
+          onPointerDown={this.props.language}
         >
           {this.props.language}
         </Language>

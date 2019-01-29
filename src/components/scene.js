@@ -11,16 +11,7 @@ import {
 } from '../redux/actions/actions';
 import { Container, Button } from '../style/scene';
 import { config } from '../configuration/config';
-/* TODO:
-  add redux to index for universal state
-  add sass loader
-  fix controls
-  config
-*/ const mapStateToProps = state => ({
-  info: state.info,
-  lookingAt: state.looking,
-  language: state.language,
-});
+import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
   // binding actions. This method takes: (action, dispatcher)
@@ -39,7 +30,7 @@ class Scene extends Component {
   constructor(props) {
     super(props);
     this.scene = new THREE.Scene();
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.buttonsGroup = new THREE.Group();
     this.selected;
     this.minZoom = 1;
@@ -50,6 +41,7 @@ class Scene extends Component {
   render() {
     return (
       <Container
+        color={this.props.lookingAt.color}
         ref={el => (this.container = el)}
         onTouchStart={this.cameraRay}
         onPointerDown={this.cameraRay}
@@ -99,6 +91,7 @@ class Scene extends Component {
       this.container.clientHeight,
     );
     this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setClearColor(new THREE.Color('black'), 0);
     this.container.appendChild(this.renderer.domElement);
     this.camera = new THREE.PerspectiveCamera(
       75,
@@ -106,8 +99,6 @@ class Scene extends Component {
       0.1,
       1000,
     );
-    // default: white
-    this.scene.background = new THREE.Color();
     const light = new THREE.AmbientLight();
     this.scene.add(light);
     const setCamera = () => {
