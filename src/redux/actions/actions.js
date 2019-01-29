@@ -4,6 +4,13 @@ export const SHOW_INFO = language => {
     language,
   };
 };
+export const SHOW_DESCRIPTION = () => ({
+  type: 'SHOW_DESCRIPTION',
+});
+
+export const HIDE_DESCRIPTION = () => ({
+  type: 'HIDE_DESCRIPTION',
+});
 export const HIDE_INFO = () => {
   return {
     type: 'HIDE_INFO',
