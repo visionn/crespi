@@ -11,11 +11,7 @@ import {
 } from '../redux/actions/actions';
 import { Container, Button } from '../style/scene';
 import { config } from '../configuration/config';
-const mapStateToProps = state => ({
-  info: state.info,
-  lookingAt: state.looking,
-  language: state.language,
-});
+import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
   // binding actions. This method takes: (action, dispatcher)

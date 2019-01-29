@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import { Toasty, Box, Body, Title, Subtitle } from '../style/toast';
 import { Exit, Top } from '../style/common';
 import { connect } from 'react-redux';
-import { HIDE_INFO, DONT_LOOK } from '../redux/actions/actions';
+import { HIDE_INFO, DONT_LOOK, SHOW_DESCRIPTION, } from '../redux/actions/actions';
 import { bindActionCreators } from 'redux';
-import ReactMarkdown from 'react-markdown';
-
-const mapStateToProps = state => ({
-  info: state.info,
-  lookingAt: state.looking,
-});
+import { mapStateToProps } from '../redux/mapStateToProps';
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
       DONT_LOOK,
+      SHOW_DESCRIPTION,
     },
     dispatch,
   ),
@@ -29,42 +25,18 @@ class Toast extends Component {
   render() {
     return (
       <Toasty
-        show={this.state.showBody}
+        show={true}
         top={this.state.top}
         height={this.state.height}
-        onTouchStart={this.changeState}
-        onPointerDown={this.changeState}
+        onTouchStart={this.props.SHOW_DESCRIPTION}
+        onPointerDown={this.props.SHOW_DESCRIPTION}
         lookingAt={this.props.lookingAt.status}
       >
         <Title>{this.props.lookingAt.title}</Title>
         <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
-        <Body show={this.state.showBody}>
-          <Top show={this.state.showBody}>
-            <Exit
-              onTouchStart={this.changeState}
-              onPointerDown={this.changeState}
-            >
-              X
-            </Exit>
-          </Top>
-          <ReactMarkdown source={this.props.lookingAt.description} />
-        </Body>
       </Toasty>
     );
   }
-  changeState = e => {
-    if (this.props.lookingAt.status) {
-      let prev = this.state.showBody;
-      this.setState({
-        showBody: !prev,
-        height: `${!prev ? 'auto' : '6rem'}`,
-      });
-    } else {
-      this.setState({
-        showBody: false,
-      });
-    }
-  };
 }
 
 export default connect(

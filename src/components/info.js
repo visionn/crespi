@@ -10,12 +10,8 @@ import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container, Language } from '../style/info';
 import { Title, Subtitle, Body, Exit, Top } from '../style/common';
 import ReactMarkdown from 'react-markdown';
+import { mapStateToProps } from '../redux/mapStateToProps';
 
-const mapStateToProps = state => ({
-  lookingAt: state.looking,
-  language: state.language,
-  info: state.info,
-});
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     {
