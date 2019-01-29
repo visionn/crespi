@@ -17,17 +17,10 @@ const mapDispatchToProps = dispatch => ({
 class Toast extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showBody: false,
-      height: '6rem',
-    };
   }
   render() {
     return (
       <Toasty
-        show={true}
-        top={this.state.top}
-        height={this.state.height}
         onTouchStart={this.props.SHOW_DESCRIPTION}
         onPointerDown={this.props.SHOW_DESCRIPTION}
         lookingAt={this.props.lookingAt.status}
