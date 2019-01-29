@@ -21,6 +21,7 @@ export const Top = styled.div`
 `;
 export const Exit = styled.button`
   position: absolute;
+  display: inherit;
   z-index: 5;
   top: 2rem;
   right: 2rem;

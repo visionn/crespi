@@ -25,14 +25,3 @@ export const Language = styled.button`
   border: none;
   border-radius: 0.2rem;
 `;
-export const InfoButton = styled.button`
-  border: 0.2rem black solid;
-  z-index: 2;
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  border: none;
-  border-radius: 0.2rem;
-  background-color: white;
-  font-size: 2.5rem;
-`;
