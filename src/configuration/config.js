@@ -17,6 +17,7 @@ export const config = {
       y: 0,
       z: 0,
     },
+    color: 'red',
     text: {
       ita: {
         title: 'Mistero',

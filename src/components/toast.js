@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
-import { Description, Container, Box, Title, Subtitle } from '../style/toast';
+import { Toasty, Box, Body, Title, Subtitle } from '../style/toast';
 import { Exit, Top } from '../style/common';
 import { connect } from 'react-redux';
-import { HIDE_INFO, DONT_LOOK } from '../redux/actions/actions';
+import { HIDE_INFO, DONT_LOOK, SHOW_DESCRIPTION, } from '../redux/actions/actions';
 import { bindActionCreators } from 'redux';
-import ReactMarkdown from 'react-markdown';
-
-const mapStateToProps = state => ({
-  info: state.info,
-  lookingAt: state.looking,
-});
+import { mapStateToProps } from '../redux/mapStateToProps';
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
       DONT_LOOK,
+      SHOW_DESCRIPTION,
     },
     dispatch,
   ),
@@ -24,21 +20,14 @@ class Toast extends Component {
   }
   render() {
     return (
-      <Container>
-        <Description lookingAt={this.props.lookingAt}>
-          <Top>
-            <Exit
-              onTouchStart={this.props.DONT_LOOK}
-              onPointerDown={this.props.DONT_LOOK}
-            >
-              X
-            </Exit>
-          </Top>
-          <Title>{this.props.lookingAt.title}</Title>
-          <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
-          <ReactMarkdown source={this.props.lookingAt.description} />
-        </Description>
-      </Container>
+      <Toasty
+        onTouchStart={this.props.SHOW_DESCRIPTION}
+        onPointerDown={this.props.SHOW_DESCRIPTION}
+        lookingAt={this.props.lookingAt.status}
+      >
+        <Title>{this.props.lookingAt.title}</Title>
+        <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
+      </Toasty>
     );
   }
 }

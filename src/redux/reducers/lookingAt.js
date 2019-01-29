@@ -5,9 +5,14 @@ export const LOOKING_AT = (state = '', action) => {
       return {
         ...config[action.payload.status].text[action.payload.language],
         language: action.payload.language,
+        color: config[action.payload.status].color,
+        status: true,
       };
     case 'DONT_LOOK':
-      return '';
+      return {
+        ...state,
+        status: false,
+      };
     default:
       return state;
   }
