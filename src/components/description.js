@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from '../style/description';
-import { Exit, Body } from '../style/common';
+import { Exit, Title, Subtitle, Body } from '../style/common';
 import { HIDE_DESCRIPTION } from '../redux/actions/actions';
 import { mapStateToProps } from '../redux/mapStateToProps';
 import ReactMarkdown from 'react-markdown';
@@ -26,6 +26,11 @@ export class Description extends Component {
         >
           X
         </Exit>
+        <Title>{this.props.lookingAt.title}</Title>
+        <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
+        <Body>
+          <ReactMarkdown source={this.props.lookingAt.description}/>
+        </Body>
       </Container>
     );
   }
