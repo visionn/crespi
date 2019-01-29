@@ -6,22 +6,6 @@ export const Title = styled.h2`
 export const Subtitle = styled.h6`
   font-weight: bold;
 `;
-export const Body = styled.div`
-  display: inline-block;
-  visibility: ${props => (props.show ? 'visible' : 'hidden')};
-  animation: ${props => (props.show ? swapUp : fadeOut)} 0.25s linear;
-  transition: visibility 0.25s linear;
-  height: auto;
-  position: relative;
-  z-index: 3;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-  overflow-y: scroll;
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-  }
-`;
 export const Toasty = styled.div`
   display: inline-block;
   position: absolute;
@@ -36,7 +20,7 @@ export const Toasty = styled.div`
   visibility: ${props => (props.lookingAt ? 'visible' : 'hidden')};
   animation: ${props => (props.lookingAt ? swapUp : fadeOut)} 0.25s linear;
   transition: visibility 0.25s linear;
-  height: ${props => props.height};
+  height: 6rem;
   left: 1.5rem;
   right: 1.5rem;
   bottom: 0.5rem;
