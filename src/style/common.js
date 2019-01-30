@@ -32,9 +32,9 @@ export const Exit = styled.button`
 `;
 export const Root = styled.div`
   @media (min-width: 320px) and (max-width: 1000px) {
-    font-size: 150%;
+    font-size: 120%;
   }
   @media (min-width: 1001px) {
-    font-size: 100%;
+    font-size: 250%;
   }
 `;
