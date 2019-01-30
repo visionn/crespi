@@ -74,6 +74,8 @@ class Scene extends Component {
   };
   controls = () => {
     this.controls = new THREE.OrbitControls(this.camera, this.container);
+    this.controls.maxPolarAngle = Math.PI - Math.PI / 2.1;
+    this.controls.minPolarAngle = Math.PI / 2.1;
   };
   animate = () => {
     requestAnimationFrame(this.animate);
