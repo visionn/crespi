@@ -108,7 +108,7 @@ class Scene extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, 1);
+      this.camera.position.set(0, 0, -220);
       this.scene.add(this.camera);
     };
     const createButton = () => {
@@ -129,6 +129,7 @@ class Scene extends Component {
             );
             // setting scene name
             gltf.scene.children[0].name = i;
+            gltf.scene.name = i;
             // adding model to scene
             this.scene.add(gltf.scene);
             // pushing model to dedicate array
