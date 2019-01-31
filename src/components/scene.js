@@ -9,7 +9,7 @@ import {
   LOOKING_AT,
   DONT_LOOK,
 } from '../redux/actions/actions';
-import { Container, Button } from '../style/scene';
+import { Container, Button, Color } from '../style/scene';
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
@@ -40,19 +40,23 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Container
+      <Color
         color={this.props.lookingAt.color}
-        ref={el => (this.container = el)}
-        onTouchStart={this.cameraRay}
-        onPointerDown={this.cameraRay}
       >
-        <Button
-          onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
-          onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
+        <Container
+          color={this.props.lookingAt.color}
+          ref={el => (this.container = el)}
+          onTouchStart={this.cameraRay}
+          onPointerDown={this.cameraRay}
         >
-          INFO
-        </Button>
-      </Container>
+          <Button
+            onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
+            onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
+          >
+            INFO
+          </Button>
+        </Container>
+      </Color>
     );
   }
   cameraRay = () => {
