@@ -1,0 +1,4 @@
+- repo: https://github.com/cubisti/crespi-tour
+  hooks:
+    - id: prettier
+    - files: '*.js'
