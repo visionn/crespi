@@ -23,6 +23,7 @@ export class Description extends Component {
       <Container status={this.props.description.status}>
         <Exit
           onPointerDown={this.props.HIDE_DESCRIPTION}
+          onTouchStart={this.props.HIDE_DESCRIPTION}
         >
           X
         </Exit>
