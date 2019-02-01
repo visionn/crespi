@@ -1,1 +1,5 @@
 node_modules/
+npm-debug.log
+v8-compile-cache-0
+build
+jest_0
