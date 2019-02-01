@@ -7,7 +7,9 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 
-![](//media.giphy.com/media/1zJUb7oTT16v2E9T2Q/giphy.gif)
+<p align="center">
+  <img src="https://media.giphy.com/media/1zJUb7oTT16v2E9T2Q/giphy.gif">
+</p>
 
 <mark style="text-color: white; background-color: yellow;">Our mission</mark> is to make the world part of the web. Visit a unesco world heritage from your sofa, with  [crespi-tour](https://cubisti.github.io/crespi-tour).
 
