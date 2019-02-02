@@ -31,10 +31,12 @@ export const Exit = styled.button`
   font-size: 2rem;
 `;
 export const Root = styled.div`
-  @media (min-width: 320px) and (max-width: 1000px) {
-    font-size: 120%;
+  /* SMARTPHONES PORTRAIT */
+  @media only screen and (min-width: 300px) {
+    font-size: 200%;
   }
-  @media (min-width: 1001px) {
-    font-size: 250%;
+  /* TABLET LANDSCAPE / DESKTOP */
+  @media only screen and (min-width: 1024px) {
+    font-size: 120%;
   }
 `;
