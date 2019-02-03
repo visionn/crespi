@@ -7,7 +7,6 @@ export const SHOW_INFO = language => {
 export const SHOW_DESCRIPTION = () => ({
   type: 'SHOW_DESCRIPTION',
 });
-
 export const HIDE_DESCRIPTION = () => ({
   type: 'HIDE_DESCRIPTION',
 });
@@ -25,6 +24,13 @@ export const LOOKING_AT = (status, language) => {
     },
   };
 };
+export const MOVE = name => ({
+  type: 'MOVE',
+  name,
+});
+export const DONT_MOVE = () => ({
+  type: 'DONT_MOVE',
+});
 export const DONT_LOOK = () => {
   return {
     type: 'DONT_LOOK',
