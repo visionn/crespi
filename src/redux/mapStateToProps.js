@@ -3,5 +3,5 @@ export const mapStateToProps = state => ({
   language: state.language,
   info: state.info,
   description: state.description,
-  touch: state.touch,
+  move: state.move,
 });

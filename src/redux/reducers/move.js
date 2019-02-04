@@ -1,14 +1,14 @@
 import { config } from '../../configuration/config';
-export const TOUCH = (state='', action) => {
+export const MOVE = (state = '', action) => {
   switch (action.type) {
-    case 'TOUCH':
+    case 'MOVE':
       return {
         ...state,
         ...config[action.name],
         status: true,
       }
 
-    case 'DONT_TOUCH':
+    case 'DONT_MOVE':
       return {
         ...state,
         status: false,
