@@ -24,11 +24,11 @@ export const Toasty = styled.div`
   right: 1.5rem;
   bottom: 1.5rem;
   /* SMARTPHONES PORTRAIT */
-  @media only screen and (min-width: 300px) {
+  @media only screen and (min-width: 300px) and (orientation: portrait) {
     font-size: 150%;
   }
   /* TABLET LANDSCAPE / DESKTOP */
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 1024px) and (orientation: landscape){
     font-size: 100%;
   }
 `;
