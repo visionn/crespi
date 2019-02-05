@@ -74,17 +74,23 @@ class Scene extends Component {
       if (typeof clicked !== 'undefined') {
         // reading gltf.scene.children[0].name
         this.props.MOVE(
-          this.selected[0].object.parent.parent.name,
+          clicked[0].object.parent.parent.name,
         );
         this.camera.lookAt(
-          this.move.position.x,
-          this.move.position.y,
-          this.move.position.z,
+          this.props.move.position.x,
+          this.props.move.position.y,
+          this.props.move.position.z,
         );
+        this.camera.updateProjectionMatrix();
+        this.changeControlStatus();
       }
     } catch (e) {
       this.props.DONT_MOVE();
+      this.changeControlStatus();
     }
+  }
+  changeControlStatus = () => {
+    this.controls.enabled = this.props.move.status;
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
