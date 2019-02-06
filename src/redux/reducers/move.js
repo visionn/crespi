@@ -5,13 +5,13 @@ export const MOVE = (state = '', action) => {
       return {
         ...state,
         ...config[action.name],
-        status: true,
+        orbitControls: false,
       }
 
     case 'DONT_MOVE':
       return {
         ...state,
-        status: false,
+        orbitControls: true,
       }
     default:
       return state;

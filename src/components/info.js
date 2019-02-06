@@ -8,7 +8,7 @@ import {
 } from '../redux/actions/actions.js';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container, Language } from '../style/info';
-import { Title, Subtitle, Body, Exit, Top } from '../style/common';
+import { Title, Subtitle, Body, Button, Top } from '../style/common';
 import ReactMarkdown from 'react-markdown';
 import { mapStateToProps } from '../redux/mapStateToProps';
 
@@ -31,10 +31,12 @@ class Info extends Component {
     return (
       <Container info={this.props.info.status}>
         <Top>
-          <Exit
+          <Button
             onTouchStart={this.props.actions.HIDE_INFO}
             onPointerDown={this.props.actions.HIDE_INFO}
-          />
+          >
+          x
+          </Button>
         </Top>
         <Title>{this.props.info.title}</Title>
         <Subtitle>{this.props.info.subtitle}</Subtitle>
