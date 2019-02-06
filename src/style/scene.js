@@ -27,6 +27,7 @@ export const Color = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(${props => props.color}, white);
-  position: absolute;  
+  background-color: ${props => props.color};
+  border-radius: 0.5rem;
+  position: absolute;
 `;
