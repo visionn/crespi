@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from '../style/description';
-import { Exit, Title, Subtitle, Body } from '../style/common';
+import { Exit, Title, Subtitle, Body, Top } from '../style/common';
 import { HIDE_DESCRIPTION } from '../redux/actions/actions';
 import { mapStateToProps } from '../redux/mapStateToProps';
 import ReactMarkdown from 'react-markdown';
@@ -21,12 +21,12 @@ export class Description extends Component {
   render () {
     return (
       <Container status={this.props.description.status}>
-        <Exit
-          onPointerDown={this.props.HIDE_DESCRIPTION}
-          onTouchStart={this.props.HIDE_DESCRIPTION}
-        >
-          X
-        </Exit>
+        <Top>
+          <Exit
+            onPointerDown={this.props.HIDE_DESCRIPTION}
+            onTouchStart={this.props.HIDE_DESCRIPTION}
+          />
+        </Top>
         <Title>{this.props.lookingAt.title}</Title>
         <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
         <Body>
