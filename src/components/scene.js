@@ -11,7 +11,8 @@ import {
   DONT_MOVE,
   MOVE,
 } from '../redux/actions/actions';
-import { Container, Button, Color } from '../style/scene';
+import { Container, Color } from '../style/scene';
+import { Button } from '../style/common'
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
@@ -57,7 +58,7 @@ class Scene extends Component {
             onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
             onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
           >
-            INFO
+          ?
           </Button>
         </Container>
       </Color>
@@ -71,7 +72,7 @@ class Scene extends Component {
     raycaster.setFromCamera(mouse, this.camera);
     let clicked = raycaster.intersectObjects(this.scene.children, true);
     try {
-      if (typeof clicked !== 'undefined') {
+      if (typeof clicked !== 'undefined' && clicked[0].object.parent.parent.name) {
         // reading gltf.scene.children[0].name
         this.props.MOVE(
           clicked[0].object.parent.parent.name,
@@ -90,7 +91,7 @@ class Scene extends Component {
     }
   }
   changeControlStatus = () => {
-    this.controls.enabled = this.props.move.status;
+    this.controls.enabled = !this.props.move.orbitControls;
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();

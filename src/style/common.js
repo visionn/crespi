@@ -19,20 +19,19 @@ export const Top = styled.div`
   position: fixed;
   z-index: 3;
 `;
-export const Exit = styled.button`
-  :before {
-    content: "x";
-  }
+export const Button = styled.button`
+  content: ${props => props.content};
   position: absolute;
   display: inherit;
   z-index: 5;
   width: 2.5rem;
   height: 2.5rem;
   top: 2rem;
-  right: 1rem;
+  right: 1.5rem;
   font-weight: 300;
   font-family: helvetica;
   border: none;
+  outline: none;
   border-radius: 20px;
   font-size: 2rem;
   box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.38);
