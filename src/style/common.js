@@ -13,22 +13,30 @@ export const Body = styled.div`
 `;
 export const Top = styled.div`
   visibility: inherit;
-  top: 3%;
+  top: 0;
   left: 0;
   right: 0;
-  position: sticky;
+  position: fixed;
   z-index: 3;
 `;
 export const Exit = styled.button`
+  :before {
+    content: "x";
+  }
   position: absolute;
   display: inherit;
   z-index: 5;
+  width: 2.5rem;
+  height: 2.5rem;
   top: 2rem;
-  right: 2rem;
+  right: 1rem;
+  font-weight: 300;
+  font-family: helvetica;
   border: none;
   border-radius: 20px;
-  background-color: white;
   font-size: 2rem;
+  box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.38);
+  background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
   /* SMARTPHONES PORTRAIT */
