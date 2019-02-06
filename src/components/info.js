@@ -34,9 +34,7 @@ class Info extends Component {
           <Exit
             onTouchStart={this.props.actions.HIDE_INFO}
             onPointerDown={this.props.actions.HIDE_INFO}
-          >
-            X
-          </Exit>
+          />
         </Top>
         <Title>{this.props.info.title}</Title>
         <Subtitle>{this.props.info.subtitle}</Subtitle>
