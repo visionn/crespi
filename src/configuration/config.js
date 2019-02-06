@@ -17,7 +17,7 @@ export const config = {
       y: 0,
       z: 0,
     },
-    color: 'red',
+    color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
         title: 'Mistero',
@@ -37,7 +37,7 @@ export const config = {
       y: 0,
       z: 100,
     },
-    color: 'teal',
+    color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
         title: 'Fabbrica',
