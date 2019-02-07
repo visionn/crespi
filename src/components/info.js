@@ -38,8 +38,8 @@ class Info extends Component {
           x
           </Button>
         </Top>
-        <Title>{this.props.info.title}</Title>
-        <Subtitle>{this.props.info.subtitle}</Subtitle>
+        <Title>{this.props.info.Title}</Title>
+        <Subtitle>{this.props.info.Subtitle}</Subtitle>
         <Language
           onTouchStart={this.props.language}
           onPointerDown={this.props.language}
@@ -47,7 +47,7 @@ class Info extends Component {
           {this.props.language}
         </Language>
         <Body>
-          <ReactMarkdown source={this.props.info.description} />
+          <ReactMarkdown source={this.props.info.Body} />
         </Body>
       </Container>
     );

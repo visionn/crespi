@@ -25,8 +25,8 @@ class Toast extends Component {
         onPointerDown={this.props.SHOW_DESCRIPTION}
         lookingAt={this.props.lookingAt.status}
       >
-        <Title>{this.props.lookingAt.title}</Title>
-        <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
+        <Title>{this.props.lookingAt.Title}</Title>
+        <Subtitle>{this.props.lookingAt.Subtitle}</Subtitle>
       </Toasty>
     );
   }
