@@ -51,8 +51,10 @@ class Scene extends Component {
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
-          onTouchStart={e => {this.cameraRay(); this.objectClick(e);}}
-          onPointerDown={e => {this.cameraRay(); this.objectClick(e);}}
+          onTouchMove={this.objectClick}
+          onTouchStart={this.cameraRay}
+          onPointerMove={this.objectClick}
+          onPointerDown={this.cameraRay}
         >
           <Button
             onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
@@ -84,6 +86,8 @@ class Scene extends Component {
         );
         this.camera.updateProjectionMatrix();
         this.changeControlStatus();
+      } else {
+        this.changeControlStatus();
       }
     } catch (e) {
       this.props.DONT_MOVE();
@@ -91,7 +95,7 @@ class Scene extends Component {
     }
   }
   changeControlStatus = () => {
-    this.controls.enabled = !this.props.move.orbitControls;
+    this.controls.enabled = this.props.move.orbitControls;
   }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
