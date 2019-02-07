@@ -1,14 +1,14 @@
 export const config = {
   info: {
     ita: {
-      title: 'Lorem ipsum',
-      subtitle: 'Sottotitolo',
-      description: require('../assets/text/ita/info/desc.md'),
+      Title: 'Lorem ipsum',
+      Subtitle: 'Sottotitolo',
+      Body: require('../assets/text/ita/info/desc.md'),
     },
     eng: {
-      title: 'Lorem ipsum',
-      subtitle: 'Subtitle',
-      description: require('../assets/text/eng/info/desc.md'),
+      Title: 'Lorem ipsum',
+      Subtitle: 'Subtitle',
+      Body: require('../assets/text/eng/info/desc.md'),
     },
   },
   chiesa: {
@@ -20,14 +20,14 @@ export const config = {
     color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
-        title: 'Mistero',
-        subtitle: 'Sottotitolo',
-        description: require('../assets/text/ita/chiesa/desc.md'),
+        Title: 'Mistero',
+        Subtitle: 'Sottotitolo',
+        Body: require('../assets/text/ita/chiesa/desc.md'),
       },
       eng: {
-        title: 'Mystery',
-        subtitle: 'Subtitle',
-        description: require('../assets/text/eng/chiesa/desc.md'),
+        Title: 'Mystery',
+        Subtitle: 'Subtitle',
+        Body: require('../assets/text/eng/chiesa/desc.md'),
       },
     },
   },
@@ -40,14 +40,14 @@ export const config = {
     color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
-        title: 'Fabbrica',
-        subtitle: 'Fabbrica di Crespi',
-        description: require('../assets/text/ita/chiesa/desc.md'),
+        Title: 'Fabbrica',
+        Subtitle: 'Fabbrica di Crespi',
+        Body: require('../assets/text/ita/chiesa/desc.md'),
       },
       eng: {
-        title: 'Factory',
-        subtitle: "Crespi's Factory",
-        description: require('../assets/text/eng/chiesa/desc.md'),
+        Title: 'Factory',
+        Subtitle: "Crespi's Factory",
+        Body: require('../assets/text/eng/chiesa/desc.md'),
       },
     },
   },

@@ -29,10 +29,10 @@ export class Description extends Component {
           x
           </Button>
         </Top>
-        <Title>{this.props.lookingAt.title}</Title>
-        <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
+        <Title>{this.props.lookingAt.Title}</Title>
+        <Subtitle>{this.props.lookingAt.Subtitle}</Subtitle>
         <Body>
-          <ReactMarkdown source={this.props.lookingAt.description}/>
+          <ReactMarkdown source={this.props.lookingAt.Body}/>
         </Body>
       </Container>
     );
