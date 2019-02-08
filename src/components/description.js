@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createElement } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Container } from '../style/description';
@@ -7,6 +7,16 @@ import { HIDE_DESCRIPTION } from '../redux/actions/actions';
 import { mapStateToProps } from '../redux/mapStateToProps';
 import ReactMarkdown from 'react-markdown';
 
+const DinamicPage = props => {
+  let keys = Object.getOwnPropertyNames(props.lookingAt);
+  let content = Object.values(props.lookingAt);
+  let desc = content.map(text =>
+    createElement('div', null, text)
+  )
+  return (
+    <div>{desc}</div>
+  )
+}
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators({
     HIDE_DESCRIPTION,
@@ -29,11 +39,7 @@ export class Description extends Component {
           x
           </Button>
         </Top>
-        <Title>{this.props.lookingAt.Title}</Title>
-        <Subtitle>{this.props.lookingAt.Subtitle}</Subtitle>
-        <Body>
-          <ReactMarkdown source={this.props.lookingAt.Body}/>
-        </Body>
+        <DinamicPage lookingAt={this.props.lookingAt}/>
       </Container>
     );
   }
