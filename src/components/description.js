@@ -9,17 +9,18 @@ import ReactMarkdown from 'react-markdown';
 import { DinamicPage } from './dinamic';
 
 const mapDispatchToProps = dispatch => ({
-  ...bindActionCreators({
-    HIDE_DESCRIPTION,
-  },
+  ...bindActionCreators(
+    {
+      HIDE_DESCRIPTION,
+    },
     dispatch,
   ),
 });
 export class Description extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
   }
-  render () {
+  render() {
     return (
       <Container status={this.props.description.status}>
         <Top>
@@ -27,15 +28,15 @@ export class Description extends Component {
             onPointerDown={this.props.HIDE_DESCRIPTION}
             onTouchStart={this.props.HIDE_DESCRIPTION}
           >
-          x
+            x
           </Button>
         </Top>
-        <DinamicPage lookingAt={this.props.lookingAt}/>
+        <DinamicPage description={this.props.description} />
       </Container>
     );
   }
 }
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Description);
