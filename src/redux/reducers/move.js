@@ -4,16 +4,16 @@ export const MOVE = (state = '', action) => {
     case 'MOVE':
       return {
         ...state,
-        ...config[action.name],
+        position: config[action.name].position,
         orbitControls: false,
-      }
+      };
 
     case 'DONT_MOVE':
       return {
         ...state,
         orbitControls: true,
-      }
+      };
     default:
       return state;
   }
-}
+};

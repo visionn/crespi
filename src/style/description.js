@@ -11,8 +11,8 @@ export const Container = styled.div`
   box-shadow: 0px 0.18rem 2rem 0.36rem rgba(0, 0, 0, 0.65);
   z-index: 2;
   background-color: rgb(255, 255, 255);
-  visibility: ${props => props.status ? 'visible' : 'hidden'};
-  animation: ${props => props.status ? slideUp : fadeOut} 0.5s linear;
+  visibility: ${props => (props.status ? 'visible' : 'hidden')};
+  animation: ${props => (props.status ? slideUp : fadeOut)} 0.5s linear;
   transition: visibility 0.5s;
   overflow: auto;
 `;

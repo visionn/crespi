@@ -12,7 +12,7 @@ import {
   MOVE,
 } from '../redux/actions/actions';
 import { Container, Color } from '../style/scene';
-import { Button } from '../style/common'
+import { Button } from '../style/common';
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
@@ -45,9 +45,7 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Color
-        color={this.props.lookingAt.color}
-      >
+      <Color color={this.props.lookingAt.color}>
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
@@ -60,7 +58,7 @@ class Scene extends Component {
             onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
             onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
           >
-          ?
+            ?
           </Button>
         </Container>
       </Color>
@@ -70,15 +68,16 @@ class Scene extends Component {
     let raycaster = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
     mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-    mouse.y =  - (event.clientY / this.container.clientHeight) * 2 + 1;
+    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
     raycaster.setFromCamera(mouse, this.camera);
     let clicked = raycaster.intersectObjects(this.scene.children, true);
     try {
-      if (typeof clicked !== 'undefined' && clicked[0].object.parent.parent.name) {
+      if (
+        typeof clicked !== 'undefined' &&
+        clicked[0].object.parent.parent.name
+      ) {
         // reading gltf.scene.children[0].name
-        this.props.MOVE(
-          clicked[0].object.parent.parent.name,
-        );
+        this.props.MOVE(clicked[0].object.parent.parent.name);
         this.camera.lookAt(
           this.props.move.position.x,
           this.props.move.position.y,
@@ -93,10 +92,10 @@ class Scene extends Component {
       this.props.DONT_MOVE();
       this.changeControlStatus();
     }
-  }
+  };
   changeControlStatus = () => {
     this.controls.enabled = this.props.move.orbitControls;
-  }
+  };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
