@@ -20,18 +20,14 @@ export const config = {
     color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
-        content: {
-          Title: 'Mistero',
-          Subtitle: 'Sottotitolo',
-          Body: require('../assets/text/ita/chiesa/desc.md'),
-        },
+        Title: 'Mistero',
+        Subtitle: 'Sottotitolo',
+        Body: require('../assets/text/ita/chiesa/desc.md'),
       },
       eng: {
-        content: {
-          Title: 'Mistero',
-          Subtitle: 'Sottotitolo',
-          Body: require('../assets/text/ita/chiesa/desc.md'),
-        },
+        Title: 'Mistero',
+        Subtitle: 'Sottotitolo',
+        Body: require('../assets/text/ita/chiesa/desc.md'),
       },
     },
   },
@@ -44,18 +40,14 @@ export const config = {
     color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
-        content: {
-          Title: 'Fabbrica',
-          Subtitle: 'Fabbrica di Crespi',
-          Body: require('../assets/text/ita/chiesa/desc.md'),
-        },
+        Title: 'Fabbrica',
+        Subtitle: 'Fabbrica di Crespi',
+        Body: require('../assets/text/ita/chiesa/desc.md'),
       },
       eng: {
-        content: {
-          Title: 'Factory',
-          Subtitle: "Crespi's Factory",
-          Body: require('../assets/text/eng/chiesa/desc.md'),
-        },
+        Title: 'Factory',
+        Subtitle: "Crespi's Factory",
+        Body: require('../assets/text/eng/chiesa/desc.md'),
       },
     },
   },
