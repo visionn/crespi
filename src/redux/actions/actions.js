@@ -4,10 +4,13 @@ export const SHOW_INFO = language => {
     language,
   };
 };
-export const SHOW_DESCRIPTION = () => ({
+export const SHOW_DESCRIPTION = (model, language) => ({
   type: 'SHOW_DESCRIPTION',
+  payload: {
+    model,
+    language,
+  },
 });
-
 export const HIDE_DESCRIPTION = () => ({
   type: 'HIDE_DESCRIPTION',
 });
@@ -25,6 +28,13 @@ export const LOOKING_AT = (status, language) => {
     },
   };
 };
+export const MOVE = name => ({
+  type: 'MOVE',
+  name,
+});
+export const DONT_MOVE = () => ({
+  type: 'DONT_MOVE',
+});
 export const DONT_LOOK = () => {
   return {
     type: 'DONT_LOOK',
