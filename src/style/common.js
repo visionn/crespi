@@ -13,28 +13,37 @@ export const Body = styled.div`
 `;
 export const Top = styled.div`
   visibility: inherit;
-  top: 3%;
+  top: 0;
   left: 0;
   right: 0;
-  position: sticky;
+  position: fixed;
   z-index: 3;
 `;
-export const Exit = styled.button`
+export const Button = styled.button`
+  content: ${props => props.content};
   position: absolute;
   display: inherit;
   z-index: 5;
+  width: 2.5rem;
+  height: 2.5rem;
   top: 2rem;
-  right: 2rem;
+  right: 1.5rem;
+  font-weight: 300;
+  font-family: helvetica;
   border: none;
+  outline: none;
   border-radius: 20px;
-  background-color: white;
   font-size: 2rem;
+  box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.38);
+  background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
-  @media (min-width: 320px) and (max-width: 1000px) {
-    font-size: 120%;
+  /* SMARTPHONES PORTRAIT */
+  @media only screen and (min-width: 300px) {
+    font-size: 200%;
   }
-  @media (min-width: 1001px) {
-    font-size: 250%;
+  /* TABLET LANDSCAPE / DESKTOP */
+  @media only screen and (min-width: 1024px) {
+    font-size: 120%;
   }
 `;

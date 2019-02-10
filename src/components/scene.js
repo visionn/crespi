@@ -8,8 +8,11 @@ import {
   HIDE_INFO,
   LOOKING_AT,
   DONT_LOOK,
+  DONT_MOVE,
+  MOVE,
 } from '../redux/actions/actions';
-import { Container, Button } from '../style/scene';
+import { Container, Color } from '../style/scene';
+import { Button } from '../style/common';
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
@@ -21,6 +24,8 @@ const mapDispatchToProps = dispatch => ({
       HIDE_INFO,
       LOOKING_AT,
       DONT_LOOK,
+      DONT_MOVE,
+      MOVE,
     },
     dispatch,
   ),
@@ -40,21 +45,57 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Container
-        color={this.props.lookingAt.color}
-        ref={el => (this.container = el)}
-        onTouchStart={this.cameraRay}
-        onPointerDown={this.cameraRay}
-      >
-        <Button
-          onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
-          onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
+      <Color color={this.props.lookingAt.color}>
+        <Container
+          color={this.props.lookingAt.color}
+          ref={el => (this.container = el)}
+          onTouchMove={this.objectClick}
+          onTouchStart={this.cameraRay}
+          onPointerMove={this.objectClick}
+          onPointerDown={this.cameraRay}
         >
-          INFO
-        </Button>
-      </Container>
+          <Button
+            onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
+            onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
+          >
+            ?
+          </Button>
+        </Container>
+      </Color>
     );
   }
+  objectClick = e => {
+    let raycaster = new THREE.Raycaster();
+    let mouse = new THREE.Vector2();
+    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
+    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
+    raycaster.setFromCamera(mouse, this.camera);
+    let clicked = raycaster.intersectObjects(this.scene.children, true);
+    try {
+      if (
+        typeof clicked !== 'undefined' &&
+        clicked[0].object.parent.parent.name
+      ) {
+        // reading gltf.scene.children[0].name
+        this.props.MOVE(clicked[0].object.parent.parent.name);
+        this.camera.lookAt(
+          this.props.move.position.x,
+          this.props.move.position.y,
+          this.props.move.position.z,
+        );
+        this.camera.updateProjectionMatrix();
+        this.changeControlStatus();
+      } else {
+        this.changeControlStatus();
+      }
+    } catch (e) {
+      this.props.DONT_MOVE();
+      this.changeControlStatus();
+    }
+  };
+  changeControlStatus = () => {
+    this.controls.enabled = this.props.move.orbitControls;
+  };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
@@ -108,7 +149,7 @@ class Scene extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, 1);
+      this.camera.position.set(0, 0, -220);
       this.scene.add(this.camera);
     };
     const createButton = () => {
@@ -129,6 +170,7 @@ class Scene extends Component {
             );
             // setting scene name
             gltf.scene.children[0].name = i;
+            gltf.scene.name = i;
             // adding model to scene
             this.scene.add(gltf.scene);
             // pushing model to dedicate array

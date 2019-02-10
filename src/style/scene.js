@@ -22,3 +22,12 @@ export const Button = styled.button`
   background-color: white;
   font-size: 2rem;
 `;
+export const Color = styled.div`
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: ${props => props.color};
+  border-radius: 0.5rem;
+  position: absolute;
+`;
