@@ -38,12 +38,7 @@ export const Button = styled.button`
   background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
-  /* SMARTPHONES PORTRAIT */
-  @media only screen and (min-width: 300px) {
-    font-size: 200%;
-  }
-  /* TABLET LANDSCAPE / DESKTOP */
-  @media only screen and (min-width: 1024px) {
-    font-size: 120%;
+  :empty {
+    color: blue;
   }
 `;
