@@ -49,10 +49,18 @@ class Scene extends Component {
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
-          onTouchMove={this.objectClick}
-          onTouchStart={this.cameraRay}
-          onPointerMove={this.objectClick}
-          onPointerDown={this.cameraRay}
+          onTouchStart={
+            e => {
+              this.cameraRay();
+              this.objectClick(e);
+            }
+          }
+          onPointerDown={
+            e => {
+              this.cameraRay();
+              this.objectClick(e);
+            }
+          }
         >
           <Button
             onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
@@ -120,12 +128,6 @@ class Scene extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
-    if (this.elements) {
-      // rotates every gltf.scene object pushed to this.elements
-      this.elements.forEach(element => {
-        element.rotation.y += 0.005;
-      });
-    }
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
