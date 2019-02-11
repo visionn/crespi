@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { swapUp, swapDown, fadeIn, fadeOut } from './animations.js';
 export const Title = styled.h1`
-  font-size: 2em;
+  font-size: 2rem;
 `;
 export const Subtitle = styled.h6`
-  font-size: 0.7em;
+  font-size: 0.7rem;
 `;
 export const Toasty = styled.div`
   display: inline-block;
@@ -23,12 +23,4 @@ export const Toasty = styled.div`
   left: 1.5rem;
   right: 1.5rem;
   bottom: 1.5rem;
-  /* SMARTPHONES PORTRAIT */
-  @media (min-width: 300px) and (orientation: portrait) {
-    font-size: 150%;
-  }
-  /* TABLET LANDSCAPE / DESKTOP */
-  @media only screen and (min-width: 1024px) and (orientation: landscape) {
-    font-size: 100%;
-  }
 `;
