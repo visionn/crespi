@@ -46,3 +46,6 @@ export const CHANGE_LANGUAGE = language => {
     language,
   };
 };
+export const HIDE_LOADING_SCREEN = () => ({
+  type: 'HIDE_LOADING_SCREEN',
+});
