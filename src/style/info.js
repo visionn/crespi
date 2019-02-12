@@ -15,6 +15,7 @@ export const Container = styled.div`
   bottom: 0;
   padding: 1rem 1.5rem;
   z-index: 2;
+  -webkit-overflow-scrolling: touch;
 `;
 export const Language = styled.button`
   text-align: center;
