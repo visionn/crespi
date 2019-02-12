@@ -14,6 +14,7 @@ export const Container = styled.div`
   animation: ${props => (props.status ? slideUp : fadeOut)} 0.5s linear;
   transition: visibility 0.5s;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 `;
 export const TopImage = styled.div`
   top: 0;
