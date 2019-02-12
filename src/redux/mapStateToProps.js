@@ -4,4 +4,5 @@ export const mapStateToProps = state => ({
   info: state.info,
   description: state.description,
   move: state.move,
+  loading: state.loading,
 });

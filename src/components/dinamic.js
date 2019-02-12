@@ -11,7 +11,7 @@ export const DinamicPage = props => {
       } else if (key === 'Body') {
         return createElement(Body, null, props.description[key]);
       } else {
-        return createElement('div', null, '"404"')
+        return createElement('div', null, '"404"');
       }
     });
   } catch (e) {}
