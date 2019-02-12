@@ -20,11 +20,13 @@ export const config = {
     color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
+        TopImage: ' ',
         Title: 'Mistero',
         Subtitle: 'Sottotitolo',
         Body: require('../assets/text/ita/chiesa/desc.md'),
       },
       eng: {
+        TopImage: ' ',
         Title: 'Mistero',
         Subtitle: 'Sottotitolo',
         Body: require('../assets/text/ita/chiesa/desc.md'),
@@ -40,11 +42,13 @@ export const config = {
     color: 'rgba(255, 60, 0, 0.3)',
     text: {
       ita: {
+        TopImage: ' ',
         Title: 'Fabbrica',
         Subtitle: 'Fabbrica di Crespi',
         Body: require('../assets/text/ita/chiesa/desc.md'),
       },
       eng: {
+        TopImage: ' ',
         Title: 'Factory',
         Subtitle: "Crespi's Factory",
         Body: require('../assets/text/eng/chiesa/desc.md'),
