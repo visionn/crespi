@@ -7,7 +7,6 @@ export const Container = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 1.5rem 1rem;
   box-shadow: 0px 0.18rem 2rem 0.36rem rgba(0, 0, 0, 0.65);
   z-index: 2;
   background-color: rgb(255, 255, 255);
@@ -18,11 +17,10 @@ export const Container = styled.div`
 `;
 export const TopImage = styled.div`
   top: 0;
-  right: 0;
-  left: 0;
-  height: 17rem;
+  padding: 0 0.7rem;
+  height: 18rem;
   background-color: #08AEEA;
   background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
-  border-bottom-right-radius: 5rem;
-  border-bottom-left-radius: 5rem;
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
 `;
