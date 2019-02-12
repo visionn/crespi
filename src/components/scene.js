@@ -10,6 +10,7 @@ import {
   DONT_LOOK,
   DONT_MOVE,
   MOVE,
+  HIDE_LOADING_SCREEN,
 } from '../redux/actions/actions';
 import { Container, Color } from '../style/scene';
 import { Button } from '../style/common';
@@ -26,6 +27,7 @@ const mapDispatchToProps = dispatch => ({
       DONT_LOOK,
       DONT_MOVE,
       MOVE,
+      HIDE_LOADING_SCREEN,
     },
     dispatch,
   ),
@@ -49,18 +51,14 @@ class Scene extends Component {
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
-          onTouchStart={
-            e => {
-              this.cameraRay();
-              this.objectClick(e);
-            }
-          }
-          onPointerDown={
-            e => {
-              this.cameraRay();
-              this.objectClick(e);
-            }
-          }
+          onTouchStart={e => {
+            this.cameraRay();
+            this.objectClick(e);
+          }}
+          onPointerDown={e => {
+            this.cameraRay();
+            this.objectClick(e);
+          }}
         >
           <Button
             onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
@@ -128,6 +126,10 @@ class Scene extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
+    if (typeof this.elements != 'undefined' && this.props.loading === true) {
+      this.props.HIDE_LOADING_SCREEN();
+    } else {
+    }
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
