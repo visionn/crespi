@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 export const Title = styled.h1`
+  padding: 0 2rem;
   font-weight: bold;
   font-family: helvetica;
 `;
 export const Subtitle = styled.h4`
+  padding: 0 2rem;
   font-weight: bold;
   font-family: helvetica;
 `;
 export const Body = styled.div`
+  padding: 0 2rem;
   font-size: 1.2rem;
   font-family: helvetica;
 `;
