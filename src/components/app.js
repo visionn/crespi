@@ -4,14 +4,12 @@ import Scene from './scene';
 import Toast from './toast';
 import Info from './info';
 import Description from './description';
-import Loading from './loading';
 import { mapStateToProps } from '../redux/mapStateToProps';
 import { Root } from '../style/common';
 class App extends Component {
   render() {
     return (
       <Root>
-        <Loading />
         <Toast />
         <Description />
         <Info />

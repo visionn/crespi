@@ -16,3 +16,13 @@ export const Container = styled.div`
   transition: visibility 0.5s;
   overflow: auto;
 `;
+export const TopImage = styled.div`
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 17rem;
+  background-color: #08AEEA;
+  background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+  border-bottom-right-radius: 5rem;
+  border-bottom-left-radius: 5rem;
+`;
