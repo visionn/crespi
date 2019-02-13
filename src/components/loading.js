@@ -7,7 +7,7 @@ class Loading extends Component {
     super(props);
   }
   render() {
-    return <Container status={this.props.loading} />;
+    return <Container status={this.props.loading}>crespi</Container>;
   }
 }
 
