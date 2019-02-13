@@ -13,6 +13,7 @@ import {
   MOVE,
   HIDE_LOADING_SCREEN,
 } from '../redux/actions/actions';
+import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container, Color } from '../style/scene';
 import { Button } from '../style/common';
 import { config } from '../configuration/config';
@@ -20,7 +21,7 @@ import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
   // binding actions. This method takes: (action, dispatcher)
-  ...bindActionCreators(
+  actions: bindActionCreators(
     {
       SHOW_INFO,
       HIDE_INFO,
@@ -32,6 +33,7 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   ),
+  setLanguage: () => dispatch(LANGUAGE()),
 });
 
 class Scene extends Component {
@@ -64,8 +66,12 @@ class Scene extends Component {
           }}
         >
           <Button
-            onTouchStart={() => this.props.SHOW_INFO(this.props.language)}
-            onPointerDown={() => this.props.SHOW_INFO(this.props.language)}
+            onTouchStart={() =>
+              this.props.actions.SHOW_INFO(this.props.language)
+            }
+            onPointerDown={() =>
+              this.props.actions.SHOW_INFO(this.props.language)
+            }
           >
             ?
           </Button>
@@ -86,7 +92,7 @@ class Scene extends Component {
         clicked[0].object.parent.parent.name
       ) {
         // reading gltf.scene.children[0].name
-        this.props.MOVE(clicked[0].object.parent.parent.name);
+        this.props.actions.MOVE(clicked[0].object.parent.parent.name);
         this.camera.lookAt(
           this.props.move.position.x,
           this.props.move.position.y,
@@ -95,16 +101,19 @@ class Scene extends Component {
         this.camera.updateProjectionMatrix();
         this.changeControlStatus();
       } else {
+        this.props.actions.DONT_MOVE();
         this.changeControlStatus();
       }
     } catch (e) {
-      this.props.DONT_MOVE();
+      this.props.actions.DONT_MOVE();
       this.changeControlStatus();
     }
   };
   changeControlStatus = () => {
     this.orbitControls.enabled = this.props.move.orbitControls;
-    this.transformControls.enabled = !this.props.move.orbitControls;
+    this.transformControls.showX = !this.props.move.orbitControls;
+    this.transformControls.showY = !this.props.move.orbitControls;
+    this.transformControls.showZ = !this.props.move.orbitControls;
   };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -114,29 +123,34 @@ class Scene extends Component {
     try {
       if (typeof this.selected !== 'undefined') {
         // reading gltf.scene.children[0].name
-        this.props.LOOKING_AT(
+        this.props.actions.LOOKING_AT(
           this.selected[0].object.parent.parent.name,
           this.props.language,
         );
       }
     } catch (e) {
-      this.props.DONT_LOOK();
+      this.props.actions.DONT_LOOK();
     }
   };
   orbitControls = () => {
-    this.orbitControls = new THREE.OrbitControls (this.camera, this.container);
+    this.orbitControls = new THREE.OrbitControls(this.camera, this.container);
     this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
     this.orbitControls.minPolarAngle = Math.PI / 2.1;
   };
   animate = () => {
     requestAnimationFrame(this.animate);
-    if (typeof this.elements != 'undefined' && this.elementsNumber != 0 && this.props.loading === true) {
-      this.props.HIDE_LOADING_SCREEN();
+    if (
+      typeof this.elements != 'undefined' &&
+      this.elementsNumber != 0 &&
+      this.props.loading === true
+    ) {
+      this.props.actions.HIDE_LOADING_SCREEN();
     } else {
     }
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
+    this.props.setLanguage();
     this.renderer.setSize(
       this.container.clientWidth,
       this.container.clientHeight,
@@ -157,7 +171,7 @@ class Scene extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, -220);
+      this.camera.position.set(0, 0, -190);
       this.scene.add(this.camera);
     };
     const createButton = () => {
@@ -185,7 +199,10 @@ class Scene extends Component {
             // pushing model to dedicate array
             this.elements.push(gltf.scene);
             // adding scenes to transformControls
-            this.transformControls = new THREE.TransformControls (this.camera, this.container);
+            this.transformControls = new THREE.TransformControls(
+              this.camera,
+              this.container,
+            );
             this.transformControls.attach(gltf.scene);
             this.transformControls.setMode('rotate');
             this.scene.add(this.transformControls);
