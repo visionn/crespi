@@ -8,7 +8,6 @@ export const Container = styled.div`
   right: 0;
   margin: 0;
   overflow: hidden;
-  background: linear-gradient(${props => props.color}, white);
   position: absolute;
   z-index: 1;
 `;
@@ -28,6 +27,10 @@ export const Color = styled.div`
   top: 0;
   bottom: 0;
   background-color: ${props => props.color};
-  border-radius: 0.5rem;
+  background-image: linear-gradient(
+    45deg,
+    ${props => props.color} 0%,
+    #ff5acd 100%
+  );
   position: absolute;
 `;
