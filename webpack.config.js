@@ -34,7 +34,8 @@ module.exports = {
     }),
     new HTML_WEBPACK_PLUGIN({
       template: PATH.join(__dirname, './src/index.html'),
-      filename: 'index.html'
+      inject: false,
+      filename: 'index.html',
     }),
     new PROGRESS_BAR({
       format: 'minimal',
