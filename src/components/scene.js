@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'three-gltfloader';
 import 'three-orbitcontrols';
+import 'three-transformcontrols';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -44,6 +45,7 @@ class Scene extends Component {
     this.maxZoom = 2;
     this.controls;
     this.elements = [];
+    this.elementsNumber = 0;
   }
   render() {
     return (
@@ -126,7 +128,7 @@ class Scene extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
-    if (typeof this.elements != 'undefined' && this.props.loading === true) {
+    if (typeof this.elements != 'undefined' && this.elementsNumber != 0 && this.props.loading === true) {
       this.props.HIDE_LOADING_SCREEN();
     } else {
     }
@@ -160,6 +162,7 @@ class Scene extends Component {
       const MAP_LOADER = new THREE.GLTFLoader();
       // takes the keys of config and loads them into an array
       let keys = Object.getOwnPropertyNames(config);
+      this.elementsNumber = keys.length;
       for (let i of keys) {
         if (i != 'info') {
           // requiring 3d objects files using jsonloader
