@@ -43,7 +43,8 @@ class Scene extends Component {
     this.selected;
     this.minZoom = 1;
     this.maxZoom = 2;
-    this.controls;
+    this.orbitControls;
+    this.transformControls;
     this.elements = [];
     this.elementsNumber = 0;
   }
@@ -102,7 +103,8 @@ class Scene extends Component {
     }
   };
   changeControlStatus = () => {
-    this.controls.enabled = this.props.move.orbitControls;
+    this.orbitControls.enabled = this.props.move.orbitControls;
+    this.transformControls.enabled = !this.props.move.orbitControls;
   };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -121,10 +123,10 @@ class Scene extends Component {
       this.props.DONT_LOOK();
     }
   };
-  controls = () => {
-    this.controls = new THREE.OrbitControls(this.camera, this.container);
-    this.controls.maxPolarAngle = Math.PI - Math.PI / 2.1;
-    this.controls.minPolarAngle = Math.PI / 2.1;
+  orbitControls = () => {
+    this.orbitControls = new THREE.OrbitControls (this.camera, this.container);
+    this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
+    this.orbitControls.minPolarAngle = Math.PI / 2.1;
   };
   animate = () => {
     requestAnimationFrame(this.animate);
@@ -182,6 +184,11 @@ class Scene extends Component {
             this.scene.add(gltf.scene);
             // pushing model to dedicate array
             this.elements.push(gltf.scene);
+            // adding scenes to transformControls
+            this.transformControls = new THREE.TransformControls (this.camera, this.container);
+            this.transformControls.attach(gltf.scene);
+            this.transformControls.setMode('rotate');
+            this.scene.add(this.transformControls);
           });
         }
       }
@@ -205,7 +212,7 @@ class Scene extends Component {
     // wait react container element (This must be called at the end of everything)
     setCamera();
     createButton();
-    this.controls();
+    this.orbitControls();
     this.animate();
     this.cameraRay();
   };
