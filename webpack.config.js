@@ -36,6 +36,7 @@ module.exports = {
       template: PATH.join(__dirname, './src/index.html'),
       inject: false,
       filename: 'index.html',
+      favicon: './src/assets/favicon.ico'
     }),
     new PROGRESS_BAR({
       format: 'minimal',
