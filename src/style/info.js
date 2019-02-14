@@ -17,12 +17,3 @@ export const Container = styled.div`
   z-index: 2;
   -webkit-overflow-scrolling: touch;
 `;
-export const Language = styled.button`
-  text-align: center;
-  top: 1rem;
-  background-color: red;
-  text-color: white;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 0.2rem;
-`;
