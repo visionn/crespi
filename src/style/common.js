@@ -30,7 +30,6 @@ export const Button = styled.button`
   height: 2.5rem;
   top: 2rem;
   right: 1.5rem;
-  patting: 0.2rem;
   font-weight: 300;
   font-family: helvetica;
   border: none;
