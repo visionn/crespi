@@ -1,6 +1,14 @@
-###### THIS IS A WORK IN PROGRESS PROJECT,
-###### [SEE MORE](https://github.com/cubisti/crespi-tour) 
-dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+<p align="center">
+<img width="100%" src="https://media.giphy.com/media/1zJUb7oTT16v2E9T2Q/giphy.gif">
+</p>
 
-Joseph stalin village people country baron brad pitt des lynam Leonine devilish cad imperial, old man in pub borat joseph stalin devilish cad felis lady magnets village people imperial brad pitt spaghetti western country baron luxurious des lynam big daft brush Leonine, country baron hello, we’re cockneys borat devilish cad luxurious imperial spaghetti western felis lady magnets village people brad pitt Leonine joseph stalin big daft brush Sergeant major old man in pub des lynam sweat irrigator,. Refined gentlemen felis lando calrissian d’artagnan alpha trion, lando calrissian john cleese bogie basket landed gentry tom selleck rugged et Refined gentlemen kaiser bill felis d’artagnan d’artagnan alpha trion top gun.
-## WIP 1
+[![Build Status](https://travis-ci.org/cubisti/crespi-tour.svg?branch=master)](https://travis-ci.org/cubisti/crespi-tour)
+[![Coverage Status](https://coveralls.io/repos/github/cubisti/crespi-tour/badge.svg?branch=master)](https://coveralls.io/github/cubisti/crespi-tour?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a5ebf288e95d416eb05e86c831548c8d)](https://app.codacy.com/app/defending1/crespi-tour?utm_source=github.com&utm_medium=referral&utm_content=cubisti/crespi-tour&utm_campaign=Badge_Grade_Dashboard)
+[![BCH compliance](https://bettercodehub.com/edge/badge/cubisti/crespi-tour?branch=master)](https://bettercodehub.com/)
+[![CodeFactor](https://www.codefactor.io/repository/github/cubisti/crespi-tour/badge)](https://www.codefactor.io/repository/github/cubisti/crespi-tour)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+
+
+<mark style="text-color: white; background-color: yellow;">Our mission</mark> is to make the world part of the web.
