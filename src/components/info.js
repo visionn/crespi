@@ -7,7 +7,7 @@ import {
   CHANGE_LANGUAGE,
 } from '../redux/actions/actions.js';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
-import { Container, Language } from '../style/info';
+import { Container } from '../style/info';
 import { Title, Subtitle, Body, Button, Top } from '../style/common';
 import ReactMarkdown from 'react-markdown';
 import { mapStateToProps } from '../redux/mapStateToProps';
@@ -40,14 +40,11 @@ class Info extends Component {
         </Top>
         <Title>{this.props.info.Title}</Title>
         <Subtitle>{this.props.info.Subtitle}</Subtitle>
-        <Language
-          onTouchStart={this.props.language}
-          onPointerDown={this.props.language}
-        >
-          {this.props.language}
-        </Language>
         <Body>
-          <ReactMarkdown source={this.props.info.Body} />
+          <ReactMarkdown
+            source={this.props.info.Body}
+            escapeHtml={false}
+          />
         </Body>
       </Container>
     );
