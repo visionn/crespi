@@ -26,7 +26,6 @@ export const Button = styled.button`
   content: ${props => props.content};
   position: absolute;
   display: inherit;
-  z-index: 5;
   width: 2.5rem;
   height: 2.5rem;
   top: 2rem;

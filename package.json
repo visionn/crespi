@@ -1,9 +1,9 @@
 {
-  "name": "crespi-tour",
+  "name": "crespi",
   "version": "1.0.0",
   "description": "Visit the world through virtual reality",
   "main": "src/index.js",
-  "homepage": "https://cubisti.github.io/crespi-tour/",
+  "homepage": "https://visionn.github.io/crespi/",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
     "build": "webpack --mode production",

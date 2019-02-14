@@ -1,13 +1,13 @@
 export const config = {
   info: {
     ita: {
-      Title: 'Lorem ipsum',
-      Subtitle: 'Sottotitolo',
+      Title: 'crespi',
+      Subtitle: "Il mondo parte dell'internet",
       Body: require('../assets/text/ita/info/desc.md'),
     },
     eng: {
-      Title: 'Lorem ipsum',
-      Subtitle: 'Subtitle',
+      Title: 'crespi',
+      Subtitle: 'The world part of the internet',
       Body: require('../assets/text/eng/info/desc.md'),
     },
   },
@@ -17,7 +17,7 @@ export const config = {
       y: 0,
       z: 0,
     },
-    color: 'rgba(255, 60, 0, 0.3)',
+    color: '#fbda61',
     text: {
       ita: {
         TopImage: ' ',
@@ -39,7 +39,7 @@ export const config = {
       y: 0,
       z: 100,
     },
-    color: 'rgba(255, 60, 0, 0.3)',
+    color: '#fbda61',
     text: {
       ita: {
         TopImage: ' ',

@@ -21,6 +21,7 @@ module.exports = {
     //loading THREE dependencies
     alias: {
       'three-orbitcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/OrbitControls.js'),
+      'three-transformcontrols': PATH.join(__dirname, 'node_modules/three/examples/js/controls/TransformControls.js'),
       'three-orientation-controls': PATH.join(__dirname, 'node_modules/three/examples/js/controls/DeviceOrientationControls.js'),
       'three-gltfloader': PATH.join(__dirname, 'node_modules/three/examples/js/loaders/GLTFLoader.js')
     },
@@ -33,7 +34,8 @@ module.exports = {
     }),
     new HTML_WEBPACK_PLUGIN({
       template: PATH.join(__dirname, './src/index.html'),
-      filename: 'index.html'
+      inject: false,
+      filename: 'index.html',
     }),
     new PROGRESS_BAR({
       format: 'minimal',
