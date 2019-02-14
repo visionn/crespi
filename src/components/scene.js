@@ -46,7 +46,7 @@ class Scene extends Component {
     this.minZoom = 1;
     this.maxZoom = 2;
     this.orbitControls;
-    this.transformControls;
+    this.transformControls = [];
     this.elements = [];
     this.elementsNumber = 0;
   }
@@ -111,9 +111,11 @@ class Scene extends Component {
   };
   changeControlStatus = () => {
     this.orbitControls.enabled = this.props.move.orbitControls;
-    this.transformControls.showX = !this.props.move.orbitControls;
-    this.transformControls.showY = !this.props.move.orbitControls;
-    this.transformControls.showZ = !this.props.move.orbitControls;
+    if (typeof this.transformControls != 'undefined' && this.props.move.orbitControls === false) {
+      this.transformControls.map(e =>
+        e.showX(!this.props.move.orbitControls),
+      );
+    }
   };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
@@ -199,13 +201,17 @@ class Scene extends Component {
             // pushing model to dedicate array
             this.elements.push(gltf.scene);
             // adding scenes to transformControls
-            this.transformControls = new THREE.TransformControls(
+            let controls = new THREE.TransformControls(
               this.camera,
               this.container,
             );
-            this.transformControls.attach(gltf.scene);
-            this.transformControls.setMode('rotate');
-            this.scene.add(this.transformControls);
+            controls.showX(false);
+            controls.showY(false);
+            controls.showZ(false);
+            controls.attach(gltf.scene);
+            controls.setMode('rotate');
+            this.scene.add(controls);
+            this.transformControls.push(controls);
           });
         }
       }
