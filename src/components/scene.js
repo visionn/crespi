@@ -120,9 +120,13 @@ class Scene extends Component {
         this.props.move.position.y,
         this.props.move.position.z,
       );
+      this.camera.lookAt(
+        this.props.move.position.x,
+        this.props.move.position.y,
+        this.props.move.position.z,
+      );
       this.orbitControls.minDistance = 200;
       this.orbitControls.maxPolarAngle = Math.PI;
-      this.orbitControls.minPolarAngle = 0;
     }
   }
   handleChange = (object) => {
