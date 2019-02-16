@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'three-gltfloader';
 import 'three-orbitcontrols';
-import 'three-ortographic-trackball-controls';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
