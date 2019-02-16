@@ -72,7 +72,7 @@ class Scene extends Component {
               this.props.actions.SHOW_INFO(this.props.language)
             }
           >
-          x
+          ?
           </Button>
         </Container>
       </Color>
@@ -112,21 +112,9 @@ class Scene extends Component {
     if (this.props.move.orbitControls) {
       this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
       this.orbitControls.minPolarAngle = Math.PI / 2.1;
-      this.orbitControls.minDistance = 210;
-      this.orbitControls.maxDistance = 210;
     } else {
-      this.camera.position.set(
-        this.props.move.position.x,
-        this.props.move.position.y,
-        this.props.move.position.z,
-      );
-      this.camera.lookAt(
-        this.props.move.position.x,
-        this.props.move.position.y,
-        this.props.move.position.z,
-      );
-      this.orbitControls.minDistance = 200;
-      this.orbitControls.maxPolarAngle = Math.PI;
+      this.orbitControls.minDistance = 150;
+      this.orbitControls.minPolarAngle = 0;
     }
   }
   handleChange = (object) => {
@@ -155,6 +143,11 @@ class Scene extends Component {
     this.orbitControls.minPolarAngle = Math.PI / 2.1;
     this.orbitControls.minDistance = 210;
     this.orbitControls.maxDistance = 210;
+    this.orbitControls.enablePan = false;
+    this.orbitControls.enableDamping = true;
+    this.orbitControls.dampingFactor = 0.2;
+    this.orbitControls.screenSpacePanning = false;
+    this.orbitControls.rotateSpeed = 0.1;
   };
   animate = () => {
     requestAnimationFrame(this.animate);
@@ -166,6 +159,7 @@ class Scene extends Component {
       this.props.actions.HIDE_LOADING_SCREEN();
     } else {
     }
+    this.orbitControls.update();
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
@@ -174,6 +168,8 @@ class Scene extends Component {
       this.container.clientWidth,
       this.container.clientHeight,
     );
+    this.renderer.gammaOutput = true;
+    this.renderer.gammaFactor = 2.2;
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setClearColor(new THREE.Color('black'), 0);
     this.container.appendChild(this.renderer.domElement);
@@ -183,8 +179,11 @@ class Scene extends Component {
       0.1,
       1000,
     );
-    const light = new THREE.AmbientLight();
-    this.scene.add(light);
+    const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.24);
+    this.scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 3);
+    directionalLight.position.set(0, 0, -300);
+    this.scene.add(directionalLight);
     const setCamera = () => {
       // telling this.camera what to lock at
       // setting this.camera init position
