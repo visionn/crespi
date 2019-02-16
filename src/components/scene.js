@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'three-gltfloader';
 import 'three-orbitcontrols';
-import 'three-transformcontrols';
+import 'three-ortographic-trackball-controls';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -73,19 +73,19 @@ class Scene extends Component {
               this.props.actions.SHOW_INFO(this.props.language)
             }
           >
-            ?
+          x
           </Button>
         </Container>
       </Color>
     );
   }
-  objectClick = e => {
-    let raycaster = new THREE.Raycaster();
-    let mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, this.camera);
-    let clicked = raycaster.intersectObjects(this.scene.children, true);
+  objectClick = event => {
+  let mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
+  mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
+  let raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(mouse, this.camera);
+  let clicked = raycaster.intersectObjects(this.scene.children, true);
     try {
       if (
         typeof clicked !== 'undefined' &&
@@ -93,30 +93,42 @@ class Scene extends Component {
       ) {
         // reading gltf.scene.children[0].name
         this.props.actions.MOVE(clicked[0].object.parent.parent.name);
-        this.camera.lookAt(
-          this.props.move.position.x,
-          this.props.move.position.y,
-          this.props.move.position.z,
-        );
         this.camera.updateProjectionMatrix();
-        this.changeControlStatus();
+        this.handleChange(this.props.move.position);
       } else {
-        this.props.actions.DONT_MOVE();
-        this.changeControlStatus();
+        this.props.actions.DONT_MOVE({...this.camera.position});
+        this.handleChange({x: 0, y: 0, z: 0,});
       }
     } catch (e) {
-      this.props.actions.DONT_MOVE();
-      this.changeControlStatus();
+      this.props.actions.DONT_MOVE({...this.camera.position});
+      this.handleChange({x: 0, y: 0, z: 0,});
     }
   };
-  changeControlStatus = () => {
-    this.orbitControls.enabled = this.props.move.orbitControls;
-    if (typeof this.transformControls != 'undefined' && this.props.move.orbitControls === false) {
-      this.transformControls.map(e =>
-        e.showX(!this.props.move.orbitControls),
+  changeTarget = object => {
+    this.orbitControls.target.set(
+      object.x,
+      object.y,
+      object.z,
+    );
+    if (this.props.move.orbitControls) {
+      this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
+      this.orbitControls.minPolarAngle = Math.PI / 2.1;
+      this.orbitControls.minDistance = 210;
+      this.orbitControls.maxDistance = 210;
+    } else {
+      this.camera.position.set(
+        this.props.move.position.x,
+        this.props.move.position.y,
+        this.props.move.position.z,
       );
+      this.orbitControls.minDistance = 200;
+      this.orbitControls.maxPolarAngle = Math.PI;
+      this.orbitControls.minPolarAngle = 0;
     }
-  };
+  }
+  handleChange = (object) => {
+    this.changeTarget(object);
+  }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
@@ -138,12 +150,14 @@ class Scene extends Component {
     this.orbitControls = new THREE.OrbitControls(this.camera, this.container);
     this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
     this.orbitControls.minPolarAngle = Math.PI / 2.1;
+    this.orbitControls.minDistance = 210;
+    this.orbitControls.maxDistance = 210;
   };
   animate = () => {
     requestAnimationFrame(this.animate);
     if (
-      typeof this.elements != 'undefined' &&
-      this.elementsNumber != 0 &&
+      typeof this.elements !== 'undefined' &&
+      this.elementsNumber !== 0 &&
       this.props.loading === true
     ) {
       this.props.actions.HIDE_LOADING_SCREEN();
@@ -182,7 +196,7 @@ class Scene extends Component {
       let keys = Object.getOwnPropertyNames(config);
       this.elementsNumber = keys.length;
       for (let i of keys) {
-        if (i != 'info') {
+        if (i !== 'info') {
           // requiring 3d objects files using jsonloader
           let mystery = require(`../assets/3d/${i}.gltf`);
           // parsing previously loaded json file
@@ -200,18 +214,6 @@ class Scene extends Component {
             this.scene.add(gltf.scene);
             // pushing model to dedicate array
             this.elements.push(gltf.scene);
-            // adding scenes to transformControls
-            let controls = new THREE.TransformControls(
-              this.camera,
-              this.container,
-            );
-            controls.showX(false);
-            controls.showY(false);
-            controls.showZ(false);
-            controls.attach(gltf.scene);
-            controls.setMode('rotate');
-            this.scene.add(controls);
-            this.transformControls.push(controls);
           });
         }
       }
