@@ -20,9 +20,14 @@ export const Container = styled.div`
 export const TopImage = styled.div`
   top: 0;
   padding: 0 0.7rem;
-  height: 18rem;
+  height: 30vh;
   background-color: #08aeea;
   background-image: linear-gradient(0deg, #08aeea 0%, #2af598 100%);
   border-bottom-right-radius: 2rem;
   border-bottom-left-radius: 2rem;
+  transition: height 0.5s;
+  -webkit-transition: height 0.5s;
+  :hover {
+    height: 90vh;
+  }
 `;
