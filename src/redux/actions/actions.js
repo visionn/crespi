@@ -32,8 +32,9 @@ export const MOVE = name => ({
   type: 'MOVE',
   name,
 });
-export const DONT_MOVE = () => ({
+export const DONT_MOVE = initialPosition => ({
   type: 'DONT_MOVE',
+  initialPosition,
 });
 export const DONT_LOOK = () => {
   return {
