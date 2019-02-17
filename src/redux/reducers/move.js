@@ -4,6 +4,7 @@ export const MOVE = (state = '', action) => {
     case 'MOVE':
       return {
         ...state,
+        type: action.type,
         position: config[action.name].position,
         orbitControls: false,
       };
@@ -11,6 +12,7 @@ export const MOVE = (state = '', action) => {
     case 'DONT_MOVE':
       return {
         ...state,
+        ...action,
         orbitControls: true,
       };
     default:

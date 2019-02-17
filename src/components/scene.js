@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'three-gltfloader';
 import 'three-orbitcontrols';
-import 'three-transformcontrols';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -73,19 +72,19 @@ class Scene extends Component {
               this.props.actions.SHOW_INFO(this.props.language)
             }
           >
-            ?
+          ?
           </Button>
         </Container>
       </Color>
     );
   }
-  objectClick = e => {
-    let raycaster = new THREE.Raycaster();
-    let mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
-    raycaster.setFromCamera(mouse, this.camera);
-    let clicked = raycaster.intersectObjects(this.scene.children, true);
+  objectClick = event => {
+  let mouse = new THREE.Vector2();
+  mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
+  mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
+  let raycaster = new THREE.Raycaster();
+  raycaster.setFromCamera(mouse, this.camera);
+  let clicked = raycaster.intersectObjects(this.scene.children, true);
     try {
       if (
         typeof clicked !== 'undefined' &&
@@ -93,30 +92,34 @@ class Scene extends Component {
       ) {
         // reading gltf.scene.children[0].name
         this.props.actions.MOVE(clicked[0].object.parent.parent.name);
-        this.camera.lookAt(
-          this.props.move.position.x,
-          this.props.move.position.y,
-          this.props.move.position.z,
-        );
         this.camera.updateProjectionMatrix();
-        this.changeControlStatus();
+        this.handleChange(this.props.move.position);
       } else {
-        this.props.actions.DONT_MOVE();
-        this.changeControlStatus();
+        this.props.actions.DONT_MOVE({...this.camera.position});
+        this.handleChange({x: 0, y: 0, z: 0,});
       }
     } catch (e) {
-      this.props.actions.DONT_MOVE();
-      this.changeControlStatus();
+      this.props.actions.DONT_MOVE({...this.camera.position});
+      this.handleChange({x: 0, y: 0, z: 0,});
     }
   };
-  changeControlStatus = () => {
-    this.orbitControls.enabled = this.props.move.orbitControls;
-    if (typeof this.transformControls != 'undefined' && this.props.move.orbitControls === false) {
-      this.transformControls.map(e =>
-        e.showX(!this.props.move.orbitControls),
-      );
+  changeTarget = object => {
+    this.orbitControls.target.set(
+      object.x,
+      object.y,
+      object.z,
+    );
+    if (this.props.move.orbitControls) {
+      this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
+      this.orbitControls.minPolarAngle = Math.PI / 2.1;
+    } else {
+      this.orbitControls.minDistance = 150;
+      this.orbitControls.minPolarAngle = 0;
     }
-  };
+  }
+  handleChange = (object) => {
+    this.changeTarget(object);
+  }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
@@ -138,17 +141,25 @@ class Scene extends Component {
     this.orbitControls = new THREE.OrbitControls(this.camera, this.container);
     this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
     this.orbitControls.minPolarAngle = Math.PI / 2.1;
+    this.orbitControls.minDistance = 210;
+    this.orbitControls.maxDistance = 210;
+    this.orbitControls.enablePan = false;
+    this.orbitControls.enableDamping = true;
+    this.orbitControls.dampingFactor = 0.2;
+    this.orbitControls.screenSpacePanning = false;
+    this.orbitControls.rotateSpeed = 0.1;
   };
   animate = () => {
     requestAnimationFrame(this.animate);
     if (
-      typeof this.elements != 'undefined' &&
-      this.elementsNumber != 0 &&
+      typeof this.elements !== 'undefined' &&
+      this.elementsNumber !== 0 &&
       this.props.loading === true
     ) {
       this.props.actions.HIDE_LOADING_SCREEN();
     } else {
     }
+    this.orbitControls.update();
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
@@ -157,6 +168,8 @@ class Scene extends Component {
       this.container.clientWidth,
       this.container.clientHeight,
     );
+    this.renderer.gammaOutput = true;
+    this.renderer.gammaFactor = 2.2;
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setClearColor(new THREE.Color('black'), 0);
     this.container.appendChild(this.renderer.domElement);
@@ -166,8 +179,11 @@ class Scene extends Component {
       0.1,
       1000,
     );
-    const light = new THREE.AmbientLight();
-    this.scene.add(light);
+    const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.24);
+    this.scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 3);
+    directionalLight.position.set(0, 0, -300);
+    this.scene.add(directionalLight);
     const setCamera = () => {
       // telling this.camera what to lock at
       // setting this.camera init position
@@ -182,7 +198,7 @@ class Scene extends Component {
       let keys = Object.getOwnPropertyNames(config);
       this.elementsNumber = keys.length;
       for (let i of keys) {
-        if (i != 'info') {
+        if (i !== 'info') {
           // requiring 3d objects files using jsonloader
           let mystery = require(`../assets/3d/${i}.gltf`);
           // parsing previously loaded json file
@@ -200,18 +216,6 @@ class Scene extends Component {
             this.scene.add(gltf.scene);
             // pushing model to dedicate array
             this.elements.push(gltf.scene);
-            // adding scenes to transformControls
-            let controls = new THREE.TransformControls(
-              this.camera,
-              this.container,
-            );
-            controls.showX(false);
-            controls.showY(false);
-            controls.showZ(false);
-            controls.attach(gltf.scene);
-            controls.setMode('rotate');
-            this.scene.add(controls);
-            this.transformControls.push(controls);
           });
         }
       }
