@@ -7,15 +7,22 @@ module.exports = {
   //setting entry app.js
   //note: every entry must be in directory src to work with webpack
   entry: {
-    app: './src/index.js',
+    main: './src/index.js',
+    app: ['./src/components/app.js', './src/style/common.js'],
+    description: ['./src/components/description.js', './src/style/common.js'],
+    dinamic: ['./src/components/dinamic.js', './src/style/description.js'],
+    info: ['./src/components/info.js', './src/style/info.js'],
+    scene: ['./src/components/scene.js', './src/style/scene.js'],
+    toast: ['./src/components/toast.js', './src/style/toast.js'],
+    configuration: './src/configuration/config.js',
+
     vendor: ['react', 'react-dom']
   },
   output: {
     //defining output file
     pathinfo: false,
     path: PATH.resolve(__dirname, './build/'),
-    filename: 'crespi.min.js',
-    chunkFilename: '[id].[hash].js',
+    filename: '[name].min.js',
   },
   resolve: {
     //loading THREE dependencies
@@ -33,8 +40,10 @@ module.exports = {
     }),
     new HTML_WEBPACK_PLUGIN({
       template: PATH.join(__dirname, './src/index.html'),
-      inject: false,
+      inject: true,
       filename: 'index.html',
+      hash: true,
+      minify: true,
       favicon: './src/assets/favicon.ico'
     }),
     new PROGRESS_BAR({
@@ -47,12 +56,6 @@ module.exports = {
         test: /\.js$/,
         exclude: '/node_modules/',
         use: 'babel-loader?cacheDirectory',
-      }, {
-        test: /\.html$/,
-        use: [{
-          loader: 'html-loader',
-          options: {minimize: true},
-        }]
       }, {
         test: /\.(md|gltf)$/,
         use: 'raw-loader',
