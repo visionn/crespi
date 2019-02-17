@@ -4,16 +4,19 @@ export const MOVE = (state = '', action) => {
     case 'MOVE':
       return {
         ...state,
-        type: action.type,
         position: config[action.name].position,
-        orbitControls: false,
+        isTargetCenter: false,
       };
 
     case 'DONT_MOVE':
       return {
         ...state,
-        ...action,
-        orbitControls: true,
+        position: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+        isTargetCenter: true,
       };
     default:
       return state;

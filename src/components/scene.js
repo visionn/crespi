@@ -41,7 +41,6 @@ class Scene extends Component {
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.buttonsGroup = new THREE.Group();
-    this.selected;
     this.minZoom = 1;
     this.maxZoom = 2;
     this.orbitControls;
@@ -79,37 +78,35 @@ class Scene extends Component {
     );
   }
   objectClick = event => {
-  let mouse = new THREE.Vector2();
-  mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-  mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
-  let raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera(mouse, this.camera);
-  let clicked = raycaster.intersectObjects(this.scene.children, true);
+    let mouse = new THREE.Vector2();
+    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
+    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
+    let raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, this.camera);
+    let clicked = raycaster.intersectObjects(this.scene.children, true);
     try {
       if (
         typeof clicked !== 'undefined' &&
-        clicked[0].object.parent.parent.name
+        typeof this.props.move.position !== 'undefined' &&
+        clicked.length > 0
       ) {
         // reading gltf.scene.children[0].name
         this.props.actions.MOVE(clicked[0].object.parent.parent.name);
         this.camera.updateProjectionMatrix();
-        this.handleChange(this.props.move.position);
+        this.changeTarget();
       } else {
-        this.props.actions.DONT_MOVE({...this.camera.position});
-        this.handleChange({x: 0, y: 0, z: 0,});
+        this.props.actions.DONT_MOVE();
+        this.changeTarget();
       }
-    } catch (e) {
-      this.props.actions.DONT_MOVE({...this.camera.position});
-      this.handleChange({x: 0, y: 0, z: 0,});
-    }
+    } catch (e) {}
   };
-  changeTarget = object => {
+  changeTarget = () => {
     this.orbitControls.target.set(
-      object.x,
-      object.y,
-      object.z,
+      this.props.move.position.x,
+      this.props.move.position.y,
+      this.props.move.position.z,
     );
-    if (this.props.move.orbitControls) {
+    if (this.props.move.isTargetCenter) {
       this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
       this.orbitControls.minPolarAngle = Math.PI / 2.1;
     } else {
@@ -117,19 +114,16 @@ class Scene extends Component {
       this.orbitControls.minPolarAngle = 0;
     }
   }
-  handleChange = (object) => {
-    this.changeTarget(object);
-  }
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
-    this.selected = cameraRay.intersectObjects(this.scene.children, true);
+    let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
     try {
-      if (typeof this.selected !== 'undefined') {
+      if (typeof facingCamera !== 'undefined') {
         // reading gltf.scene.children[0].name
         this.props.actions.LOOKING_AT(
-          this.selected[0].object.parent.parent.name,
+          facingCamera[0].object.parent.parent.name,
           this.props.language,
         );
       }
