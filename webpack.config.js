@@ -60,9 +60,9 @@ module.exports = {
     ]
   },
   optimization: {
-    removeAvailableModules: false,
-    removeEmptyChunks: false,
-    splitChunks: false,
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   devServer: {
     hot: true,
