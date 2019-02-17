@@ -71,7 +71,7 @@ class Scene extends Component {
               this.props.actions.SHOW_INFO(this.props.language)
             }
           >
-          ?
+            ?
           </Button>
         </Container>
       </Color>
@@ -113,7 +113,7 @@ class Scene extends Component {
       this.orbitControls.minDistance = 150;
       this.orbitControls.minPolarAngle = 0;
     }
-  }
+  };
   cameraRay = () => {
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
@@ -175,7 +175,10 @@ class Scene extends Component {
     );
     const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.24);
     this.scene.add(ambientLight);
-    const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 3);
+    const directionalLight = new THREE.DirectionalLight(
+      new THREE.Color('white'),
+      3,
+    );
     directionalLight.position.set(0, 0, -300);
     this.scene.add(directionalLight);
     const setCamera = () => {
