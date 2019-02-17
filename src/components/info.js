@@ -41,10 +41,7 @@ class Info extends Component {
         <Title>{this.props.info.Title}</Title>
         <Subtitle>{this.props.info.Subtitle}</Subtitle>
         <Body>
-          <ReactMarkdown
-            source={this.props.info.Body}
-            escapeHtml={false}
-          />
+          <ReactMarkdown source={this.props.info.Body} escapeHtml={false} />
         </Body>
       </Container>
     );
