@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   ),
-  setLanguage: () => dispatch(LANGUAGE()),
+  setLanguage: (language) => dispatch(LANGUAGE(language)),
 });
 
 class Scene extends Component {
@@ -78,6 +78,7 @@ class Scene extends Component {
     );
   }
   objectClick = event => {
+    console.log(window.onload);
     let mouse = new THREE.Vector2();
     mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
     mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
@@ -157,7 +158,7 @@ class Scene extends Component {
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
-    this.props.setLanguage();
+    this.props.setLanguage(navigator.language);
     this.renderer.setSize(
       this.container.clientWidth,
       this.container.clientHeight,
