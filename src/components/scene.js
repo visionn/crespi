@@ -185,6 +185,7 @@ class Scene extends Component {
             gltf.scene.name = i;
             gltf.scene.children[0].name = i;
             gltf.scene.name = i;
+            gltf.scene.rotation.y = Math.PI / 2;
             // adding model to scene
             this.scene.add(gltf.scene);
             // pushing model to dedicate array
