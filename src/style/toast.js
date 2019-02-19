@@ -28,8 +28,8 @@ export const Toasty = styled.div`
   ${props => props.description && css`
     padding: 0;
     margin: 0;
-    width: 100%;
-    height: 100%;
+    bottom: 0;
+    top: 0;
     border-radius: 0;
   `};
 `;
