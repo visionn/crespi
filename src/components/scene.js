@@ -78,9 +78,12 @@ class Scene extends Component {
     );
     // true: camera looking to object, false: camera looking to centre
     if (this.props.lookingAt.status) {
-      this.orbitControls.minDistance = 150;
       this.orbitControls.minPolarAngle = 0;
+        this.orbitControls.minDistance = 100;
+        this.orbitControls.maxDistance = 100;
     } else {
+      this.orbitControls.minDistance = 205;
+      this.orbitControls.maxDistance = 205;
       this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
       this.orbitControls.minPolarAngle = Math.PI / 2.1;
     }
@@ -110,8 +113,8 @@ class Scene extends Component {
     this.orbitControls = new THREE.OrbitControls(this.camera, this.container);
     this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
     this.orbitControls.minPolarAngle = Math.PI / 2.1;
-    this.orbitControls.minDistance = 210;
-    this.orbitControls.maxDistance = 210;
+    this.orbitControls.minDistance = 207;
+    this.orbitControls.maxDistance = 207;
     this.orbitControls.enablePan = false;
     this.orbitControls.enableDamping = true;
     this.orbitControls.dampingFactor = 0.2;
@@ -152,9 +155,8 @@ class Scene extends Component {
     this.scene.add(ambientLight);
     const directionalLight = new THREE.DirectionalLight(
       new THREE.Color('white'),
-      3,
+      1,
     );
-    directionalLight.position.set(0, 0, -300);
     this.scene.add(directionalLight);
     const setCamera = () => {
       // telling this.camera what to lock at
