@@ -36,6 +36,7 @@ export const Button = styled.button`
   outline: none;
   border-radius: 20px;
   font-size: 2rem;
+  padding: 0;
   box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.38);
   background-color: rgb(255, 255, 255);
 `;

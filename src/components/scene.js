@@ -70,28 +70,6 @@ class Scene extends Component {
       </Color>
     );
   }
-  objectClick = event => {
-    console.log(window.onload);
-    let mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
-    let raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, this.camera);
-    let clicked = raycaster.intersectObjects(this.scene.children, true);
-    try {
-      if (
-        typeof clicked !== 'undefined' &&
-        typeof this.props.move.position !== 'undefined' &&
-        clicked.length > 0
-      ) {
-        // reading gltf.scene.children[0].name
-        this.props.actions.MOVE(clicked[0].object.parent.parent.name);
-        this.camera.updateProjectionMatrix();
-      } else {
-        this.props.actions.DONT_MOVE();
-      }
-    } catch (e) {}
-  };
   changeTarget = () => {
     this.orbitControls.target.set(
       this.props.lookingAt.position.x,
