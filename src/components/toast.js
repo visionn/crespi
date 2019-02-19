@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Toasty, Box, Body, Title, Subtitle, Container } from '../style/toast';
+import { Toasty, Box, Body, Title, Subtitle } from '../style/toast';
 import { Exit, Top } from '../style/common';
-import Description from './description';
 import { connect } from 'react-redux';
 import {
   HIDE_INFO,
@@ -44,7 +43,6 @@ class Toast extends Component {
       >
         <Title>{this.props.lookingAt.Title}</Title>
         <Subtitle>{this.props.lookingAt.Subtitle}</Subtitle>
-        <Description />
       </Toasty>
     );
   }
