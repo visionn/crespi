@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Toasty, Box, Body, Title, Subtitle } from '../style/toast';
+import { Toasty, Box, Body, Title, Subtitle, Container } from '../style/toast';
 import { Exit, Top } from '../style/common';
+import Description from './description';
 import { connect } from 'react-redux';
 import {
   HIDE_INFO,
@@ -37,10 +38,13 @@ class Toast extends Component {
             this.props.language,
           )
         }
+        size={this.props.description.toastSize}
+        description={this.props.description.status}
         lookingAt={this.props.lookingAt.status}
       >
         <Title>{this.props.lookingAt.Title}</Title>
         <Subtitle>{this.props.lookingAt.Subtitle}</Subtitle>
+        <Description />
       </Toasty>
     );
   }

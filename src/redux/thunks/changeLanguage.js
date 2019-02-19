@@ -1,7 +1,7 @@
 import { CHANGE_LANGUAGE, SHOW_INFO } from '../actions/actions';
-export const LANGUAGE = () => {
+export const LANGUAGE = (language) => {
   return (dispatch, getState) => {
-    switch (navigator.language) {
+    switch (language) {
       case 'it-IT':
         dispatch(CHANGE_LANGUAGE('ita'));
       default:

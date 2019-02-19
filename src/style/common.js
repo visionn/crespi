@@ -36,11 +36,16 @@ export const Button = styled.button`
   outline: none;
   border-radius: 20px;
   font-size: 2rem;
+  padding: 0;
   box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.38);
   background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
-  :empty {
-    color: blue;
-  }
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 `;

@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   ),
-  setLanguage: () => dispatch(LANGUAGE()),
+  setLanguage: (language) => dispatch(LANGUAGE(language)),
 });
 
 class Scene extends Component {
@@ -54,15 +54,8 @@ class Scene extends Component {
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
-          onTouchStart={e => {
-            this.cameraRay();
-            this.objectClick(e);
-          }}
-          onPointerDown={e => {
-            this.cameraRay();
-            this.objectClick(e);
-          }}
-        >
+          onTouchStart={this.cameraRay}
+          onPointerDown={this.cameraRay}>
           <Button
             onTouchStart={() =>
               this.props.actions.SHOW_INFO(this.props.language)
@@ -77,58 +70,40 @@ class Scene extends Component {
       </Color>
     );
   }
-  objectClick = event => {
-    let mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
-    let raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, this.camera);
-    let clicked = raycaster.intersectObjects(this.scene.children, true);
-    try {
-      if (
-        typeof clicked !== 'undefined' &&
-        typeof this.props.move.position !== 'undefined' &&
-        clicked.length > 0
-      ) {
-        // reading gltf.scene.children[0].name
-        this.props.actions.MOVE(clicked[0].object.parent.parent.name);
-        this.camera.updateProjectionMatrix();
-        this.changeTarget();
-      } else {
-        this.props.actions.DONT_MOVE();
-        this.changeTarget();
-      }
-    } catch (e) {}
-  };
   changeTarget = () => {
     this.orbitControls.target.set(
-      this.props.move.position.x,
-      this.props.move.position.y,
-      this.props.move.position.z,
+      this.props.lookingAt.position.x,
+      this.props.lookingAt.position.y,
+      this.props.lookingAt.position.z,
     );
-    if (this.props.move.isTargetCenter) {
-      this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
-      this.orbitControls.minPolarAngle = Math.PI / 2.1;
-    } else {
+    // true: camera looking to object, false: camera looking to centre
+    if (this.props.lookingAt.status) {
       this.orbitControls.minDistance = 150;
       this.orbitControls.minPolarAngle = 0;
+    } else {
+      this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
+      this.orbitControls.minPolarAngle = Math.PI / 2.1;
     }
   };
   cameraRay = () => {
+    // declaring camera raycaster
     let cameraRay = new THREE.Raycaster();
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
     let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-    try {
-      if (typeof facingCamera !== 'undefined') {
-        // reading gltf.scene.children[0].name
-        this.props.actions.LOOKING_AT(
-          facingCamera[0].object.parent.parent.name,
-          this.props.language,
-        );
-      }
-    } catch (e) {
+    if (
+      typeof facingCamera !== 'undefined' &&
+      facingCamera.length > 0
+    ) {
+      // reading gltf.scene.children[0].name
+      this.props.actions.LOOKING_AT(
+        facingCamera[0].object.parent.parent.name,
+        this.props.language,
+      );
+      this.changeTarget();
+    } else {
       this.props.actions.DONT_LOOK();
+      this.changeTarget();
     }
   };
   orbitControls = () => {
@@ -157,7 +132,7 @@ class Scene extends Component {
     this.renderer.render(this.scene, this.camera);
   };
   componentDidMount = () => {
-    this.props.setLanguage();
+    this.props.setLanguage(navigator.language);
     this.renderer.setSize(
       this.container.clientWidth,
       this.container.clientHeight,
@@ -207,6 +182,7 @@ class Scene extends Component {
               config[i].position.z,
             );
             // setting scene name
+            gltf.scene.name = i;
             gltf.scene.children[0].name = i;
             gltf.scene.name = i;
             // adding model to scene
