@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'three-gltfloader';
 import 'three-orbitcontrols';
 import { bindActionCreators } from 'redux';
+import { loadModels } from './functions/loadModels';
 import { connect } from 'react-redux';
 import {
   SHOW_INFO,
@@ -15,7 +16,6 @@ import {
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container, Color } from '../style/scene';
 import { Button } from '../style/common';
-import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
     },
     dispatch,
   ),
-  setLanguage: (language) => dispatch(LANGUAGE(language)),
+  setLanguage: language => dispatch(LANGUAGE(language)),
 });
 
 class Scene extends Component {
@@ -46,7 +46,6 @@ class Scene extends Component {
     this.orbitControls;
     this.transformControls = [];
     this.elements = [];
-    this.elementsNumber = 0;
   }
   render() {
     return (
@@ -55,7 +54,8 @@ class Scene extends Component {
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
           onTouchStart={this.cameraRay}
-          onPointerDown={this.cameraRay}>
+          onPointerDown={this.cameraRay}
+        >
           <Button
             onTouchStart={() =>
               this.props.actions.SHOW_INFO(this.props.language)
@@ -79,8 +79,8 @@ class Scene extends Component {
     // true: camera looking to object, false: camera looking to centre
     if (this.props.lookingAt.status) {
       this.orbitControls.minPolarAngle = 0;
-        this.orbitControls.minDistance = 100;
-        this.orbitControls.maxDistance = 100;
+      this.orbitControls.minDistance = 100;
+      this.orbitControls.maxDistance = 100;
     } else {
       this.orbitControls.minDistance = 205;
       this.orbitControls.maxDistance = 205;
@@ -94,10 +94,7 @@ class Scene extends Component {
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
     let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-    if (
-      typeof facingCamera !== 'undefined' &&
-      facingCamera.length > 0
-    ) {
+    if (typeof facingCamera !== 'undefined' && facingCamera.length > 0) {
       // reading gltf.scene.children[0].name
       this.props.actions.LOOKING_AT(
         facingCamera[0].object.parent.parent.name,
@@ -125,7 +122,7 @@ class Scene extends Component {
     requestAnimationFrame(this.animate);
     if (
       typeof this.elements !== 'undefined' &&
-      this.elementsNumber !== 0 &&
+      this.elements.length > 0 &&
       this.props.loading === true
     ) {
       this.props.actions.HIDE_LOADING_SCREEN();
@@ -166,36 +163,6 @@ class Scene extends Component {
       this.camera.position.set(0, 0, -190);
       this.scene.add(this.camera);
     };
-    const createButton = () => {
-      const MAP_LOADER = new THREE.GLTFLoader();
-      // takes the keys of config and loads them into an array
-      let keys = Object.getOwnPropertyNames(config);
-      this.elementsNumber = keys.length;
-      for (let i of keys) {
-        if (i !== 'info') {
-          // requiring 3d objects files using jsonloader
-          let mystery = require(`../assets/3d/${i}.gltf`);
-          // parsing previously loaded json file
-          MAP_LOADER.parse(mystery, './', gltf => {
-            // setting object position
-            gltf.scene.position.set(
-              config[i].position.x,
-              config[i].position.y,
-              config[i].position.z,
-            );
-            // setting scene name
-            gltf.scene.name = i;
-            gltf.scene.children[0].name = i;
-            gltf.scene.name = i;
-            gltf.scene.rotation.y = Math.PI / 2;
-            // adding model to scene
-            this.scene.add(gltf.scene);
-            // pushing model to dedicate array
-            this.elements.push(gltf.scene);
-          });
-        }
-      }
-    };
     const onWindowResize = () => {
       try {
         // asign new window sizes to camera
@@ -214,7 +181,7 @@ class Scene extends Component {
     window.addEventListener('resize', onWindowResize, false);
     // wait react container element (This must be called at the end of everything)
     setCamera();
-    createButton();
+    loadModels(this.scene, this.elements);
     this.orbitControls();
     this.animate();
     this.cameraRay();
