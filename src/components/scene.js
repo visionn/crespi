@@ -9,8 +9,6 @@ import {
   HIDE_INFO,
   LOOKING_AT,
   DONT_LOOK,
-  DONT_MOVE,
-  MOVE,
   HIDE_LOADING_SCREEN,
 } from '../redux/actions/actions';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';

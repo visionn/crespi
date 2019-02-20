@@ -28,24 +28,17 @@ export const LOOKING_AT = (status, language) => {
     },
   };
 };
-export const MOVE = name => ({
-  type: 'MOVE',
-  name,
-});
-export const DONT_MOVE = () => ({
-  type: 'DONT_MOVE',
-});
 export const DONT_LOOK = () => {
   return {
     type: 'DONT_LOOK',
   };
 };
-export const CHANGE_LANGUAGE = language => {
-  return {
-    type: 'CHANGE_LANGUAGE',
-    language,
-  };
-};
+export const LANGUAGE_ITA = () => ({
+  type: 'LANGUAGE_ITA',
+});
+export const LANGUAGE_ENG = () => ({
+  type: 'LANGUAGE_ENG',
+});
 export const HIDE_LOADING_SCREEN = () => ({
   type: 'HIDE_LOADING_SCREEN',
 });
