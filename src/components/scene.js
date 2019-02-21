@@ -24,8 +24,6 @@ const mapDispatchToProps = dispatch => ({
       HIDE_INFO,
       LOOKING_AT,
       DONT_LOOK,
-      DONT_MOVE,
-      MOVE,
       HIDE_LOADING_SCREEN,
     },
     dispatch,
@@ -38,11 +36,8 @@ class Scene extends Component {
     super(props);
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    this.buttonsGroup = new THREE.Group();
-    this.minZoom = 1;
-    this.maxZoom = 2;
+    this.camera;
     this.orbitControls;
-    this.transformControls = [];
     this.elements = [];
   }
   render() {
