@@ -1,5 +1,5 @@
 <p style="border-radius: 1%;" align="center">
-  ![gif](src/assets/README.gif)
+  <img src="src/assets/README.gif">
 </p>
 
 # crespi
