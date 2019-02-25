@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container } from '../../style/video';
 import 'three-orbitcontrols';
 export class Video extends Component {
   constructor (props) {
@@ -10,12 +11,11 @@ export class Video extends Component {
   }
   render () {
     return (
-      <div ref={el => this.container = el}>
+      <Container ref={el => this.container = el}>
         <video
           ref={el => this.videoRef = el}
-          onWindowResize={this.onWindowResize}
         />
-      </div>
+      </Container>
     );
   }
   componentDidMount = () => {
@@ -36,29 +36,32 @@ export class Video extends Component {
     );
     this.camera.position.set(-10, 0, 0);
     this.controls = new THREE.OrbitControls(this.camera, this.container);
-    let geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+    let geometry = new THREE.SphereBufferGeometry( 20, 20, 20 );
     geometry.scale( - 1, 1, 1 );
-    let video = this.videoRef;
-    video.crossOrigin = 'anonymous';
-    video.loop = true;
-    video.muted = true;
-    video.src = '../../assets/video/pano.webm';
-    video.play();
-    let texture = new THREE.VideoTexture(video);
+    this.videoRef.visibility = 'hidden';
+    this.videoRef.width = 0;
+    this.videoRef.height = 0;
+    this.videoRef.crossOrigin = 'anonymous';
+    this.videoRef.loop = true;
+    this.videoRef.muted = true;
+    this.videoRef.src = '../../assets/video/pano.webm';
+    this.videoRef.setAttribute( 'webkit-playsinline', 'webkit-playsinline' );
+    this.videoRef.play();
+    let texture = new THREE.VideoTexture(this.videoRef);
     let material = new THREE.MeshBasicMaterial({ map: texture });
     texture.flipY = false;
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
+    window.addEventListener('resize', this.onWindowResize, false);
+    this.animate();
   }
   onWindowResize = () => {
-    try {
-      // asign new window sizes to this.camera
-      this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
-      // updates this.camera projections
-      this.camera.updateProjectionMatrix();
-      // updates this.renderer size on reductction for responsive canvas
-      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    } catch (e) {}
+    // asign new window sizes to this.camera
+    this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+    // updates this.camera projections
+    this.camera.updateProjectionMatrix();
+    // updates this.renderer size on reductction for responsive canvas
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
   };
   animate = () => {
     requestAnimationFrame(this.animate);
