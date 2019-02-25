@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'three-orbitcontrols';
-import { Container } from '../../style/photo';
+import { Container } from '../../style/video';
 export class Photo extends Component {
   constructor (props) {
     super (props);
@@ -22,7 +22,7 @@ export class Photo extends Component {
     this.renderer.gammaOutput = true;
     this.renderer.gammaFactor = 2.2;
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setClearColor();
+    this.renderer.setClearColor(new THREE.Color('white'));
     this.container.appendChild(this.renderer.domElement);
     this.camera = new THREE.PerspectiveCamera(
       75,
@@ -30,13 +30,14 @@ export class Photo extends Component {
       0.1,
       1000,
     );
+    this.camera.position.set(-10, 0, 0);
+    this.camera.lookAt(0, 0, 0)
     this.controls = new THREE.OrbitControls(this.camera, this.container);
-    const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.24);
-    this.scene.add(ambientLight);
     let geometry = new THREE.BoxGeometry( 1, 1, 1 );
     let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     let cube = new THREE.Mesh( geometry, material );
     this.scene.add( cube );
+    this.animate();
   }
   onWindowResize = () => {
     try {

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { fadeIn, fadeOut } from './animations';
 export const Container = styled.div`
   position: absolute;
+  display: flex;
   top: 0;
   left: 0;
   right: 0;
