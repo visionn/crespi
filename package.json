@@ -44,7 +44,6 @@
     "coveralls": "^3.0.2",
     "npm": "^6.5.0",
     "react": "^16.6.3",
-    "react-container-dimensions": "^1.4.1",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "redux": "^4.0.1",
