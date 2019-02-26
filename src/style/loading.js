@@ -3,17 +3,8 @@ import { fadeIn, fadeOut } from './animations';
 export const Container = styled.div`
   position: absolute;
   visibility: ${props => (props.status ? 'visible' : 'hidden')};
-  animation: ${props => (props.status ? fadeIn : fadeOut)} 1s ease-out;
-  transition: visibility 0.25s;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgb(255, 255, 255);
   animation: ${fadeOut} 1s linear;
-`;
-export const Element = styled.div`
-  position: absolute;
+  transition: visibility 1s linear;
   top: 50%;
   left: 50%;
   transform: translateY(-50%);

@@ -1,11 +1,11 @@
-import { LANGUAGE_ITA, LANGUAGE_ENG } from '../actions/actions';
-export const LANGUAGE = language => {
+import { CHANGE_LANGUAGE, SHOW_INFO } from '../actions/actions';
+export const LANGUAGE = (language) => {
   return (dispatch, getState) => {
     switch (language) {
       case 'it-IT':
-        dispatch(LANGUAGE_ITA());
+        dispatch(CHANGE_LANGUAGE('ita'));
       default:
-        dispatch(LANGUAGE_ENG());
+        dispatch(CHANGE_LANGUAGE('eng'));
     }
   };
 };
