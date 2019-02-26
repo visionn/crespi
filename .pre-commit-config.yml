@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-- repo: https://github.com/cubisti/crespi-tour
+- repo: https://github.com/visionn/crespi
   hooks:
     - id: prettier
     - files: '*.js'
-=======
-- repo: https://github.com/cubisti/crespi-tour
-  hooks:
-    - id: prettier
-    - files: '*.js'
->>>>>>> 0d0795dbd62d6666e2654c8b510bb04c04cc7fe5

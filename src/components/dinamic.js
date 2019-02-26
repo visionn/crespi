@@ -1,5 +1,6 @@
 import React, { createElement } from 'react';
 import { Title, Subtitle, Body } from '../style/common';
+import { Video } from './functions/video';
 import { TopImage } from '../style/description';
 export const DinamicPage = props => {
   let page = [''];
@@ -12,7 +13,7 @@ export const DinamicPage = props => {
       } else if (key === 'Body') {
         return createElement(Body, null, props.description[key]);
       } else if (key === 'TopImage') {
-        return createElement(TopImage, null, '');
+        return <Video />
       } else {
         return '';
       }

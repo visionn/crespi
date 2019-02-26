@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import 'three-gltfloader';
 import 'three-orbitcontrols';
 import { bindActionCreators } from 'redux';
+import { loadModels } from './functions/loadModels';
 import { connect } from 'react-redux';
 import {
   SHOW_INFO,
   HIDE_INFO,
   LOOKING_AT,
   DONT_LOOK,
-  DONT_MOVE,
-  MOVE,
   HIDE_LOADING_SCREEN,
 } from '../redux/actions/actions';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
@@ -26,13 +25,11 @@ const mapDispatchToProps = dispatch => ({
       HIDE_INFO,
       LOOKING_AT,
       DONT_LOOK,
-      DONT_MOVE,
-      MOVE,
       HIDE_LOADING_SCREEN,
     },
     dispatch,
   ),
-  setLanguage: (language) => dispatch(LANGUAGE(language)),
+  setLanguage: language => dispatch(LANGUAGE(language)),
 });
 
 class Scene extends Component {
@@ -40,13 +37,9 @@ class Scene extends Component {
     super(props);
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    this.buttonsGroup = new THREE.Group();
-    this.minZoom = 1;
-    this.maxZoom = 2;
+    this.camera;
     this.orbitControls;
-    this.transformControls = [];
     this.elements = [];
-    this.elementsNumber = 0;
   }
   render() {
     return (
@@ -55,7 +48,8 @@ class Scene extends Component {
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
           onTouchStart={this.cameraRay}
-          onPointerDown={this.cameraRay}>
+          onPointerDown={this.cameraRay}
+        >
           <Button
             onTouchStart={() =>
               this.props.actions.SHOW_INFO(this.props.language)
@@ -78,7 +72,7 @@ class Scene extends Component {
     );
     // true: camera looking to object, false: camera looking to centre
     if (this.props.lookingAt.status) {
-      this.orbitControls.minPolarAngle = 0;
+        this.orbitControls.minPolarAngle = 0;
         this.orbitControls.minDistance = 100;
         this.orbitControls.maxDistance = 100;
     } else {
@@ -123,9 +117,10 @@ class Scene extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
+    let i = 0;
     if (
       typeof this.elements !== 'undefined' &&
-      this.elementsNumber !== 0 &&
+      this.elements.length > 0 &&
       this.props.loading === true
     ) {
       this.props.actions.HIDE_LOADING_SCREEN();
@@ -214,7 +209,7 @@ class Scene extends Component {
     window.addEventListener('resize', onWindowResize, false);
     // wait react container element (This must be called at the end of everything)
     setCamera();
-    createButton();
+    loadModels(this.scene, this.elements);
     this.orbitControls();
     this.animate();
     this.cameraRay();

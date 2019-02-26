@@ -28,7 +28,7 @@ export const LOOKING_AT = (state = '', action) => {
           x: 0,
           y: 0,
           z: 0,
-        }
+        },
       };
   }
 };

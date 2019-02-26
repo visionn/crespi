@@ -1,7 +1,9 @@
 export const LANGUAGE = (state = 'ita', action) => {
   switch (action.type) {
-    case 'CHANGE_LANGUAGE':
-      return action.language;
+    case 'LANGUAGE_ITA':
+      return 'ita';
+    case 'LANGUAGE_ENG':
+      return 'eng';
     default:
       return state;
   }
