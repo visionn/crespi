@@ -7,6 +7,10 @@ import { HIDE_DESCRIPTION } from '../redux/actions/actions';
 import { mapStateToProps } from '../redux/mapStateToProps';
 import ReactMarkdown from 'react-markdown';
 import { DinamicPage } from './dinamic';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {

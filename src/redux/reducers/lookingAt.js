@@ -28,7 +28,11 @@ export const LOOKING_AT = (state = '', action) => {
           x: 0,
           y: 0,
           z: 0,
+<<<<<<< HEAD
         },
+=======
+        }
+>>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
       };
   }
 };
