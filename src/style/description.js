@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { fadeIn, fadeOut } from './animations';
 export const Container = styled.div`
   position: absolute;
+<<<<<<< HEAD
   display: flex;
+=======
+>>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
   top: 0;
   left: 0;
   right: 0;
@@ -12,7 +15,11 @@ export const Container = styled.div`
   background-color: rgb(255, 255, 255);
   visibility: ${props => (props.status ? 'visible' : 'hidden')};
   animation: ${props => (props.status ? fadeIn : fadeOut)} 0.5s linear;
+<<<<<<< HEAD
   transition: all 0.5s;
+=======
+  transition: visibility 0.5s;
+>>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;
