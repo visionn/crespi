@@ -12,7 +12,7 @@ export const Container = styled.div`
   background-color: rgb(255, 255, 255);
   visibility: ${props => (props.status ? 'visible' : 'hidden')};
   animation: ${props => (props.status ? fadeIn : fadeOut)} 0.5s linear;
-  transition: visibility 0.5s;
+  transition: all 0.5s;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;

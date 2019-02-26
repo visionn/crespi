@@ -8,15 +8,34 @@ export class Video extends Component {
     this.camera;
     this.renderer;
     this.controls;
+    this.state = {
+      height: window.innerHeight * 0.3,
+    };
   }
   render () {
     return (
-      <Container ref={el => this.container = el}>
+      <Container
+        height={this.state.height}
+        ref={el => this.container = el}
+        onPointerDown={this.hover}
+        onTouchStart={this.hover}
+      >
         <video
           ref={el => this.videoRef = el}
         />
       </Container>
     );
+  }
+  hover = () => {
+    this.setState({
+      height: window.innerHeight * 0.9,
+    });
+  }
+  componentDidUpdate = () => {
+    this.camera.aspect = this.container.clientWidth / this.state.height;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.container.clientWidth, this.state.height);
+
   }
   componentDidMount = () => {
     this.scene = new THREE.Scene();
