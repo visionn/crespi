@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'three-orbitcontrols';
-import { Container } from '../../style/video';
-export class Photo extends Component {
+import { Container } from '../../style/photo';
+export class PhotoSphere extends Component {
   constructor (props) {
     super (props);
     this.scene;
@@ -33,25 +33,29 @@ export class Photo extends Component {
       0.1,
       1000,
     );
-    this.camera.position.set(-10, 0, 0);
-    this.camera.lookAt(0, 0, 0)
+    this.camera.target = new THREE.Vector3( 0, 0, 0 );
+    this.camera.position.set(-1, 0, 0);
     this.controls = new THREE.OrbitControls(this.camera, this.container);
-    let geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    let cube = new THREE.Mesh( geometry, material );
-    this.scene.add( cube );
+    let geometry = new THREE.SphereGeometry(-20, 20, 20);
+    let loader = new THREE.TextureLoader();
+    let texture = loader.load("../../assets/img/test.jpg");
+    let material = new THREE.MeshBasicMaterial({
+      map: texture
+    });
+    texture.flipY = true;
+    let sphere = new THREE.Mesh(geometry, material);
+    sphere.position.set(0, 0, 0);
+    this.scene.add(sphere);
     window.addEventListener('resize', this.onWindowResize, false);
     this.animate();
   }
   onWindowResize = () => {
-    try {
-      // asign new window sizes to this.camera
-      this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
-      // updates this.camera projections
-      this.camera.updateProjectionMatrix();
-      // updates this.renderer size on reductction for responsive canvas
-      this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
-    } catch (e) {}
+    // asign new window sizes to this.camera
+    this.camera.aspect = this.container.clientWidth / this.container.clientHeight;
+    // updates this.camera projections
+    this.camera.updateProjectionMatrix();
+    // updates this.renderer size on reductction for responsive canvas
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
   };
   animate = () => {
     requestAnimationFrame(this.animate);
