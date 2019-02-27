@@ -2,30 +2,19 @@ import React, { Component } from 'react';
 import 'three-gltfloader';
 import 'three-orbitcontrols';
 import { bindActionCreators } from 'redux';
-<<<<<<< HEAD
 import { loadModels } from './functions/loadModels';
-=======
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
 import { connect } from 'react-redux';
 import {
   SHOW_INFO,
   HIDE_INFO,
   LOOKING_AT,
   DONT_LOOK,
-<<<<<<< HEAD
-=======
-  DONT_MOVE,
-  MOVE,
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
   HIDE_LOADING_SCREEN,
 } from '../redux/actions/actions';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container, Color } from '../style/scene';
 import { Button } from '../style/common';
-<<<<<<< HEAD
-=======
 import { config } from '../configuration/config';
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
 const mapDispatchToProps = dispatch => ({
@@ -36,20 +25,11 @@ const mapDispatchToProps = dispatch => ({
       HIDE_INFO,
       LOOKING_AT,
       DONT_LOOK,
-<<<<<<< HEAD
-=======
-      DONT_MOVE,
-      MOVE,
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
       HIDE_LOADING_SCREEN,
     },
     dispatch,
   ),
-<<<<<<< HEAD
   setLanguage: language => dispatch(LANGUAGE(language)),
-=======
-  setLanguage: (language) => dispatch(LANGUAGE(language)),
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
 });
 
 class Scene extends Component {
@@ -57,19 +37,9 @@ class Scene extends Component {
     super(props);
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-<<<<<<< HEAD
     this.camera;
     this.orbitControls;
     this.elements = [];
-=======
-    this.buttonsGroup = new THREE.Group();
-    this.minZoom = 1;
-    this.maxZoom = 2;
-    this.orbitControls;
-    this.transformControls = [];
-    this.elements = [];
-    this.elementsNumber = 0;
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
   }
   render() {
     return (
@@ -78,12 +48,8 @@ class Scene extends Component {
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
           onTouchStart={this.cameraRay}
-<<<<<<< HEAD
           onPointerDown={this.cameraRay}
         >
-=======
-          onPointerDown={this.cameraRay}>
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
           <Button
             onTouchStart={() =>
               this.props.actions.SHOW_INFO(this.props.language)
@@ -106,14 +72,9 @@ class Scene extends Component {
     );
     // true: camera looking to object, false: camera looking to centre
     if (this.props.lookingAt.status) {
-      this.orbitControls.minPolarAngle = 0;
-<<<<<<< HEAD
-      this.orbitControls.minDistance = 100;
-      this.orbitControls.maxDistance = 100;
-=======
+        this.orbitControls.minPolarAngle = 0;
         this.orbitControls.minDistance = 100;
         this.orbitControls.maxDistance = 100;
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
     } else {
       this.orbitControls.minDistance = 205;
       this.orbitControls.maxDistance = 205;
@@ -127,14 +88,10 @@ class Scene extends Component {
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
     let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-<<<<<<< HEAD
-    if (typeof facingCamera !== 'undefined' && facingCamera.length > 0) {
-=======
     if (
       typeof facingCamera !== 'undefined' &&
       facingCamera.length > 0
     ) {
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
       // reading gltf.scene.children[0].name
       this.props.actions.LOOKING_AT(
         facingCamera[0].object.parent.parent.name,
@@ -160,13 +117,10 @@ class Scene extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
+    let i = 0;
     if (
       typeof this.elements !== 'undefined' &&
-<<<<<<< HEAD
       this.elements.length > 0 &&
-=======
-      this.elementsNumber !== 0 &&
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
       this.props.loading === true
     ) {
       this.props.actions.HIDE_LOADING_SCREEN();
@@ -207,8 +161,6 @@ class Scene extends Component {
       this.camera.position.set(0, 0, -190);
       this.scene.add(this.camera);
     };
-<<<<<<< HEAD
-=======
     const createButton = () => {
       const MAP_LOADER = new THREE.GLTFLoader();
       // takes the keys of config and loads them into an array
@@ -239,7 +191,6 @@ class Scene extends Component {
         }
       }
     };
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
     const onWindowResize = () => {
       try {
         // asign new window sizes to camera
@@ -258,11 +209,7 @@ class Scene extends Component {
     window.addEventListener('resize', onWindowResize, false);
     // wait react container element (This must be called at the end of everything)
     setCamera();
-<<<<<<< HEAD
     loadModels(this.scene, this.elements);
-=======
-    createButton();
->>>>>>> 03d2b473717304eb575c5825895ef11c3c3ca3b7
     this.orbitControls();
     this.animate();
     this.cameraRay();
