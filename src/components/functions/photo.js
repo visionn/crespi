@@ -14,6 +14,9 @@ export class Photo extends Component {
       <Container ref={el => this.container = el} />
     );
   }
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.onWindowResize, false);
+  }
   componentDidMount = () => {
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -37,6 +40,7 @@ export class Photo extends Component {
     let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     let cube = new THREE.Mesh( geometry, material );
     this.scene.add( cube );
+    window.addEventListener('resize', this.onWindowResize, false);
     this.animate();
   }
   onWindowResize = () => {
