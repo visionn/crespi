@@ -23,6 +23,9 @@ export class Video extends Component {
   componentDidUpdate = () => {
     this.onWindowResize();
   }
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.onWindowResize, false);
+  }
   componentDidMount = () => {
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });

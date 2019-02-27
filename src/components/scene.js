@@ -129,6 +129,9 @@ class Scene extends Component {
     this.orbitControls.update();
     this.renderer.render(this.scene, this.camera);
   };
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.onWindowResize, false);
+  }
   componentDidMount = () => {
     this.props.setLanguage(navigator.language);
     this.renderer.setSize(
