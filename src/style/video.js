@@ -9,4 +9,9 @@ export const Container = styled.div`
   box-shadow: 0 0 2.6rem 0.75rem rgba(0, 0, 0, 0.10);
   border-bottom-right-radius: 2rem;
   border-bottom-left-radius: 2rem;
+  transition: height 0.5s;
+  -webkit-transition: height 0.5s;
+  &:hover {
+    height: 86vh;
+  }
 `;

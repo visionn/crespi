@@ -2,6 +2,7 @@ import React, { createElement } from 'react';
 import { Title, Subtitle, Body } from '../style/common';
 import { Video } from './functions/video';
 import { TopImage } from '../style/description';
+import ContainerDimensions from 'react-container-dimensions';
 export const DinamicPage = props => {
   let page = [''];
   try {
@@ -13,7 +14,13 @@ export const DinamicPage = props => {
       } else if (key === 'Body') {
         return createElement(Body, null, props.description[key]);
       } else if (key === 'TopImage') {
-        return <Video />
+        return (
+          <ContainerDimensions>
+          {({width, height}) =>
+            <Video width={width} height={height}/>
+          }
+          </ContainerDimensions>
+        );
       } else {
         return '';
       }
