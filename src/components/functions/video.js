@@ -8,34 +8,17 @@ export class Video extends Component {
     this.camera;
     this.renderer;
     this.controls;
-    this.state = {
-      height: window.innerHeight * 0.3,
-    };
   }
   render () {
     return (
       <Container
-        height={this.state.height}
         ref={el => this.container = el}
-        onPointerDown={this.hover}
-        onTouchStart={this.hover}
       >
         <video
           ref={el => this.videoRef = el}
         />
       </Container>
     );
-  }
-  hover = () => {
-    this.setState({
-      height: window.innerHeight * 0.9,
-    });
-  }
-  componentDidUpdate = () => {
-    this.camera.aspect = this.container.clientWidth / this.state.height;
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(this.container.clientWidth, this.state.height);
-
   }
   componentDidMount = () => {
     this.scene = new THREE.Scene();
@@ -55,6 +38,12 @@ export class Video extends Component {
     );
     this.camera.position.set(-10, 0, 0);
     this.controls = new THREE.OrbitControls(this.camera, this.container);
+    this.controls.enablePan = false;
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.2;
+    this.controls.screenSpacePanning = false;
+    this.controls.rotateSpeed = 0.1;
+    this.controls.enableZoom = false;
     let geometry = new THREE.SphereBufferGeometry( 20, 20, 20 );
     geometry.scale( - 1, 1, 1 );
     this.videoRef.visibility = 'hidden';
@@ -84,6 +73,7 @@ export class Video extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
+    this.controls.update();
     this.renderer.render(this.scene, this.camera);
   };
 };
