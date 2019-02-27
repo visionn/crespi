@@ -20,6 +20,9 @@ export class Video extends Component {
       </Container>
     );
   }
+  componentDidUpdate = () => {
+    this.onWindowResize();
+  }
   componentDidMount = () => {
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
