@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 export const Container = styled.div`
-  z-index: 5;
-  width: 100%;
-  height: 50%;
+  position: relative;
+  height: 40vh;
+  margin: 0;
 `;
