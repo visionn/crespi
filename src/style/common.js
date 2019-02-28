@@ -10,7 +10,7 @@ export const Subtitle = styled.h4`
   font-family: helvetica;
 `;
 export const Body = styled.div`
-  padding: 0 2rem;
+  padding: 2rem;
   font-size: 1.2rem;
   font-family: helvetica;
 `;
