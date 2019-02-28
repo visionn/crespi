@@ -16,23 +16,12 @@ export const Container = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;
-export const TopImage = styled.div`
-  top: 0;
-  padding: 0 0.7rem;
-  height: 30vh;
-  background-color: #08aeea;
-  background-image: linear-gradient(0deg, #08aeea 0%, #2af598 100%);
-  border-bottom-right-radius: 2rem;
-  border-bottom-left-radius: 2rem;
-  transition: height 0.5s;
-  -webkit-transition: height 0.5s;
-  :hover {
-    height: 90vh;
-  }
-`;
 export const Photo = styled.div`
   max-height: 70%;
   padding: 0 2rem;
   border-radius: 1rem;
   box-shadow: 0 0 2.6rem 0.75rem rgba(0, 0, 0, 0.29);
+`;
+export const DinamicContainer = styled.div`
+  margin: 0 2rem;
 `;
