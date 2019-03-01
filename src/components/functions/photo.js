@@ -36,6 +36,12 @@ export class PhotoSphere extends Component {
     this.camera.target = new THREE.Vector3( 0, 0, 0 );
     this.camera.position.set(-1, 0, 0);
     this.controls = new THREE.OrbitControls(this.camera, this.container);
+    this.controls.enablePan = false;
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.2;
+    this.controls.screenSpacePanning = false;
+    this.controls.rotateSpeed = 0.1;
+    this.controls.enableZoom = false;
     let geometry = new THREE.SphereGeometry(-20, 20, 20);
     let loader = new THREE.TextureLoader();
     let texture = loader.load("../../assets/img/test.jpg");
@@ -59,6 +65,7 @@ export class PhotoSphere extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
+    this.controls.update();
     this.renderer.render(this.scene, this.camera);
   };
 };
