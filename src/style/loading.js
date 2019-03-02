@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { fadeIn, fadeOut } from './animations';
 export const Container = styled.div`
   position: absolute;
+<<<<<<< HEAD
   top: 0;
   bottom: 0;
   left: 0;
@@ -13,6 +14,11 @@ export const Container = styled.div`
 `;
 export const Element = styled.div`
   position: absolute;
+=======
+  visibility: ${props => (props.status ? 'visible' : 'hidden')};
+  animation: ${fadeOut} 1s linear;
+  transition: visibility 1s linear;
+>>>>>>> master
   top: 50%;
   left: 50%;
   transform: translateY(-50%);

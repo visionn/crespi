@@ -1,6 +1,5 @@
 import React, { createElement } from 'react';
 import { Title, Subtitle, Body } from '../style/common';
-import { Video } from './functions/video';
 import { TopImage } from '../style/description';
 import { PhotoSphere } from './functions/photo';
 import ContainerDimensions from 'react-container-dimensions';
