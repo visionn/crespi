@@ -58,7 +58,7 @@ export class Video extends Component {
     this.videoRef.crossOrigin = 'anonymous';
     this.videoRef.loop = true;
     this.videoRef.muted = true;
-    this.videoRef.src = '../../assets/video/pano.webm';
+    this.videoRef.src = require('../../assets/video/pano.webm');
     this.videoRef.setAttribute( 'webkit-playsinline', 'webkit-playsinline' );
     this.videoRef.play();
     let texture = new THREE.VideoTexture(this.videoRef);
