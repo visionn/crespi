@@ -15,15 +15,12 @@ export class Video extends Component {
         <video
           ref={el => (this.videoRef = el)}
           crossorigin={"anonymous"}
-          x-webkit-airplay={"allow"}
           preload={"auto"}
-          webkit-playsinline={true}
-          playsinline={true}
-          autoplay={true}
-          loop={true}
+          playsinline
+          autoplay
+          loop
           visibility={"hidden"}
-          muted={true}
-          onTouchStart={() => this.videoRef.play()}
+          muted
         />
       </Container>
     );
