@@ -17,7 +17,7 @@ export class Video extends Component {
           crossorigin={"anonymous"}
           preload={"auto"}
           playsinline
-          autoplay
+          autoplay={"autoplay"}
           loop
           visibility={"hidden"}
           muted
