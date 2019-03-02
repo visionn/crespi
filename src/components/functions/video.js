@@ -62,11 +62,13 @@ export class Video extends Component {
     geometry.scale( - 1, 1, 1 );
     this.videoRef.width = 0;
     this.videoRef.height = 0;
-    this.videoRef.src = require('../../assets/video/pano.webm');
-    this.videoRef.play();
+    import('../../assets/video/pano.webm')
+    .then(url => {
+      this.videoRef.src = url.default
+    });
     let texture = new THREE.VideoTexture(this.videoRef);
     let material = new THREE.MeshBasicMaterial({ map: texture });
-    texture.flipY = false;
+    texture.flipY = true;
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
     window.addEventListener("resize", this.onWindowResize, false);
