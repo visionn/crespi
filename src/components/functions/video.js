@@ -23,6 +23,7 @@ export class Video extends Component {
           loop={true}
           visibility={"hidden"}
           muted={true}
+          onTouchStart={() => this.videoRef.play()}
         />
       </Container>
     );
@@ -60,12 +61,11 @@ export class Video extends Component {
     this.controls.screenSpacePanning = false;
     this.controls.rotateSpeed = 0.1;
     this.controls.enableZoom = false;
-    let geometry = new THREE.SphereBufferGeometry(20, 20, 20);
-    geometry.scale(-1, 1, 1);
+    let geometry = new THREE.SphereBufferGeometry( 20, 20, 20 );
+    geometry.scale( - 1, 1, 1 );
     this.videoRef.width = 0;
     this.videoRef.height = 0;
-    this.videoRef.src = require("../../assets/video/pano.webm");
-    this.videoRef.setAttribute("webkit-playsinline", "webkit-playsinline");
+    this.videoRef.src = require('../../assets/video/pano.webm');
     this.videoRef.play();
     let texture = new THREE.VideoTexture(this.videoRef);
     let material = new THREE.MeshBasicMaterial({ map: texture });
