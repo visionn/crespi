@@ -11,13 +11,16 @@ export class Video extends Component {
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)}>
+      <Container
+        ref={el => (this.container = el)}
+        onTouchStart={this.playVideo}
+        onPointerDown={this.playVideo}
+      >
         <video
           ref={el => (this.videoRef = el)}
           crossorigin={"anonymous"}
           preload={"auto"}
           playsinline
-          autoplay={"autoplay"}
           loop
           visibility={"hidden"}
           muted
@@ -28,6 +31,9 @@ export class Video extends Component {
   componentDidUpdate = () => {
     this.onWindowResize();
   };
+  playVideo = () => {
+    this.videoRef.play()
+  }
   componentWillUnmount = () => {
     window.removeEventListener("resize", this.onWindowResize, false);
   };
@@ -62,11 +68,13 @@ export class Video extends Component {
     geometry.scale( - 1, 1, 1 );
     this.videoRef.width = 0;
     this.videoRef.height = 0;
-    this.videoRef.src = require('../../assets/video/pano.webm');
-    this.videoRef.play();
+    import('../../assets/video/pano.webm')
+    .then(url => {
+      this.videoRef.src = url.default
+    });
     let texture = new THREE.VideoTexture(this.videoRef);
     let material = new THREE.MeshBasicMaterial({ map: texture });
-    texture.flipY = false;
+    texture.flipY = true;
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
     window.addEventListener("resize", this.onWindowResize, false);

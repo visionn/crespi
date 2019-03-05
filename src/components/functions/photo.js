@@ -43,14 +43,18 @@ export class PhotoSphere extends Component {
     this.controls.rotateSpeed = 0.1;
     this.controls.enableZoom = false;
     let geometry = new THREE.SphereGeometry(-20, 20, 20);
-    let file = require("../../assets/img/test.jpg");
-    let texture = new THREE.TextureLoader().load(file);
-    let material = new THREE.MeshBasicMaterial({
-      map: texture
+    let file;
+    import("../../assets/img/test.jpg")
+    .then(url => {
+      let texture = new THREE.TextureLoader().load(url.default);
+      let material = new THREE.MeshBasicMaterial({
+        map: texture
+      });
+      texture.flipY = true;
+      let sphere = new THREE.Mesh(geometry, material);
+      sphere.position.set(0, 0, 0);
+      this.scene.add(sphere);
     });
-    let sphere = new THREE.Mesh(geometry, material);
-    sphere.position.set(0, 0, 0);
-    this.scene.add(sphere);
     window.addEventListener('resize', this.onWindowResize, false);
     this.animate();
   }
