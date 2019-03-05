@@ -11,13 +11,16 @@ export class Video extends Component {
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)}>
+      <Container
+        ref={el => (this.container = el)}
+        onTouchStart={this.playVideo}
+        onPointerDown={this.playVideo}
+      >
         <video
           ref={el => (this.videoRef = el)}
           crossorigin={"anonymous"}
           preload={"auto"}
           playsinline
-          autoplay={"autoplay"}
           loop
           visibility={"hidden"}
           muted
@@ -28,6 +31,9 @@ export class Video extends Component {
   componentDidUpdate = () => {
     this.onWindowResize();
   };
+  playVideo = () => {
+    this.videoRef.play()
+  }
   componentWillUnmount = () => {
     window.removeEventListener("resize", this.onWindowResize, false);
   };
