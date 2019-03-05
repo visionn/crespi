@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "coveralls": "^3.0.2",
+    "iphone-inline-video": "^2.2.2",
     "npm": "^6.5.0",
     "react": "^16.6.3",
     "react-container-dimensions": "^1.4.1",
