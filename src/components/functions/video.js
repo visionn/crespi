@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container } from "../../style/video";
+import enableInlineVideo from 'iphone-inline-video';
 import "three-orbitcontrols";
 export class Video extends Component {
   constructor(props) {
@@ -13,17 +14,15 @@ export class Video extends Component {
     return (
       <Container
         ref={el => (this.container = el)}
-        onTouchStart={this.playVideo}
-        onPointerDown={this.playVideo}
       >
         <video
           ref={el => (this.videoRef = el)}
           crossorigin={"anonymous"}
-          preload={"auto"}
           playsinline
           loop
-          visibility={"hidden"}
           muted
+          autoplay
+          visibility={"hidden"}
         />
       </Container>
     );
@@ -31,9 +30,6 @@ export class Video extends Component {
   componentDidUpdate = () => {
     this.onWindowResize();
   };
-  playVideo = () => {
-    this.videoRef.play()
-  }
   componentWillUnmount = () => {
     window.removeEventListener("resize", this.onWindowResize, false);
   };
@@ -72,6 +68,8 @@ export class Video extends Component {
     .then(url => {
       this.videoRef.src = url.default
     });
+    enableInlineVideo(this.videoRef);
+    this.videoRef.play();
     let texture = new THREE.VideoTexture(this.videoRef);
     let material = new THREE.MeshBasicMaterial({ map: texture });
     texture.flipY = true;
