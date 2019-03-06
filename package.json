@@ -8,9 +8,14 @@
     "start": "webpack-dev-server --hot --inline",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
-    "format": "prettier --write **/*/*.js",
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
+    "git-add": "git add",
+    "prettier": "prettier --write \"src/**/*.js\""
   },
+  "pre-commit": [
+    "prettier",
+    "git-add"
+  ],
   "author": "defending1",
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
   "devDependencies": {
