@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container } from "../../style/video";
-import enableInlineVideo from 'iphone-inline-video';
 import "three-orbitcontrols";
 export class Video extends Component {
   constructor(props) {
@@ -17,11 +16,11 @@ export class Video extends Component {
       >
         <video
           ref={el => (this.videoRef = el)}
-          crossorigin={"anonymous"}
-          playsinline
+          crossOrigin={"anonymous"}
+          playsInline
           loop
           muted
-          autoplay
+          autoPlay
           visibility={"hidden"}
         />
       </Container>
