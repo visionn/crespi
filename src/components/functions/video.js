@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Container } from "../../style/video";
-import "three-orbitcontrols";
+import React, { Component } from 'react';
+import { Container } from '../../style/video';
+import 'three-orbitcontrols';
 export class Video extends Component {
   constructor(props) {
     super(props);
@@ -11,17 +11,15 @@ export class Video extends Component {
   }
   render() {
     return (
-      <Container
-        ref={el => (this.container = el)}
-      >
+      <Container ref={el => (this.container = el)}>
         <video
           ref={el => (this.videoRef = el)}
-          crossOrigin={"anonymous"}
+          crossOrigin={'anonymous'}
           playsInline
           loop
           muted
           autoPlay
-          visibility={"hidden"}
+          visibility={'hidden'}
         />
       </Container>
     );
@@ -30,7 +28,7 @@ export class Video extends Component {
     this.onWindowResize();
   };
   componentWillUnmount = () => {
-    window.removeEventListener("resize", this.onWindowResize, false);
+    window.removeEventListener('resize', this.onWindowResize, false);
   };
   componentDidMount = () => {
     this.scene = new THREE.Scene();
@@ -38,18 +36,18 @@ export class Video extends Component {
     this.camera = new THREE.Camera();
     this.renderer.setSize(
       this.container.clientWidth,
-      this.container.clientHeight
+      this.container.clientHeight,
     );
     this.renderer.gammaOutput = true;
     this.renderer.gammaFactor = 2.2;
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.setClearColor(new THREE.Color("black"), 0);
+    this.renderer.setClearColor(new THREE.Color('black'), 0);
     this.container.appendChild(this.renderer.domElement);
     this.camera = new THREE.PerspectiveCamera(
       75,
       this.container.clientWidth / this.container.clientHeight,
       0.1,
-      1000
+      1000,
     );
     this.camera.position.set(-10, 0, 0);
     this.controls = new THREE.OrbitControls(this.camera, this.container);
@@ -59,22 +57,20 @@ export class Video extends Component {
     this.controls.screenSpacePanning = false;
     this.controls.rotateSpeed = 0.1;
     this.controls.enableZoom = false;
-    let geometry = new THREE.SphereBufferGeometry( 20, 20, 20 );
-    geometry.scale( - 1, 1, 1 );
+    let geometry = new THREE.SphereBufferGeometry(20, 20, 20);
+    geometry.scale(-1, 1, 1);
     this.videoRef.width = 0;
     this.videoRef.height = 0;
-    import('../../assets/video/pano.webm')
-    .then(url => {
-      this.videoRef.src = url.default
+    import('../../assets/video/pano.webm').then(url => {
+      this.videoRef.src = url.default;
     });
-    enableInlineVideo(this.videoRef);
     this.videoRef.play();
     let texture = new THREE.VideoTexture(this.videoRef);
     let material = new THREE.MeshBasicMaterial({ map: texture });
     texture.flipY = true;
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
-    window.addEventListener("resize", this.onWindowResize, false);
+    window.addEventListener('resize', this.onWindowResize, false);
     this.animate();
   };
   onWindowResize = () => {
@@ -86,7 +82,7 @@ export class Video extends Component {
     // updates this.renderer size on reductction for responsive canvas
     this.renderer.setSize(
       this.container.clientWidth,
-      this.container.clientHeight
+      this.container.clientHeight,
     );
   };
   animate = () => {
