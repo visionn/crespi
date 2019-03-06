@@ -72,9 +72,9 @@ class Scene extends Component {
     );
     // true: camera looking to object, false: camera looking to centre
     if (this.props.lookingAt.status) {
-        this.orbitControls.minPolarAngle = 0;
-        this.orbitControls.minDistance = 100;
-        this.orbitControls.maxDistance = 100;
+      this.orbitControls.minPolarAngle = 0;
+      this.orbitControls.minDistance = 100;
+      this.orbitControls.maxDistance = 100;
     } else {
       this.orbitControls.minDistance = 205;
       this.orbitControls.maxDistance = 205;
@@ -88,10 +88,7 @@ class Scene extends Component {
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
     let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-    if (
-      typeof facingCamera !== 'undefined' &&
-      facingCamera.length > 0
-    ) {
+    if (typeof facingCamera !== 'undefined' && facingCamera.length > 0) {
       // reading gltf.scene.children[0].name
       this.props.actions.LOOKING_AT(
         facingCamera[0].object.parent.parent.name,
@@ -131,7 +128,7 @@ class Scene extends Component {
   };
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize, false);
-  }
+  };
   componentDidMount = () => {
     this.props.setLanguage(navigator.language);
     this.renderer.setSize(
