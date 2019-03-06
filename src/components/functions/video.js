@@ -14,12 +14,12 @@ export class Video extends Component {
       <Container ref={el => (this.container = el)}>
         <video
           ref={el => (this.videoRef = el)}
-          crossOrigin={'anonymous'}
           playsInline
           loop
+          width={0}
+          height={0}
           muted
           autoPlay
-          visibility={'hidden'}
         />
       </Container>
     );
@@ -59,12 +59,9 @@ export class Video extends Component {
     this.controls.enableZoom = false;
     let geometry = new THREE.SphereBufferGeometry(20, 20, 20);
     geometry.scale(-1, 1, 1);
-    this.videoRef.width = 0;
-    this.videoRef.height = 0;
     import('../../assets/video/pano.webm').then(url => {
       this.videoRef.src = url.default;
     });
-    this.videoRef.play();
     let texture = new THREE.VideoTexture(this.videoRef);
     let material = new THREE.MeshBasicMaterial({ map: texture });
     texture.flipY = true;
