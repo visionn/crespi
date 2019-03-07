@@ -15,7 +15,7 @@ export const Toasty = styled.div`
   box-shadow: 0 0 2.6rem 0.75rem rgba(0, 0, 0, 0.29);
   background-color: white;
   visibility: ${props => (props.lookingAt ? 'visible' : 'hidden')};
-  animation: ${props => (props.lookingAt ? swapUp : fadeOut)} 0.25s linear;
+  animation: ${props => (props.lookingAt ? swapUp : swapDown)} 0.25s linear;
   transition: visibility 0.25s linear;
   height: auto;
   padding: 0 1.5rem;
