@@ -59,7 +59,7 @@ export class Video extends Component {
     this.controls.enableZoom = false;
     let geometry = new THREE.SphereBufferGeometry(20, 20, 20);
     geometry.scale(-1, 1, 1);
-    import('../../assets/video/pano.webm').then(url => {
+    import('../../assets/video/test.mp4').then(url => {
       this.videoRef.src = url.default;
     });
     let texture = new THREE.VideoTexture(this.videoRef);
