@@ -64,24 +64,6 @@ class Scene extends Component {
       </Color>
     );
   }
-  changeTarget = () => {
-    this.orbitControls.target.set(
-      this.props.lookingAt.position.x,
-      this.props.lookingAt.position.y,
-      this.props.lookingAt.position.z,
-    );
-    // true: camera looking to object, false: camera looking to centre
-    if (this.props.lookingAt.status) {
-      this.orbitControls.minPolarAngle = 0;
-      this.orbitControls.minDistance = 100;
-      this.orbitControls.maxDistance = 100;
-    } else {
-      this.orbitControls.minDistance = 205;
-      this.orbitControls.maxDistance = 205;
-      this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
-      this.orbitControls.minPolarAngle = Math.PI / 2.1;
-    }
-  };
   cameraRay = () => {
     // declaring camera raycaster
     let cameraRay = new THREE.Raycaster();
@@ -94,23 +76,25 @@ class Scene extends Component {
         facingCamera[0].object.parent.parent.name,
         this.props.language,
       );
-      this.changeTarget();
     } else {
       this.props.actions.DONT_LOOK();
-      this.changeTarget();
     }
   };
-  orbitControls = () => {
-    this.orbitControls = new THREE.OrbitControls(this.camera, this.container);
-    this.orbitControls.maxPolarAngle = Math.PI - Math.PI / 2.1;
-    this.orbitControls.minPolarAngle = Math.PI / 2.1;
-    this.orbitControls.minDistance = 207;
-    this.orbitControls.maxDistance = 207;
-    this.orbitControls.enablePan = false;
-    this.orbitControls.enableDamping = true;
-    this.orbitControls.dampingFactor = 0.2;
-    this.orbitControls.screenSpacePanning = false;
-    this.orbitControls.rotateSpeed = 0.1;
+  componentDidUpdate = () => {
+    this.orbitControls.target.set(
+      this.props.lookingAt.position.x,
+      this.props.lookingAt.position.y,
+      this.props.lookingAt.position.z,
+    );
+    this.orbitControls.maxPolarAngle = this.props.lookingAt.controls.maxPolarAngle;
+    this.orbitControls.minPolarAngle = this.props.lookingAt.controls.minPolarAngle;
+    this.orbitControls.minDistance = this.props.lookingAt.controls.minDistance;
+    this.orbitControls.maxDistance = this.props.lookingAt.controls.maxDistance;
+    this.orbitControls.enablePan = this.props.lookingAt.controls.enablePan;
+    this.orbitControls.enableDamping = this.props.lookingAt.controls.enableDamping;
+    this.orbitControls.dampingFactor = this.props.lookingAt.controls.dampingFactor;
+    this.orbitControls.screenSpacePanning = this.props.lookingAt.controls.screenSpacePanning;
+    this.orbitControls.rotateSpeed = this.props.lookingAt.controls.rotateSpeed;
   };
   animate = () => {
     requestAnimationFrame(this.animate);
@@ -147,6 +131,7 @@ class Scene extends Component {
       1000,
     );
     const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.24);
+    this.orbitControls = new THREE.OrbitControls(this.camera, this.container);
     this.scene.add(ambientLight);
     const directionalLight = new THREE.DirectionalLight(
       new THREE.Color('white'),
@@ -160,36 +145,6 @@ class Scene extends Component {
       // last one is fov
       this.camera.position.set(0, 0, -190);
       this.scene.add(this.camera);
-    };
-    const createButton = () => {
-      const MAP_LOADER = new THREE.GLTFLoader();
-      // takes the keys of config and loads them into an array
-      let keys = Object.getOwnPropertyNames(config);
-      this.elementsNumber = keys.length;
-      for (let i of keys) {
-        if (i !== 'info') {
-          // requiring 3d objects files using jsonloader
-          let mystery = require(`../assets/3d/${i}.gltf`);
-          // parsing previously loaded json file
-          MAP_LOADER.parse(mystery, './', gltf => {
-            // setting object position
-            gltf.scene.position.set(
-              config[i].position.x,
-              config[i].position.y,
-              config[i].position.z,
-            );
-            // setting scene name
-            gltf.scene.name = i;
-            gltf.scene.children[0].name = i;
-            gltf.scene.name = i;
-            gltf.scene.rotation.y = Math.PI / 2;
-            // adding model to scene
-            this.scene.add(gltf.scene);
-            // pushing model to dedicate array
-            this.elements.push(gltf.scene);
-          });
-        }
-      }
     };
     const onWindowResize = () => {
       try {
@@ -210,7 +165,6 @@ class Scene extends Component {
     // wait react container element (This must be called at the end of everything)
     setCamera();
     loadModels(this.scene, this.elements);
-    this.orbitControls();
     this.animate();
     this.cameraRay();
   };
