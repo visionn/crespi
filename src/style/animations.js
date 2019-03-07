@@ -27,9 +27,11 @@ export const swapUp = keyframes`
 export const swapDown = keyframes`
   from {
     transform: translateY(2%);
+    opacity: 1;
   }
   to {
     transform: translateY(5rem);
+    opacity: 0;
   }
 `;
 export const slideUp = keyframes`
