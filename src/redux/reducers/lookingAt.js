@@ -9,6 +9,12 @@ export const LOOKING_AT = (state = '', action) => {
         color: config[action.payload.status].color,
         Body: '',
         status: true,
+        controls: {
+          ...state.controls,
+          minPolarAngle: 0,
+          minDistance: 100,
+          maxDistance: 100,
+        },
         name: action.payload.status,
       };
     case 'DONT_LOOK':
@@ -19,6 +25,13 @@ export const LOOKING_AT = (state = '', action) => {
           y: 0,
           z: 0,
         },
+        controls: {
+          ...state.controls,
+          maxPolarAngle: Math.PI - Math.PI / 2.1,
+          minPolarAngle: Math.PI / 2.1,
+          minDistance: 207,
+          maxDistance: 207,
+        },
         status: false,
       };
     default:
@@ -28,6 +41,17 @@ export const LOOKING_AT = (state = '', action) => {
           x: 0,
           y: 0,
           z: 0,
+        },
+        controls: {
+          maxPolarAngle: Math.PI - Math.PI / 2.1,
+          minPolarAngle: Math.PI / 2.1,
+          minDistance: 207,
+          maxDistance: 207,
+          enablePan: false,
+          enableDamping: true,
+          dampingFactor: 0.2,
+          screenSpacePanning: false,
+          rotateSpeed: 0.1,
         },
       };
   }
