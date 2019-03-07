@@ -12,15 +12,13 @@ export const DinamicPage = props => {
   let page = [''];
   const [content, setContent] = useState('');
   if (props.description !== false) {
-    page = Object.keys(props.description)
-    .map(key => {
+    page = Object.keys(props.description).map(key => {
       if (key === 'Title') {
         return createElement(Title, null, props.description[key]);
       } else if (key === 'Subtitle') {
         return createElement(Subtitle, null, props.description[key]);
       } else if (key === 'Body') {
-        importBody()
-        .then(text => {
+        importBody().then(text => {
           setContent(text);
         });
         return createElement(Body, null, content);
@@ -38,7 +36,5 @@ export const DinamicPage = props => {
     });
   } else {
   }
-  return (
-    <div>{page}</div>
-  );
+  return <div>{page}</div>;
 };
