@@ -27,7 +27,7 @@ export const DinamicPage = props => {
       } else if (key === 'TopImage') {
         return (
           <ContainerDimensions>
-            {({ width, height }) => <Video width={width} height={height} />}
+            {({ width, height }) => <Video name={props.name} width={width} height={height} />}
           </ContainerDimensions>
         );
       } else {
