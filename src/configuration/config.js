@@ -36,7 +36,7 @@ export const config = {
   fabbrica: {
     position: {
       x: 0,
-      y: 0,
+      y: 5,
       z: 100,
     },
     color: '#fbda61',

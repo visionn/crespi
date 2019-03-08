@@ -83,7 +83,7 @@ class Scene extends Component {
   componentDidUpdate = () => {
     this.orbitControls.target.set(
       this.props.lookingAt.position.x,
-      this.props.lookingAt.position.y,
+      0,
       this.props.lookingAt.position.z,
     );
     this.orbitControls.maxPolarAngle = this.props.lookingAt.controls.maxPolarAngle;
