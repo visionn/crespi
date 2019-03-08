@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from '../../style/video';
+import { Skeleton } from '../../style/skeleton';
 import 'three-orbitcontrols';
-const checkVideo = async video => {
-  setInterval(() => {
-    if (video.readyState >= 3) {
-      console.log('ready');
-      console.log(this.videoRef.paused)
-    }
-  }, 500);
-}
 export class Video extends Component {
   constructor(props) {
     super(props);
@@ -16,20 +9,26 @@ export class Video extends Component {
     this.camera;
     this.renderer;
     this.controls;
+    this.state = {
+      skeleton: true,
+    }
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)}>
-        <video
-          ref={el => (this.videoRef = el)}
-          playsInline
-          loop
-          width={0}
-          height={0}
-          muted
-          autoPlay
-        />
-      </Container>
+      <div>
+        <Container ref={el => (this.container = el)}>
+          <video
+            ref={el => (this.videoRef = el)}
+            playsInline
+            loop
+            width={0}
+            height={0}
+            muted
+            autoPlay
+          />
+        </Container>
+        <Skeleton show={this.state.skeleton} />
+      </div>
     );
   }
   componentDidUpdate = () => {
@@ -38,6 +37,16 @@ export class Video extends Component {
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize, false);
   };
+  checkVideo = async () => {
+    const check = setInterval(() => {
+      if (this.videoRef.readyState >= 3) {
+        this.setState({
+          skeleton: false,
+        });
+      } else {
+      }
+    }, 500);
+  }
   componentDidMount = () => {
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -76,7 +85,7 @@ export class Video extends Component {
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
     window.addEventListener('resize', this.onWindowResize, false);
-    checkVideo(this.videoRef);
+    this.checkVideo();
     this.animate();
   };
   onWindowResize = () => {
