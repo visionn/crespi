@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { Container } from '../../style/video';
 import 'three-orbitcontrols';
+const checkVideo = async video => {
+  setInterval(() => {
+    if (video.readyState >= 3) {
+      console.log('ready');
+      console.log(this.videoRef.paused)
+    }
+  }, 500);
+}
 export class Video extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +67,7 @@ export class Video extends Component {
     this.controls.enableZoom = false;
     let geometry = new THREE.SphereBufferGeometry(20, 20, 20);
     geometry.scale(-1, 1, 1);
-    import('../../assets/video/test.mp4').then(url => {
+    import(`../../assets/video/${this.props.name}.mp4`).then(url => {
       this.videoRef.src = url.default;
     });
     let texture = new THREE.VideoTexture(this.videoRef);
@@ -68,6 +76,7 @@ export class Video extends Component {
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
     window.addEventListener('resize', this.onWindowResize, false);
+    checkVideo(this.videoRef);
     this.animate();
   };
   onWindowResize = () => {
