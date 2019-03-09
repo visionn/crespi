@@ -16,11 +16,17 @@ export const Container = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;
-export const Photo = styled.div`
+export const Photo = styled.img`
   max-height: 70%;
-  padding: 0 2rem;
+  max-width: 95%;
   border-radius: 1rem;
   box-shadow: 0 0 2.6rem 0.75rem rgba(0, 0, 0, 0.29);
+`;
+export const PhotoContainer = styled.p`
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: 1rem auto;
 `;
 export const DinamicContainer = styled.div`
   margin: 0 2rem;
