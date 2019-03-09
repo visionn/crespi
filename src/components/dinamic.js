@@ -3,6 +3,7 @@ import { Title, Subtitle, Body } from '../style/common';
 import { Video } from './functions/video';
 import { TopImage } from '../style/description';
 import { PhotoSphere } from './functions/photo';
+import { BidimensionalPhoto } from './functions/bidimensionalPhoto';
 import ContainerDimensions from 'react-container-dimensions';
 const importBody = async () => {
   const page = await import('../assets/text/ita/chiesa/desc.md');
@@ -30,7 +31,10 @@ export const DinamicPage = props => {
             {({ width, height }) => <Video name={props.name} width={width} height={height} />}
           </ContainerDimensions>
         );
-      } else {
+      } else if (key === 'Photo') {
+        return <BidimensionalPhoto />
+      }
+      else {
         return '';
       }
     });
