@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'three-orbitcontrols';
 import { Container } from '../../style/photo';
+import { Skeleton } from '../../style/skeleton';
 export class PhotoSphere extends Component {
   constructor(props) {
     super(props);
@@ -8,9 +9,18 @@ export class PhotoSphere extends Component {
     this.camera;
     this.renderer;
     this.controls;
+    this.photo;
+    this.state = {
+      skeleton: true,
+    }
   }
   render() {
-    return <Container ref={el => (this.container = el)} />;
+    return (
+      <div>
+        <Container ref={el => (this.container = el)} />
+        <Skeleton show={this.state.skeleton}/>
+      </div>
+    );
   }
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize, false);
@@ -51,13 +61,24 @@ export class PhotoSphere extends Component {
         map: texture,
       });
       texture.flipY = true;
-      let sphere = new THREE.Mesh(geometry, material);
-      sphere.position.set(0, 0, 0);
-      this.scene.add(sphere);
+      this.photo = new THREE.Mesh(geometry, material);
+      this.photo.position.set(0, 0, 0);
+      this.scene.add(this.photo);
     });
     window.addEventListener('resize', this.onWindowResize, false);
+    this.checkPhoto();
     this.animate();
   };
+  checkPhoto = async () => {
+    setInterval (() => {
+      if (this.photo) {
+        this.setState({
+          skeleton: false,
+        });
+      } else {
+      }
+    }, 500);
+  }
   onWindowResize = () => {
     // asign new window sizes to this.camera
     this.camera.aspect =
