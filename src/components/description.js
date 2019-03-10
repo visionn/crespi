@@ -30,7 +30,10 @@ export class Description extends Component {
             x
           </Button>
         </Top>
-        <DinamicPage name={this.props.lookingAt.name} description={this.props.description} />
+        <DinamicPage
+          name={this.props.lookingAt.name}
+          description={this.props.description}
+        />
       </Container>
     );
   }

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { swapUp, swapDown, fadeIn, fadeOut } from './animations.js';
 export const Title = styled.h1`
-  color: ${props => props.color ? props.color : 'black'};
+  color: ${props => (props.color ? props.color : 'black')};
   text-align: center;
   font-size: 2.5rem;
 `;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 export const Title = styled.h1`
-  color: ${props => props.color ? props.color : 'black'};
+  color: ${props => (props.color ? props.color : 'black')};
   padding: 1rem;
   text-align: center;
   font-weight: bold;

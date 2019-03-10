@@ -11,7 +11,7 @@ export class Video extends Component {
     this.controls;
     this.state = {
       skeleton: true,
-    }
+    };
   }
   render() {
     return (
@@ -46,7 +46,7 @@ export class Video extends Component {
       } else {
       }
     }, 500);
-  }
+  };
   componentDidMount = () => {
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
