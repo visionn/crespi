@@ -12,13 +12,13 @@ export class PhotoSphere extends Component {
     this.photo;
     this.state = {
       skeleton: true,
-    }
+    };
   }
   render() {
     return (
       <div>
         <Container ref={el => (this.container = el)} />
-        <Skeleton show={this.state.skeleton}/>
+        <Skeleton show={this.state.skeleton} />
       </div>
     );
   }
@@ -70,7 +70,7 @@ export class PhotoSphere extends Component {
     this.animate();
   };
   checkPhoto = async () => {
-    setInterval (() => {
+    setInterval(() => {
       if (this.photo) {
         this.setState({
           skeleton: false,
@@ -78,7 +78,7 @@ export class PhotoSphere extends Component {
       } else {
       }
     }, 500);
-  }
+  };
   onWindowResize = () => {
     // asign new window sizes to this.camera
     this.camera.aspect =
