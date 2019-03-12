@@ -7,7 +7,7 @@ import {
   CHANGE_LANGUAGE,
 } from '../redux/actions/actions.js';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
-import { Container } from '../style/info';
+import { Container, Footer } from '../style/info';
 import { Title, Subtitle, Body, Button, Top } from '../style/common';
 import ReactMarkdown from 'react-markdown';
 import { mapStateToProps } from '../redux/mapStateToProps';
@@ -43,6 +43,11 @@ class Info extends Component {
         <Body>
           <ReactMarkdown source={this.props.info.Body} escapeHtml={false} />
         </Body>
+        <Footer>
+          <Body>
+            visionn
+          </Body>
+        </Footer>
       </Container>
     );
   }
