@@ -11,7 +11,7 @@ export const config = {
       Body: require('../assets/text/eng/info/desc.md'),
     },
   },
-  chiesa: {
+  cimitero: {
     position: {
       x: -100,
       y: 0,
@@ -36,7 +36,7 @@ export const config = {
   fabbrica: {
     position: {
       x: 0,
-      y: 0,
+      y: 5,
       z: 100,
     },
     color: '#fbda61',
@@ -45,6 +45,7 @@ export const config = {
         TopImage: ' ',
         Title: 'Fabbrica',
         Subtitle: 'Fabbrica di Crespi',
+        Photo: '',
         PhotoSphere: '',
         Body: 1,
       },
@@ -52,6 +53,7 @@ export const config = {
         TopImage: ' ',
         Title: 'Factory',
         Subtitle: "Crespi's Factory",
+        Photo: '',
         PhotoSphere: '',
         Body: 1,
       },
