@@ -11,7 +11,7 @@ export const config = {
       Body: require('../assets/text/eng/info/desc.md'),
     },
   },
-  chiesa: {
+  cimitero: {
     position: {
       x: -100,
       y: 0,
