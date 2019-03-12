@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from '../../style/video';
+import { Skeleton } from '../../style/skeleton';
 import 'three-orbitcontrols';
 export class Video extends Component {
   constructor(props) {
@@ -8,20 +9,26 @@ export class Video extends Component {
     this.camera;
     this.renderer;
     this.controls;
+    this.state = {
+      skeleton: true,
+    };
   }
   render() {
     return (
-      <Container ref={el => (this.container = el)}>
-        <video
-          ref={el => (this.videoRef = el)}
-          playsInline
-          loop
-          width={0}
-          height={0}
-          muted
-          autoPlay
-        />
-      </Container>
+      <div>
+        <Container ref={el => (this.container = el)}>
+          <video
+            ref={el => (this.videoRef = el)}
+            playsInline
+            loop
+            width={0}
+            height={0}
+            muted
+            autoPlay
+          />
+        </Container>
+        <Skeleton show={this.state.skeleton} />
+      </div>
     );
   }
   componentDidUpdate = () => {
@@ -29,6 +36,16 @@ export class Video extends Component {
   };
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize, false);
+  };
+  checkVideo = async () => {
+    const check = setInterval(() => {
+      if (this.videoRef.readyState >= 3) {
+        this.setState({
+          skeleton: false,
+        });
+      } else {
+      }
+    }, 500);
   };
   componentDidMount = () => {
     this.scene = new THREE.Scene();
@@ -59,7 +76,7 @@ export class Video extends Component {
     this.controls.enableZoom = false;
     let geometry = new THREE.SphereBufferGeometry(20, 20, 20);
     geometry.scale(-1, 1, 1);
-    import('../../assets/video/test.mp4').then(url => {
+    import(`../../assets/video/${this.props.name}.mp4`).then(url => {
       this.videoRef.src = url.default;
     });
     let texture = new THREE.VideoTexture(this.videoRef);
@@ -68,6 +85,7 @@ export class Video extends Component {
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
     window.addEventListener('resize', this.onWindowResize, false);
+    this.checkVideo();
     this.animate();
   };
   onWindowResize = () => {
