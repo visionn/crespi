@@ -67,21 +67,19 @@ class Scene extends Component {
       </Color>
     );
   }
-  mouseRay = async event => {
-    setInterval(() => {
-      let mouseRay = new THREE.Raycaster();
-      let mouse = new THREE.Vector2();
-      mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-      mouse.y = - (event.clientY / this.container.clientHeight) * 2 + 1;
-      mouseRay.setFromCamera(mouse, this.camera);
-      let mouseClick = mouseRay.intersectObjects(this.scene.children, true);
-      if (typeof mouseClick !== 'undefined' && mouseClick.length === 0) {
-        this.props.actions.DONT_LOOK();
-      } else {
-      }
-    }, 500);
+  mouseRay = event => {
+    let mouseRay = new THREE.Raycaster();
+    let mouse = new THREE.Vector2();
+    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
+    mouse.y = - (event.clientY / this.container.clientHeight) * 2 + 1;
+    mouseRay.setFromCamera(mouse, this.camera);
+    let mouseClick = mouseRay.intersectObjects(this.scene.children, true);
+    if (typeof mouseClick !== 'undefined' && mouseClick.length === 0) {
+      this.props.actions.DONT_LOOK();
+    } else {
+    }
   }
-  cameraRay = async () => {
+  cameraRay = () => {
     setInterval(() => {
       // declaring camera raycaster
       let cameraRay = new THREE.Raycaster();
@@ -162,7 +160,6 @@ class Scene extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, -190);
       this.scene.add(this.camera);
     };
     const onWindowResize = () => {
