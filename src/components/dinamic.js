@@ -25,7 +25,9 @@ export const DinamicPage = props => {
           });
           return createElement(Body, null, content);
         case 'PhotoSphere':
-          return <PhotoSphere />;
+          return (
+            <PhotoSphere name={props.name} fileName={props.description[key]} />
+          );
         case 'TopImage':
           return (
             <ContainerDimensions>
