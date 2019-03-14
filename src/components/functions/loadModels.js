@@ -6,8 +6,7 @@ export const loadModels = (scene, elements) => {
   for (let i of keys) {
     if (i !== 'info') {
       // requiring 3d objects files using jsonloader
-      import(`../../assets/3d/${i}.gltf`)
-      .then(object => {
+      import(`../../assets/3d/${i}.gltf`).then(object => {
         // parsing previously loaded json file
         MAP_LOADER.parse(object.default, './', gltf => {
           // setting object position
