@@ -11,6 +11,7 @@ const importBody = async () => {
 };
 export const DinamicPage = props => {
   let page = [''];
+  let countPhotoSpheres = 1;
   const [content, setContent] = useState('');
   if (props.description !== false) {
     page = Object.keys(props.description).map(key => {
@@ -26,8 +27,9 @@ export const DinamicPage = props => {
           return createElement(Body, null, content);
         case 'PhotoSphere':
           return (
-            <PhotoSphere name={props.name} fileName={props.description[key]} />
+            <PhotoSphere name={props.name} fileName={countPhotoSpheres} />
           );
+          countPhotoSpheres++;
         case 'TopImage':
           return (
             <ContainerDimensions>
