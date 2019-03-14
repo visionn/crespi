@@ -51,7 +51,6 @@ class Scene extends Component {
           onTouchStart={this.mouseRay}
           onPointerDown={this.cameraRay}
           onPointerDown={this.mouseRay}
-
         >
           <Button
             onTouchStart={() =>
@@ -71,14 +70,14 @@ class Scene extends Component {
     let mouseRay = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
     mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-    mouse.y = - (event.clientY / this.container.clientHeight) * 2 + 1;
+    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
     mouseRay.setFromCamera(mouse, this.camera);
     let mouseClick = mouseRay.intersectObjects(this.scene.children, true);
     if (typeof mouseClick !== 'undefined' && mouseClick.length === 0) {
       this.props.actions.DONT_LOOK();
     } else {
     }
-  }
+  };
   cameraRay = () => {
     setInterval(() => {
       // declaring camera raycaster
@@ -160,6 +159,7 @@ class Scene extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
+      this.camera.position.set(0, 0, -200);
       this.scene.add(this.camera);
     };
     const onWindowResize = () => {
