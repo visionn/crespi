@@ -4,10 +4,10 @@ import { Fabbrica } from './pages/fabbrica';
 export const DinamicPage = props => {
   switch (props.name) {
     case 'cimitero':
-      import('./pages/cimitero')
-      return <Cimitero />
+      import('./pages/cimitero');
+      return <Cimitero />;
     case 'fabbrica':
-      return <Fabbrica />
+      return <Fabbrica status={props.status} name={props.name} />;
     default:
       return null;
   }

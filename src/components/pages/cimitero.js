@@ -7,5 +7,5 @@ export const Cimitero = props => {
       <Title>Cimitero</Title>
       <Subtitle>Cimitero di Crespi</Subtitle>
     </div>
-  )
-}
+  );
+};
