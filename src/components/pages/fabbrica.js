@@ -1,6 +1,6 @@
 import React, { useState, createElement } from 'react';
-import { Container } from '../../style/description';
-import { Title, Subtitle } from '../../style/common';
+import { Container, Message } from '../../style/description';
+import { Title, Subtitle, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
 import { Body } from '../functions/body';
 import { Video } from '../functions/video';
@@ -17,9 +17,13 @@ export const Fabbrica = props => {
       </ContainerDimensions>
       <Title>Fabbrica</Title>
       <Subtitle>Fabbrica di Crespi</Subtitle>
-      <Body />
+      <Message>
+        <Body />
+      </Message>
       <PhotoSphere />
-      <Body />
+      <NormalBody>
+        <Body />
+      </NormalBody>
     </div>
   );
 };

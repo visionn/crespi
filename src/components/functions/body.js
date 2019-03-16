@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Body as Container } from '../../style/common';
 const importBody = async () => {
   const page = await import('../../assets/text/ita/chiesa/desc.md');
   return page.default;
@@ -9,5 +8,5 @@ export const Body = props => {
   importBody().then(text => {
     setContent(text);
   });
-  return <Container>{content}</Container>;
+  return <div>{content}</div>;
 };
