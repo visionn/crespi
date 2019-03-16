@@ -33,6 +33,7 @@ export class Description extends Component {
         <DinamicPage
           name={this.props.lookingAt.name}
           description={this.props.description}
+          language={this.props.language}
         />
       </Container>
     );
