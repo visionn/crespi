@@ -18,11 +18,11 @@ export const Fabbrica = props => {
       <Title>Fabbrica</Title>
       <Subtitle>Fabbrica di Crespi</Subtitle>
       <Message>
-        <Body />
+        <Body filename={'desc'} name={props.name} language={props.language}/>
       </Message>
       <PhotoSphere />
       <NormalBody>
-        <Body />
+        <Body filename={'desc'} name={props.name} language={props.language}/>
       </NormalBody>
     </div>
   );
