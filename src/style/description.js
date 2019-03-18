@@ -31,14 +31,22 @@ export const PhotoContainer = styled.p`
 export const DinamicContainer = styled.div`
   margin: 0 2rem;
 `;
-export const Message = styled.div`
-  background-color: rgba(60, 73, 87, 0.7);
-  width: 50%;
+export const LeftMessage = styled.div`
+  background-color: rgba(2, 125, 255, 0.2);
   height: auto;
+  font-size: 1.2rem;
   text-align: left;
   word-wrap: break-word;
-  shape-outside: polygon(0 0, 100% 0, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0 75%);
-  -webkit-shape-outside: polygon(0 0, 100% 0, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0 75%)
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0 75%);
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0 75%);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  margin: 1rem 8rem 1rem 1rem;
+`;
+export const RightMessage = styled.div`
+  background-color: rgba(0, 255, 255, 0.2);
+  font-size: 1.2rem;
+  text-align: left;
+  word-wrap: break-word;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  margin: 1rem 1rem 1rem 8rem;
 `;

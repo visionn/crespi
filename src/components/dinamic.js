@@ -7,7 +7,13 @@ export const DinamicPage = props => {
       import('./pages/cimitero');
       return <Cimitero />;
     case 'fabbrica':
-      return <Fabbrica status={props.status} name={props.name} language={props.language}/>;
+      return (
+        <Fabbrica
+          status={props.status}
+          name={props.name}
+          language={props.language}
+        />
+      );
     default:
       return null;
   }

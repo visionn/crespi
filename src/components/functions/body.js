@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 const importBody = async props => {
-  const page = await import(`../../assets/text/${props.language}/${props.name}/${props.filename}.md`);
+  const page = await import(`../../assets/text/${props.language}/${
+    props.name
+  }/${props.filename}.md`);
   return page.default;
 };
 export const Body = props => {
