@@ -43,6 +43,10 @@ export const Button = styled.button`
   background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
+  @font-face {
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    font-family: 'Open Sans', sans-serif;
+  }
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
