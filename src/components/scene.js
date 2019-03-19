@@ -43,7 +43,8 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Color color={this.props.lookingAt.color}>
+      <div>
+        <Color color={this.props.lookingAt.color} />
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
@@ -63,7 +64,7 @@ class Scene extends Component {
             ?
           </Button>
         </Container>
-      </Color>
+      </div>
     );
   }
   mouseRay = event => {
