@@ -9,11 +9,14 @@ export const Title = styled.h1`
 export const Subtitle = styled.h4`
   text-align: center;
   font-weight: bold;
+  font-style: italic;
   font-family: helvetica;
 `;
 export const Body = styled.div`
-  padding: 2rem 1rem;
   font-size: 1.2rem;
+  max-width: 50rem;
+  line-height: 1.5em;
+  margin: 0 auto;
   font-family: helvetica;
 `;
 export const Top = styled.div`
@@ -43,6 +46,10 @@ export const Button = styled.button`
   background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
+  @font-face {
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    font-family: 'Open Sans', sans-serif;
+  }
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */

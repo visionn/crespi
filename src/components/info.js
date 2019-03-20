@@ -44,9 +44,7 @@ class Info extends Component {
           <ReactMarkdown source={this.props.info.Body} escapeHtml={false} />
         </Body>
         <Footer>
-          <Body>
-            visionn
-          </Body>
+          <Body>visionn</Body>
         </Footer>
       </Container>
     );

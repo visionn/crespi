@@ -31,3 +31,20 @@ export const PhotoContainer = styled.p`
 export const DinamicContainer = styled.div`
   margin: 0 2rem;
 `;
+const Message = styled.div`
+  position: relative;
+  line-height: 1.5em;
+  font-size: 1.2rem;
+  word-wrap: break-word;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  max-width: 50rem;
+`;
+export const LeftMessage = styled(Message)`
+  background-color: rgba(2, 125, 255, 0.2);
+  margin: 1rem 8rem 1rem auto;
+`;
+export const RightMessage = styled(Message)`
+  background-color: rgba(0, 255, 255, 0.2);
+  margin: 1rem auto 1rem 8rem;
+`;

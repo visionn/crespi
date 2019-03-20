@@ -15,7 +15,9 @@ export class BidimensionalPhoto extends Component {
     );
   }
   componentDidMount = () => {
-    import('../../assets/img/test.jpg').then(url => {
+    import(`../../assets/img/${this.props.name}/${
+      this.props.fileName
+    }.jpg`).then(url => {
       this.setState({
         photo: url.default,
       });

@@ -43,12 +43,15 @@ class Scene extends Component {
   }
   render() {
     return (
-      <Color color={this.props.lookingAt.color}>
+      <div>
+        <Color color={this.props.lookingAt.color} />
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
           onTouchStart={this.cameraRay}
+          onTouchStart={this.mouseRay}
           onPointerDown={this.cameraRay}
+          onPointerDown={this.mouseRay}
         >
           <Button
             onTouchStart={() =>
@@ -61,24 +64,38 @@ class Scene extends Component {
             ?
           </Button>
         </Container>
-      </Color>
+      </div>
     );
   }
-  cameraRay = () => {
-    // declaring camera raycaster
-    let cameraRay = new THREE.Raycaster();
-    let rayVector = new THREE.Vector2(0, 0);
-    cameraRay.setFromCamera(rayVector, this.camera);
-    let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-    if (typeof facingCamera !== 'undefined' && facingCamera.length > 0) {
-      // reading gltf.scene.children[0].name
-      this.props.actions.LOOKING_AT(
-        facingCamera[0].object.parent.parent.name,
-        this.props.language,
-      );
-    } else {
+  mouseRay = event => {
+    let mouseRay = new THREE.Raycaster();
+    let mouse = new THREE.Vector2();
+    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
+    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
+    mouseRay.setFromCamera(mouse, this.camera);
+    let mouseClick = mouseRay.intersectObjects(this.scene.children, true);
+    if (typeof mouseClick !== 'undefined' && mouseClick.length === 0) {
       this.props.actions.DONT_LOOK();
+    } else {
     }
+  };
+  cameraRay = async () => {
+    setInterval(() => {
+      // declaring camera raycaster
+      let cameraRay = new THREE.Raycaster();
+      let rayVector = new THREE.Vector2(0, 0);
+      cameraRay.setFromCamera(rayVector, this.camera);
+      let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
+      if (facingCamera !== 'undefined' && facingCamera.length > 0) {
+        // reading gltf.scene.children[0].name
+        this.props.actions.LOOKING_AT(
+          facingCamera[0].object.parent.parent.name,
+          this.props.language,
+        );
+      } else {
+        this.props.actions.DONT_LOOK();
+      }
+    }, 500);
   };
   componentDidUpdate = () => {
     this.orbitControls.target.set(
@@ -143,7 +160,7 @@ class Scene extends Component {
       // setting this.camera init position
       // this.camera.target = new THREE.Vector3(0, 0, 50);
       // last one is fov
-      this.camera.position.set(0, 0, -190);
+      this.camera.position.set(0, 0, -200);
       this.scene.add(this.camera);
     };
     const onWindowResize = () => {

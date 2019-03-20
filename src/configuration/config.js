@@ -13,11 +13,11 @@ export const config = {
   },
   cimitero: {
     position: {
-      x: -100,
+      x: -200,
       y: 0,
       z: 0,
     },
-    color: '#fbda61',
+    color: '#8EC5FC',
     text: {
       ita: {
         TopImage: ' ',
@@ -37,7 +37,7 @@ export const config = {
     position: {
       x: 0,
       y: 5,
-      z: 100,
+      z: 200,
     },
     color: '#fbda61',
     text: {
