@@ -9,6 +9,7 @@ export const Title = styled.h1`
 export const Subtitle = styled.h4`
   text-align: center;
   font-weight: bold;
+  font-style: italic;
   font-family: helvetica;
 `;
 export const Body = styled.div`
