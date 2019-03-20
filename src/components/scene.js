@@ -79,7 +79,7 @@ class Scene extends Component {
     } else {
     }
   };
-  cameraRay = () => {
+  cameraRay = async () => {
     setInterval(() => {
       // declaring camera raycaster
       let cameraRay = new THREE.Raycaster();

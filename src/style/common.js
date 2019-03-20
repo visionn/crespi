@@ -12,8 +12,10 @@ export const Subtitle = styled.h4`
   font-family: helvetica;
 `;
 export const Body = styled.div`
-  padding: 2rem 1rem;
   font-size: 1.2rem;
+  max-width: 50rem;
+  line-height: 1.5em;
+  margin: 0 auto;
   font-family: helvetica;
 `;
 export const Top = styled.div`
