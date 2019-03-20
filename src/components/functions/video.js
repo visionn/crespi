@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Container } from '../../style/video';
-import { Skeleton } from '../../style/skeleton';
 import 'three-orbitcontrols';
 export class Video extends Component {
   constructor(props) {
@@ -9,9 +8,6 @@ export class Video extends Component {
     this.camera;
     this.renderer;
     this.controls;
-    this.state = {
-      skeleton: true,
-    };
   }
   render() {
     return (
@@ -27,7 +23,6 @@ export class Video extends Component {
             autoPlay
           />
         </Container>
-        <Skeleton show={this.state.skeleton} />
       </div>
     );
   }
@@ -36,16 +31,6 @@ export class Video extends Component {
   };
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize, false);
-  };
-  checkVideo = async () => {
-    const check = setInterval(() => {
-      if (this.videoRef.readyState >= 3) {
-        this.setState({
-          skeleton: false,
-        });
-      } else {
-      }
-    }, 500);
   };
   componentDidMount = () => {
     this.scene = new THREE.Scene();
@@ -85,7 +70,6 @@ export class Video extends Component {
     let videoMesh = new THREE.Mesh(geometry, material);
     this.scene.add(videoMesh);
     window.addEventListener('resize', this.onWindowResize, false);
-    this.checkVideo();
     this.animate();
   };
   onWindowResize = () => {

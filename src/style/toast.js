@@ -9,6 +9,7 @@ export const Subtitle = styled.div`
   text-align: center;
   padding: 0.5rem;
   font-weight: bold;
+  font-style: italic;
   font-size: 1rem;
 `;
 export const Toasty = styled.div`

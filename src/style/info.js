@@ -17,6 +17,4 @@ export const Container = styled.div`
   z-index: 2;
   -webkit-overflow-scrolling: touch;
 `;
-export const Footer = styled.footer`
-
-`;
+export const Footer = styled.footer``;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'three-orbitcontrols';
 import { Container } from '../../style/photo';
-import { Skeleton } from '../../style/skeleton';
 export class PhotoSphere extends Component {
   constructor(props) {
     super(props);
@@ -10,15 +9,11 @@ export class PhotoSphere extends Component {
     this.renderer;
     this.controls;
     this.photo;
-    this.state = {
-      skeleton: true,
-    };
   }
   render() {
     return (
       <div>
         <Container ref={el => (this.container = el)} />
-        <Skeleton show={this.state.skeleton} />
       </div>
     );
   }
@@ -66,18 +61,7 @@ export class PhotoSphere extends Component {
       this.scene.add(this.photo);
     });
     window.addEventListener('resize', this.onWindowResize, false);
-    this.checkPhoto();
     this.animate();
-  };
-  checkPhoto = async () => {
-    setInterval(() => {
-      if (this.photo) {
-        this.setState({
-          skeleton: false,
-        });
-      } else {
-      }
-    }, 500);
   };
   onWindowResize = () => {
     // asign new window sizes to this.camera
