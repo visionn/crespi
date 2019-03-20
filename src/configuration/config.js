@@ -17,7 +17,7 @@ export const config = {
       y: 0,
       z: 0,
     },
-    color: '#fbda61',
+    color: '#8EC5FC',
     text: {
       ita: {
         TopImage: ' ',
