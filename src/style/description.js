@@ -42,7 +42,9 @@ const Message = styled.div`
 `;
 export const LeftMessage = styled(Message)`
   background-color: rgba(2, 125, 255, 0.2);
+  margin: 1rem 8rem 1rem 1rem;
 `;
 export const RightMessage = styled(Message)`
   background-color: rgba(0, 255, 255, 0.2);
+  margin: 1rem 1rem 1rem 8rem;
 `;
