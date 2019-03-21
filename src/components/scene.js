@@ -79,7 +79,6 @@ class Scene extends Component {
     mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
-    console.log(this.mouseClick);
   };
   cameraRay = () => {
     // declaring camera raycaster
