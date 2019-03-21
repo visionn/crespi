@@ -12,8 +12,8 @@ export const LOOKING_AT = (state = '', action) => {
         controls: {
           ...state.controls,
           minPolarAngle: 0,
-          minDistance: 100,
-          maxDistance: 100,
+          minDistance: 150,
+          maxDistance: 150,
         },
         name: action.payload.status,
       };
