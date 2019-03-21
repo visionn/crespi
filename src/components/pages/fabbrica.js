@@ -1,5 +1,10 @@
 import React, { useState, createElement } from 'react';
-import { Container, LeftMessage, RightMessage, PaddedDiv } from '../../style/description';
+import {
+  Container,
+  LeftMessage,
+  RightMessage,
+  PaddedDiv,
+} from '../../style/description';
 import { Title, Subtitle, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
 import { Body } from '../functions/body';
