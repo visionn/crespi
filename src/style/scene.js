@@ -27,8 +27,8 @@ export const Color = styled.div`
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 25rem;
-  height: 25rem;
+  width: 20rem;
+  height: 20rem;
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;

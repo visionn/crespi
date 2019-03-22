@@ -27,7 +27,7 @@ export const LOOKING_AT = (state = '', action) => {
         },
         controls: {
           ...state.controls,
-          maxPolarAngle: Math.PI - Math.PI / 2.1,
+          maxPolarAngle: Math.PI / 2,
           minPolarAngle: Math.PI / 2.1,
           minDistance: 300,
           maxDistance: 300,
@@ -43,7 +43,7 @@ export const LOOKING_AT = (state = '', action) => {
           z: 0,
         },
         controls: {
-          maxPolarAngle: Math.PI - Math.PI / 2.1,
+          maxPolarAngle: Math.PI / 2,
           minPolarAngle: Math.PI / 2.1,
           minDistance: 300,
           maxDistance: 300,
