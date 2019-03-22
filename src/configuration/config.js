@@ -13,7 +13,7 @@ export const config = {
   },
   cimitero: {
     position: {
-      x: -200,
+      x: -150,
       y: 0,
       z: 0,
     },
@@ -36,8 +36,8 @@ export const config = {
   fabbrica: {
     position: {
       x: 0,
-      y: 5,
-      z: 200,
+      y: 0,
+      z: 150,
     },
     color: '#fbda61',
     text: {

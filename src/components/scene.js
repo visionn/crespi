@@ -40,6 +40,7 @@ class Scene extends Component {
     this.camera;
     this.orbitControls;
     this.elements = [];
+    this.mouseClick = [];
   }
   render() {
     return (
@@ -48,10 +49,14 @@ class Scene extends Component {
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
-          onTouchStart={this.cameraRay}
-          onTouchStart={this.mouseRay}
-          onPointerDown={this.cameraRay}
-          onPointerDown={this.mouseRay}
+          onTouchStart={event => {
+            this.mouseRay(event);
+            this.cameraRay();
+          }}
+          onPointerDown={event => {
+            this.mouseRay(event);
+            this.cameraRay();
+          }}
         >
           <Button
             onTouchStart={() =>
@@ -73,29 +78,27 @@ class Scene extends Component {
     mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
     mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
     mouseRay.setFromCamera(mouse, this.camera);
-    let mouseClick = mouseRay.intersectObjects(this.scene.children, true);
-    if (typeof mouseClick !== 'undefined' && mouseClick.length === 0) {
-      this.props.actions.DONT_LOOK();
-    } else {
-    }
+    this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
   };
-  cameraRay = async () => {
-    setInterval(() => {
-      // declaring camera raycaster
-      let cameraRay = new THREE.Raycaster();
-      let rayVector = new THREE.Vector2(0, 0);
-      cameraRay.setFromCamera(rayVector, this.camera);
-      let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-      if (facingCamera !== 'undefined' && facingCamera.length > 0) {
-        // reading gltf.scene.children[0].name
-        this.props.actions.LOOKING_AT(
-          facingCamera[0].object.parent.parent.name,
-          this.props.language,
-        );
-      } else {
-        this.props.actions.DONT_LOOK();
-      }
-    }, 500);
+  cameraRay = () => {
+    // declaring camera raycaster
+    let cameraRay = new THREE.Raycaster();
+    let rayVector = new THREE.Vector2(0, 0);
+    cameraRay.setFromCamera(rayVector, this.camera);
+    let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
+    if (
+      facingCamera !== 'undefined' &&
+      facingCamera.length > 0 &&
+      this.mouseClick.length
+    ) {
+      // reading gltf.scene.children[0].name
+      this.props.actions.LOOKING_AT(
+        facingCamera[0].object.parent.parent.name,
+        this.props.language,
+      );
+    } else {
+      this.props.actions.DONT_LOOK();
+    }
   };
   componentDidUpdate = () => {
     this.orbitControls.target.set(
