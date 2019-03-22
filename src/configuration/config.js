@@ -11,33 +11,11 @@ export const config = {
       Body: require('../assets/text/eng/info/desc.md'),
     },
   },
-  cimitero: {
-    position: {
-      x: -150,
-      y: 0,
-      z: 0,
-    },
-    color: '#8EC5FC',
-    text: {
-      ita: {
-        TopImage: ' ',
-        Title: 'Mistero',
-        Subtitle: 'Sottotitolo',
-        Body: 1,
-      },
-      eng: {
-        TopImage: ' ',
-        Title: 'Mistero',
-        Subtitle: 'Sottotitolo',
-        Body: 1,
-      },
-    },
-  },
   fabbrica: {
     position: {
       x: 0,
       y: 0,
-      z: 150,
+      z: 10,
     },
     color: '#fbda61',
     text: {
