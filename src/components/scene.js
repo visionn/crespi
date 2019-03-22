@@ -75,8 +75,13 @@ class Scene extends Component {
   mouseRay = event => {
     let mouseRay = new THREE.Raycaster();
     let mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
+    if (event.type === 'touchstart') {
+      mouse.x = (event.touches[0].clientX / this.container.clientWidth) * 2 - 1;
+      mouse.y = -(event.touches[0].clientY / this.container.clientHeight) * 2 + 1;
+    } else {
+      mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
+      mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
+    }
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
   };
