@@ -12,8 +12,8 @@ export const LOOKING_AT = (state = '', action) => {
         controls: {
           ...state.controls,
           minPolarAngle: 0,
-          minDistance: 150,
-          maxDistance: 150,
+          minDistance: 10,
+          maxDistance: 10,
         },
         name: action.payload.status,
       };
@@ -29,8 +29,8 @@ export const LOOKING_AT = (state = '', action) => {
           ...state.controls,
           maxPolarAngle: Math.PI / 2,
           minPolarAngle: Math.PI / 2.1,
-          minDistance: 300,
-          maxDistance: 300,
+          minDistance: 20,
+          maxDistance: 20,
         },
         status: false,
       };
@@ -45,8 +45,8 @@ export const LOOKING_AT = (state = '', action) => {
         controls: {
           maxPolarAngle: Math.PI / 2,
           minPolarAngle: Math.PI / 2.1,
-          minDistance: 300,
-          maxDistance: 300,
+          minDistance: 20,
+          maxDistance: 20,
           enablePan: false,
           enableDamping: true,
           dampingFactor: 0.2,
