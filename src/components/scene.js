@@ -10,6 +10,7 @@ import {
   LOOKING_AT,
   DONT_LOOK,
   HIDE_LOADING_SCREEN,
+  SHOW_DESCRIPTION,
 } from '../redux/actions/actions';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container, Color } from '../style/scene';
@@ -25,6 +26,7 @@ const mapDispatchToProps = dispatch => ({
       HIDE_INFO,
       LOOKING_AT,
       DONT_LOOK,
+      SHOW_DESCRIPTION,
       HIDE_LOADING_SCREEN,
     },
     dispatch,
@@ -60,10 +62,16 @@ class Scene extends Component {
         >
           <Button
             onTouchStart={() =>
-              this.props.actions.SHOW_INFO(this.props.language)
+              this.props.actions.SHOW_DESCRIPTION(
+                'info',
+                this.props.language
+              )
             }
             onPointerDown={() =>
-              this.props.actions.SHOW_INFO(this.props.language)
+              this.props.actions.SHOW_DESCRIPTION(
+                'info',
+                this.props.language
+              )
             }
           >
             ?

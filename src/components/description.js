@@ -31,7 +31,6 @@ export class Description extends Component {
           </Button>
         </Top>
         <DinamicPage
-          name={this.props.lookingAt.name}
           description={this.props.description}
           language={this.props.language}
         />
