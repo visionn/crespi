@@ -1,15 +1,17 @@
 export const config = {
   info: {
-    ita: {
-      Title: 'crespi',
-      Subtitle: "Il mondo parte dell'internet",
-      Body: require('../assets/text/ita/info/desc.md'),
-    },
-    eng: {
-      Title: 'crespi',
-      Subtitle: 'The world part of the internet',
-      Body: require('../assets/text/eng/info/desc.md'),
-    },
+    text: {
+      ita: {
+        Title: 'crespi',
+        Subtitle: "Il mondo parte dell'internet",
+        Body: require('../assets/text/ita/info/desc.md'),
+      },
+      eng: {
+        Title: 'crespi',
+        Subtitle: 'The world part of the internet',
+        Body: require('../assets/text/eng/info/desc.md'),
+      },
+    }
   },
   fabbrica: {
     position: {
