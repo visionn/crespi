@@ -20,7 +20,7 @@ export const Photo = styled.img`
   max-height: 70%;
   max-width: 95%;
   border-radius: 1rem;
-  box-shadow: 0 0 2.6rem 0.75rem rgba(0, 0, 0, 0.29);
+  box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
 `;
 export const PhotoContainer = styled.p`
   left: 0;
