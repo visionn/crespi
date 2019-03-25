@@ -42,7 +42,7 @@ export const Button = styled.button`
   border-radius: 20px;
   font-size: 2rem;
   padding: 0;
-  box-shadow: 0 0 0.8rem 0 rgba(0, 0, 0, 0.38);
+  box-shadow: 0 0 2.0125rem 0.175rem rgba(0, 0, 0, 0.24);
   background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
