@@ -10,9 +10,8 @@ export const Container = styled.div`
   max-height: 100%;
   background-color: rgb(255, 255, 255);
   visibility: ${props => (props.status ? 'visible' : 'hidden')};
-  animation: ${props => (props.status ? fadeIn : fadeOut)} 0.5s linear;
-  transition: all 0.5s;
-  transition: visibility 0.5s;
+  animation: ${props => (props.status ? fadeIn : fadeOut)} 0.25s linear;
+  transition: all 0.25s;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;
