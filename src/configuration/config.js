@@ -4,12 +4,10 @@ export const config = {
       ita: {
         Title: 'crespi',
         Subtitle: "Il mondo parte dell'internet",
-        Body: require('../assets/text/ita/info/desc.md'),
       },
       eng: {
         Title: 'crespi',
         Subtitle: 'The world part of the internet',
-        Body: require('../assets/text/eng/info/desc.md'),
       },
     }
   },
