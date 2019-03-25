@@ -23,12 +23,14 @@ export const Fabbrica = props => {
       <Title>Fabbrica</Title>
       <Subtitle>Fabbrica di Crespi</Subtitle>
       <PaddedDiv>
-        <LeftMessage>
-          <Body filename={'desc'} name={props.name} language={props.language} />
-        </LeftMessage>
-        <RightMessage>
-          <Body filename={'desc'} name={props.name} language={props.language} />
-        </RightMessage>
+        <NormalBody>
+          <LeftMessage>
+            <Body filename={'desc'} name={props.name} language={props.language} />
+          </LeftMessage>
+          <RightMessage>
+            <Body filename={'desc'} name={props.name} language={props.language} />
+          </RightMessage>
+        </NormalBody>
         <PhotoSphere />
         <NormalBody>
           <Body filename={'desc'} name={props.name} language={props.language} />
