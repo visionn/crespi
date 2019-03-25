@@ -41,11 +41,13 @@ const Message = styled.div`
   max-width: 50rem;
 `;
 export const LeftMessage = styled(Message)`
-  background-color: rgba(2, 125, 255, 0.2);
+  background-color: rgb(242, 227, 225);
   margin: 1rem 2rem 1rem auto;
 `;
 export const RightMessage = styled(Message)`
-  background-color: rgba(0, 255, 255, 0.2);
+  border-width: 0.3125rem;
+  border-style: solid;
+  border-color: rgb(242, 227, 225);
   margin: 1rem auto 1rem 2rem;
 `;
 export const PaddedDiv = styled.div`
