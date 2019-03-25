@@ -17,7 +17,7 @@ export const Toasty = styled.div`
   z-index: 2;
   font-family: helvetica;
   border-radius: 1rem;
-  box-shadow: 0 0 2.6rem 0.75rem rgba(0, 0, 0, 0.29);
+  box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
   background-color: white;
   visibility: ${props => (props.lookingAt ? 'visible' : 'hidden')};
   animation: ${props => (props.lookingAt ? swapUp : swapDown)} 0.25s linear;
