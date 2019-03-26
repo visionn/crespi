@@ -23,20 +23,12 @@ export const config = {
     },
     text: {
       ita: {
-        TopImage: ' ',
         Title: 'Fabbrica',
         Subtitle: 'Fabbrica di Crespi',
-        Photo: '',
-        PhotoSphere: '',
-        Body: 1,
       },
       eng: {
-        TopImage: ' ',
         Title: 'Factory',
         Subtitle: "Crespi's Factory",
-        Photo: '',
-        PhotoSphere: '',
-        Body: 1,
       },
     },
   },
