@@ -32,11 +32,11 @@ export const Color = styled.div`
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  background-color: ${props => props.color};
+  background-color: ${props => props.color.first};
   background-image: linear-gradient(
     45deg,
-    ${props => props.color} 0%,
-    #ff5acd 100%
+    ${props => props.color.first} 0%,
+    ${props => props.color.second} 100%
   );
   transition: all 0.5s;
 `;

@@ -53,6 +53,10 @@ export const LOOKING_AT = (state = '', action) => {
           screenSpacePanning: false,
           rotateSpeed: 0.1,
         },
+        color: {
+          first: '',
+          second: '',
+        }
       };
   }
 };
