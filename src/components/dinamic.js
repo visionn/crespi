@@ -1,7 +1,7 @@
 import React, { createElement, useState } from 'react';
 import { Cimitero } from './pages/cimitero';
 import { Fabbrica } from './pages/fabbrica';
-import { Info } from './info';
+import { Info } from './pages/info';
 export const DinamicPage = props => {
   switch (props.description.name) {
     case 'cimitero':
