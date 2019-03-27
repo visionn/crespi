@@ -1,15 +1,15 @@
 export const config = {
   info: {
-    ita: {
-      Title: 'crespi',
-      Subtitle: "Il mondo parte dell'internet",
-      Body: require('../assets/text/ita/info/desc.md'),
-    },
-    eng: {
-      Title: 'crespi',
-      Subtitle: 'The world part of the internet',
-      Body: require('../assets/text/eng/info/desc.md'),
-    },
+    text: {
+      ita: {
+        Title: 'crespi',
+        Subtitle: "Il mondo parte dell'internet",
+      },
+      eng: {
+        Title: 'crespi',
+        Subtitle: 'The world part of the internet',
+      },
+    }
   },
   fabbrica: {
     position: {
@@ -17,23 +17,18 @@ export const config = {
       y: 0,
       z: 10,
     },
-    color: '#fbda61',
+    color: {
+      first: '#fbda61',
+      second: '#ff5acd',
+    },
     text: {
       ita: {
-        TopImage: ' ',
         Title: 'Fabbrica',
         Subtitle: 'Fabbrica di Crespi',
-        Photo: '',
-        PhotoSphere: '',
-        Body: 1,
       },
       eng: {
-        TopImage: ' ',
         Title: 'Factory',
         Subtitle: "Crespi's Factory",
-        Photo: '',
-        PhotoSphere: '',
-        Body: 1,
       },
     },
   },

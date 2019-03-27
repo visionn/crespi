@@ -10,9 +10,8 @@ export const Container = styled.div`
   max-height: 100%;
   background-color: rgb(255, 255, 255);
   visibility: ${props => (props.status ? 'visible' : 'hidden')};
-  animation: ${props => (props.status ? fadeIn : fadeOut)} 0.5s linear;
-  transition: all 0.5s;
-  transition: visibility 0.5s;
+  animation: ${props => (props.status ? fadeIn : fadeOut)} 0.25s linear;
+  transition: all 0.25s;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;
@@ -20,7 +19,7 @@ export const Photo = styled.img`
   max-height: 70%;
   max-width: 95%;
   border-radius: 1rem;
-  box-shadow: 0 0 2.6rem 0.75rem rgba(0, 0, 0, 0.29);
+  box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
 `;
 export const PhotoContainer = styled.p`
   left: 0;
@@ -41,12 +40,14 @@ const Message = styled.div`
   max-width: 50rem;
 `;
 export const LeftMessage = styled(Message)`
-  background-color: rgba(2, 125, 255, 0.2);
-  margin: 1rem 2rem 1rem auto;
+  background-color: rgb(242, 227, 225);
+  margin: 1rem auto 1rem 2rem;
 `;
 export const RightMessage = styled(Message)`
-  background-color: rgba(0, 255, 255, 0.2);
-  margin: 1rem auto 1rem 2rem;
+  border-width: 0.3125rem;
+  border-style: solid;
+  border-color: rgb(242, 227, 225);
+  margin: 1rem 2rem 1rem auto;
 `;
 export const PaddedDiv = styled.div`
   padding: 0 1rem;

@@ -6,7 +6,10 @@ export const LOOKING_AT = (state = '', action) => {
         ...state,
         ...config[action.payload.status].text[action.payload.language],
         position: config[action.payload.status].position,
-        color: config[action.payload.status].color,
+        color: {
+          ...state.color,
+          ...config[action.payload.status].color,
+        },
         Body: '',
         status: true,
         controls: {
@@ -32,6 +35,9 @@ export const LOOKING_AT = (state = '', action) => {
           minDistance: 19,
           maxDistance: 19,
         },
+        color: {
+          ...state.color,
+        },        
         status: false,
       };
     default:
@@ -53,6 +59,9 @@ export const LOOKING_AT = (state = '', action) => {
           screenSpacePanning: false,
           rotateSpeed: 0.1,
         },
+        color: {
+          ...state.color,
+        }
       };
   }
 };

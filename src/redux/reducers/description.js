@@ -5,6 +5,7 @@ export const DESCRIPTION = (state = false, action) => {
       return {
         ...state,
         ...config[action.payload.model].text[action.payload.language],
+        name: action.payload.model,
         status: true,
       };
     case 'HIDE_DESCRIPTION':
