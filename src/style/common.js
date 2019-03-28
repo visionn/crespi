@@ -39,7 +39,7 @@ export const Button = styled.button`
   font-family: helvetica;
   border: none;
   outline: none;
-  border-radius: 20px;
+  border-radius: 50%;
   font-size: 2rem;
   padding: 0;
   box-shadow: 0 0 2.0125rem 0.175rem rgba(0, 0, 0, 0.24);

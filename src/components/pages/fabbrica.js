@@ -25,10 +25,18 @@ export const Fabbrica = props => {
       <PaddedDiv>
         <NormalBody>
           <LeftMessage>
-            <Body filename={'desc'} name={props.name} language={props.language} />
+            <Body
+              filename={'desc'}
+              name={props.name}
+              language={props.language}
+            />
           </LeftMessage>
           <RightMessage>
-            <Body filename={'desc'} name={props.name} language={props.language} />
+            <Body
+              filename={'desc'}
+              name={props.name}
+              language={props.language}
+            />
           </RightMessage>
         </NormalBody>
         <PhotoSphere />

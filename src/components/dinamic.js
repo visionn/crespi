@@ -22,7 +22,7 @@ export const DinamicPage = props => {
           name={props.description.name}
           language={props.language}
         />
-      )
+      );
     default:
       return null;
   }

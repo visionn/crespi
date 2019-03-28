@@ -9,7 +9,7 @@ export const config = {
         Title: 'crespi',
         Subtitle: 'The world part of the internet',
       },
-    }
+    },
   },
   fabbrica: {
     position: {

@@ -62,16 +62,10 @@ class Scene extends Component {
         >
           <Button
             onTouchStart={() =>
-              this.props.actions.SHOW_DESCRIPTION(
-                'info',
-                this.props.language
-              )
+              this.props.actions.SHOW_DESCRIPTION('info', this.props.language)
             }
             onPointerDown={() =>
-              this.props.actions.SHOW_DESCRIPTION(
-                'info',
-                this.props.language
-              )
+              this.props.actions.SHOW_DESCRIPTION('info', this.props.language)
             }
           >
             ?
@@ -85,7 +79,8 @@ class Scene extends Component {
     let mouse = new THREE.Vector2();
     if (event.type === 'touchstart') {
       mouse.x = (event.touches[0].clientX / this.container.clientWidth) * 2 - 1;
-      mouse.y = -(event.touches[0].clientY / this.container.clientHeight) * 2 + 1;
+      mouse.y =
+        -(event.touches[0].clientY / this.container.clientHeight) * 2 + 1;
     } else {
       mouse.x = (event.clientX / this.container.clientWidth) * 2 - 1;
       mouse.y = -(event.clientY / this.container.clientHeight) * 2 + 1;
