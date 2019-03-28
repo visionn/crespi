@@ -1,15 +1,3 @@
-<p align="center">
-<img width="100%" src="https://media.giphy.com/media/1zJUb7oTT16v2E9T2Q/giphy.gif">
-</p>
+Our mission is to make the world part of the web.
 
-[![Build Status](https://travis-ci.org/cubisti/crespi-tour.svg?branch=master)](https://travis-ci.org/cubisti/crespi-tour)
-[![Coverage Status](https://coveralls.io/repos/github/cubisti/crespi-tour/badge.svg?branch=master)](https://coveralls.io/github/cubisti/crespi-tour?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a5ebf288e95d416eb05e86c831548c8d)](https://app.codacy.com/app/defending1/crespi-tour?utm_source=github.com&utm_medium=referral&utm_content=cubisti/crespi-tour&utm_campaign=Badge_Grade_Dashboard)
-[![BCH compliance](https://bettercodehub.com/edge/badge/cubisti/crespi-tour?branch=master)](https://bettercodehub.com/)
-[![CodeFactor](https://www.codefactor.io/repository/github/cubisti/crespi-tour/badge)](https://www.codefactor.io/repository/github/cubisti/crespi-tour)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
-
-
-<mark style="text-color: white; background-color: yellow;">La nostra missione</mark> è rendere il mondo parte del web.
-```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed aliquet libero, quis pellentesque nisl. Etiam rutrum, risus ut finibus ornare, massa mauris commodo magna, id maximus dolor ante at orci. Praesent porttitor ligula et turpis vulputate, sit amet sollicitudin nunc pretium. Etiam vitae tortor rutrum sem pulvinar pulvinar in quis est. Praesent vitae elementum est. Donec vestibulum tincidunt interdum. Aenean nec ullamcorper urna. Fusce iaculis nisi pharetra sodales consequat. Pellentesque neque libero, consequat in est ac, commodo sagittis enim. Aenean scelerisque ex id felis interdum, vel consequat nulla viverra. Nam in luctus magna. Ut egestas a ex non consectetur. Mauris vel iaculis purus. Nam vel arcu mi. Curabitur feugiat libero urna, ac maximus sem rhoncus nec.

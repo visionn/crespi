@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MDReactComponent from 'markdown-react-js';
 const importBody = async props => {
   const page = await import(`../../assets/text/${props.language}/${
     props.name
@@ -10,5 +11,5 @@ export const Body = props => {
   importBody(props).then(text => {
     setContent(text);
   });
-  return <div>{content}</div>;
+  return <MDReactComponent text={content} />;
 };

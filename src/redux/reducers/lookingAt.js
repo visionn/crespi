@@ -37,7 +37,7 @@ export const LOOKING_AT = (state = '', action) => {
         },
         color: {
           ...state.color,
-        },        
+        },
         status: false,
       };
     default:
@@ -61,7 +61,7 @@ export const LOOKING_AT = (state = '', action) => {
         },
         color: {
           ...state.color,
-        }
+        },
       };
   }
 };
