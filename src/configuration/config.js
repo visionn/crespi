@@ -32,4 +32,25 @@ export const config = {
       },
     },
   },
+  cimitero: {
+    position: {
+      x: 0,
+      y: 0,
+      z: -10,
+    },
+    color: {
+      first: '#8EC5FC',
+      second: '#E0C3FC',
+    },
+    text: {
+      ita: {
+        title: 'Cimitero',
+        subtitle: 'Cimitero di Crespi',
+      },
+      eng: {
+        title: 'Cemetery',
+        subtitle: "Crespi's Cemetery",
+      },
+    },
+  },
 };

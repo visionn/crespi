@@ -38,9 +38,6 @@ export const Fabbrica = props => {
               language={props.language}
             />
           </RightMessage>
-        </NormalBody>
-        <PhotoSphere />
-        <NormalBody>
           <Body filename={'desc'} name={props.name} language={props.language} />
         </NormalBody>
       </PaddedDiv>
