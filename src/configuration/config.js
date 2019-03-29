@@ -2,12 +2,12 @@ export const config = {
   info: {
     text: {
       ita: {
-        Title: 'crespi',
-        Subtitle: "Il mondo parte dell'internet",
+        title: 'crespi',
+        subtitle: "Il mondo parte dell'internet",
       },
       eng: {
-        Title: 'crespi',
-        Subtitle: 'The world part of the internet',
+        title: 'crespi',
+        subtitle: 'The world part of the internet',
       },
     },
   },
@@ -23,12 +23,12 @@ export const config = {
     },
     text: {
       ita: {
-        Title: 'Fabbrica',
-        Subtitle: 'Fabbrica di Crespi',
+        title: 'Fabbrica',
+        subtitle: 'Fabbrica di Crespi',
       },
       eng: {
-        Title: 'Factory',
-        Subtitle: "Crespi's Factory",
+        title: 'Factory',
+        subtitle: "Crespi's Factory",
       },
     },
   },

@@ -41,8 +41,8 @@ class Toast extends Component {
         description={this.props.description.status}
         lookingAt={this.props.lookingAt.status}
       >
-        <Title>{this.props.lookingAt.Title}</Title>
-        <Subtitle>{this.props.lookingAt.Subtitle}</Subtitle>
+        <Title>{this.props.lookingAt.title}</Title>
+        <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
       </Toasty>
     );
   }

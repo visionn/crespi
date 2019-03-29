@@ -13,6 +13,8 @@ export const DinamicPage = props => {
           status={props.status}
           name={props.description.name}
           language={props.language}
+          title={props.description.title}
+          subtitle={props.description.subtitle}
         />
       );
     case 'info':
