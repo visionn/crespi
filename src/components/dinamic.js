@@ -5,8 +5,15 @@ import { Info } from './pages/info';
 export const DinamicPage = props => {
   switch (props.description.name) {
     case 'cimitero':
-      import('./pages/cimitero');
-      return <Cimitero />;
+      return (
+        <Fabbrica
+          status={props.status}
+          name={props.description.name}
+          language={props.language}
+          title={props.description.title}
+          subtitle={props.description.subtitle}
+        />
+      );
     case 'fabbrica':
       return (
         <Fabbrica
