@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "coveralls": "^3.0.2",
+    "markdown-react-js": "^1.0.2",
     "npm": "^6.5.0",
     "react": "^16.8.3",
     "react-container-dimensions": "^1.4.1",
