@@ -20,8 +20,8 @@ export const Fabbrica = props => {
           <Video name={props.name} width={width} height={height} />
         )}
       </ContainerDimensions>
-      <Title>Fabbrica</Title>
-      <Subtitle>Fabbrica di Crespi</Subtitle>
+      <Title>{props.title}</Title>
+      <Subtitle>{props.subtitle}</Subtitle>
       <PaddedDiv>
         <NormalBody>
           <LeftMessage>
