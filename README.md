@@ -1,4 +1,4 @@
-<p style="border-radius: 1%;" align="center">
+<p align="center" height="50%" width="100%">
   <img src="src/assets/README.gif">
 </p>
 
