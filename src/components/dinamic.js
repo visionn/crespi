@@ -6,7 +6,7 @@ export const DinamicPage = props => {
   switch (props.description.name) {
     case 'cimitero':
       return (
-        <Fabbrica
+        <Cimitero
           status={props.status}
           name={props.description.name}
           language={props.language}
