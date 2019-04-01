@@ -56,7 +56,7 @@ export class PhotoSphere extends Component {
         let material = new THREE.MeshBasicMaterial({
           map: texture,
         });
-        texture.flipY = true;
+        texture.flipY = false;
         this.photo = new THREE.Mesh(geometry, material);
         this.photo.position.set(0, 0, 0);
         this.scene.add(this.photo);
