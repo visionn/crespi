@@ -65,6 +65,7 @@ export class Video extends Component {
       this.videoRef.src = url.default;
     });
     let texture = new THREE.VideoTexture(this.videoRef);
+    texture.anisotropy = this.renderer.getMaxAnisotropy();
     let material = new THREE.MeshBasicMaterial({ map: texture });
     texture.flipY = true;
     let videoMesh = new THREE.Mesh(geometry, material);

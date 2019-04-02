@@ -56,6 +56,7 @@ export class PhotoSphere extends Component {
         let material = new THREE.MeshBasicMaterial({
           map: texture,
         });
+        texture.anisotropy = this.renderer.getMaxAnisotropy();
         texture.flipY = false;
         this.photo = new THREE.Mesh(geometry, material);
         this.photo.position.set(0, 0, 0);
