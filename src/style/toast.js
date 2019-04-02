@@ -15,7 +15,7 @@ export const Subtitle = styled.div`
 export const Toasty = styled.div`
   position: absolute;
   z-index: 2;
-  font-family: helvetica;
+  font-family: 'Open Sans', sans-serif;
   border-radius: 1rem;
   box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
   background-color: white;
