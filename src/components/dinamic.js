@@ -1,4 +1,4 @@
-import React, { createElement, useState } from 'react';
+import React, { createElement } from 'react';
 import { Cimitero } from './pages/cimitero';
 import { Fabbrica } from './pages/fabbrica';
 import { Info } from './pages/info';

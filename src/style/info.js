@@ -13,7 +13,9 @@ export const CrespiLogo = styled.h1`
 export const ViewCode = styled.button`
   position: sticky;
   bottom: 0.5rem;
-  background-color: white;
+  color: white;
+  visibility: ${props => props.visibility};
+  background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   border: none;
   outline: none;
   width: 100%;
