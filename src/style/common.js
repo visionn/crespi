@@ -48,7 +48,6 @@ export const Button = styled.button`
 export const Root = styled.div`
   @font-face {
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-    font-family: 'Open Sans', sans-serif;
   }
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

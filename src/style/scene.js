@@ -8,7 +8,7 @@ export const Container = styled.div`
   bottom: 0%;
   overflow: hidden;
   z-index: 1;
-  opacity: 25%;
+  opacity: 5%;
 `;
 export const Button = styled.button`
   z-index: 2;

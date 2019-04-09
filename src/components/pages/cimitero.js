@@ -21,14 +21,11 @@ export const Cimitero = props => {
       </ContainerDimensions>
       <Title>{props.title}</Title>
       <Subtitle>{props.subtitle}</Subtitle>
-      <PhotoSphere name={props.name} filename={1} />
-      <PhotoSphere name={props.name} filename={2} />
-      <PhotoSphere name={props.name} filename={3} />
-      <PhotoSphere name={props.name} filename={4} />
-      <PhotoSphere name={props.name} filename={5} />
-      <PhotoSphere name={props.name} filename={6} />
       <PaddedDiv>
         <NormalBody>
+          <PhotoSphere name={props.name} filename={'1'} />
+          <PhotoSphere name={props.name} filename={'2'} />
+          <BidimensionalPhoto name={props.name} filename={'1'} />
           <Body filename={'desc'} name={props.name} language={props.language} />
         </NormalBody>
       </PaddedDiv>

@@ -17,7 +17,7 @@ export const Container = styled.div`
 `;
 export const Photo = styled.img`
   max-height: 70%;
-  max-width: 95%;
+  width: 100%;
   border-radius: 1rem;
   box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
 `;
