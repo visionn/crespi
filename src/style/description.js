@@ -35,6 +35,7 @@ const Message = styled.div`
   line-height: 1.5em;
   font-size: 1.2rem;
   word-wrap: break-word;
+  color: rgb(51, 51, 51);
   border-radius: 1.5rem;
   padding: 1rem;
   max-width: 50rem;

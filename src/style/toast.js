@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components';
 import { swapUp, swapDown, fadeIn, fadeOut } from './animations.js';
 export const Title = styled.h1`
-  color: ${props => (props.color ? props.color : 'black')};
+  color: rgb(51, 51, 51);
   text-align: center;
   font-size: 2.5rem;
 `;
 export const Subtitle = styled.div`
   text-align: center;
   padding: 0.5rem;
+  color: rgb(51, 51, 51);
   font-weight: bold;
   font-style: italic;
   font-size: 1rem;

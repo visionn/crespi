@@ -3,11 +3,13 @@ export const Title = styled.h1`
   color: ${props => (props.color ? props.color : 'black')};
   padding: 1rem;
   text-align: center;
+  color: rgb(51, 51, 51);
   font-weight: bold;
   font-family: helvetica;
 `;
 export const Subtitle = styled.h4`
   text-align: center;
+  color: rgb(51, 51, 51);
   font-weight: bold;
   font-style: italic;
   font-family: helvetica;
@@ -16,6 +18,7 @@ export const Body = styled.div`
   font-size: 1.2rem;
   max-width: 50rem;
   line-height: 1.5em;
+  color: rgb(51, 51, 51);
   margin: 0 auto;
   font-family: helvetica;
 `;
@@ -33,6 +36,7 @@ export const Button = styled.button`
   display: inherit;
   width: 2.5rem;
   height: 2.5rem;
+  color: rgb(51, 51, 51);
   top: 2rem;
   right: 1.5rem;
   font-weight: 300;
@@ -46,9 +50,6 @@ export const Button = styled.button`
   background-color: rgb(255, 255, 255);
 `;
 export const Root = styled.div`
-  @font-face {
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-  }
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
