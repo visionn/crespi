@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps } from '../redux/mapStateToProps';
+import { Root } from '../style/common';
 import { Container, Element } from '../style/loading';
 class Loading extends Component {
   constructor(props) {
@@ -8,9 +9,11 @@ class Loading extends Component {
   }
   render() {
     return (
-      <Container status={this.props.loading}>
-        <Element>crespi</Element>
-      </Container>
+      <Root>
+        <Container status={this.props.loading}>
+          <Element>crespi</Element>
+        </Container>
+      </Root>
     );
   }
 }

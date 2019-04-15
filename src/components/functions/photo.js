@@ -50,19 +50,19 @@ export class PhotoSphere extends Component {
     this.controls.enableZoom = false;
     let geometry = new THREE.SphereGeometry(-20, 20, 20);
     let file;
-    import(`../../assets/img/${this.props.name}/3d/${this.props.filename}.jpg`).then(
-      url => {
-        let texture = new THREE.TextureLoader().load(url.default);
-        let material = new THREE.MeshBasicMaterial({
-          map: texture,
-        });
-        texture.anisotropy = this.renderer.getMaxAnisotropy();
-        texture.flipY = false;
-        this.photo = new THREE.Mesh(geometry, material);
-        this.photo.position.set(0, 0, 0);
-        this.scene.add(this.photo);
-      },
-    );
+    import(`../../assets/img/${this.props.name}/3d/${
+      this.props.filename
+    }.jpg`).then(url => {
+      let texture = new THREE.TextureLoader().load(url.default);
+      let material = new THREE.MeshBasicMaterial({
+        map: texture,
+      });
+      texture.anisotropy = this.renderer.getMaxAnisotropy();
+      texture.flipY = false;
+      this.photo = new THREE.Mesh(geometry, material);
+      this.photo.position.set(0, 0, 0);
+      this.scene.add(this.photo);
+    });
     window.addEventListener('resize', this.onWindowResize, false);
     this.animate();
   };
