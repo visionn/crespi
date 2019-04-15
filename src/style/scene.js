@@ -10,16 +10,6 @@ export const Container = styled.div`
   z-index: 1;
   opacity: 5%;
 `;
-export const Button = styled.button`
-  z-index: 2;
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-  border: none;
-  border-radius: 0.2rem;
-  background-color: white;
-  font-size: 2rem;
-`;
 export const Color = styled.div`
   position: absolute;
   margin: 0 auto;
