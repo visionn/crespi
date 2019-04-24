@@ -58,6 +58,6 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.1.2",
     "styled-normalize": "^8.0.6",
-    "three": "^0.101.0"
+    "three": "^0.104.0"
   }
 }
