@@ -60,8 +60,8 @@ export const config = {
       z: 0,
     },
     color: {
-      first: '#8EC5FC',
-      second: '#E0C3FC',
+      first: '#85FFBD',
+      second: '#FFFB7D',
     },
     text: {
       ita: {
@@ -74,15 +74,15 @@ export const config = {
       },
     },
   },
-  casa: {
+  case: {
     position: {
       x: -10,
       y: 0,
       z: 0,
     },
     color: {
-      first: '#8EC5FC',
-      second: '#E0C3FC',
+      first: '#FF9A8B',
+      second: '#FF99AC',
     },
     text: {
       ita: {
