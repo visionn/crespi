@@ -127,8 +127,8 @@ class Scene extends Component {
   animate = () => {
     requestAnimationFrame(this.animate);
     if (
-      typeof this.elements !== 'undefined' &&	
-      this.elements.length > 0 &&	
+      typeof this.elements !== 'undefined' &&
+      this.elements.length > 0 &&
       this.props.loading === true
     ) {
       this.props.actions.HIDE_LOADING_SCREEN();
