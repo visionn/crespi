@@ -14,10 +14,9 @@ export const Container = styled.div`
 `;
 export const Element = styled.div`
   position: absolute;
-  top: 50%;
+  top: 44%;
   left: 50%;
-  transform: translateY(-50%);
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   font-family: helvetica;
   font-size: 3.5rem;
   font-weight: bold;
