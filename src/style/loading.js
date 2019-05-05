@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fadeIn, fadeOut } from './animations';
+import { fadeIn, fadeOut, Pulse } from './animations';
 export const Container = styled.div`
   position: absolute;
   top: 0;
@@ -25,4 +25,5 @@ export const Element = styled.div`
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   z-index: 7;
+  animation: ${Pulse} 2s ease-out infinite;
 `;
