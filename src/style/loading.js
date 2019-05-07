@@ -14,16 +14,15 @@ export const Container = styled.div`
 `;
 export const Element = styled.div`
   position: absolute;
-  top: 44%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: helvetica;
-  font-size: 3.5rem;
-  font-weight: bold;
+  font-size: 3.3rem;
+  font-weight: 900;
   text-background: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   z-index: 7;
-  animation: ${Pulse} 2s ease-out infinite;
 `;
