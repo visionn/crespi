@@ -19,7 +19,7 @@ export const Element = styled.div`
   transform: translate(-50%, -50%);
   font-family: helvetica;
   font-size: 3.3rem;
-  font-weight: 900;
+  font-weight: bold;
   text-background: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
