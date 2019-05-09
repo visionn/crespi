@@ -24,21 +24,7 @@ export const Fabbrica = props => {
       <Subtitle>{props.subtitle}</Subtitle>
       <PaddedDiv>
         <NormalBody>
-          <LeftMessage>
-            <Body
-              filename={'desc'}
-              name={props.name}
-              language={props.language}
-            />
-          </LeftMessage>
-          <RightMessage>
-            <Body
-              filename={'desc'}
-              name={props.name}
-              language={props.language}
-            />
-          </RightMessage>
-          <Body filename={'desc'} name={props.name} language={props.language} />
+          <Body filename={'1'} name={props.name} language={props.language} />
         </NormalBody>
       </PaddedDiv>
     </div>

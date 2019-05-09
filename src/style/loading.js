@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fadeIn, fadeOut } from './animations';
+import { fadeIn, fadeOut, Pulse } from './animations';
 export const Container = styled.div`
   position: absolute;
   top: 0;
@@ -16,10 +16,9 @@ export const Element = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateY(-50%);
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   font-family: helvetica;
-  font-size: 3.5rem;
+  font-size: 3.3rem;
   font-weight: bold;
   text-background: transparent;
   -webkit-background-clip: text;

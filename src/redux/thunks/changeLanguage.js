@@ -4,7 +4,7 @@ export const LANGUAGE = language => {
     switch (language) {
       case 'it-IT':
       default:
-        dispatch(LANGUAGE_ENG());
+        dispatch(LANGUAGE_ITA());
     }
   };
 };

@@ -53,45 +53,24 @@ export const config = {
       },
     },
   },
-  chiesa: {
+  case: {
     position: {
       x: 10,
       y: 0,
       z: 0,
     },
     color: {
-      first: '#8EC5FC',
-      second: '#E0C3FC',
-    },
-    text: {
-      ita: {
-        title: 'Chiesa',
-        subtitle: 'Chiesa di Crespi',
-      },
-      eng: {
-        title: 'Church',
-        subtitle: "Crespi's Church",
-      },
-    },
-  },
-  casa: {
-    position: {
-      x: -10,
-      y: 0,
-      z: 0,
-    },
-    color: {
-      first: '#8EC5FC',
-      second: '#E0C3FC',
+      first: '#fbda61',
+      second: '#ff5acd',
     },
     text: {
       ita: {
         title: 'Case',
-        subtitle: 'Case dei lavoratori',
+        subtitle: 'Case di Crespi',
       },
       eng: {
-        title: 'Houses',
-        subtitle: "Crespi's workers' houses",
+        title: 'Factory',
+        subtitle: "Crespi's Factory",
       },
     },
   },
