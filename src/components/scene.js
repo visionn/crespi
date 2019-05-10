@@ -87,6 +87,18 @@ class Scene extends Component {
     }
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
+    if (
+      this.mouseClick !== 'undefined' &&
+      this.mouseClick.length > 0
+    ) {
+        // reading gltf.scene.children[0].name
+        this.props.actions.LOOKING_AT(
+        this.mouseClick[0].object.parent.name,
+        this.props.language,
+        );
+    } else {
+        this.props.actions.DONT_LOOK();
+    }
   };
   cameraRay = () => {
     // declaring camera raycaster
@@ -94,19 +106,7 @@ class Scene extends Component {
     let rayVector = new THREE.Vector2(0, 0);
     cameraRay.setFromCamera(rayVector, this.camera);
     let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-    if (
-      facingCamera !== 'undefined' &&
-      facingCamera.length > 0 &&
-      this.mouseClick.length
-    ) {
-      // reading gltf.scene.children[0].name
-      this.props.actions.LOOKING_AT(
-        facingCamera[0].object.parent.parent.name,
-        this.props.language,
-      );
-    } else {
-      this.props.actions.DONT_LOOK();
-    }
+
   };
   componentDidUpdate = () => {
     this.orbitControls.target.set(
