@@ -52,10 +52,10 @@ class Scene extends Component {
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
           onTouchStart={event => {
-            this.mouseRay(event)
+            this.mouseRay(event);
           }}
           onPointerDown={event => {
-            this.mouseRay(event)
+            this.mouseRay(event);
           }}
         >
           <Button
@@ -85,17 +85,14 @@ class Scene extends Component {
     }
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
-    if (
-      this.mouseClick !== 'undefined' &&
-      this.mouseClick.length > 0
-    ) {
-        // reading gltf.scene.children[0].name
-        this.props.actions.LOOKING_AT(
+    if (this.mouseClick !== 'undefined' && this.mouseClick.length > 0) {
+      // reading gltf.scene.children[0].name
+      this.props.actions.LOOKING_AT(
         this.mouseClick[0].object.parent.name,
         this.props.language,
-        );
+      );
     } else {
-        this.props.actions.DONT_LOOK();
+      this.props.actions.DONT_LOOK();
     }
   };
   componentDidUpdate = () => {
@@ -184,7 +181,6 @@ class Scene extends Component {
     setCamera();
     loadModels(this.scene, this.elements);
     this.animate();
-    this.cameraRay();
   };
 }
 export default connect(
