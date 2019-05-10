@@ -52,12 +52,10 @@ class Scene extends Component {
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
           onTouchStart={event => {
-            this.mouseRay(event);
-            this.cameraRay();
+            this.mouseRay(event)
           }}
           onPointerDown={event => {
-            this.mouseRay(event);
-            this.cameraRay();
+            this.mouseRay(event)
           }}
         >
           <Button
@@ -99,14 +97,6 @@ class Scene extends Component {
     } else {
         this.props.actions.DONT_LOOK();
     }
-  };
-  cameraRay = () => {
-    // declaring camera raycaster
-    let cameraRay = new THREE.Raycaster();
-    let rayVector = new THREE.Vector2(0, 0);
-    cameraRay.setFromCamera(rayVector, this.camera);
-    let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
-
   };
   componentDidUpdate = () => {
     this.orbitControls.target.set(
