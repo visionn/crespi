@@ -52,12 +52,10 @@ class Scene extends Component {
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
           onTouchStart={event => {
-            this.mouseRay(event);
-            this.cameraRay();
+            this.mouseRay(event)
           }}
           onPointerDown={event => {
-            this.mouseRay(event);
-            this.cameraRay();
+            this.mouseRay(event)
           }}
         >
           <Button
@@ -87,25 +85,17 @@ class Scene extends Component {
     }
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
-  };
-  cameraRay = () => {
-    // declaring camera raycaster
-    let cameraRay = new THREE.Raycaster();
-    let rayVector = new THREE.Vector2(0, 0);
-    cameraRay.setFromCamera(rayVector, this.camera);
-    let facingCamera = cameraRay.intersectObjects(this.scene.children, true);
     if (
-      facingCamera !== 'undefined' &&
-      facingCamera.length > 0 &&
-      this.mouseClick.length
+      this.mouseClick !== 'undefined' &&
+      this.mouseClick.length > 0
     ) {
-      // reading gltf.scene.children[0].name
-      this.props.actions.LOOKING_AT(
-        facingCamera[0].object.parent.parent.name,
+        // reading gltf.scene.children[0].name
+        this.props.actions.LOOKING_AT(
+        this.mouseClick[0].object.parent.name,
         this.props.language,
-      );
+        );
     } else {
-      this.props.actions.DONT_LOOK();
+        this.props.actions.DONT_LOOK();
     }
   };
   componentDidUpdate = () => {
