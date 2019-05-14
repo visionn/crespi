@@ -4,6 +4,7 @@ node_js:
 script:
   - npm test
   - npm run build
+  - npm run add-domain
 deploy:
   provider: pages
   skip_cleanup: true
