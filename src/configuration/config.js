@@ -74,4 +74,25 @@ export const config = {
       },
     },
   },
+  chiesa: {
+    position: {
+      x: -10,
+      y: 0,
+      z: 0,
+    },
+    color: {
+      first: '#fbda61',
+      second: '#ff5acd',
+    },
+    text: {
+      ita: {
+        title: 'Case',
+        subtitle: 'Case di Crespi',
+      },
+      eng: {
+        title: 'Factory',
+        subtitle: "Crespi's Factory",
+      },
+    },
+  },
 };
