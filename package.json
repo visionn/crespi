@@ -10,7 +10,7 @@
     "lint": "eslint --ignore-path .gitignore .",
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
     "prettier": "prettier --write \"src/**/*.js\"",
-    "add-domain": "echo \"crespi.world\" > CNAME"
+    "add-domain": "echo \"crespi.world\" > build/CNAME"
   },
   "pre-commit": [
     "prettier",
