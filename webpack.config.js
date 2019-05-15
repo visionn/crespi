@@ -2,6 +2,13 @@ const PATH = require('path');
 const WEBPACK = require('webpack');
 const HTML_WEBPACK_PLUGIN = require('html-webpack-plugin');
 const PROGRESS_BAR = require('simple-progress-webpack-plugin');
+const ROBOTS_TXT_PLUGIN = require("robotstxt-webpack-plugin");
+const OPTIONS = require('./robots-txt.config.js');
+const SITEMAP_WEBPACK_PLUGIN = require('sitemap-webpack-plugin').default;
+
+const paths = [
+  '/index.html'
+];
 
 module.exports = {
   //setting entry app.js
@@ -60,7 +67,14 @@ module.exports = {
     }),
     new PROGRESS_BAR({
       format: 'minimal'
-    })
+    }),
+    new ROBOTS_TXT_PLUGIN(OPTIONS),
+    new SITEMAP_WEBPACK_PLUGIN('crespi.world', paths, {
+      fileName: 'map.xml',
+      lastMod: true,
+      changeFreq: 'monthly',
+      priority: '0.4'
+    }),
   ],
   module: {
     rules: [

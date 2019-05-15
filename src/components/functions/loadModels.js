@@ -1,5 +1,5 @@
 import { config } from '../../configuration/config';
-export const loadModels = (scene, elements) => {
+export const loadModels = async (scene, elements) => {
   const MAP_LOADER = new THREE.GLTFLoader();
   // takes the keys of config and loads them into an array
   let keys = Object.getOwnPropertyNames(config);
