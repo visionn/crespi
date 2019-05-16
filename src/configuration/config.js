@@ -18,8 +18,8 @@ export const config = {
       z: 10,
     },
     color: {
-      first: '0xfbda61',
-      second: '0xff5acd',
+      first: '0x21D4FD',
+      second: '0xB721FF',
     },
     text: {
       ita: {
