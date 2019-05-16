@@ -13,7 +13,7 @@ import {
   SHOW_DESCRIPTION,
 } from '../redux/actions/actions';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
-import { Container, Color } from '../style/scene';
+import { Container } from '../style/scene';
 import { Button } from '../style/common';
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
@@ -43,11 +43,11 @@ class Scene extends Component {
     this.orbitControls;
     this.elements = [];
     this.mouseClick = [];
+    this.centralSphere;
   }
   render() {
     return (
       <div>
-        <Color color={this.props.lookingAt.color} />
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
@@ -110,6 +110,8 @@ class Scene extends Component {
     this.orbitControls.dampingFactor = this.props.lookingAt.controls.dampingFactor;
     this.orbitControls.screenSpacePanning = this.props.lookingAt.controls.screenSpacePanning;
     this.orbitControls.rotateSpeed = this.props.lookingAt.controls.rotateSpeed;
+    this.centralSphere.material.color.setHex(this.props.lookingAt.color.first);
+    this.centralSphere.material.emissive.setHex(this.props.lookingAt.color.second);
   };
   animate = () => {
     requestAnimationFrame(this.animate);
@@ -163,10 +165,12 @@ class Scene extends Component {
     };
     const centralSphere = () => {
       let geometry = new THREE.SphereGeometry( 10, 2, 100 );
-      let material = new THREE.MeshNormalMaterial();
-      let sphere =  new THREE.Mesh( geometry, material );
-      sphere.scale.set(0.5, 0.5, 0.5);
-      this.scene.add( sphere );
+      let material = new THREE.MeshPhongMaterial();
+      this.centralSphere =  new THREE.Mesh( geometry, material );
+      this.centralSphere.scale.set(0.5, 0.5, 0.5);
+      this.centralSphere.material.color.setHex(0xFFE53B);
+      this.centralSphere.material.emissive.setHex(0xFF2525);
+      this.scene.add( this.centralSphere );
     }
     const onWindowResize = () => {
       try {

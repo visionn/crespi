@@ -18,8 +18,8 @@ export const config = {
       z: 10,
     },
     color: {
-      first: '#fbda61',
-      second: '#ff5acd',
+      first: '0xfbda61',
+      second: '0xff5acd',
     },
     text: {
       ita: {
@@ -39,8 +39,8 @@ export const config = {
       z: -10,
     },
     color: {
-      first: '#8EC5FC',
-      second: '#E0C3FC',
+      first: '0x8EC5FC',
+      second: '0xE0C3FC',
     },
     text: {
       ita: {
@@ -60,8 +60,8 @@ export const config = {
       z: 0,
     },
     color: {
-      first: '#fbda61',
-      second: '#ff5acd',
+      first: '0xfbda61',
+      second: '0xff5acd',
     },
     text: {
       ita: {
@@ -81,8 +81,8 @@ export const config = {
       z: 0,
     },
     color: {
-      first: '#fbda61',
-      second: '#ff5acd',
+      first: '0xfbda61',
+      second: '0xff5acd',
     },
     text: {
       ita: {
