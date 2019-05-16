@@ -18,8 +18,8 @@ export const config = {
       z: 10,
     },
     color: {
-      first: '#fbda61',
-      second: '#ff5acd',
+      first: '0x21D4FD',
+      second: '0xB721FF',
     },
     text: {
       ita: {
@@ -38,10 +38,6 @@ export const config = {
       y: 0,
       z: -10,
     },
-    color: {
-      first: '#8EC5FC',
-      second: '#E0C3FC',
-    },
     text: {
       ita: {
         title: 'Cimitero',
@@ -59,10 +55,6 @@ export const config = {
       y: 0,
       z: 0,
     },
-    color: {
-      first: '#fbda61',
-      second: '#ff5acd',
-    },
     text: {
       ita: {
         title: 'Case',
@@ -79,10 +71,6 @@ export const config = {
       x: -10,
       y: 0,
       z: 0,
-    },
-    color: {
-      first: '#fbda61',
-      second: '#ff5acd',
     },
     text: {
       ita: {

@@ -6,16 +6,12 @@ export const LOOKING_AT = (state = '', action) => {
         ...state,
         ...config[action.payload.status].text[action.payload.language],
         position: config[action.payload.status].position,
-        color: {
-          ...state.color,
-          ...config[action.payload.status].color,
-        },
         Body: '',
         status: true,
         controls: {
           ...state.controls,
           minPolarAngle: 0,
-          minDistance: 9,
+          minDistance: 4,
           maxDistance: 9,
         },
         name: action.payload.status,
@@ -34,9 +30,6 @@ export const LOOKING_AT = (state = '', action) => {
           minPolarAngle: Math.PI / 2.1,
           minDistance: 19,
           maxDistance: 19,
-        },
-        color: {
-          ...state.color,
         },
         status: false,
       };
@@ -58,9 +51,6 @@ export const LOOKING_AT = (state = '', action) => {
           dampingFactor: 0.2,
           screenSpacePanning: false,
           rotateSpeed: 0.1,
-        },
-        color: {
-          ...state.color,
         },
       };
   }

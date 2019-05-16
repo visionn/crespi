@@ -13,7 +13,7 @@ import {
   SHOW_DESCRIPTION,
 } from '../redux/actions/actions';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
-import { Container, Color } from '../style/scene';
+import { Container } from '../style/scene';
 import { Button } from '../style/common';
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
@@ -43,11 +43,11 @@ class Scene extends Component {
     this.orbitControls;
     this.elements = [];
     this.mouseClick = [];
+    this.centralSphere;
   }
   render() {
     return (
       <div>
-        <Color color={this.props.lookingAt.color} />
         <Container
           color={this.props.lookingAt.color}
           ref={el => (this.container = el)}
@@ -161,6 +161,13 @@ class Scene extends Component {
       this.camera.position.set(0, 0, -200);
       this.scene.add(this.camera);
     };
+    const centralSphere = () => {
+      let geometry = new THREE.SphereGeometry( 10, 2, 100 );
+      let material = new THREE.MeshNormalMaterial();
+      this.centralSphere =  new THREE.Mesh( geometry, material );
+      this.centralSphere.scale.set(0.5, 1, 0.5);
+      this.scene.add( this.centralSphere );
+    }
     const onWindowResize = () => {
       try {
         // asign new window sizes to camera
@@ -180,6 +187,7 @@ class Scene extends Component {
     // wait react container element (This must be called at the end of everything)
     setCamera();
     loadModels(this.scene, this.elements);
+    centralSphere();
     this.animate();
   };
 }
