@@ -161,6 +161,13 @@ class Scene extends Component {
       this.camera.position.set(0, 0, -200);
       this.scene.add(this.camera);
     };
+    const centralSphere = () => {
+      let geometry = new THREE.SphereGeometry( 10, 2, 100 );
+      let material = new THREE.MeshNormalMaterial();
+      let sphere =  new THREE.Mesh( geometry, material );
+      sphere.scale.set(0.5, 0.5, 0.5);
+      this.scene.add( sphere );
+    }
     const onWindowResize = () => {
       try {
         // asign new window sizes to camera
@@ -180,6 +187,7 @@ class Scene extends Component {
     // wait react container element (This must be called at the end of everything)
     setCamera();
     loadModels(this.scene, this.elements);
+    centralSphere();
     this.animate();
   };
 }
