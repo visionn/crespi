@@ -15,6 +15,7 @@ import {
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container } from '../style/scene';
 import { Button } from '../style/common';
+import { TopLogo } from './top_logo';
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
@@ -68,6 +69,7 @@ class Scene extends Component {
           >
             ?
           </Button>
+          <TopLogo />
         </Container>
       </div>
     );
@@ -166,6 +168,7 @@ class Scene extends Component {
       let material = new THREE.MeshNormalMaterial();
       this.centralSphere =  new THREE.Mesh( geometry, material );
       this.centralSphere.scale.set(0.5, 1, 0.5);
+      this.centralSphere.flatShading = true;
       this.scene.add( this.centralSphere );
     }
     const onWindowResize = () => {
