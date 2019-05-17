@@ -88,11 +88,14 @@ class Scene extends Component {
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
     if (this.mouseClick !== 'undefined' && this.mouseClick.length > 0) {
-      // reading gltf.scene.children[0].name
-      this.props.actions.LOOKING_AT(
-        this.mouseClick[0].object.parent.name,
-        this.props.language,
-      );
+      if(this.mouseClick.object.name === 'centralSphere') {
+      } else {
+        // reading gltf.scene.children[0].name
+        this.props.actions.LOOKING_AT(
+          this.mouseClick[0].object.parent.name,
+          this.props.language,
+        );
+      }
     } else {
       this.props.actions.DONT_LOOK();
     }
@@ -169,6 +172,7 @@ class Scene extends Component {
       this.centralSphere =  new THREE.Mesh( geometry, material );
       this.centralSphere.scale.set(0.5, 1, 0.5);
       this.centralSphere.flatShading = true;
+      this.centralSphere.name = 'centralSphere';
       this.scene.add( this.centralSphere );
     }
     const onWindowResize = () => {
