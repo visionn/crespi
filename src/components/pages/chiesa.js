@@ -28,7 +28,6 @@ export const Chiesa = props => {
           <Body filename={'2'} name={props.name} language={props.language} />
           <PhotoSphere name={props.name} filename={'2'} />
           <Body filename={'3'} name={props.name} language={props.language} />
-          <BidimensionalPhoto name={props.name} filename={'1'} />
         </NormalBody>
       </PaddedDiv>
     </div>

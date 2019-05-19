@@ -15,6 +15,8 @@ import {
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
 import { Container } from '../style/scene';
 import { Button } from '../style/common';
+import { TopLogo } from './top_logo';
+import { EasterEgg } from './easter_egg';
 import { config } from '../configuration/config';
 import { mapStateToProps } from '../redux/mapStateToProps';
 // sends props actions, taken as props to reducer
@@ -44,6 +46,9 @@ class Scene extends Component {
     this.elements = [];
     this.mouseClick = [];
     this.centralSphere;
+    this.state = {
+      easterEgg: false,
+    }
   }
   render() {
     return (
@@ -68,6 +73,8 @@ class Scene extends Component {
           >
             ?
           </Button>
+          <TopLogo />
+          <EasterEgg status={this.state.easterEgg} />
         </Container>
       </div>
     );
@@ -86,11 +93,22 @@ class Scene extends Component {
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
     if (this.mouseClick !== 'undefined' && this.mouseClick.length > 0) {
-      // reading gltf.scene.children[0].name
-      this.props.actions.LOOKING_AT(
-        this.mouseClick[0].object.parent.name,
-        this.props.language,
-      );
+      if(this.mouseClick[0].object.name === 'centralSphere') {
+        this.setState({
+          easterEgg: true,
+        })
+        setTimeout(() => {
+          this.setState({
+            easterEgg: false,
+          });
+        }, 3000)
+      } else {
+        // reading gltf.scene.children[0].name
+        this.props.actions.LOOKING_AT(
+          this.mouseClick[0].object.parent.name,
+          this.props.language,
+        );
+      }
     } else {
       this.props.actions.DONT_LOOK();
     }
@@ -165,7 +183,9 @@ class Scene extends Component {
       let geometry = new THREE.SphereGeometry( 10, 2, 100 );
       let material = new THREE.MeshNormalMaterial();
       this.centralSphere =  new THREE.Mesh( geometry, material );
-      this.centralSphere.scale.set(0.5, 1, 0.5);
+      this.centralSphere.scale.set(0.5, 0.75, 0.5);
+      this.centralSphere.flatShading = true;
+      this.centralSphere.name = 'centralSphere';
       this.scene.add( this.centralSphere );
     }
     const onWindowResize = () => {
