@@ -93,7 +93,7 @@ class Scene extends Component {
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
     if (this.mouseClick !== 'undefined' && this.mouseClick.length > 0) {
-      if(this.mouseClick[0].object.name === 'centralSphere') {
+      if(this.mouseClick[0].object.parent.name === 'centro') {
         this.setState({
           easterEgg: true,
         })
@@ -179,15 +179,6 @@ class Scene extends Component {
       this.camera.position.set(0, 0, -200);
       this.scene.add(this.camera);
     };
-    const centralSphere = () => {
-      let geometry = new THREE.SphereGeometry( 10, 2, 100 );
-      let material = new THREE.MeshNormalMaterial();
-      this.centralSphere =  new THREE.Mesh( geometry, material );
-      this.centralSphere.scale.set(0.5, 0.75, 0.5);
-      this.centralSphere.flatShading = true;
-      this.centralSphere.name = 'centralSphere';
-      this.scene.add( this.centralSphere );
-    }
     const onWindowResize = () => {
       try {
         // asign new window sizes to camera
@@ -207,7 +198,6 @@ class Scene extends Component {
     // wait react container element (This must be called at the end of everything)
     setCamera();
     loadModels(this.scene, this.elements);
-    centralSphere();
     this.animate();
   };
 }
