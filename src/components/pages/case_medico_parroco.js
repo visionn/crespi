@@ -20,7 +20,6 @@ export const CaseMedicoParroco = props => {
         )}
       </ContainerDimensions>
       <Title>{props.title}</Title>
-      <Subtitle>{props.subtitle}</Subtitle>
       <PaddedDiv>
         <NormalBody>
           <Body filename={'1'} name={props.name} language={props.language} />

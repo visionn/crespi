@@ -31,7 +31,7 @@ export const config = {
     text: {
       ita: {
         title: 'Fabbrica',
-        subtitle: 'Fabbrica di Crespi',
+        subtitle: 'Tocca per scoprire la fabbrica di Crespi',
       },
       eng: {
         title: 'Factory',
@@ -48,7 +48,7 @@ export const config = {
     text: {
       ita: {
         title: 'Cimitero',
-        subtitle: 'Cimitero di Crespi',
+        subtitle: 'Tocca per scoprire il cimitero di Crespi',
       },
       eng: {
         title: 'Cemetery',
@@ -65,7 +65,7 @@ export const config = {
     text: {
       ita: {
         title: 'Case',
-        subtitle: 'Case di Crespi',
+        subtitle: 'Tocca per scoprire le case di Crespi',
       },
       eng: {
         title: 'Factory',
@@ -81,8 +81,8 @@ export const config = {
     },
     text: {
       ita: {
-        title: 'Case',
-        subtitle: 'Case di Crespi',
+        title: 'Chiesa',
+        subtitle: 'Tocca per scoprire la chiesa di Crespi',
       },
       eng: {
         title: 'Factory',

@@ -18,7 +18,6 @@ export const Fabbrica = props => {
     <div>
       <TopPhoto name={props.name} filename={'2'} />
       <Title>{props.title}</Title>
-      <Subtitle>{props.subtitle}</Subtitle>
       <PaddedDiv>
         <NormalBody>
           <Body filename={'1'} name={props.name} language={props.language} />
