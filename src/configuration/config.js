@@ -11,23 +11,8 @@ export const config = {
       },
     },
   },
-  centro: {
-    position: {
-      x: 0,
-      y: 0,
-      z: 0,
-    },
-  },
+  centro: '',
   fabbrica: {
-    position: {
-      x: 0,
-      y: 0,
-      z: 10,
-    },
-    color: {
-      first: '0x21D4FD',
-      second: '0xB721FF',
-    },
     text: {
       ita: {
         title: 'Fabbrica',
@@ -40,11 +25,6 @@ export const config = {
     },
   },
   cimitero: {
-    position: {
-      x: 0,
-      y: 0,
-      z: -10,
-    },
     text: {
       ita: {
         title: 'Cimitero',
@@ -57,11 +37,6 @@ export const config = {
     },
   },
   case: {
-    position: {
-      x: 10,
-      y: 0,
-      z: 0,
-    },
     text: {
       ita: {
         title: 'Case',
@@ -74,15 +49,22 @@ export const config = {
     },
   },
   chiesa: {
-    position: {
-      x: -10,
-      y: 0,
-      z: 0,
-    },
     text: {
       ita: {
         title: 'Chiesa',
         subtitle: 'Tocca per scoprire la chiesa di Crespi',
+      },
+      eng: {
+        title: 'Factory',
+        subtitle: "Crespi's Factory",
+      },
+    },
+  },
+  casaMedico: {
+    text: {
+      ita: {
+        title: 'Casa del Medico',
+        subtitle: 'Tocca per scoprire la casa del medico',
       },
       eng: {
         title: 'Factory',
