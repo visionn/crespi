@@ -50,9 +50,9 @@ export class PhotoSphere extends Component {
     this.controls.enableZoom = false;
     let geometry = new THREE.SphereGeometry(-20, 20, 20);
     let file;
-    import(`../../assets/img/${this.props.name}/${
-      this.props.filename
-    }.jpg`).then(url => {
+    import(
+      `../../assets/img/${this.props.name}/${this.props.filename}.jpg`
+    ).then(url => {
       let texture = new THREE.TextureLoader().load(url.default);
       let material = new THREE.MeshBasicMaterial({
         map: texture,

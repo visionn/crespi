@@ -48,7 +48,7 @@ class Scene extends Component {
     this.centralSphere;
     this.state = {
       easterEgg: false,
-    }
+    };
   }
   render() {
     return (
@@ -93,19 +93,20 @@ class Scene extends Component {
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
     if (this.mouseClick !== 'undefined' && this.mouseClick.length > 0) {
-      if(this.mouseClick[0].object.parent.name === 'centro') {
+      if (this.mouseClick[0].object.parent.name === 'centro') {
         this.setState({
           easterEgg: true,
-        })
+        });
         setTimeout(() => {
           this.setState({
             easterEgg: false,
           });
-        }, 3000)
+        }, 3000);
       } else {
         // reading gltf.scene.children[0].name
         this.props.actions.LOOKING_AT(
-          this.mouseClick[0].object.parent.name || this.mouseClick[0].object.parent.parent.name,
+          this.mouseClick[0].object.parent.name ||
+            this.mouseClick[0].object.parent.parent.name,
           this.props.language,
         );
       }
