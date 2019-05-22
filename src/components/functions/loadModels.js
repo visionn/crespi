@@ -19,6 +19,16 @@ export const loadModels = async (scene, elements) => {
               0,
               10 * Math.cos(5 * counter),
             );
+            elements[i] = {
+              text: {
+                ...elements[i].text
+              },
+              position: {
+                x: 10 * Math.sin(5 * counter),
+                y: 0,
+                z: 10 * Math.cos(5 * counter),
+              } 
+            };
             counter++;
           }
           // setting scene name
