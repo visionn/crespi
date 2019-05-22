@@ -5,7 +5,6 @@ import { Info } from './pages/info';
 import { Case } from './pages/case';
 import { Chiesa } from './pages/chiesa';
 import { CaseMedicoParroco } from './pages/case_medico_parroco';
-import { Scuola } from './pages/scuola';
 import LazyLoad from 'react-lazyload';
 export const DinamicPage = props => {
   switch (props.description.name) {
@@ -25,18 +24,6 @@ export const DinamicPage = props => {
       return (
         <LazyLoad height={200} once>
           <Fabbrica
-            status={props.status}
-            name={props.description.name}
-            language={props.language}
-            title={props.description.title}
-            subtitle={props.description.subtitle}
-          />
-        </LazyLoad>
-      );
-    case 'scuola':
-      return (
-        <LazyLoad height={200} once>
-          <Scuola
             status={props.status}
             name={props.description.name}
             language={props.language}
