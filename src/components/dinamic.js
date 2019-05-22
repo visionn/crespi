@@ -11,7 +11,7 @@ export const DinamicPage = props => {
   switch (props.description.name) {
     case 'cimitero':
       return (
-        <LazyLoad>
+        <LazyLoad height={200} once>
           <Cimitero
             status={props.status}
             name={props.description.name}
@@ -23,7 +23,7 @@ export const DinamicPage = props => {
       );
     case 'fabbrica':
       return (
-        <LazyLoad>
+        <LazyLoad height={200} once>
           <Fabbrica
             status={props.status}
             name={props.description.name}
@@ -35,7 +35,7 @@ export const DinamicPage = props => {
       );
     case 'scuola':
       return (
-        <LazyLoad>
+        <LazyLoad height={200} once>
           <Scuola
             status={props.status}
             name={props.description.name}
@@ -47,7 +47,7 @@ export const DinamicPage = props => {
       );
     case 'case':
       return (
-        <LazyLoad>
+        <LazyLoad height={200} once>
           <Case
             status={props.status}
             name={props.description.name}
@@ -59,7 +59,7 @@ export const DinamicPage = props => {
       );
     case 'case_medico_parroco':
       return (
-        <LazyLoad>
+        <LazyLoad height={200} once>
           <CaseMedicoParroco
             status={props.status}
             name={props.description.name}
@@ -71,7 +71,7 @@ export const DinamicPage = props => {
       );
     case 'chiesa':
       return (
-        <LazyLoad>
+        <LazyLoad height={200} once>
           <Chiesa
             status={props.status}
             name={props.description.name}
@@ -83,7 +83,7 @@ export const DinamicPage = props => {
       );
     case 'info':
       return (
-        <LazyLoad>
+        <LazyLoad height={200} once>
           <Info
             status={props.status}
             name={props.description.name}
