@@ -105,7 +105,7 @@ class Scene extends Component {
       } else {
         // reading gltf.scene.children[0].name
         this.props.actions.LOOKING_AT(
-          this.mouseClick[0].object.parent.name,
+          this.mouseClick[0].object.parent.name || this.mouseClick[0].object.parent.parent.name,
           this.props.language,
         );
       }
