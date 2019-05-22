@@ -6,6 +6,7 @@ import { Button, Title, Subtitle, Body, Top } from '../style/common';
 import { HIDE_DESCRIPTION } from '../redux/actions/actions';
 import { mapStateToProps } from '../redux/mapStateToProps';
 import { DinamicPage } from './dinamic';
+import Skeleton from 'react-loading-skeleton';
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
@@ -29,10 +30,12 @@ export class Description extends Component {
             x
           </Button>
         </Top>
-        <DinamicPage
-          description={this.props.description}
-          language={this.props.language}
-        />
+        {(
+          <DinamicPage
+            description={this.props.description}
+            language={this.props.language}
+          />
+        ) || <Skeleton />}
       </Container>
     );
   }
