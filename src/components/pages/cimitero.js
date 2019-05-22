@@ -11,14 +11,11 @@ import { Body } from '../functions/body';
 import { Video } from '../functions/video';
 import { BidimensionalPhoto } from '../functions/bidimensionalPhoto';
 import ContainerDimensions from 'react-container-dimensions';
+import { TopPhoto } from '../functions/topPhoto';
 export const Cimitero = props => {
   return (
     <div>
-      <ContainerDimensions>
-        {({ width, height }) => (
-          <Video name={props.name} width={width} height={height} />
-        )}
-      </ContainerDimensions>
+      <TopPhoto name={props.name} filename={'3'} />
       <Title>{props.title}</Title>
       <PaddedDiv>
         <NormalBody>
@@ -27,7 +24,6 @@ export const Cimitero = props => {
           <Body filename={'2'} name={props.name} language={props.language} />
           <PhotoSphere name={props.name} filename={'2'} />
           <Body filename={'3'} name={props.name} language={props.language} />
-          <PhotoSphere name={props.name} filename={'3'} />
         </NormalBody>
       </PaddedDiv>
     </div>
