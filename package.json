@@ -28,6 +28,7 @@
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.4.5",
     "babel-loader": "8.0.6",
+    "babel-plugin-styled-components": "^1.10.0",
     "coveralls": "^3.0.3",
     "eslint": "5.16.0",
     "eslint-config-google": "0.13.0",
@@ -61,7 +62,7 @@
     "react-redux": "^7.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.2.0",
+    "styled-components": "^4.0.0-beta.7-hoist",
     "styled-normalize": "^8.0.6",
     "three": "^0.104.0"
   }

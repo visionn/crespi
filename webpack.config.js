@@ -25,8 +25,7 @@ module.exports = {
       './src/style/toast.js'
     ],
     configuration: './src/configuration/config.js',
-
-    vendor: ['react', 'react-dom']
+    vendor: ['react', 'react-dom', 'styled-components']
   },
   output: {
     //defining output file
@@ -48,7 +47,8 @@ module.exports = {
       'three-gltfloader': PATH.join(
         __dirname,
         'node_modules/three/examples/js/loaders/GLTFLoader.js'
-      )
+      ),
+      "styled-components": PATH.resolve(__dirname, "node_modules", "styled-components")
     },
     extensions: ['*', '.js', '.jsx']
   },
