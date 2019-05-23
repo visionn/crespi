@@ -44,7 +44,7 @@ export const DinamicPage = props => {
           />
         </LazyLoad>
       );
-    case 'case_medico_parroco':
+    case 'casaMedico':
       return (
         <LazyLoad height={200} once>
           <CaseMedicoParroco
