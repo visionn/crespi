@@ -11,16 +11,13 @@ export const CrespiLogo = styled.h1`
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
 `;
 export const ViewCode = styled.button`
-  position: sticky;
   bottom: 0.5rem;
   color: white;
-  visibility: ${props => props.visibility};
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   border: none;
   outline: none;
   width: 100%;
-  box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
   font-family: helvetica;
-  border-radius: 1rem;
-  padding: 0.25rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 `;
