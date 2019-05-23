@@ -93,7 +93,7 @@ class Scene extends Component {
     mouseRay.setFromCamera(mouse, this.camera);
     this.mouseClick = mouseRay.intersectObjects(this.scene.children, true);
     if (this.mouseClick !== 'undefined' && this.mouseClick.length > 0) {
-      if (this.mouseClick[0].object.parent.name === 'centro') {
+      if (this.mouseClick[0].object.parent.parent.parent.name === 'centro') {
         this.setState({
           easterEgg: true,
         });

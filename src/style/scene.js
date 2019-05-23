@@ -24,6 +24,7 @@ export const Logo = styled.div`
 `;
 export const Egg = styled.div`
   position: absolute;
+  font-family: helvetica;
   bottom: 2rem;
   left: 50%;
   transform: translate(-50%, -50%);
