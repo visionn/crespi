@@ -4,6 +4,7 @@ import {
   LeftMessage,
   RightMessage,
   PaddedDiv,
+  Emoji,
 } from '../../style/description';
 import { Title, Subtitle, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
@@ -17,6 +18,7 @@ export const Case = props => {
     <div>
       <TopPhoto name={props.name} filename={'1'} />
       <Title>{props.title}</Title>
+      <Emoji>👇🏼</Emoji>
       <PaddedDiv>
         <NormalBody>
           <Body filename={'1'} name={props.name} language={props.language} />

@@ -15,6 +15,10 @@ export const Container = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 `;
+export const Emoji = styled.div`
+  font-size: 2rem;
+  text-align: center;
+`;
 export const Photo = styled.img`
   max-height: 70%;
   width: 100%;
