@@ -34,8 +34,8 @@ export const Button = styled.button`
   content: ${props => props.content};
   position: absolute;
   display: inherit;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   color: rgb(51, 51, 51);
   top: 2rem;
   right: 1.5rem;
