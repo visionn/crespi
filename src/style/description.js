@@ -52,4 +52,5 @@ export const RightMessage = styled(Message)`
 `;
 export const PaddedDiv = styled.div`
   padding: 0 1rem;
+  color: rgb(51, 51, 51);
 `;

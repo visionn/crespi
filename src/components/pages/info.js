@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PaddedDiv } from '../../style/description';
-import { Footer, CrespiLogo, ViewCode, PhotoBody } from '../../style/info';
+import { Footer, CrespiLogo, ViewCode, PhotoBody, Slide } from '../../style/info';
 import {
   Title,
   Subtitle,
@@ -19,13 +19,15 @@ export const Info = props => {
     <div>
       <CrespiLogo>crespi</CrespiLogo>
       <PaddedDiv>
-        <PhotoBody>
-          <h2>Il progetto</h2>
-          <Photo name="info" filename="modelli" type="gif" />
-        </PhotoBody>
-        <NormalBody>
-          <div>Ecco come il gruppo ha lavorato</div>
-        </NormalBody>
+        <Slide>
+          <PhotoBody>
+            <h2>Il progetto</h2>
+            <Photo name="info" filename="modelli" type="gif" />
+          </PhotoBody>
+          <NormalBody>
+            <div>Ecco come il gruppo ha lavorato</div>
+          </NormalBody>
+        </Slide>
         <NormalBody>
           <PhotoSphere name={props.name} filename={'1'} />
           <ViewCode onPointerDown={openLink} onTouchStart={openLink}>

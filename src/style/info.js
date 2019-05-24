@@ -33,3 +33,8 @@ export const PhotoBody = styled.div`
   margin: 0 auto;
   font-family: helvetica;
 `;
+export const Slide = styled.div`
+  box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
+  border-radius: 1.2rem;
+  padding: 1rem;
+`;
