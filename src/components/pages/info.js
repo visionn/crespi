@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { PaddedDiv, Emoji } from '../../style/description';
+import { PaddedDiv } from '../../style/description';
 import { Footer, CrespiLogo, ViewCode } from '../../style/info';
 import {
   Title,
@@ -16,8 +16,7 @@ const openLink = () => {
 export const Info = props => {
   return (
     <div>
-      <CrespiLogo>crespi</CrespiLogo>
-      <Emoji>👇🏼</Emoji>
+      <CrespiLogo>crespi 👇🏼</CrespiLogo>
       <PaddedDiv>
         <NormalBody>
           <PhotoSphere name={props.name} filename={'1'} />

@@ -1,3 +1,4 @@
-Our mission is to make the world part of the web.
+## Il progetto
+<img src="../../../img/info/modelli.gif" style="width:100%; border-radius: 1rem"></img>
+Ecco come il gruppo ha lavorato
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed aliquet libero, quis pellentesque nisl. Etiam rutrum, risus ut finibus ornare, massa mauris commodo magna, id maximus dolor ante at orci. Praesent porttitor ligula et turpis vulputate, sit amet sollicitudin nunc pretium. Etiam vitae tortor rutrum sem pulvinar pulvinar in quis est. Praesent vitae elementum est. Donec vestibulum tincidunt interdum. Aenean nec ullamcorper urna. Fusce iaculis nisi pharetra sodales consequat. Pellentesque neque libero, consequat in est ac, commodo sagittis enim. Aenean scelerisque ex id felis interdum, vel consequat nulla viverra. Nam in luctus magna. Ut egestas a ex non consectetur. Mauris vel iaculis purus. Nam vel arcu mi. Curabitur feugiat libero urna, ac maximus sem rhoncus nec.

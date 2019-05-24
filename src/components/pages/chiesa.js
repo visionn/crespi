@@ -4,7 +4,6 @@ import {
   LeftMessage,
   RightMessage,
   PaddedDiv,
-  Emoji,
 } from '../../style/description';
 import { Title, Subtitle, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
@@ -17,8 +16,7 @@ export const Chiesa = props => {
   return (
     <div>
       <TopPhoto name={props.name} filename={'2'} />
-      <Title>{props.title}</Title>
-      <Emoji>👇🏼</Emoji>
+      <Title>{`${props.title} 👇🏼`}</Title>
       <PaddedDiv>
         <NormalBody>
           <Body filename={'1'} name={props.name} language={props.language} />

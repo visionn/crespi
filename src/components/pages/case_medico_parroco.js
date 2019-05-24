@@ -4,7 +4,6 @@ import {
   LeftMessage,
   RightMessage,
   PaddedDiv,
-  Emoji,
 } from '../../style/description';
 import { Title, Subtitle, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
@@ -15,8 +14,7 @@ import ContainerDimensions from 'react-container-dimensions';
 export const CaseMedicoParroco = props => {
   return (
     <div>
-      <Title>{props.title}</Title>
-      <Emoji>👇🏼</Emoji>
+      <Title>{`${props.title} 👇🏼`}</Title>
       <PaddedDiv>
         <NormalBody>
           <Body filename={'1'} name={props.name} language={props.language} />
