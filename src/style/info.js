@@ -37,4 +37,12 @@ export const Slide = styled.div`
   box-shadow: 0 0.375rem 0.65rem 0.1625rem rgba(0, 0, 0, 0.31);
   border-radius: 1.2rem;
   padding: 1rem;
+  margin: 1.5rem 0;
+`;
+export const Subtitle = styled.div`
+  text-align: center;
+  font-size: 1.3rem;
+  color: rgb(51, 51, 51);
+  font-weight: bold;
+  font-family: helvetica;
 `;

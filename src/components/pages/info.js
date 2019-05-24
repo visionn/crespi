@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { PaddedDiv } from '../../style/description';
-import { Footer, CrespiLogo, ViewCode, PhotoBody, Slide } from '../../style/info';
 import {
-  Title,
+  Footer,
   Subtitle,
-  Button,
-  Top,
-  Body as NormalBody,
-} from '../../style/common';
+  CrespiLogo,
+  ViewCode,
+  PhotoBody,
+  Slide,
+} from '../../style/info';
+import { Title, Button, Top, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
 import { Photo } from '../functions/loadPhoto';
 import { Body } from '../functions/body';
@@ -18,7 +19,17 @@ export const Info = props => {
   return (
     <div>
       <CrespiLogo>crespi</CrespiLogo>
+      <Subtitle>Il mondo parte della rete</Subtitle>
       <PaddedDiv>
+        <Slide>
+          <PhotoBody>
+            <h2>Il progetto</h2>
+            <Photo name="info" filename="modelli" type="gif" />
+          </PhotoBody>
+          <NormalBody>
+            <div>Ecco come il gruppo ha lavorato</div>
+          </NormalBody>
+        </Slide>
         <Slide>
           <PhotoBody>
             <h2>Il progetto</h2>
