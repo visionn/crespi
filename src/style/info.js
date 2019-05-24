@@ -3,7 +3,7 @@ export const Footer = styled.footer``;
 export const CrespiLogo = styled.h1`
   text-align: center;
   font-family: helvetica;
-  font-size: 3rem;
+  font-size: 6rem;
   font-weight: bold;
   text-background: transparent;
   -webkit-background-clip: text;
@@ -11,7 +11,7 @@ export const CrespiLogo = styled.h1`
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
 `;
 export const ViewCode = styled.button`
-  bottom: 0.5rem;
+  bottom: 0;
   color: white;
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   border: none;
@@ -20,4 +20,16 @@ export const ViewCode = styled.button`
   font-family: helvetica;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
+`;
+export const Image = styled.img`
+  width: 100%;
+  border-radius: 1.2rem;
+`;
+export const PhotoBody = styled.div`
+  font-size: 1.2rem;
+  max-width: 90%;
+  line-height: 1.5em;
+  color: rgb(51, 51, 51);
+  margin: 0 auto;
+  font-family: helvetica;
 `;
