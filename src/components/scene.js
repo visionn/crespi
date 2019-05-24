@@ -13,7 +13,7 @@ import {
   SHOW_DESCRIPTION,
 } from '../redux/actions/actions';
 import { LANGUAGE } from '../redux/thunks/changeLanguage';
-import { Container } from '../style/scene';
+import { Container, ColouredButton } from '../style/scene';
 import { Button } from '../style/common';
 import { TopLogo } from './top_logo';
 import { EasterEgg } from './easter_egg';
@@ -63,7 +63,7 @@ class Scene extends Component {
             this.mouseRay(event);
           }}
         >
-          <Button
+          <ColouredButton
             onTouchStart={() =>
               this.props.actions.SHOW_DESCRIPTION('info', this.props.language)
             }
@@ -72,7 +72,7 @@ class Scene extends Component {
             }
           >
             i
-          </Button>
+          </ColouredButton>
           <TopLogo />
           <EasterEgg status={this.state.easterEgg} />
         </Container>

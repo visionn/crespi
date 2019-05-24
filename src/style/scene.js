@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { fadeIn, fadeOut } from './animations.js';
+import { Button } from './common';
 export const Container = styled.div`
   position: absolute;
   left: 0%;
@@ -32,4 +33,8 @@ export const Egg = styled.div`
   visibility: ${props => (props.status ? 'visible' : 'hidden')};
   animation: ${props => (props.status ? fadeIn : fadeOut)} 0.5s ease-out;
   transition: visibility 0.5s linear;
+`;
+export const ColouredButton = styled(Button)`
+  background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
+  color: white;
 `;

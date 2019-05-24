@@ -37,7 +37,7 @@ export const Button = styled.button`
   width: 3rem;
   height: 3rem;
   color: rgb(51, 51, 51);
-  top: 2rem;
+  top: 1.4rem;
   right: 1.5rem;
   font-weight: 300;
   font-family: helvetica;
