@@ -12,6 +12,7 @@ import { Title, Button, Top, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
 import { Photo } from '../functions/loadPhoto';
 import { Body } from '../functions/body';
+import { QRCode } from "react-qr-svg";
 const openLink = () => {
   window.open('https://github.com/visionn/crespi', '_blank');
 };
@@ -38,6 +39,17 @@ export const Info = props => {
           <NormalBody>
             <div>Ecco come il gruppo ha lavorato</div>
           </NormalBody>
+        </Slide>
+        <Slide>
+          <PhotoBody>
+            <QRCode
+              bgColor="#FFFFFF"
+              fgColor="#000000"
+              level="Q"
+              style={{ "width": "40%" }}
+              value="crespi.world"
+            />
+          </PhotoBody>
         </Slide>
         <NormalBody>
           <PhotoSphere name={props.name} filename={'1'} />
