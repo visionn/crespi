@@ -15,18 +15,18 @@ export const loadModels = async (scene, elements) => {
             gltf.scene.position.set(0, 0, 0);
           } else {
             gltf.scene.position.set(
-              10 * Math.sin(5 * counter),
+              11 * Math.sin(5 * counter),
               0,
-              10 * Math.cos(5 * counter),
+              11 * Math.cos(5 * counter),
             );
             config[i] = {
               text: {
                 ...config[i].text,
               },
               position: {
-                x: 10 * Math.sin(5 * counter),
+                x: 11 * Math.sin(5 * counter),
                 y: 0,
-                z: 10 * Math.cos(5 * counter),
+                z: 11 * Math.cos(5 * counter),
               },
             };
             counter++;
