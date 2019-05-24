@@ -71,7 +71,7 @@ class Scene extends Component {
               this.props.actions.SHOW_DESCRIPTION('info', this.props.language)
             }
           >
-            ?
+            i
           </Button>
           <TopLogo />
           <EasterEgg status={this.state.easterEgg} />
