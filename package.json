@@ -9,7 +9,7 @@
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
-    "prettier": "prettier --write \"src/**/*.js\"",
+    "prettier": "prettier --write \"./**/*.js\"",
     "add-domain": "echo \"crespi.world\" > build/CNAME"
   },
   "pre-commit": [

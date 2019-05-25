@@ -46,3 +46,7 @@ export const Subtitle = styled.div`
   font-weight: bold;
   font-family: helvetica;
 `;
+export const QR = styled.div`
+  text-align: center;
+  opacity: 0.9;
+`;

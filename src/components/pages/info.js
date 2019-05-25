@@ -7,12 +7,13 @@ import {
   ViewCode,
   PhotoBody,
   Slide,
+  QR,
 } from '../../style/info';
 import { Title, Button, Top, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
 import { Photo } from '../functions/loadPhoto';
 import { Body } from '../functions/body';
-import { QRCode } from "react-qr-svg";
+import { QRCode } from 'react-qr-svg';
 const openLink = () => {
   window.open('https://github.com/visionn/crespi', '_blank');
 };
@@ -42,13 +43,15 @@ export const Info = props => {
         </Slide>
         <Slide>
           <PhotoBody>
-            <QRCode
-              bgColor="#FFFFFF"
-              fgColor="#000000"
-              level="Q"
-              style={{ "width": "40%" }}
-              value="crespi.world"
-            />
+            <QR>
+              <QRCode
+                bgColor="#FFFFFF"
+                fgColor="#000000"
+                level="Q"
+                style={{ width: '40%' }}
+                value="https://crespi.world"
+              />
+            </QR>
           </PhotoBody>
         </Slide>
         <NormalBody>
