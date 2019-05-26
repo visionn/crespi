@@ -25,17 +25,26 @@ export const Info = props => {
       <PaddedDiv>
         <Slide>
           <PhotoBody>
-            <h2>Il progetto</h2>
+            <h2>I modelli</h2>
             <Photo name="info" filename="modelli" type="gif" />
           </PhotoBody>
           <NormalBody>
-            <div>Ecco come il gruppo ha lavorato</div>
+            <Body filename={'modelli'} name={'info'} language={'ita'} />
           </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Il progetto</h2>
-            <Photo name="info" filename="modelli" type="gif" />
+            <h2>Il sito</h2>
+            <Photo name="info" filename="code" type="gif" />
+          </PhotoBody>
+          <NormalBody>
+            <Body filename={'codice'} name={'info'} language={'ita'} />
+          </NormalBody>
+        </Slide>
+        <Slide>
+          <PhotoBody>
+            <h2>I video</h2>
+            <Photo name="info" filename="code" type="gif" />
           </PhotoBody>
           <NormalBody>
             <div>Ecco come il gruppo ha lavorato</div>

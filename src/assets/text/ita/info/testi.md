@@ -1,0 +1,1 @@
+Un gruppo ha avuto il compito di estrapolare dal villaggio la storia dei monumenti di crespi: grazie al loro aiuto abbiamo portato alla luce informazioni storiche e testimonianze di coloro che hanno vissuto la fabbrica in prima persona.
