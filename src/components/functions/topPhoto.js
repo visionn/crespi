@@ -79,8 +79,12 @@ export class TopPhoto extends Component {
     );
   };
   animate = () => {
-    requestAnimationFrame(this.animate);
-    this.controls.update();
-    this.renderer.render(this.scene, this.camera);
+    if (!this.props.status) {
+      return;
+    } else {
+      console.log('on');
+      requestAnimationFrame(this.animate);
+      this.renderer.render(this.scene, this.camera);
+    }
   };
 }

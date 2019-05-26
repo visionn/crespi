@@ -64,7 +64,7 @@ export const Info = props => {
           </PhotoBody>
         </Slide>
         <NormalBody>
-          <PhotoSphere name={props.name} filename={'1'} />
+          <PhotoSphere name={props.name} filename={'1'} status={props.status} />
           <ViewCode onPointerDown={openLink} onTouchStart={openLink}>
             <Body filename={'code'} name={'info'} language={props.language} />
           </ViewCode>

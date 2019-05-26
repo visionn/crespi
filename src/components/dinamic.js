@@ -12,7 +12,7 @@ export const DinamicPage = props => {
       return (
         <LazyLoad height={200} once>
           <Cimitero
-            status={props.status}
+            status={props.description.status}
             name={props.description.name}
             language={props.language}
             title={props.description.title}
@@ -24,7 +24,7 @@ export const DinamicPage = props => {
       return (
         <LazyLoad height={200} once>
           <Fabbrica
-            status={props.status}
+            status={props.description.status}
             name={props.description.name}
             language={props.language}
             title={props.description.title}
@@ -36,7 +36,7 @@ export const DinamicPage = props => {
       return (
         <LazyLoad height={200} once>
           <Case
-            status={props.status}
+            status={props.description.status}
             name={props.description.name}
             language={props.language}
             title={props.description.title}
@@ -48,7 +48,7 @@ export const DinamicPage = props => {
       return (
         <LazyLoad height={200} once>
           <CaseMedicoParroco
-            status={props.status}
+            status={props.description.status}
             name={props.description.name}
             language={props.language}
             title={props.description.title}
@@ -60,7 +60,7 @@ export const DinamicPage = props => {
       return (
         <LazyLoad height={200} once>
           <Chiesa
-            status={props.status}
+            status={props.description.status}
             name={props.description.name}
             language={props.language}
             title={props.description.title}
@@ -72,7 +72,7 @@ export const DinamicPage = props => {
       return (
         <LazyLoad height={200} once>
           <Info
-            status={props.status}
+            status={props.description.status}
             name={props.description.name}
             language={props.language}
           />

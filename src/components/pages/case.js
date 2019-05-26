@@ -15,7 +15,7 @@ import { TopPhoto } from '../functions/topPhoto';
 export const Case = props => {
   return (
     <div>
-      <TopPhoto name={props.name} filename={'1'} />
+      <TopPhoto name={props.name} filename={'1'} status={props.status} />
       <Title>{`${props.title} 👇🏼`}</Title>
       <PaddedDiv>
         <NormalBody>

@@ -15,12 +15,12 @@ import { TopPhoto } from '../functions/topPhoto';
 export const Chiesa = props => {
   return (
     <div>
-      <TopPhoto name={props.name} filename={'2'} />
+      <TopPhoto name={props.name} filename={'2'} status={props.status} />
       <Title>{`${props.title} 👇🏼`}</Title>
       <PaddedDiv>
         <NormalBody>
           <Body filename={'1'} name={props.name} language={props.language} />
-          <PhotoSphere name={props.name} filename={'1'} />
+          <PhotoSphere name={props.name} filename={'1'} status={props.status} />
           <Body filename={'2'} name={props.name} language={props.language} />
           <Body filename={'3'} name={props.name} language={props.language} />
         </NormalBody>
