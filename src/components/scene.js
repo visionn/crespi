@@ -129,20 +129,28 @@ class Scene extends Component {
     this.orbitControls.dampingFactor = this.props.lookingAt.controls.dampingFactor;
     this.orbitControls.screenSpacePanning = this.props.lookingAt.controls.screenSpacePanning;
     this.orbitControls.rotateSpeed = this.props.lookingAt.controls.rotateSpeed;
-  };
-  animate = () => {
-    requestAnimationFrame(this.animate);
-    if (
-      typeof this.elements !== 'undefined' &&
-      this.elements.length > 0 &&
-      this.props.loading === true
-    ) {
-      this.props.actions.HIDE_LOADING_SCREEN();
-      this.props.loading = false;
+    if (!this.props.description.status) {
+      requestAnimationFrame(this.animate);
     } else {
     }
-    this.orbitControls.update();
-    this.renderer.render(this.scene, this.camera);
+  };
+  animate = () => {
+    if (this.props.description.status) {
+      return;
+    } else {
+      requestAnimationFrame(this.animate);
+      if (
+        typeof this.elements !== 'undefined' &&
+        this.elements.length > 0 &&
+        this.props.loading === true
+      ) {
+        this.props.actions.HIDE_LOADING_SCREEN();
+        this.props.loading = false;
+      } else {
+      }
+      this.orbitControls.update();
+      this.renderer.render(this.scene, this.camera);
+    }
   };
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize, false);
