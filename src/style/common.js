@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 export const Title = styled.h1`
-  color: ${props => (props.color ? props.color : 'black')};
   padding: 1rem;
   text-align: center;
   color: rgb(51, 51, 51);

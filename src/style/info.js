@@ -10,6 +10,13 @@ export const CrespiLogo = styled.h1`
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
 `;
+export const Title = styled.div`
+  color: rgb(51, 51, 51);
+  text-align: center;
+  font-weight: bold;
+  font-family: helvetica;
+  font-size: 3.4rem;
+`;
 export const ViewCode = styled.button`
   bottom: 0;
   color: white;
@@ -40,8 +47,9 @@ export const Slide = styled.div`
   margin: 1.5rem 0;
 `;
 export const Subtitle = styled.div`
-  text-align: center;
-  font-size: 1.3rem;
+  font-size: 2rem;
+  margin: 1rem 0;
+  font-style: italic;
   color: rgb(51, 51, 51);
   font-weight: bold;
   font-family: helvetica;
@@ -52,7 +60,8 @@ export const QR = styled.div`
 `;
 export const CrespiWorld = styled.h1`
   font-family: helvetica;
-  font-size: 2.5rem;
+  text-align: center;
+  font-size: 3.2rem;
   font-weight: bold;
   color: red;
 `;

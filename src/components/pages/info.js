@@ -25,47 +25,35 @@ export const Info = props => {
       <PaddedDiv>
         <Slide>
           <PhotoBody>
-            <h2>Cura per i dettagli🗽</h2>
+            <Title>Cura per i dettagli🗽</Title>
             <Photo name="info" filename="modelli" type="gif" />
+            <Subtitle>"Sembra così reale"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body
-              filename={'modelli'}
-              name={'info'}
-              language={props.language}
-            />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Un po' di storia🏺</h2>
-            <Photo name="info" filename="modelli" type="gif" />
+            <Title>Un po' di storia🏺</Title>
+            <Photo name="info" filename="testo" type="gif" />
+            <Subtitle>"Abbiamo parlato con un operaio del 1800"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body filename={'testi'} name={'info'} language={props.language} />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Video col drone🛸</h2>
-            <Photo name="info" filename="modelli" type="gif" />
+            <Title>Video col drone🛸</Title>
+            <Photo name="info" filename="video" type="gif" />
+            <Subtitle>"Gli UFO esistono"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body filename={'video'} name={'info'} language={props.language} />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Internet, mai stato così reale😮</h2>
-            <Photo name="info" filename="modelli" type="gif" />
+            <Title>Internet, mai stato così reale😮</Title>
+            <Photo name="info" filename="codice" type="gif" />
+            <Subtitle>"Posso toccarlo!"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body filename={'codice'} name={'info'} language={props.language} />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Inquadra il codice🤳 o vai su</h2>
+            <Title>Inquadra il codice🤳 o vai su</Title>
             <CrespiWorld>crespi.world</CrespiWorld>
             <QR>
               <QRCode
@@ -79,7 +67,6 @@ export const Info = props => {
           </PhotoBody>
         </Slide>
         <NormalBody>
-          <PhotoSphere name={props.name} filename={'1'} />
           <ViewCode onPointerDown={openLink} onTouchStart={openLink}>
             <Body filename={'code'} name={'info'} language={props.language} />
           </ViewCode>
