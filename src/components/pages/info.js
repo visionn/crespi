@@ -25,7 +25,7 @@ export const Info = props => {
       <PaddedDiv>
         <Slide>
           <PhotoBody>
-            <h2>Cura per i dettagli🗽</h2>
+            <Title>Cura per i dettagli🗽</Title>
             <Photo name="info" filename="modelli" type="gif" />
           </PhotoBody>
           <NormalBody>
@@ -38,7 +38,7 @@ export const Info = props => {
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Un po' di storia🏺</h2>
+            <Title>Un po' di storia🏺</Title>
             <Photo name="info" filename="modelli" type="gif" />
           </PhotoBody>
           <NormalBody>
@@ -47,7 +47,7 @@ export const Info = props => {
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Video col drone🛸</h2>
+            <Title>Video col drone🛸</Title>
             <Photo name="info" filename="modelli" type="gif" />
           </PhotoBody>
           <NormalBody>
@@ -56,7 +56,7 @@ export const Info = props => {
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Internet, mai stato così reale😮</h2>
+            <Title>Internet, mai stato così reale😮</Title>
             <Photo name="info" filename="modelli" type="gif" />
           </PhotoBody>
           <NormalBody>
@@ -65,7 +65,7 @@ export const Info = props => {
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Inquadra il codice🤳 o vai su</h2>
+            <Title>Inquadra il codice🤳 o vai su</Title>
             <CrespiWorld>crespi.world</CrespiWorld>
             <QR>
               <QRCode

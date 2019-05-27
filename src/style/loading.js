@@ -20,9 +20,9 @@ export const Element = styled.div`
   font-family: helvetica;
   font-size: 3.6rem;
   font-weight: bold;
-  text-background: transparent;
+  text-background: rgba(255, 255, 255, 0);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   z-index: 7;
 `;
