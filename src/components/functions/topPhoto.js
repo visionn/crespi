@@ -80,7 +80,6 @@ export class TopPhoto extends Component {
   };
   animate = () => {
     requestAnimationFrame(this.animate);
-    this.controls.update();
     this.renderer.render(this.scene, this.camera);
   };
 }
