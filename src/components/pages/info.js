@@ -24,11 +24,11 @@ export const Info = props => {
   return (
     <div>
       <CrespiLogo>crespi</CrespiLogo>
-      <ReactPlayer width="100%" src="https://vimeo.com/336989780" playing />
       <PaddedDiv>
+      <ReactPlayer url="https://www.youtube.com/watch?v=qI70dYpsPTU" playing controls/>
         <Slide>
           <PhotoBody>
-            <Title>Cura per i dettagli🗽</Title>
+            <Title>Cura nei dettagli🗽</Title>
             <Photo name="info" filename="modelli" type="gif" />
             <Subtitle>"Sembra così reale"</Subtitle>
           </PhotoBody>
