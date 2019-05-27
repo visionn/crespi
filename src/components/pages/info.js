@@ -15,6 +15,8 @@ import { PhotoSphere } from '../functions/photo';
 import { Photo } from '../functions/loadPhoto';
 import { Body } from '../functions/body';
 import { QRCode } from 'react-qr-svg';
+import ReactPlayer from 'react-player'
+
 const openLink = () => {
   window.open('https://github.com/visionn/crespi', '_blank');
 };
@@ -22,6 +24,7 @@ export const Info = props => {
   return (
     <div>
       <CrespiLogo>crespi</CrespiLogo>
+      <ReactPlayer width="100%" src="https://vimeo.com/336989780" playing />
       <PaddedDiv>
         <Slide>
           <PhotoBody>
