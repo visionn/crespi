@@ -9,6 +9,7 @@ export class TopPhoto extends Component {
     this.renderer;
     this.controls;
     this.photo;
+    this.animationId = '';
   }
   render() {
     return (
@@ -78,13 +79,16 @@ export class TopPhoto extends Component {
       this.container.clientHeight,
     );
   };
-  animate = () => {
+  componentDidUpdate = () => {
     if (!this.props.status) {
-      return;
-    } else {
-      console.log('on');
       requestAnimationFrame(this.animate);
-      this.renderer.render(this.scene, this.camera);
+    } else if (this.animationId !== '') {
+      window.cancelAnimationFrame(this.animationId);
+    } else {
     }
+  };
+  animate = () => {
+    this.animationId = requestAnimationFrame(this.animate);
+    this.renderer.render(this.scene, this.camera);
   };
 }

@@ -46,6 +46,7 @@ class Scene extends Component {
     this.elements = [];
     this.mouseClick = [];
     this.centralSphere;
+    this.animationId = '';
     this.state = {
       easterEgg: false,
     };
@@ -131,26 +132,19 @@ class Scene extends Component {
     this.orbitControls.rotateSpeed = this.props.lookingAt.controls.rotateSpeed;
     if (!this.props.description.status) {
       requestAnimationFrame(this.animate);
+    } else if (this.animationId !== '') {
+      window.cancelAnimationFrame(this.animationId);
     } else {
     }
   };
   animate = () => {
-    if (this.props.description.status) {
-      return;
+    this.animationId = requestAnimationFrame(this.animate);
+    if (typeof this.elements !== 'undefined' && this.elements.length >= 2) {
+      this.props.actions.HIDE_LOADING_SCREEN();
     } else {
-      requestAnimationFrame(this.animate);
-      if (
-        typeof this.elements !== 'undefined' &&
-        this.elements.length > 0 &&
-        this.props.loading === true
-      ) {
-        this.props.actions.HIDE_LOADING_SCREEN();
-        this.props.loading = false;
-      } else {
-      }
-      this.orbitControls.update();
-      this.renderer.render(this.scene, this.camera);
     }
+    this.orbitControls.update();
+    this.renderer.render(this.scene, this.camera);
   };
   componentWillUnmount = () => {
     window.removeEventListener('resize', this.onWindowResize, false);
