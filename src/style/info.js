@@ -50,3 +50,9 @@ export const QR = styled.div`
   text-align: center;
   opacity: 0.9;
 `;
+export const CrespiWorld = styled.h1`
+  font-family: helvetica;
+  font-size: 4rem;
+  font-weight: bold;
+  color: red;
+`;
