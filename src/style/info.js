@@ -65,3 +65,12 @@ export const CrespiWorld = styled.h1`
   font-weight: bold;
   color: red;
 `;
+export const VideoBody = styled.div`
+  max-width: 60rem;
+  margin: 0 auto;
+`;
+export const VideoContainer = styled.div`
+  width: auto;
+  -webkit-clip-path: inset(0 0 round 3rem);
+  clip-path: inset(0 0 round 3rem);
+`;
