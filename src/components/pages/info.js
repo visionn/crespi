@@ -27,41 +27,29 @@ export const Info = props => {
           <PhotoBody>
             <Title>Cura per i dettagli🗽</Title>
             <Photo name="info" filename="modelli" type="gif" />
+            <Subtitle>"Sembra così reale"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body
-              filename={'modelli'}
-              name={'info'}
-              language={props.language}
-            />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
             <Title>Un po' di storia🏺</Title>
             <Photo name="info" filename="modelli" type="gif" />
+            <Subtitle>"Abbiamo parlato con un operaio del 1800"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body filename={'testi'} name={'info'} language={props.language} />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
             <Title>Video col drone🛸</Title>
             <Photo name="info" filename="modelli" type="gif" />
+            <Subtitle>"Gli UFO esistono"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body filename={'video'} name={'info'} language={props.language} />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
             <Title>Internet, mai stato così reale😮</Title>
             <Photo name="info" filename="modelli" type="gif" />
+            <Subtitle>"Posso toccarlo!"</Subtitle>
           </PhotoBody>
-          <NormalBody>
-            <Body filename={'codice'} name={'info'} language={props.language} />
-          </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
@@ -79,7 +67,6 @@ export const Info = props => {
           </PhotoBody>
         </Slide>
         <NormalBody>
-          <PhotoSphere name={props.name} filename={'1'} />
           <ViewCode onPointerDown={openLink} onTouchStart={openLink}>
             <Body filename={'code'} name={'info'} language={props.language} />
           </ViewCode>
