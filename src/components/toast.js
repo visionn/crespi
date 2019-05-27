@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Toasty, Box, Body, Title, Subtitle } from '../style/toast';
+import { Toasty, Box, Body, Title, Subtitle, MaxWidth } from '../style/toast';
 import { Exit, Top } from '../style/common';
 import { connect } from 'react-redux';
 import {
@@ -24,26 +24,28 @@ class Toast extends Component {
   }
   render() {
     return (
-      <Toasty
-        onTouchStart={() =>
-          this.props.SHOW_DESCRIPTION(
-            this.props.lookingAt.name,
-            this.props.language,
-          )
-        }
-        onPointerDown={() =>
-          this.props.SHOW_DESCRIPTION(
-            this.props.lookingAt.name,
-            this.props.language,
-          )
-        }
-        size={this.props.description.toastSize}
-        description={this.props.description.status}
-        lookingAt={this.props.lookingAt.status}
-      >
-        <Title>{this.props.lookingAt.title}</Title>
-        <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
-      </Toasty>
+      <MaxWidth>
+        <Toasty
+          onTouchStart={() =>
+            this.props.SHOW_DESCRIPTION(
+              this.props.lookingAt.name,
+              this.props.language,
+            )
+          }
+          onPointerDown={() =>
+            this.props.SHOW_DESCRIPTION(
+              this.props.lookingAt.name,
+              this.props.language,
+            )
+          }
+          size={this.props.description.toastSize}
+          description={this.props.description.status}
+          lookingAt={this.props.lookingAt.status}
+        >
+          <Title>{this.props.lookingAt.title}</Title>
+          <Subtitle>{this.props.lookingAt.subtitle}</Subtitle>
+        </Toasty>
+      </MaxWidth>
     );
   }
 }

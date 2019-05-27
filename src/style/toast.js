@@ -31,3 +31,7 @@ export const Toasty = styled.div`
   right: 0;
   transition: all 0.25s;
 `;
+export const MaxWidth = styled.div`
+  max-width: 50rem;
+  margin: 0 auto;
+`;
