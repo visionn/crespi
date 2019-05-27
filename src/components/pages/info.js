@@ -33,21 +33,21 @@ export const Info = props => {
         <Slide>
           <PhotoBody>
             <Title>Un po' di storia🏺</Title>
-            <Photo name="info" filename="modelli" type="gif" />
+            <Photo name="info" filename="testo" type="gif" />
             <Subtitle>"Abbiamo parlato con un operaio del 1800"</Subtitle>
           </PhotoBody>
         </Slide>
         <Slide>
           <PhotoBody>
             <Title>Video col drone🛸</Title>
-            <Photo name="info" filename="modelli" type="gif" />
+            <Photo name="info" filename="video" type="gif" />
             <Subtitle>"Gli UFO esistono"</Subtitle>
           </PhotoBody>
         </Slide>
         <Slide>
           <PhotoBody>
             <Title>Internet, mai stato così reale😮</Title>
-            <Photo name="info" filename="modelli" type="gif" />
+            <Photo name="info" filename="codice" type="gif" />
             <Subtitle>"Posso toccarlo!"</Subtitle>
           </PhotoBody>
         </Slide>

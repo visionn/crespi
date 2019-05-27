@@ -21,8 +21,8 @@ export const Logo = styled.div`
   text-background: rgba(255, 255, 255, 0);
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
-  background-color: #FBDA61;
-  background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+  background-color: #fbda61;
+  background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
   z-index: 6;
 `;
 export const Egg = styled.div`
