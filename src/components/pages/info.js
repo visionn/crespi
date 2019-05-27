@@ -9,12 +9,16 @@ import {
   Slide,
   QR,
   CrespiWorld,
+  VideoContainer,
+  VideoBody,
 } from '../../style/info';
 import { Title, Button, Top, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
 import { Photo } from '../functions/loadPhoto';
 import { Body } from '../functions/body';
 import { QRCode } from 'react-qr-svg';
+import ReactPlayer from 'react-player';
+
 const openLink = () => {
   window.open('https://github.com/visionn/crespi', '_blank');
 };
@@ -23,9 +27,18 @@ export const Info = props => {
     <div>
       <CrespiLogo>crespi</CrespiLogo>
       <PaddedDiv>
+        <VideoBody>
+          <VideoContainer>
+            <ReactPlayer
+              width="auto"
+              url="https://www.youtube.com/watch?v=qI70dYpsPTU"
+              controls
+            />
+          </VideoContainer>
+        </VideoBody>
         <Slide>
           <PhotoBody>
-            <Title>Cura per i dettagli🗽</Title>
+            <Title>Cura nei dettagli🗽</Title>
             <Photo name="info" filename="modelli" type="gif" />
             <Subtitle>"Sembra così reale"</Subtitle>
           </PhotoBody>
