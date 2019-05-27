@@ -15,7 +15,7 @@ export const Title = styled.div`
   text-align: center;
   font-weight: bold;
   font-family: helvetica;
-  font-size: 3rem;
+  font-size: 3.4rem;
 `;
 export const ViewCode = styled.button`
   bottom: 0;
@@ -47,8 +47,9 @@ export const Slide = styled.div`
   margin: 1.5rem 0;
 `;
 export const Subtitle = styled.div`
-  text-align: center;
-  font-size: 1.3rem;
+  font-size: 2rem;
+  margin: 1rem 0;
+  font-style: italic;
   color: rgb(51, 51, 51);
   font-weight: bold;
   font-family: helvetica;
@@ -59,7 +60,8 @@ export const QR = styled.div`
 `;
 export const CrespiWorld = styled.h1`
   font-family: helvetica;
-  font-size: 2.5rem;
+  text-align: center;
+  font-size: 3.2rem;
   font-weight: bold;
   color: red;
 `;
