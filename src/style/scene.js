@@ -22,6 +22,7 @@ export const Logo = styled.div`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(45deg, #fbda61 0%, #ff5acd 100%);
+  z-index: 6;
 `;
 export const Egg = styled.div`
   position: absolute;

@@ -52,7 +52,7 @@ export const QR = styled.div`
 `;
 export const CrespiWorld = styled.h1`
   font-family: helvetica;
-  font-size: 4rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: red;
 `;
