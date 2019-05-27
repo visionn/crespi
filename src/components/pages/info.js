@@ -8,6 +8,7 @@ import {
   PhotoBody,
   Slide,
   QR,
+  CrespiWorld,
 } from '../../style/info';
 import { Title, Button, Top, Body as NormalBody } from '../../style/common';
 import { PhotoSphere } from '../functions/photo';
@@ -21,28 +22,51 @@ export const Info = props => {
   return (
     <div>
       <CrespiLogo>crespi</CrespiLogo>
-      <Subtitle>Il mondo parte della rete</Subtitle>
       <PaddedDiv>
         <Slide>
           <PhotoBody>
-            <h2>Il progetto</h2>
+            <h2>Cura per i dettagli🗽</h2>
             <Photo name="info" filename="modelli" type="gif" />
           </PhotoBody>
           <NormalBody>
-            <div>Ecco come il gruppo ha lavorato</div>
+            <Body
+              filename={'modelli'}
+              name={'info'}
+              language={props.language}
+            />
           </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
-            <h2>Il progetto</h2>
+            <h2>Un po' di storia🏺</h2>
             <Photo name="info" filename="modelli" type="gif" />
           </PhotoBody>
           <NormalBody>
-            <div>Ecco come il gruppo ha lavorato</div>
+            <Body filename={'testi'} name={'info'} language={props.language} />
           </NormalBody>
         </Slide>
         <Slide>
           <PhotoBody>
+            <h2>Video col drone🛸</h2>
+            <Photo name="info" filename="modelli" type="gif" />
+          </PhotoBody>
+          <NormalBody>
+            <Body filename={'video'} name={'info'} language={props.language} />
+          </NormalBody>
+        </Slide>
+        <Slide>
+          <PhotoBody>
+            <h2>Internet, mai stato così reale😮</h2>
+            <Photo name="info" filename="modelli" type="gif" />
+          </PhotoBody>
+          <NormalBody>
+            <Body filename={'codice'} name={'info'} language={props.language} />
+          </NormalBody>
+        </Slide>
+        <Slide>
+          <PhotoBody>
+            <h2>Inquadra il codice🤳 o vai su</h2>
+            <CrespiWorld>crespi.world</CrespiWorld>
             <QR>
               <QRCode
                 bgColor="#FFFFFF"
