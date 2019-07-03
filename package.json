@@ -42,7 +42,7 @@
     "react-markdown": "^4.0.8",
     "redux-devtools": "3.5.0",
     "redux-devtools-extension": "^2.13.8",
-    "robotstxt-webpack-plugin": "^5.0.0",
+    "robotstxt-webpack-plugin": "^6.0.0",
     "simple-progress-webpack-plugin": "^1.1.2",
     "sitemap-webpack-plugin": "^0.6.0",
     "uglifyjs-webpack-plugin": "^2.1.3",
