@@ -30,7 +30,7 @@
     "babel-loader": "8.0.6",
     "babel-plugin-styled-components": "^1.10.0",
     "coveralls": "^3.0.3",
-    "eslint": "6.1.0",
+    "eslint": "6.2.0",
     "eslint-config-google": "0.13.0",
     "file-loader": "^4.0.0",
     "generate-robotstxt": "^7.0.0",
