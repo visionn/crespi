@@ -1,17 +1,13 @@
 import React, { useState, createElement } from 'react';
 import {
-  Container,
-  LeftMessage,
-  RightMessage,
   PaddedDiv,
-} from '../../style/description';
-import { Title, Subtitle, Body as NormalBody } from '../../style/common';
-import { PhotoSphere } from '../functions/photo';
-import { TopPhoto } from '../functions/topPhoto';
-import { Body } from '../functions/body';
-import { Video } from '../functions/video';
-import { BidimensionalPhoto } from '../functions/bidimensionalPhoto';
+} from '../../common/style/body';
+import { Title, Subtitle, Body as NormalBody } from '../../common/style/style';
+import { PhotoSphere } from '../../helpers/PhotoSphere';
+import { Body } from '../../helpers/Body';
+import { BidimensionalPhoto } from '../../helpers/BidimensionalPhoto';
 import ContainerDimensions from 'react-container-dimensions';
+import { TopPhoto } from '../../helpers/TopPhoto';
 export const Fabbrica = props => {
   const [content, setContent] = useState('');
   return (

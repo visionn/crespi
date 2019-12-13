@@ -1,1 +1,0 @@
-Un gruppo ha effettuato registrazioni con strumenti di ultima generazione, per fornire un’esperienza multimediale immersiva: come se vi trovaste a camminare nel pittoresco villaggio.
