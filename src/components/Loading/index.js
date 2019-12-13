@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { mapStateToProps } from '../redux/mapStateToProps';
-import { Root } from '../style/common';
-import { Container, Element } from '../style/loading';
+import { mapStateToProps } from '../../redux/mapStateToProps';
+
+import { Root } from '../../common/style/style';
+import { Container, Element } from './style';
 class Loading extends Component {
   constructor(props) {
     super(props);

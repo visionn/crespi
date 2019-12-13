@@ -1,4 +1,4 @@
-import { config } from '../../configuration/config';
+import { config } from '../../../configuration/config';
 export const DESCRIPTION = (state = false, action) => {
   switch (action.type) {
     case 'SHOW_DESCRIPTION':

@@ -56,3 +56,7 @@ export const Root = styled.div`
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently */
 `;
+export const PaddedDiv = styled.div`
+  padding: 0 1rem;
+  color: rgb(51, 51, 51);
+`;

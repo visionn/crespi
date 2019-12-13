@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container } from '../style/description';
-import { Button, Title, Subtitle, Body, Top } from '../style/common';
-import { HIDE_DESCRIPTION } from '../redux/actions/actions';
-import { mapStateToProps } from '../redux/mapStateToProps';
-import { DinamicPage } from './dinamic';
+import { Container } from './style';
+import { Button, Title, Subtitle, Body, Top } from '../../common/style/style';
+import { HIDE_DESCRIPTION } from './redux/actions';
+import { mapStateToProps } from '../../redux/mapStateToProps';
+import { DinamicPage } from './Dinamic/index';
 import Skeleton from 'react-loading-skeleton';
+
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {

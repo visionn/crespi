@@ -1,5 +1,5 @@
 import React, { createElement, useState } from 'react';
-import { Egg } from '../style/scene';
+import { Egg } from './style';
 export const EasterEgg = props => {
   return (
     <Egg status={props.status}>

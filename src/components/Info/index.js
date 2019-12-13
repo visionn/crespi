@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { PaddedDiv } from '../../style/description';
 import {
   Footer,
   Subtitle,
@@ -11,11 +10,17 @@ import {
   CrespiWorld,
   VideoContainer,
   VideoBody,
-} from '../../style/info';
-import { Title, Button, Top, Body as NormalBody } from '../../style/common';
-import { PhotoSphere } from '../functions/photo';
-import { Photo } from '../functions/loadPhoto';
-import { Body } from '../functions/body';
+} from './style';
+import {
+  Title,
+  Button,
+  Top,
+  Body as NormalBody,
+  PaddedDiv,
+} from '../../common/style/style';
+import { PhotoSphere } from '../../helpers/PhotoSphere';
+import { Photo } from '../../helpers/loadPhoto';
+import { Body } from '../../helpers/Body';
 import { QRCode } from 'react-qr-svg';
 import ReactPlayer from 'react-player';
 

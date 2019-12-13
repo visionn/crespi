@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fadeIn, fadeOut } from './animations';
+import { fadeIn, fadeOut } from '../../common/style/animations';
 export const Container = styled.div`
   position: absolute;
   top: 0;
@@ -29,26 +29,6 @@ export const PhotoContainer = styled.p`
 `;
 export const DinamicContainer = styled.div`
   margin: 0 2rem;
-`;
-const Message = styled.div`
-  position: relative;
-  line-height: 1.5em;
-  font-size: 1.2rem;
-  word-wrap: break-word;
-  color: rgb(51, 51, 51);
-  border-radius: 1.5rem;
-  padding: 1rem;
-  max-width: 50rem;
-`;
-export const LeftMessage = styled(Message)`
-  background-color: rgb(242, 227, 225);
-  margin: 1rem auto 1rem 2rem;
-`;
-export const RightMessage = styled(Message)`
-  border-width: 0.3125rem;
-  border-style: solid;
-  border-color: rgb(242, 227, 225);
-  margin: 1rem 2rem 1rem auto;
 `;
 export const PaddedDiv = styled.div`
   padding: 0 1rem;
