@@ -1,2 +1,0 @@
-I modelli sono stati creati da un gruppo che ha osservato attentamente le forme dei monumenti reali, per poterli rappresentare in formato digitale tramite dei software per modellazione tridimensionale.
-Ci siamo posti come obiettivo quello di rappresentare la realtà nell’internet di oggi: con l’aiuto dei nostri modellisti abbiamo ricercato minuziosamente nella natura ogni dettaglio, per poi riprodurla in una copia fedele alla realtà.
