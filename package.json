@@ -6,6 +6,7 @@
   "homepage": "https://visionn.github.io/crespi/",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
+    "test": "return 0",
     "build": "webpack --mode production",
     "lint": "eslint --ignore-path .gitignore .",
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls",
