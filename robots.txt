@@ -1,0 +1,14 @@
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+User-agent: OtherBot
+Allow: /allow-for-all-bots
+Allow: /allow-only-for-other-bot
+Crawl-delay: 2
+
+User-agent: *
+Allow: /
+Crawl-delay: 10
+Sitemap: https://crespi.world/map.xml
+Host: https://crespi.world
